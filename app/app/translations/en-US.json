@@ -17,7 +17,8 @@
   "gameList": {
     "title": "Game List",
     "error": "Unable to retrieve list of games.",
-    "noGames": "No games were found."
+    "noGames": "No games were found.",
+    "add": "Add game"
   },
   "radiusSearch": {
     "title": "Radius Search",

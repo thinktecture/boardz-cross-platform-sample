@@ -19,22 +19,21 @@
     function GameDetailController($scope, $state, $stateParams, $translate, boardGamesApi, playersApi, ngNotify, geolocation, camera, security) {
         initialize();
 
+        $scope.game = {};
+
         $scope.defaults = {
-          tileLayer: 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png'
+            tileLayer: 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png'
         };
 
         function initialize() {
-            if (!$stateParams.gameId) {
-                $state.go('games');
-                return;
+            if ($stateParams.gameId) {
+                boardGamesApi.single($stateParams.gameId)
+                    .then(function (result) {
+                        $scope.game = result;
+                    }, function (err) {
+                        // TODO: Error case
+                    });
             }
-
-            boardGamesApi.single($stateParams.gameId)
-                .then(function (result) {
-                    $scope.game = result;
-                }, function (err) {
-                    // TODO: Error case
-                });
 
             $scope.locationError = false;
             geolocation.getCoordinatesFromSensor()
@@ -63,9 +62,28 @@
                 return;
             }
 
-            boardGamesApi.update($scope.game)
-                .then(function () {
+            var promise;
+
+            if ($stateParams.gameId) {
+                promise = boardGamesApi.update($scope.game);
+            }
+            else {
+                promise = boardGamesApi.add($scope.game);
+            }
+
+            promise
+                .then(function (gameId) {
                     ngNotify.set($translate.instant('gameDetails.success'), 'success');
+
+                    if (!$stateParams.gameId) {
+                        $scope.game.id = gameId;
+                        $state.go('.', {
+                            gameId: gameId
+                        }, {
+                            reload: false,
+                            notify: false
+                        });
+                    }
                 }, showErrorNotification);
         };
 
