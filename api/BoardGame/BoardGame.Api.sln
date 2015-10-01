@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGame.Api", "BoardGame.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGame.Host", "BoardGame.Host\BoardGame.Host.csproj", "{94504A74-C489-4E88-8647-A0EBE29EC66A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGame.WebHost", "BoardGame.WebHost\BoardGame.WebHost.csproj", "{BF141505-C0B1-418B-A73B-74880A667183}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{94504A74-C489-4E88-8647-A0EBE29EC66A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94504A74-C489-4E88-8647-A0EBE29EC66A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94504A74-C489-4E88-8647-A0EBE29EC66A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF141505-C0B1-418B-A73B-74880A667183}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF141505-C0B1-418B-A73B-74880A667183}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF141505-C0B1-418B-A73B-74880A667183}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF141505-C0B1-418B-A73B-74880A667183}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
