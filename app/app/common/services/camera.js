@@ -79,7 +79,7 @@
 
             var onCordovaDeviceReady = function () {
                 var options = {
-                    quality: 100,
+                    quality: 50,
                     destinationType: $window.Camera.DestinationType.DATA_URL,
                     sourceType: $window.Camera.PictureSourceType.CAMERA,
                     encodingType: $window.Camera.EncodingType.PNG,
