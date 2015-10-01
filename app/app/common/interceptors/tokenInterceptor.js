@@ -29,7 +29,7 @@
                     var state = getState();
                     security.logout();
                     $rootScope.$emit('needsAuthentication', state.current.name);
-                    return $q.reject();
+                    return $q.reject(response);
                 }
 
                 return $q.reject(response);
