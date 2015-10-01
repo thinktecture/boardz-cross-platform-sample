@@ -32,7 +32,7 @@
                     return $q.reject();
                 }
 
-                return response;
+                return $q.reject(response);
             }
         };
     }
