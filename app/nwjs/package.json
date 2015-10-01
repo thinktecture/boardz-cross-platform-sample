@@ -1,5 +1,6 @@
 {
   "name": "X-Platform Demo",
+  "version": "1.0.0",
   "main": "www/index.html",
   "window": {
     "toolbar": false,
