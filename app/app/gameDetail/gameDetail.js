@@ -10,8 +10,9 @@
      * @param $translate
      * @param {BoardGamesApi} boardGamesApi
      * @param ngNotify
+     * @param {Geolocation} geolocation
      */
-    function GameDetailController($scope, $stateParams, $translate, boardGamesApi, ngNotify) {
+    function GameDetailController($scope, $stateParams, $translate, boardGamesApi, ngNotify, geolocation) {
         initialize();
 
         function initialize() {
@@ -20,6 +21,24 @@
                     $scope.game = result;
                 }, function (err) {
                     // TODO: Error case
+                });
+
+            geolocation.getCoordinatesFromSensor()
+                .then(function (coordinates) {
+                    $scope.center = {
+                        lat: coordinates.latitude,
+                        lng: coordinates.longitude,
+                        zoom: 16
+                    };
+
+                    $scope.markers = {
+                        centerMarker: {
+                            lat: coordinates.latitude,
+                            lng: coordinates.longitude,
+                            focus: true,
+                            draggable: false
+                        }
+                    }
                 });
         }
 
