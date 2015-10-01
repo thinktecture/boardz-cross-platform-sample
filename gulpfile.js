@@ -5,7 +5,10 @@ var gulp = require('gulp'),
     sh = require('shelljs');
 
 gulp.task('clean', function (done) {
-    del(['app/cordova/www'], done);
+    del(['app/cordova/www'])
+        .then(function () {
+            done();
+        });
 });
 
 gulp.task('copy-source', ['clean'], function () {
@@ -20,6 +23,7 @@ gulp.task('build:cordova', ['clean', 'copy-source'], function (done) {
     sh.cd('app/cordova');
     sh.exec('cordova platform add ios');
     sh.exec('cordova platform add android');
+    sh.exec('cordova build');
     done();
 });
 
