@@ -1,0 +1,20 @@
+{
+  "name": "basta-herbst-2015-xplatform-sample",
+  "version": "1.0.0",
+  "description": "All the resources for the BASTA! 2015 workshop “Cross-Plattform HTML5 – in Action!” can be found in this repository.",
+  "main": "gulpfile.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thinktecture/basta-herbst-2015-xplatform-sample.git"
+  },
+  "author": "Thinktecture AG",
+  "bugs": {
+    "url": "https://github.com/thinktecture/basta-herbst-2015-xplatform-sample/issues"
+  },
+  "homepage": "https://github.com/thinktecture/basta-herbst-2015-xplatform-sample#readme",
+  "dependencies": {
+    "del": "^2.0.2",
+    "gulp": "^3.9.0",
+    "shelljs": "^0.5.3"
+  }
+}

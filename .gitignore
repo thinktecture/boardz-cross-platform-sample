@@ -8,3 +8,4 @@ plugins/
 
 # res
 resources/signing
+node_modules
