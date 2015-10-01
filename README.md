@@ -41,6 +41,7 @@ All the resources for the BASTA! 2015 workshop “Cross-Plattform HTML5 – in A
   * [Camera Plugin](https://github.com/apache/cordova-plugin-camera), allows native camera access
   * [Geolocation Plugin](https://github.com/apache/cordova-plugin-geolocation), allows access to geolocation
   * [Statusbar Plugin](https://github.com/apache/cordova-plugin-statusbar), allows modifying the statusbar
+* [Ionic](http://ionicframework.com/)
 * [NW.js](http://nwjs.io/)
   * [nw-builder](https://github.com/nwjs/nw-builder), builds NW.js apps for Mac OS X, Windows and Linux via CLI
 

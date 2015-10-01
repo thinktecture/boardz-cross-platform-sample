@@ -30,6 +30,8 @@ gulp.task('build:cordova', ['clean', 'copy-source'], function (done) {
     sh.exec('cordova plugin add org.apache.cordova.statusbar');
     sh.exec('cordova plugin add cordova-plugin-geolocation');
     sh.exec('cordova plugin add cordova-plugin-camera');
+    sh.exec('cp -r ../resources .');
+    sh.exec('ionic resources');
     sh.exec('cordova build');
     done();
 });
