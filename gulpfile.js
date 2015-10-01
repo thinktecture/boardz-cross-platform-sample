@@ -5,7 +5,7 @@ var gulp = require('gulp'),
     sh = require('shelljs');
 
 gulp.task('clean', function (done) {
-    del(['app/cordova/www', 'app/cordova/platforms', 'app/cordova/plugins'])
+    del(['app/cordova/www', 'app/cordova/platforms', 'app/cordova/plugins', 'app/nwjs/www'])
         .then(function () {
             done();
         });
@@ -16,7 +16,8 @@ gulp.task('copy-source', ['clean'], function () {
         'app/**/*.*',
         '!app/cordova/**/*.*'
     ])
-        .pipe(gulp.dest('app/cordova/www'));
+        .pipe(gulp.dest('app/cordova/www'))
+        .pipe(gulp.dest('app/nwjs/www'));
 });
 
 gulp.task('build:cordova', ['clean', 'copy-source'], function (done) {
