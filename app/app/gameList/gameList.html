@@ -1,5 +1,8 @@
 <h3 translate="gameList.title"></h3>
 
-<ul>
-    <li ng-repeat="game in games"><a ui-sref="games.detail({gameId: game.id})">{{game.name}}</a></li>
+<ul class="list-group" ng-if="games">
+    <li class="list-group-item" ng-repeat="game in games"><a ui-sref="games.detail({gameId: game.id})">{{game.name}}</a></li>
 </ul>
+
+<div class="alert alert-info" ng-if="games.length === 0" translate="gameList.noGames"></div>
+<div class="alert alert-danger" ng-if="hasError" translate="gameList.error"></div>

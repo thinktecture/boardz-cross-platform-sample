@@ -11,7 +11,9 @@
     "title": "Dashboard"
   },
   "gameList": {
-    "title": "Spieleliste"
+    "title": "Spieleliste",
+    "error": "Fehler beim Abrufen der Spieleliste.",
+    "noGames": "Es konnten keine Spiele gefunden werden."
   },
   "radiusSearch": {
     "title": "Umkreissuche",

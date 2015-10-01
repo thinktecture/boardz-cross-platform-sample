@@ -12,11 +12,14 @@
 		init();
 
         function init() {
+            $scope.hasError = false;
+            $scope.games = null;
+
             boardGamesApi.list()
                 .then(function (games) {
                     $scope.games = games;
                 }, function (err) {
-                    // TODO: Error case
+                    $scope.hasError = true;
                 });
         }
 	}

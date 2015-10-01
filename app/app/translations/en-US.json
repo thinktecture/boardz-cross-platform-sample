@@ -11,7 +11,9 @@
     "title": "Dashboard"
   },
   "gameList": {
-    "title": "Game List"
+    "title": "Game List",
+    "error": "Unable to retrieve list of games.",
+    "noGames": "No games were found."
   },
   "radiusSearch": {
     "title": "Radius Search",
