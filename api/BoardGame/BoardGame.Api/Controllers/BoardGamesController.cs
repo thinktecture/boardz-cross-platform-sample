@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Web.Http;
+using System.Web.Http.Description;
 using BoardGame.Api.Storages;
 
 namespace BoardGame.Api.Controllers
 {
+    /// <summary>
+    /// Provides a CRUD api for board games
+    /// </summary>
     [Authorize]
     public class BoardGamesController : ApiController
     {
@@ -14,13 +18,24 @@ namespace BoardGame.Api.Controllers
             _storage = storage;
         }
         
+        /// <summary>
+        /// Lists all players
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
+        [ResponseType(typeof(Models.BoardGame[]))]
         public IHttpActionResult List()
         {
             return Ok(_storage.List());
         }
         
+        /// <summary>
+        /// Adds a new board game
+        /// </summary>
+        /// <param name="game"></param>
+        /// <returns></returns>
         [HttpPost]
+        [ResponseType(typeof(Guid))]
         public IHttpActionResult Add(Models.BoardGame game)
         {
             var result = _storage.Add(game);
@@ -28,12 +43,23 @@ namespace BoardGame.Api.Controllers
             return Ok(result);
         }
         
+        /// <summary>
+        /// Returns a single board game
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
+        [ResponseType(typeof(Models.BoardGame))]
         public IHttpActionResult Single(Guid id)
         {
             return Ok(_storage.Get(id));
         }
         
+        /// <summary>
+        /// Removes a board game
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         public IHttpActionResult Remove(Guid id)
         {
@@ -41,6 +67,11 @@ namespace BoardGame.Api.Controllers
             return Ok();
         }
         
+        /// <summary>
+        /// Updates a board game
+        /// </summary>
+        /// <param name="game"></param>
+        /// <returns></returns>
         [HttpPut]
         public IHttpActionResult Update(Models.BoardGame game)
         {

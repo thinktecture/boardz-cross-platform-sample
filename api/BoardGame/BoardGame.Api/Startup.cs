@@ -1,4 +1,7 @@
-﻿using System.Net.Http.Formatting;
+﻿using System;
+using System.IO;
+using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Reflection;
 using System.Web.Http;
 using System.Web.Http.Cors;
@@ -10,6 +13,7 @@ using BoardGame.Api.Storages;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Owin;
+using Swashbuckle.Application;
 
 namespace BoardGame.Api
 {
@@ -58,12 +62,28 @@ namespace BoardGame.Api
                     ContractResolver = new CamelCasePropertyNamesContractResolver()
                 }
             });
-            
+
             httpConfiguration.EnableCors(new EnableCorsAttribute("*", "*", "*"));
 
             httpConfiguration.DependencyResolver = new AutofacWebApiDependencyResolver(lifetimeScope);
-            
+
+            EnableSwashbuckle(httpConfiguration);
+
             return httpConfiguration;
+        }
+
+        private void EnableSwashbuckle(HttpConfiguration httpConfiguration)
+        {
+            httpConfiguration.EnableSwagger(c =>
+            {
+                var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                var commentsFileName = Assembly.GetExecutingAssembly().GetName().Name + ".XML";
+                var commentsFile = Path.Combine(baseDirectory, "bin", "App_Data", commentsFileName);
+
+                c.IncludeXmlComments(commentsFile);
+                c.SingleApiVersion("v1", "BoardGame API");
+            })
+                .EnableSwaggerUi();
         }
     }
 }

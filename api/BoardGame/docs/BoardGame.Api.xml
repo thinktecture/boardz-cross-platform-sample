@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BoardGame.Api</name>
+    </assembly>
+    <members>
+        <member name="T:BoardGame.Api.Controllers.BoardGamesController">
+            <summary>
+            Provides a CRUD api for board games
+            </summary>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.BoardGamesController.List">
+            <summary>
+            Lists all players
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.BoardGamesController.Add(BoardGame.Api.Models.BoardGame)">
+            <summary>
+            Adds a new board game
+            </summary>
+            <param name="game"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.BoardGamesController.Single(System.Guid)">
+            <summary>
+            Returns a single board game
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.BoardGamesController.Remove(System.Guid)">
+            <summary>
+            Removes a board game
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.BoardGamesController.Update(BoardGame.Api.Models.BoardGame)">
+            <summary>
+            Updates a board game
+            </summary>
+            <param name="game"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BoardGame.Api.Controllers.PlayersController">
+            <summary>
+            Provides an CRUD api for players
+            </summary>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.PlayersController.List">
+            <summary>
+            Returns a list of players.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.PlayersController.Add(BoardGame.Api.Models.Player)">
+            <summary>
+            Adds a new player
+            </summary>
+            <param name="player"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.PlayersController.Single(System.Guid)">
+            <summary>
+            Returns a single player
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.PlayersController.Remove(System.Guid)">
+            <summary>
+            Removes a player
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.PlayersController.Update(BoardGame.Api.Models.Player)">
+            <summary>
+            Updates a player
+            </summary>
+            <param name="player"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.PlayersController.FindNearby(BoardGame.Api.Models.Coordinate,System.Int32)">
+            <summary>
+            Finds all players nearby a coordinate within the given radius
+            </summary>
+            <param name="coordinate"></param>
+            <param name="radius"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Helpers.DistanceCalculator.CalculateDistance(BoardGame.Api.Models.Coordinate,BoardGame.Api.Models.Coordinate)">
+             Adapted from http://www.geodatasource.com/developers/c-sharp
+            
+        </member>
+        <member name="P:BoardGame.Api.Models.BoardGame.Id">
+            <summary>
+            Unique identifier
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.BoardGame.Name">
+            <summary>
+            Name of the board game
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.BoardGame.Description">
+            <summary>
+            Additional description
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.BoardGame.Packshot">
+            <summary>
+            Packshot URLs
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.Coordinate.Latitude">
+            <summary>
+            Latitude value
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.Coordinate.Longitude">
+            <summary>
+            Longitude value
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.Player.Id">
+            <summary>
+            Unique identifier
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.Player.Name">
+            <summary>
+            Name of the player
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.Player.Coordinate">
+            <summary>
+            Optional coordinate of the player
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.Player.BoardGameId">
+            <summary>
+            Current game the player is playing
+            </summary>
+        </member>
+    </members>
+</doc>
