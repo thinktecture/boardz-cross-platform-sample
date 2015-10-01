@@ -6,3 +6,29 @@ body {
 	user-select: none;
 	cursor: default;
 }
+
+[ui-view].ng-enter, [ui-view].ng-leave {
+	position: relative;
+	-webkit-transition:all .3s ease-in-out;
+	-moz-transition:all .3s ease-in-out;
+	-o-transition:all .3s ease-in-out;
+	transition:all .3s ease-in-out;
+}
+
+[ui-view].ng-enter {
+	opacity: 0;
+	-webkit-transform:translate3d(100px, 0, 0);
+	-moz-transform:translate3d(100px, 0, 0);
+	transform:translate3d(100px, 0, 0);
+}
+
+[ui-view].ng-enter-active {
+	opacity: 1;
+	-webkit-transform:translate3d(0, 0, 0);
+	-moz-transform:translate3d(0, 0, 0);
+	transform:translate3d(0, 0, 0);
+}
+
+[ui-view].ng-leave {
+	display: none;
+}
