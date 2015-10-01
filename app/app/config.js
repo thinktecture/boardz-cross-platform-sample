@@ -41,8 +41,11 @@
     app.module.config(
         /**
          * @param $httpProvider
+         * @param cfpLoadingBarProvider
          */
-        function ($httpProvider) {
+        function ($httpProvider, cfpLoadingBarProvider) {
             $httpProvider.interceptors.push('tokenInterceptor');
+
+            cfpLoadingBarProvider.includeSpinner = false;
         });
 }();
