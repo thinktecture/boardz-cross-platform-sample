@@ -57,7 +57,7 @@
         $scope.takePhoto = function () {
             camera.takePhoto()
                 .then(function (photo) {
-                    console.log(photo);
+                    $scope.photoUrl = photo;
                 }, function (err) {
                     console.log(err);
                 });

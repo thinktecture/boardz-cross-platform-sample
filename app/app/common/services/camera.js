@@ -7,9 +7,10 @@
      * @param $window
      * @param $document
      * @param $q
+     * @param $timeout
      * @param {PlatformInformation} platformInformation
      */
-    function Camera($window, $document, $q, platformInformation) {
+    function Camera($window, $document, $q, $timeout, platformInformation) {
         function getMediaDevices() {
             var mediaDevices = $window.navigator.mediaDevices || (($window.navigator.mozGetUserMedia || $window.navigator.webkitGetUserMedia) ? {
                     getUserMedia: function (options) {
@@ -42,15 +43,23 @@
                             videoElement.src = vendorURL.createObjectURL(stream);
                             videoElement.play();
 
-                            var canvasElement = doc.createElement('canvas');
-                            canvasElement.setAttribute('width', videoElement.videoWidth);
-                            canvasElement.setAttribute('height', videoElement.videoHeight);
+                            videoElement.addEventListener('canplay', function () {
+                                var canvasElement = doc.createElement('canvas');
+                                canvasElement.setAttribute('width', videoElement.videoWidth);
+                                canvasElement.setAttribute('height', videoElement.videoHeight);
 
-                            var context = canvasElement.getContext('2d');
-                            context.drawImage(videoElement, 0, 0, videoElement.videoWidth, videoElement.videoHeight);
+                                // Wait a bit before taking a screenshot so the camera has time to adjust lights
+                                $timeout(function () {
+                                    var context = canvasElement.getContext('2d');
+                                    context.drawImage(videoElement, 0, 0, videoElement.videoWidth, videoElement.videoHeight);
 
-                            var url = canvasElement.toDataURL('image/png');
-                            return url;
+                                    var url = canvasElement.toDataURL('image/png');
+
+                                    videoElement.pause();
+                                    stream.stop();
+                                    defer.resolve(url);
+                                }, 500);
+                            });
                         }
                         catch (e) {
                             defer.reject(e);
