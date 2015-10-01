@@ -14,7 +14,8 @@
     "title": "Spieleliste"
   },
   "radiusSearch": {
-    "title": "Umkreissuche"
+    "title": "Umkreissuche",
+    "locate": "Standort bestimmen"
   },
   "footer": {
     "text": "Hallo Basta!"

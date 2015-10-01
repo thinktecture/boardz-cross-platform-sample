@@ -6,8 +6,9 @@
      * @public
      *
      * @param $q
+     * @param $window
      */
-    function Geolocation($q) {
+    function Geolocation($q, $window) {
         this.getCoordinatesFromSensor = function () {
             var deferred = $q.defer();
 

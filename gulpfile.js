@@ -25,6 +25,7 @@ gulp.task('build:cordova', ['clean', 'copy-source'], function (done) {
     sh.exec('cordova platform add android');
     sh.exec('cordova platform add windows');
     sh.exec('cordova plugin add org.apache.cordova.statusbar');
+    sh.exec('cordova plugin add cordova-plugin-geolocation');
     sh.exec('cordova build');
     done();
 });

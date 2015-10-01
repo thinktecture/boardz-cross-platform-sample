@@ -14,7 +14,8 @@
     "title": "Game List"
   },
   "radiusSearch": {
-    "title": "Radius Search"
+    "title": "Radius Search",
+    "locate": "Locate me"
   },
   "footer": {
     "text": "Hello Basta!"
