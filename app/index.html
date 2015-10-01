@@ -35,6 +35,9 @@
 
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
+                    <li ng-controller="navigationController as navigation" ng-show="navigation.showBackButton">
+                        <a href ng-click="navigation.goBack()"><i class="fa fa-chevron-left"></i></a>
+                    </li>
                     <!-- Notifications: style can be found in dropdown.less -->
                     <li class="dropdown notifications-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -143,6 +146,7 @@
 <script src="app/login/login.js"></script>
 <script src="app/radiusSearch/radiusSearch.js"></script>
 <script src="app/common/controllers/language.js"></script>
+<script src="app/common/controllers/navigation.js"></script>
 <script src="app/common/interceptors/tokenInterceptor.js"></script>
 <script src="app/common/services/boardGamesApi.js"></script>
 <script src="app/common/services/geolocation.js"></script>
