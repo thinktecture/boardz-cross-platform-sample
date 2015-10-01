@@ -22,7 +22,9 @@ All the resources for the BASTA! 2015 workshop “Cross-Plattform HTML5 – in A
   * [Angular Translate Static File Loader](https://github.com/angular-translate/bower-angular-translate-loader-static-files), loading translation from static json files
   * [UI Router](https://github.com/angular-ui/ui-router), AngularJS routing framework
   * [ngSanitize](https://docs.angularjs.org/api/ngSanitize), service for sanitation
-  * [ngAnimate](https://docs.angularjs.org/api/ngAnimate), service for animations
+  * [ngAnimate](https://docs.angularjs.org/api/ngAnimate), service for animatio
+  * [ngNotify](https://github.com/matowens/ng-notify), simple, lightweight module for displaying notifications
+  * [Angular Loading Bar](https://chieffancypants.github.io/angular-loading-bar/), an automatic loading bar
 * [Bootstrap](http://getbootstrap.com/), responsive layout framework
 * [AdminLTE](https://almsaeedstudio.com/preview), free responsive dashboard template
   * [Font Awesome](https://fortawesome.github.io/Font-Awesome/), free icon font
@@ -32,6 +34,7 @@ All the resources for the BASTA! 2015 workshop “Cross-Plattform HTML5 – in A
 * [three.js](http://threejs.org/), JavaScript library for WebGL and 3D content
   * [Touch Polyfill](https://github.com/CamHenlin/TouchPolyfill), adds touch event support to Internet Explorer 11/Windows (Phone) 8.1
 * [Leaflet](http://leafletjs.com/), an open-source JavaScript library for mobile-friendly interactive maps
+  * [Angular Leaflet Directive](https://github.com/tombatossals/angular-leaflet-directive), Leaflet directive for AngularJS
 
 ### Native Wrappers
 * [Cordova](https://cordova.apache.org/)
