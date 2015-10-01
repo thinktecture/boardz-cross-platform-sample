@@ -39,5 +39,12 @@
     "signIn": "Sign In",
     "rememberMe": "Remember me",
     "error": "Login not possible. Please check your inputs and try again!"
+  },
+  "gameDetails": {
+    "success": "Game details have been updated successfully!",
+    "gameName": "Game name",
+    "gameDescription": "Descroption",
+    "cancel": "Reset",
+    "save": "Save"
   }
 }

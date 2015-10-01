@@ -19,12 +19,22 @@
         /**
          * @param $rootScope
          * @param $state
+         * @param ngNotify
          */
-        function ($rootScope, $state) {
+        function ($rootScope, $state, ngNotify) {
             $rootScope.$on('needsAuthentication', function (event, currentState) {
                 $state.go('login', {
                     redirectTo: currentState
                 });
+            });
+
+            ngNotify.config({
+                theme: 'pure',
+                position: 'top',
+                duration: 3000,
+                type: 'info',
+                sticky: false,
+                html: false
             });
         });
 

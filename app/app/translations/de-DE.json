@@ -39,5 +39,12 @@
     "signIn": "Einloggen",
     "rememberMe": "Eingeloggt bleiben",
     "error": "Login nicht möglich. Bitte prüfen Sie Ihre Eingaben und versuches Sie es erneut!"
+  },
+  "gameDetails": {
+    "success": "Spieldetails wurden erfolgreich bearbeitet!",
+    "gameName": "Spielname",
+    "gameDescription": "Beschreibung",
+    "cancel": "Zurücksetzen",
+    "save": "Speichern"
   }
 }
