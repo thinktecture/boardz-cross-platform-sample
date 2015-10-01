@@ -80,9 +80,9 @@
             var onCordovaDeviceReady = function () {
                 var options = {
                     quality: 100,
-                    destinationType: Camera.DestinationType.DATA_URL,
-                    sourceType: Camera.PictureSourceType.CAMERA,
-                    encodingType: Camera.EncodingType.PNG,
+                    destinationType: $window.Camera.DestinationType.DATA_URL,
+                    sourceType: $window.Camera.PictureSourceType.CAMERA,
+                    encodingType: $window.Camera.EncodingType.PNG,
                     saveToPhotoAlbum: false,
                     correctOrientation: true
                 };
@@ -90,7 +90,7 @@
                 $cordovaCamera.getPicture(options)
                     .then(function (imageData) {
                         $document[0].removeEventListener('deviceready', onCordovaDeviceReady);
-                        defer.resolve(imageData);
+                        defer.resolve("data:image/png;base64," + imageData);
                     }, defer.reject);
             };
 
