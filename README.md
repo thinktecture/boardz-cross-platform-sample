@@ -30,6 +30,7 @@ All the resources for the BASTA! 2015 workshop “Cross-Plattform HTML5 – in A
 * [FastClick](https://github.com/ftlabs/fastclick), eliminates the [infamous 300 ms lag on touch devices](http://developer.telerik.com/featured/300-ms-click-delay-ios-8/)
 * [three.js](http://threejs.org/), JavaScript library for WebGL and 3D content
   * [Touch Polyfill](https://github.com/CamHenlin/TouchPolyfill), adds touch event support to Internet Explorer 11/Windows (Phone) 8.1
+* [Leaflet](http://leafletjs.com/), an open-source JavaScript library for mobile-friendly interactive maps
 
 ### Native Wrappers
 * [Cordova](https://cordova.apache.org/)
