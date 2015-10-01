@@ -25,4 +25,8 @@
     </platform>
     <engine name="ios" spec="^3.8.0" />
     <engine name="android" spec="^4.0.2" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarBackgroundColor" value="#555299" />
+    <preference name="StatusBarStyle" value="lightcontent" />
+    <preference name="DisallowOverscroll" value="true" />
 </widget>
