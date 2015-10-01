@@ -54,7 +54,16 @@
     "gameDescription": "Beschreibung",
     "cancel": "Zurücksetzen",
     "save": "Speichern",
-    "iAmGamingSuccess": "Dein Spiel wurde erfolgreich übermittelt. Freue Dich auf neue Mitspieler!",
+    "iAmGaming": {
+      "success": "Dein Spiel wurde erfolgreich übermittelt. Freue Dich auf neue Mitspieler!",
+      "title": "Ich spiele gerade!",
+      "description": "Die &quot;Ich spiele gerade!&quot;-Funktion übermittelt ein Bild und Deinen aktuellen Standort, sodass andere Mitspieler Dich finden und mit Dir spielen können!",
+      "photo": "Fotografiere Dein Spiel!",
+      "photoError": "Leider haben wir keinen Zugriff auf Deine Kamera, um ein Bild zu machen. :-(",
+      "position": "Aktueller Standort",
+      "gettingPosition": "Aktuelle Position wird ermittelt...",
+      "positionError": "Leider haben wir keinen Zugriff auf Deinen Standort, um diesen zu bestimmen. :-("
+    },
     "error": "Leider konnten wir Deine Anfrage nicht zufriedenstellend beantworten. Bitte probiere es später noch einmal."
   }
 }

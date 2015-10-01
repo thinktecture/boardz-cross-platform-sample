@@ -144,5 +144,10 @@
             Current game the player is playing
             </summary>
         </member>
+        <member name="P:BoardGame.Api.Models.Player.ImageUrl">
+            <summary>
+            Base64 Image Url (if player did "i am gaming")
+            </summary>
+        </member>
     </members>
 </doc>

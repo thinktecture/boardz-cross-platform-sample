@@ -23,5 +23,10 @@ namespace BoardGame.Api.Models
         /// Current game the player is playing
         /// </summary>
         public Guid BoardGameId { get; set; }
+
+        /// <summary>
+        /// Base64 Image Url (if player did "i am gaming")
+        /// </summary>
+        public string ImageUrl { get; set; }
     }
 }

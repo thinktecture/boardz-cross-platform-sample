@@ -39,12 +39,11 @@
             <div class="box-header with-border">
                 <i class="fa fa-user"></i>
 
-                <h3 class="box-title">Ich spiele gerade!</h3>
+                <h3 class="box-title" translate="gameDetails.iAmGaming.title"></h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <p>Die &quot;Ich spiele gerade!&quot;-Funktion übermittelt ein Bild und Deinen aktuellen Standort,
-                    sodass andere Mitspieler Dich finden und mit Dir spielen können!</p>
+                <p translate="gameDetails.iAmGaming.description"></p>
 
                 <p class="text-center">
                     <button type="button" class="btn btn-success" ng-disabled="!center || !photoUrl" ng-click="sendIAmGaming()"><i class="fa fa-flag-checkered fa-4x"></i></button>
@@ -59,14 +58,14 @@
             <div class="box-header with-border">
                 <i class="fa fa-photo"></i>
 
-                <h3 class="box-title">Fotografiere Dein Spiel!</h3>
+                <h3 class="box-title" translate="gameDetails.iAmGaming.photo"></h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body text-center">
                 <p>
                     <button type="button" class="btn btn-primary" ng-click="takePhoto()"><i class="fa fa-camera-retro fa-2x"></i></button>
                 </p>
-                <p ng-show="photoError" class="text-danger">Leider haben wir keinen Zugriff auf Deine Kamera, um ein Bild zu machen. :-(</p>
+                <p ng-show="photoError" class="text-danger" translate="gameDetails.iAmGaming.photoError"></p>
                 <img ng-src="{{photoUrl}}" class="img-responsive"/>
             </div>
             <!-- /.box-body -->
@@ -78,13 +77,13 @@
             <div class="box-header with-border">
                 <i class="fa fa-map-pin"></i>
 
-                <h3 class="box-title">Aktueller Standort</h3>
+                <h3 class="box-title" translate="gameDetails.iAmGaming.position"></h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <p ng-hide="center || locationError">Ermittle Position...</p>
+                <p ng-hide="center || locationError" translate="gameDetails.iAmGaming.gettingPosition"></p>
 
-                <p ng-show="locationError" class="text-danger">Leider haben wir keinen Zugriff auf Deinen Standort, um diesen zu bestimmen. :-(</p>
+                <p ng-show="locationError" class="text-danger" translate="gameDetails.iAmGaming.positionError"></p>
                 <leaflet ng-if="center" style="height: 250px" defaults="defaults" markers="markers" center="center"></leaflet>
             </div>
             <!-- /.box-body -->

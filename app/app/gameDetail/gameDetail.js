@@ -95,7 +95,7 @@
                 imageUrl: $scope.photoUrl
             })
                 .then(function () {
-                    ngNotify.set($translate.instant('gameDetails.iAmGamingSuccess'), 'success');
+                    ngNotify.set($translate.instant('gameDetails.iAmGaming.success'), 'success');
                 })
         };
 
