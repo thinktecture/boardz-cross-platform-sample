@@ -22,6 +22,10 @@
     "unavailable": "Geolocation steht auf dieser Plattform entweder nicht zur Verfügung oder wurde blockiert.",
     "noResults": "Im Umkreis wurden keine Mitspieler gefunden."
   },
+  "packshot": {
+    "title": "Verpackung",
+    "noShot": "Für dieses Spiel ist keine Verpackung hinterlegt."
+  },
   "footer": {
     "text": "Hallo Basta!"
   },

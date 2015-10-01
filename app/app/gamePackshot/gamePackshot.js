@@ -14,12 +14,34 @@
     function GamePackshotController($scope, $element, $window, $stateParams, boardGamesApi) {
         var scene, camera, renderer, controls;
 
+        var height = 400;
+        var width = $element.width();
+
+        $window.addEventListener('resize', resize);
+        $scope.$on('$destroy', function () {
+            $window.removeEventListener('resize');
+        });
+
         init();
 
         function init() {
-            var width = 500;
-            var height = 500;
+            $scope.hasPackshot = true;
 
+            boardGamesApi.single($stateParams.gameId)
+                .then(function (game) {
+                    $scope.game = game;
+
+                    var hasPackshot = !!game.packshot;
+                    $scope.hasPackshot = hasPackshot;
+                    if (hasPackshot) {
+                        initScene(game.packshot);
+                    }
+                }, function (err) {
+                    $scope.hasPackshot = false;
+                });
+        }
+
+        function initScene(packshot) {
             // scene
             scene = new THREE.Scene();
 
@@ -44,28 +66,24 @@
             var ambientLight = new THREE.AmbientLight(0xffffff);
             scene.add(ambientLight);
 
-            boardGamesApi.single($stateParams.gameId)
-                .then(function (game) {
-                    $scope.game = game;
-
-                    if (game.packshot) {
-                        // box
-                        var geometry = new THREE.CubeGeometry(50, 35, 10);
-                        var materials = [
-                            new THREE.MeshLambertMaterial({map: getTextureFromBase64(game.packshot.rightImageUrl)}),
-                            new THREE.MeshLambertMaterial({map: getTextureFromBase64(game.packshot.leftImageUrl)}),
-                            new THREE.MeshLambertMaterial({map: getTextureFromBase64(game.packshot.topImageUrl)}),
-                            new THREE.MeshLambertMaterial({map: getTextureFromBase64(game.packshot.bottomImageUrl)}),
-                            new THREE.MeshLambertMaterial({map: getTextureFromBase64(game.packshot.frontImageUrl)}),
-                            new THREE.MeshLambertMaterial({map: getTextureFromBase64(game.packshot.backImageUrl)})
-                        ];
-                        var material = new THREE.MeshFaceMaterial(materials);
-                        var box = new THREE.Mesh(geometry, material);
-                        scene.add(box);
-                    }
-                });
-
+            addPackshotBox(packshot);
             animate();
+        }
+
+        function addPackshotBox(packshot) {
+            // box
+            var geometry = new THREE.CubeGeometry(50, 35, 10);
+            var materials = [
+                new THREE.MeshLambertMaterial({map: getTextureFromBase64(packshot.rightImageUrl)}),
+                new THREE.MeshLambertMaterial({map: getTextureFromBase64(packshot.leftImageUrl)}),
+                new THREE.MeshLambertMaterial({map: getTextureFromBase64(packshot.topImageUrl)}),
+                new THREE.MeshLambertMaterial({map: getTextureFromBase64(packshot.bottomImageUrl)}),
+                new THREE.MeshLambertMaterial({map: getTextureFromBase64(packshot.frontImageUrl)}),
+                new THREE.MeshLambertMaterial({map: getTextureFromBase64(packshot.backImageUrl)})
+            ];
+            var material = new THREE.MeshFaceMaterial(materials);
+            var box = new THREE.Mesh(geometry, material);
+            scene.add(box);
         }
 
         function getTextureFromBase64(base64Image) {
@@ -84,6 +102,13 @@
             renderer.render(scene, camera);
 
             $window.requestAnimationFrame(animate);
+        }
+
+        function resize() {
+            camera.aspect = $element.width() / height;
+            camera.updateProjectionMatrix();
+
+            renderer.setSize($element.width(), height);
         }
     }
 

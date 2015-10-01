@@ -22,6 +22,10 @@
     "unavailable": "Geolocation is either not available on this system or request was denied by user.",
     "noResults": "No players were found in this area."
   },
+  "packshot": {
+    "title": "Packshot",
+    "noShot": "Unfortunately, we do not have a packshot for this game."
+  },
   "footer": {
     "text": "Hello Basta!"
   },
