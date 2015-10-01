@@ -7,9 +7,9 @@
 	 * 
 	 * @param $scope
 	 */
-	function DashboardController($scope) {
+	function GameListController($scope) {
 		
 	}
 	
-	app.module.controller('dashboardController', DashboardController);
+	app.module.controller('gameListController', GameListController);
 }();
