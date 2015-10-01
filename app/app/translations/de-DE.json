@@ -1,0 +1,12 @@
+{
+  "footer": {
+    "text": "Hallo Basta!"
+  },
+  "sidebar": {
+    "language": "Sprache",
+    "languages": {
+      "enEN": "English",
+      "deDE": "Deutsch"
+    }
+  }
+}

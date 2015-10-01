@@ -96,7 +96,7 @@
         <div class="pull-right hidden-xs">
           <b>Version</b> 2015
         </div>
-        Hallo BASTA!
+        {{ 'footer.text' | translate }}
       </footer>
 
       <!-- Add the sidebar's background. This div must be placed
@@ -108,11 +108,14 @@
 		<script src="vendor/bootstrap/js/bootstrap.js"></script>
 		<script src="vendor/admin-lte/js/app.js"></script>
 		<script src="vendor/angular-js/angular.js"></script>
+		<script src="vendor/angular-js/angular-sanitize.js"></script>
 		<script src="vendor/angular-translate/angular-translate.js"></script>
+		<script src="vendor/angular-translate/angular-translate-static-file-loader.js"></script>
 		<script src="vendor/ui-router/angular-ui-router.js"></script>
 		<script src="vendor/fastclick/fastclick.js"></script>
 		<script src="vendor/three-js/three.js"></script>
 		<script src="app/init.js"></script>
+		<script src="app/config.js"></script>
 		<script src="app/routing.js"></script>
 		<script src="app/dashboard/dashboard.js"></script>
 	</body>

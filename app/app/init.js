@@ -1,7 +1,7 @@
 !function($, jQuery){
 	
 	window.app = window.app || {};
-	window.app.module = angular.module('basta-sample', ['ui.router']);
+	window.app.module = angular.module('basta-sample', ['ui.router', 'pascalprecht.translate', 'ngSanitize']);
 	
     FastClick.attach(document.body);
 	
