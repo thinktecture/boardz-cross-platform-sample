@@ -12,6 +12,7 @@ All the resources for the BASTA! 2015 workshop “Cross-Plattform HTML5 – in A
 ## Third-Party Libraries
 * [AngularJS](https://angularjs.org/), JavaScript framework — HTML enhanced for web apps!
   * [Angular Translate](https://github.com/angular-translate/angular-translate), i18n for AngularJS apps, made easy
+  * [Angular Translate Static File Loader](https://github.com/angular-translate/bower-angular-translate-loader-static-files), loading translation from static json files
   * [UI Router](https://github.com/angular-ui/ui-router), AngularJS routing framework
 * [Bootstrap](http://getbootstrap.com/), responsive layout framework
 * [AdminLTE](https://almsaeedstudio.com/preview), free responsive dashboard template
