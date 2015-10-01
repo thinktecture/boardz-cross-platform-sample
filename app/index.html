@@ -7,8 +7,7 @@
 		<link rel="stylesheet" href="vendor/admin-lte/css/skins/skin-purple.css" />
 		<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.css" />
 	</head>
-	<body>
-  <body class="hold-transition skin-purple sidebar-mini">
+  <body class="hold-transition skin-purple sidebar-mini" ng-app="basta-sample">
     <div class="wrapper">
       <header class="main-header">
         <!-- Logo -->
@@ -87,15 +86,8 @@
 
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <h1>
-            Dashboard
-          </h1>
-        </section>
-
         <!-- Main content -->
-        <section class="content">
+        <section class="content" ui-view="main">
 
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
@@ -117,6 +109,10 @@
 		<script src="vendor/angular-js/angular.js"></script>
 		<script src="vendor/angular-translate/angular-translate.js"></script>
 		<script src="vendor/ui-router/angular-ui-router.js"></script>
+		<script src="vendor/fastclick/fastclick.js"></script>
 		<script src="vendor/three-js/three.js"></script>
+		<script src="app/init.js"></script>
+		<script src="app/routing.js"></script>
+		<script src="app/dashboard/dashboard.js"></script>
 	</body>
 </html>
