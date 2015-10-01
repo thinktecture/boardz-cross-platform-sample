@@ -1,12 +1,48 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using BoardGame = BoardGame.Api.Models.BoardGame;
 
 namespace BoardGame.Api.Storages
 {
     public class BoardGameStorage : IStorage<Models.BoardGame>
     {
         private ConcurrentDictionary<Guid, Models.BoardGame> _storage = new ConcurrentDictionary<Guid, Models.BoardGame>();
+
+        public BoardGameStorage()
+        {
+            var guid = Guid.NewGuid();
+            _storage.TryAdd(guid, new Models.BoardGame()
+            {
+                Id = guid,
+                Name = "Jumanji",
+                Description = "Crazy board game!"
+            });
+
+            guid = Guid.NewGuid();
+            _storage.TryAdd(guid, new Models.BoardGame()
+            {
+                Id = guid,
+                Name = "Monopoly",
+                Description = "24h board game"
+            });
+
+            guid = Guid.NewGuid();
+            _storage.TryAdd(guid, new Models.BoardGame()
+            {
+                Id = guid,
+                Name = "You don't know, Jack!",
+                Description = "You really don't"
+            });
+
+            guid = Guid.NewGuid();
+            _storage.TryAdd(guid, new Models.BoardGame()
+            {
+                Id = guid,
+                Name = "Jenga",
+                Description = "Let the tower fall."
+            });
+        }
 
         public Models.BoardGame Get(Guid id)
         {
