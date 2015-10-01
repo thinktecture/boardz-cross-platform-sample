@@ -11,8 +11,9 @@
      * @param {BoardGamesApi} boardGamesApi
      * @param ngNotify
      * @param {Geolocation} geolocation
+     * @param {Camera} camera
      */
-    function GameDetailController($scope, $stateParams, $translate, boardGamesApi, ngNotify, geolocation) {
+    function GameDetailController($scope, $stateParams, $translate, boardGamesApi, ngNotify, geolocation, camera) {
         initialize();
 
         function initialize() {
@@ -50,6 +51,15 @@
             boardGamesApi.update($scope.game)
                 .then(function () {
                     ngNotify.set($translate.instant('gameDetails.success'), 'success');
+                });
+        };
+
+        $scope.takePhoto = function () {
+            camera.takePhoto()
+                .then(function (photo) {
+                    console.log(photo);
+                }, function (err) {
+                    console.log(err);
                 });
         };
     }
