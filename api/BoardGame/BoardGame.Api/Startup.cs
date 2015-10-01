@@ -5,6 +5,7 @@ using System.Web.Http.Cors;
 using Autofac;
 using Autofac.Integration.WebApi;
 using BoardGame.Api.Security;
+using BoardGame.Api.Storages;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Owin;
@@ -26,6 +27,10 @@ namespace BoardGame.Api
         {
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterApiControllers(typeof (Startup).Assembly);
+
+            containerBuilder.RegisterType<BoardGameStorage>()
+                .As<IStorage<Models.BoardGame>>()
+                .SingleInstance();
 
             var container = containerBuilder.Build();
 

@@ -93,11 +93,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\BoardGameController.cs" />
     <Compile Include="Controllers\BoardGamesController.cs" />
+    <Compile Include="Models\BoardGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AuthorizationServerProvider.cs" />
     <Compile Include="Security\SecurityStartup.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Storages\BoardGameStorage.cs" />
+    <Compile Include="Storages\IStorage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
