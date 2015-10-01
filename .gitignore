@@ -6,6 +6,8 @@
 platforms/
 plugins/
 
+app/cordova/www/
+
 # res
 resources/signing
 node_modules
