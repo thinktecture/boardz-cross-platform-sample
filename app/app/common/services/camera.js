@@ -8,9 +8,10 @@
      * @param $document
      * @param $q
      * @param $timeout
+     * @param $cordovaCamera
      * @param {PlatformInformation} platformInformation
      */
-    function Camera($window, $document, $q, $timeout, platformInformation) {
+    function Camera($window, $document, $q, $timeout, $cordovaCamera, platformInformation) {
         function getMediaDevices() {
             var mediaDevices = $window.navigator.mediaDevices || (($window.navigator.mozGetUserMedia || $window.navigator.webkitGetUserMedia) ? {
                     getUserMedia: function (options) {
@@ -69,6 +70,31 @@
             else {
                 defer.reject('Platform does not support getUserMedia-API');
             }
+
+            return defer.promise;
+        }
+
+        function takeCordovaPhoto() {
+            var defer = $q.defer();
+
+            var onCordovaDeviceReady = function () {
+                var options = {
+                    quality: 100,
+                    destinationType: Camera.DestinationType.DATA_URL,
+                    sourceType: Camera.PictureSourceType.CAMERA,
+                    encodingType: Camera.EncodingType.PNG,
+                    saveToPhotoAlbum: false,
+                    correctOrientation: true
+                };
+
+                $cordovaCamera.getPicture(options)
+                    .then(function (imageData) {
+                        $document[0].removeEventListener('deviceready', onCordovaDeviceReady);
+                        defer.resolve(imageData);
+                    }, defer.reject);
+            };
+
+            $document[0].addEventListener('deviceready', onCordovaDeviceReady);
 
             return defer.promise;
         }
