@@ -10,7 +10,7 @@
      * @param {PlayersApi} playersApi
      */
     function RadiusSearchController($scope, geolocation, playersApi) {
-        $scope.radiuses = [5, 10, 25, 50, 100, 250];
+        $scope.radiuses = [5, 10, 25, 50, 100, 250, 1000];
         $scope.model = {
             radius: 10
         };
