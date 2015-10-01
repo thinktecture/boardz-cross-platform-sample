@@ -32,6 +32,10 @@ namespace BoardGame.Api
                 .As<IStorage<Models.BoardGame>>()
                 .SingleInstance();
 
+            containerBuilder.RegisterType<PlayerStorage>()
+                .As<IStorage<Models.Player>>()
+                .SingleInstance();
+
             var container = containerBuilder.Build();
 
             return container;
