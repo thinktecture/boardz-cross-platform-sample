@@ -1,0 +1,11 @@
+{
+  "name": "X-Platform Demo",
+  "main": "www/index.html",
+  "window": {
+    "toolbar": false,
+    "resizable": true,
+    "fullscreen": false,
+    "width": 800,
+    "height": 600
+  }
+}
