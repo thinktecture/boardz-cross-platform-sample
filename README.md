@@ -1,1 +1,1 @@
-# basta-herbst-2015-xplatform-sample
+# Workshop “Cross-Plattform HTML5 – in Action!”
