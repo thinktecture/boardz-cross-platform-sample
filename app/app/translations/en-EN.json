@@ -1,4 +1,13 @@
 {
+  "dashboard": {
+    "title": "Dashboard"
+  },
+  "gameList": {
+    "title": "Game List"
+  },
+  "radiusSearch": {
+    "title": "Radius Search"
+  },
   "footer": {
     "text": "Hello Basta!"
   },

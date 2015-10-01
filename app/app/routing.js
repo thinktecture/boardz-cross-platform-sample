@@ -4,8 +4,9 @@
 	app.module.config(function ($stateProvider, $urlRouterProvider) {
 		$stateProvider
 			.state('dashboard', getState('dashboard', '/'))
-			.state('gameList', getState('gameList', '/games'))
-			.state('gameDetail', getState('gameDetail', '/games/:gameId'));
+			.state('games', getState('gameList', '/games'))
+			.state('games.detail', getState('gameDetail', '/:gameId'))
+			.state('radiusSearch', getState('radiusSearch'));
 		
 		$urlRouterProvider.otherwise('/');
 	});
