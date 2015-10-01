@@ -38,6 +38,7 @@ gulp.task('build:nwjs', ['clean', 'copy-source'], function () {
     var nw = new NwBuilder({
         version: '0.12.3',
         files: './app/nwjs/**/**',
+        buildDir: "./app/nwjs/build",
         platforms: ['win32', 'win64', 'osx32', 'osx64', 'linux32', 'linux64']
     });
 
