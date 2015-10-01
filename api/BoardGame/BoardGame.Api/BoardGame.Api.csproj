@@ -93,7 +93,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\BoardGameController.cs" />
     <Compile Include="Controllers\BoardGamesController.cs" />
     <Compile Include="Models\BoardGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
