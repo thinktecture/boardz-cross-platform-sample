@@ -5,7 +5,8 @@
   },
   "common": {
     "toggleNavigation": "Toggle navigation",
-    "showAll": "Show all"
+    "showAll": "Show all",
+    "back": "Back"
   },
   "dashboard": {
     "title": "Dashboard"

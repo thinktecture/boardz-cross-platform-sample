@@ -5,7 +5,8 @@
   },
   "common": {
     "toggleNavigation": "Navigation umschalten",
-    "showAll": "Alle anzeigen"
+    "showAll": "Alle anzeigen",
+    "back": "Zurück"
   },
   "dashboard": {
     "title": "Dashboard"

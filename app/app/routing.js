@@ -6,6 +6,7 @@
 			.state('dashboard', getState('dashboard', '/'))
 			.state('games', getState('gameList', '/games'))
 			.state('games.detail', getState('gameDetail', '/:gameId'))
+			.state('games.detail.packshot', getState('gamePackshot', '/packshot'))
 			.state('radiusSearch', getState('radiusSearch'))
 			.state('login', {
 				url: '/login?redirectTo',
