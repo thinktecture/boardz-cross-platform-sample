@@ -45,6 +45,10 @@
             <div class="box-body">
                 <p>Die &quot;Ich spiele gerade!&quot;-Funktion übermittelt ein Bild und Deinen aktuellen Standort,
                     sodass andere Mitspieler Dich finden und mit Dir spielen können!</p>
+
+                <p class="text-center">
+                    <button type="button" class="btn btn-success" ng-disabled="!coordinates || !photo"><i class="fa fa-flag-checkered fa-4x"></i></button>
+                </p>
             </div>
             <!-- /.box-body -->
         </div>
@@ -60,8 +64,9 @@
             <!-- /.box-header -->
             <div class="box-body text-center">
                 <p>
-                    <button type="button" class="btn btn-success" ng-click="takePhoto()"><i class="fa fa-camera-retro fa-4x"></i></button>
+                    <button type="button" class="btn btn-primary" ng-click="takePhoto()"><i class="fa fa-camera-retro fa-2x"></i></button>
                 </p>
+                <p ng-show="photoError" class="text-danger">Leider haben wir keinen Zugriff auf Deine Kamera, um ein Bild zu machen. :-(</p>
                 <img ng-src="{{photoUrl}}" class="img-responsive"/>
             </div>
             <!-- /.box-body -->
@@ -77,7 +82,9 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <p ng-hide="center">Ermittle Position...</p>
+                <p ng-hide="center || locationError">Ermittle Position...</p>
+
+                <p ng-show="locationError" class="text-danger">Leider haben wir keinen Zugriff auf Deinen Standort, um diesen zu bestimmen. :-(</p>
                 <leaflet ng-if="center" style="height: 250px" defaults="defaults" markers="markers" center="center"></leaflet>
             </div>
             <!-- /.box-body -->

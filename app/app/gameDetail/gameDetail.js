@@ -34,6 +34,7 @@
                     // TODO: Error case
                 });
 
+            $scope.locationError = false;
             geolocation.getCoordinatesFromSensor()
                 .then(function (coordinates) {
                     $scope.center = {
@@ -50,6 +51,8 @@
                             draggable: false
                         }
                     }
+                }, function () {
+                    $scope.locationError = true;
                 });
         }
 
@@ -65,11 +68,13 @@
         };
 
         $scope.takePhoto = function () {
+            $scope.photoError = false;
+
             camera.takePhoto()
                 .then(function (photo) {
                     $scope.photoUrl = photo;
-                }, function (err) {
-                    console.log(err);
+                }, function () {
+                    $scope.photoError = true;
                 });
         };
     }
