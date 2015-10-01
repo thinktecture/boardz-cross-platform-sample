@@ -1,8 +1,9 @@
 {
-  "name": "X-Platform Demo",
+  "name": "BoardZ!",
   "version": "1.0.0",
   "main": "www/index.html",
   "window": {
+    "title": "BoardZ! Desktop",
     "toolbar": false,
     "resizable": true,
     "fullscreen": false,

@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="net.basta.sample" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>BastaSample</name>
+<widget id="net.tt.boardz" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>BoardZ!</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        Small demo app.
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="office@thinktecture.com" href="http://www.thinktecture.com">
+        Thinktecture AG
     </author>
     <content src="index.html" />
     <plugin name="cordova-plugin-whitelist" version="1" />
