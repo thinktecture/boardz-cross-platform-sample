@@ -1,5 +1,4 @@
 !function ($, jQuery, window, document) {
-    'use strict';
 
     /**
      * @constructor
@@ -7,9 +6,11 @@
      *
      * @param $scope
      * @param $state
+     * @param $stateParams
      * @param {Security} security
      */
-    function LoginController($scope, $state, security) {
+    'use strict';
+    function LoginController($scope, $state, $stateParams, security) {
         $scope.model = {};
 
         $scope.login = function () {
@@ -21,7 +22,7 @@
             security.login($scope.model.username, $scope.model.password, $scope.model.rememberMe)
                 .then(function () {
                     if (security.isLoggedIn()) {
-                        return $state.go('dashboard');
+                        return $state.go($stateParams.redirectTo || 'dashboard');
                     }
 
                     $scope.error = true;

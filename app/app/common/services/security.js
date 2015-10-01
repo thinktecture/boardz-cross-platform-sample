@@ -60,6 +60,11 @@
             return token;
         };
 
+        this.logout = function () {
+            token = '';
+            saveToken('');
+        };
+
         function saveToken(obtainedToken) {
             localStorage.setItem(localStorageKey, obtainedToken);
         }

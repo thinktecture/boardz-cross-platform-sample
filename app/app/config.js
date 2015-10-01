@@ -19,18 +19,12 @@
         /**
          * @param $rootScope
          * @param $state
-         * @param {Security} security
          */
-        function ($rootScope, $state, security) {
-            $rootScope.$on('$stateChangeStart', function (event, toState) {
-                if (security.isLoggedIn()) {
-                    return;
-                }
-
-                if (toState.data && toState.data.needsAuthentication) {
-                    event.preventDefault();
-                    $state.go('login');
-                }
+        function ($rootScope, $state) {
+            $rootScope.$on('needsAuthentication', function (event, currentState) {
+                $state.go('login', {
+                    redirectTo: currentState
+                });
             });
         });
 
@@ -38,7 +32,7 @@
         /**
          * @param $httpProvider
          */
-        function($httpProvider) {
+        function ($httpProvider) {
             $httpProvider.interceptors.push('tokenInterceptor');
         });
 }();

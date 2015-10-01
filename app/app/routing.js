@@ -7,12 +7,20 @@
 			.state('games', getState('gameList', '/games'))
 			.state('games.detail', getState('gameDetail', '/:gameId'))
 			.state('radiusSearch', getState('radiusSearch'))
-			.state('login', getState('login', '/login', true));
+			.state('login', {
+				url: '/login?redirectTo',
+				views: {
+					'main@': {
+						templateUrl: 'app/login/login.html',
+						controller: 'loginController'
+					}
+				}
+			});
 		
 		$urlRouterProvider.otherwise('/');
 	});
 	
-	function getState(name, url, isAnonymous) {
+	function getState(name, url) {
 		return {
 			url: url || '/' + name,
 			views: {
@@ -20,9 +28,6 @@
 					templateUrl: 'app/' + name + '/' + name + '.html',
 					controller: name + 'Controller'
 				}
-			},
-			data: {
-				needsAuthentication: !isAnonymous
 			}
 		};
 	}	
