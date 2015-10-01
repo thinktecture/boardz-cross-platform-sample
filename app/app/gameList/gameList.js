@@ -15,6 +15,8 @@
             boardGamesApi.list()
                 .then(function (games) {
                     $scope.games = games;
+                }, function (err) {
+                    // TODO: Error case
                 });
         }
 	}

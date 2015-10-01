@@ -1,5 +1,5 @@
 <h3 translate="gameList.title"></h3>
 
 <ul>
-    <li ng-repeat="game in games">{{game.name}}</li>
+    <li ng-repeat="game in games"><a ui-sref="games.detail({gameId: game.id})">{{game.name}}</a></li>
 </ul>
