@@ -1,10 +1,26 @@
 body {
-	font-family: -apple-system-font, "Helvetica Neue", HelveticaNeue, "Roboto", "Segoe WP", "Segoe UI", sans-serif;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
 	cursor: default;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+.main-header .logo {
+	font-family: -apple-system-font, "Helvetica Neue", HelveticaNeue, "Roboto", "Segoe WP", "Segoe UI", sans-serif;
 }
 
 [ui-view].ng-enter, [ui-view].ng-leave {
