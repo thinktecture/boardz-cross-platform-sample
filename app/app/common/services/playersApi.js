@@ -41,7 +41,8 @@
             return $http.get(baseUrl + 'FindNearby', {
                 params: {
                     radius: radius,
-                    coordinate: coordinate
+                    "coordinate.latitude": coordinate.latitude,
+                    "coordinate.longitude": coordinate.longitude
                 }
             })
                 .then(unwrapData);

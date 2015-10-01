@@ -1,7 +1,7 @@
 {
   "appBranding": {
     "shortTitle": "B!",
-    "title": "BASTA!"
+    "title": "BoardZ!"
   },
   "common": {
     "toggleNavigation": "Toggle navigation",
@@ -27,7 +27,7 @@
     "noShot": "Unfortunately, we do not have a packshot for this game."
   },
   "footer": {
-    "text": "Hello Basta!"
+    "text": "Hello!"
   },
   "sidebar": {
     "language": "Language",

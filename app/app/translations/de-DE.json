@@ -1,7 +1,7 @@
 {
   "appBranding": {
     "shortTitle": "B!",
-    "title": "BASTA!"
+    "title": "BoardZ!"
   },
   "common": {
     "toggleNavigation": "Navigation umschalten",
@@ -27,7 +27,7 @@
     "noShot": "Für dieses Spiel ist keine Verpackung hinterlegt."
   },
   "footer": {
-    "text": "Hallo Basta!"
+    "text": "Hallo!"
   },
   "sidebar": {
     "language": "Sprache",
