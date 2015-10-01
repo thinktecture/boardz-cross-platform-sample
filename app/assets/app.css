@@ -23,6 +23,12 @@ h6,
 	font-family: -apple-system-font, "Helvetica Neue", HelveticaNeue, "Roboto", "Segoe WP", "Segoe UI", sans-serif;
 }
 
+body,
+.wrapper {
+	overflow-x: hidden;
+	position: relative;
+}
+
 [ui-view].ng-enter, [ui-view].ng-leave {
 	position: relative;
 	-webkit-transition:all .3s ease-in-out;
