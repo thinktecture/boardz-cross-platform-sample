@@ -4,6 +4,7 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using Autofac;
 using Autofac.Integration.WebApi;
+using BoardGame.Api.Helpers;
 using BoardGame.Api.Security;
 using BoardGame.Api.Storages;
 using Newtonsoft.Json;
@@ -35,6 +36,8 @@ namespace BoardGame.Api
             containerBuilder.RegisterType<PlayerStorage>()
                 .As<IStorage<Models.Player>>()
                 .SingleInstance();
+
+            containerBuilder.RegisterType<DistanceCalculator>();
 
             var container = containerBuilder.Build();
 

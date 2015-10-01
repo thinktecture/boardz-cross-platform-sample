@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Http;
+using BoardGame.Api.Helpers;
+using BoardGame.Api.Models;
 using BoardGame.Api.Storages;
 
 namespace BoardGame.Api.Controllers
@@ -8,10 +11,12 @@ namespace BoardGame.Api.Controllers
     public class PlayersController : ApiController
     {
         private readonly IStorage<Models.Player> _storage;
+        private readonly DistanceCalculator _distanceCalculator;
 
-        public PlayersController(IStorage<Models.Player> storage)
+        public PlayersController(IStorage<Models.Player> storage, DistanceCalculator distanceCalculator)
         {
             _storage = storage;
+            _distanceCalculator = distanceCalculator;
         }
 
         [HttpGet]
@@ -46,6 +51,23 @@ namespace BoardGame.Api.Controllers
         {
             _storage.Update(player);
             return Ok();
+        }
+
+        [HttpGet]
+        public IHttpActionResult FindNearby([FromUri] Coordinate coordinate, int radius)
+        {
+            var result = _storage.List()
+                .Where(i => i.Coordinate != null)
+                .Select(c => new
+                {
+                    Player = c,
+                    Distance = _distanceCalculator.CalculateDistance(coordinate, c.Coordinate)
+                })
+                .Where(c => c.Distance <= radius)
+                .OrderBy(c => c.Distance)
+                .ToList();
+
+            return Ok(result);
         }
     }
 }
