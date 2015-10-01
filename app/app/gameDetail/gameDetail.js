@@ -10,11 +10,13 @@
      * @param $stateParams
      * @param $translate
      * @param {BoardGamesApi} boardGamesApi
+     * @param {PlayersApi} playersApi
      * @param ngNotify
      * @param {Geolocation} geolocation
      * @param {Camera} camera
+     * @param {Security} security
      */
-    function GameDetailController($scope, $state, $stateParams, $translate, boardGamesApi, ngNotify, geolocation, camera) {
+    function GameDetailController($scope, $state, $stateParams, $translate, boardGamesApi, playersApi, ngNotify, geolocation, camera, security) {
         initialize();
 
         $scope.defaults = {
@@ -64,7 +66,7 @@
             boardGamesApi.update($scope.game)
                 .then(function () {
                     ngNotify.set($translate.instant('gameDetails.success'), 'success');
-                });
+                }, showErrorNotification);
         };
 
         $scope.takePhoto = function () {
@@ -77,6 +79,29 @@
                     $scope.photoError = true;
                 });
         };
+
+        $scope.sendIAmGaming = function () {
+            if (!$scope.center || !$scope.photoUrl) {
+                return;
+            }
+
+            playersApi.add({
+                name: security.getUser(),
+                boardGameId: $stateParams.gameId,
+                coordinate: {
+                    latitude: $scope.center.lat,
+                    longitude: $scope.center.lng
+                },
+                imageUrl: $scope.photoUrl
+            })
+                .then(function () {
+                    ngNotify.set($translate.instant('gameDetails.iAmGamingSuccess'), 'success');
+                })
+        };
+
+        function showErrorNotification() {
+            ngNotify.set($translate.instant('gameDetails.error'), 'error');
+        }
     }
 
     app.module.controller('gameDetailController', GameDetailController);

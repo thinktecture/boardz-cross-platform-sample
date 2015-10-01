@@ -9,9 +9,11 @@
      * @param apiBaseUrl
      */
     function Security($http, apiBaseUrl) {
-        var localStorageKey = 'boardgame.token';
+        var tokenStorageKey = 'boardgame.token';
+        var userStorageKey = 'boardgame.user';
         var loginPromise;
         var token;
+        var user;
 
         this.login = function (username, password, rememberMe) {
             if (loginPromise) {
@@ -35,9 +37,10 @@
                     // We assume we get a valid bearer token
                     if (response.data && response.data.access_token) {
                         token = response.data.access_token;
+                        user = username;
 
                         if (rememberMe) {
-                            saveToken(token);
+                            saveUserData(token, username);
                         }
 
                         return token;
@@ -53,27 +56,38 @@
         };
 
         this.isLoggedIn = function () {
-            return !!token;
+            return !!token && !!user;
         };
 
         this.getToken = function () {
             return token;
         };
 
-        this.logout = function () {
-            token = '';
-            saveToken('');
+        this.getUser = function () {
+            return user;
         };
 
-        function saveToken(obtainedToken) {
-            localStorage.setItem(localStorageKey, obtainedToken);
+        this.logout = function () {
+            token = undefined;
+            user = undefined;
+            saveUserData('', '');
+        };
+
+        function saveUserData(obtainedToken, obtainedUser) {
+            localStorage.setItem(tokenStorageKey, obtainedToken);
+            localStorage.setItem(userStorageKey, obtainedUser);
         }
 
         function initialize() {
-            var cachedToken = localStorage.getItem(localStorageKey);
+            var cachedToken = localStorage.getItem(tokenStorageKey);
+            var cachedUser = localStorage.getItem(userStorageKey);
 
             if (cachedToken && cachedToken !== null) {
                 token = cachedToken;
+            }
+
+            if (cachedUser && cachedUser !== null) {
+                user = cachedUser;
             }
         }
 

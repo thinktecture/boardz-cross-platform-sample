@@ -53,6 +53,8 @@
     "gameName": "Spielname",
     "gameDescription": "Beschreibung",
     "cancel": "Zurücksetzen",
-    "save": "Speichern"
+    "save": "Speichern",
+    "iAmGamingSuccess": "Dein Spiel wurde erfolgreich übermittelt. Freue Dich auf neue Mitspieler!",
+    "error": "Leider konnten wir Deine Anfrage nicht zufriedenstellend beantworten. Bitte probiere es später noch einmal."
   }
 }

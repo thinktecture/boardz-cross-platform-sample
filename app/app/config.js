@@ -46,7 +46,7 @@
                 duration: 3000,
                 type: 'info',
                 sticky: false,
-                html: false
+                html: true
             });
         });
 
