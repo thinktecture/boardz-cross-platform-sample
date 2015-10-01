@@ -29,6 +29,12 @@ body,
 	position: relative;
 }
 
+.player-image {
+	height: 30px;
+	width: auto;
+	max-width: 100px;
+}
+
 [ui-view].ng-enter, [ui-view].ng-leave {
 	position: relative;
 	-webkit-transition:all .3s ease-in-out;
