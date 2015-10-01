@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
 using BoardGame.Api.Storages;
@@ -13,6 +15,25 @@ namespace BoardGame.Api.Controllers
     {
         private readonly IStorage<Models.BoardGame> _storage;
 
+        private string GetCurrentUsername()
+        {
+            var user = (ClaimsPrincipal) User;
+
+            if (user == null)
+            {
+                throw new Exception("No user found.");
+            }
+
+            var claim = user.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (claim == null)
+            {
+                throw new Exception("Claim not found.");
+            }
+
+            return claim.Value;
+        }
+
         public BoardGamesController(IStorage<Models.BoardGame> storage)
         {
             _storage = storage;
@@ -26,7 +47,8 @@ namespace BoardGame.Api.Controllers
         [ResponseType(typeof(Models.BoardGame[]))]
         public IHttpActionResult List()
         {
-            return Ok(_storage.List());
+            var username = GetCurrentUsername();
+            return Ok(_storage.List().Where(g => g.UserName == username).ToList());
         }
         
         /// <summary>
@@ -38,6 +60,7 @@ namespace BoardGame.Api.Controllers
         [ResponseType(typeof(Guid))]
         public IHttpActionResult Add(Models.BoardGame game)
         {
+            game.UserName = GetCurrentUsername();
             var result = _storage.Add(game);
 
             return Ok(result);
@@ -75,6 +98,7 @@ namespace BoardGame.Api.Controllers
         [HttpPut]
         public IHttpActionResult Update(Models.BoardGame game)
         {
+            game.UserName = GetCurrentUsername();
             _storage.Update(game);
             return Ok();
         }

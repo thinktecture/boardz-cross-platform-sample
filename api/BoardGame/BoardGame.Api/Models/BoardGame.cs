@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace BoardGame.Api.Models
 {
@@ -23,5 +24,8 @@ namespace BoardGame.Api.Models
         /// Packshot URLs
         /// </summary>
         public Packshot Packshot { get; set; }
+
+        [JsonIgnore]
+        public string UserName { get; set; }
     }
 }
