@@ -1,3 +1,8 @@
 body {
-	font-family: -apple-system-font, "Helvetica Neue", HelveticaNeue, "Roboto", "Segoe WP", "Segoe UI", sans-serif !important;
+	font-family: -apple-system-font, "Helvetica Neue", HelveticaNeue, "Roboto", "Segoe WP", "Segoe UI", sans-serif;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	cursor: default;
 }
