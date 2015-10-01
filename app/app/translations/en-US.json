@@ -15,7 +15,9 @@
   },
   "radiusSearch": {
     "title": "Radius Search",
-    "locate": "Locate me"
+    "search": "Search",
+    "unavailable": "Geolocation is either not available on this system or request was denied by user.",
+    "noResults": "No players were found in this area."
   },
   "footer": {
     "text": "Hello Basta!"
@@ -23,7 +25,7 @@
   "sidebar": {
     "language": "Language",
     "languages": {
-      "enEN": "English",
+      "enUS": "English",
       "deDE": "Deutsch"
     }
   },

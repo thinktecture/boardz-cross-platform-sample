@@ -15,7 +15,9 @@
   },
   "radiusSearch": {
     "title": "Umkreissuche",
-    "locate": "Standort bestimmen"
+    "search": "Suchen",
+    "unavailable": "Geolocation steht auf dieser Plattform entweder nicht zur Verfügung oder wurde blockiert.",
+    "noResults": "Im Umkreis wurden keine Mitspieler gefunden."
   },
   "footer": {
     "text": "Hallo Basta!"
@@ -23,7 +25,7 @@
   "sidebar": {
     "language": "Sprache",
     "languages": {
-      "enEN": "English",
+      "enUS": "English",
       "deDE": "Deutsch"
     }
   },
