@@ -1,6 +1,10 @@
 ﻿using System.Net.Http.Formatting;
+using System.Reflection;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using Autofac;
+using Autofac.Integration.WebApi;
+using BoardGame.Api.Security;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Owin;
@@ -11,12 +15,24 @@ namespace BoardGame.Api
     {
         public void Configuration(IAppBuilder appBuilder)
         {
-            var httpConfiguration = CreateHttpConfiguration();
+            var container = CreateAutofacContainer();
+            var httpConfiguration = CreateHttpConfiguration(container);
 
+            SecurityStartup.Configuration(appBuilder);
             appBuilder.UseWebApi(httpConfiguration);
         }
 
-        private HttpConfiguration CreateHttpConfiguration()
+        private IContainer CreateAutofacContainer()
+        {
+            var containerBuilder = new ContainerBuilder();
+            containerBuilder.RegisterApiControllers(typeof (Startup).Assembly);
+
+            var container = containerBuilder.Build();
+
+            return container;
+        }
+
+        private HttpConfiguration CreateHttpConfiguration(ILifetimeScope lifetimeScope)
         {
             var httpConfiguration = new HttpConfiguration();
             httpConfiguration.MapHttpAttributeRoutes();
@@ -33,6 +49,8 @@ namespace BoardGame.Api
             
             httpConfiguration.EnableCors(new EnableCorsAttribute("*", "*", "*"));
 
+            httpConfiguration.DependencyResolver = new AutofacWebApiDependencyResolver(lifetimeScope);
+            
             return httpConfiguration;
         }
     }

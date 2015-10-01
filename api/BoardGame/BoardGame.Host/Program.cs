@@ -8,7 +8,7 @@ namespace BoardGame.Host
     {
         static void Main(string[] args)
         {
-            using (WebApp.Start<Startup>("http://+:8090"))
+            using (WebApp.Start<Startup>("http://+:8080"))
             {
                 Console.WriteLine("Server is up and running");
                 Console.ReadLine();
