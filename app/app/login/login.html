@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title" translate="login.title"></h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form class="form-horizontal" name="loginForm" ng-submit="login()">
+                <div class="box-body">
+                    <div class="form-group">
+                        <label for="username" class="col-sm-2 control-label" translate="login.username"></label>
+
+                        <div class="col-sm-10">
+                            <input type="text" ng-model="model.username" required class="form-control" id="username" placeholder="{{ 'login.username' | translate }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-sm-2 control-label" translate="login.password"></label>
+
+                        <div class="col-sm-10">
+                            <input type="password" ng-model="model.password" required class="form-control" id="password" placeholder="{{ 'login.password' | translate }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="model.rememberMe"> <span translate="login.rememberMe"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="help-block" translate="login.error" ng-show="error"></p>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-default" translate="login.cancel"></button>
+                    <button type="submit" class="btn btn-info pull-right" translate="login.signIn" ng-disabled="loginForm.$invalid"></button>
+                </div>
+                <!-- /.box-footer -->
+            </form>
+        </div>
+    </div>
+</div>

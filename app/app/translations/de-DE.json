@@ -26,5 +26,14 @@
       "enEN": "English",
       "deDE": "Deutsch"
     }
+  },
+  "login": {
+    "title": "Login",
+    "username": "Benutzername",
+    "password": "Passwort",
+    "cancel": "Abbrechen",
+    "signIn": "Einloggen",
+    "rememberMe": "Eingeloggt bleiben",
+    "error": "Login nicht möglich. Bitte prüfen Sie Ihre Eingaben und versuches Sie es erneut!"
   }
 }

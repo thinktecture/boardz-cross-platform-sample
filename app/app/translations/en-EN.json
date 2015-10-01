@@ -26,5 +26,14 @@
       "enEN": "English",
       "deDE": "Deutsch"
     }
+  },
+  "login": {
+    "title": "Login",
+    "username": "Username",
+    "password": "Password",
+    "cancel": "Cancel",
+    "signIn": "Sign In",
+    "rememberMe": "Remember me",
+    "error": "Login not possible. Please check your inputs and try again!"
   }
 }
