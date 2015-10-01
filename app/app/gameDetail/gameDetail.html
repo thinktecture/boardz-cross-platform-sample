@@ -60,7 +60,7 @@
             <!-- /.box-header -->
             <div class="box-body text-center">
                 <p>
-                    <button type="button" ng-click="takePhoto()"><i class="fa fa-camera-retro fa-4x"></i></button>
+                    <button type="button" class="btn btn-success" ng-click="takePhoto()"><i class="fa fa-camera-retro fa-4x"></i></button>
                 </p>
                 <img ng-src="{{photoUrl}}" class="img-responsive"/>
             </div>
@@ -78,7 +78,7 @@
             <!-- /.box-header -->
             <div class="box-body">
                 <p ng-hide="center">Ermittle Position...</p>
-                <leaflet ng-if="center" style="height: 250px" markers="markers" center="center"></leaflet>
+                <leaflet ng-if="center" style="height: 250px" defaults="defaults" markers="markers" center="center"></leaflet>
             </div>
             <!-- /.box-body -->
         </div>

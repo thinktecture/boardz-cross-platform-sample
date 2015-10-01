@@ -6,6 +6,7 @@
      * @constructor
      *
      * @param $scope
+     * @param $state
      * @param $stateParams
      * @param $translate
      * @param {BoardGamesApi} boardGamesApi
@@ -13,10 +14,19 @@
      * @param {Geolocation} geolocation
      * @param {Camera} camera
      */
-    function GameDetailController($scope, $stateParams, $translate, boardGamesApi, ngNotify, geolocation, camera) {
+    function GameDetailController($scope, $state, $stateParams, $translate, boardGamesApi, ngNotify, geolocation, camera) {
         initialize();
 
+        $scope.defaults = {
+          tileLayer: 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png'
+        };
+
         function initialize() {
+            if (!$stateParams.gameId) {
+                $state.go('games');
+                return;
+            }
+
             boardGamesApi.single($stateParams.gameId)
                 .then(function (result) {
                     $scope.game = result;
