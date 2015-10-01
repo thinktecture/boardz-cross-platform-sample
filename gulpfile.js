@@ -16,7 +16,7 @@ gulp.task('copy-source', ['clean'], function () {
     return gulp.src([
         'app/**/*.*',
         '!app/cordova/**/*.*',
-        '!app/nwjs/**/*.*',
+        '!app/nwjs/**/*.*'
     ])
         .pipe(gulp.dest('app/cordova/www'))
         .pipe(gulp.dest('app/nwjs/www'));
@@ -44,4 +44,4 @@ gulp.task('build:nwjs', ['clean', 'copy-source'], function () {
     return nw.build();
 });
 
-gulp.task('default', ['clean', 'copy-source', 'build:cordova', 'build:nwjs']);
+gulp.task('default', ['clean', 'copy-source', 'build:cordova']);
