@@ -9,7 +9,10 @@
     "back": "Back"
   },
   "dashboard": {
-    "title": "Dashboard"
+    "title": "Dashboard",
+    "boardGames": "Board Games",
+    "players": "Players",
+    "more": "More info"
   },
   "gameList": {
     "title": "Game List",

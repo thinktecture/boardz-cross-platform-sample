@@ -1,1 +1,30 @@
 <h3 translate="dashboard.title"></h3>
+
+<div class="row">
+    <div class="col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-aqua">
+            <div class="inner">
+                <h3 ng-bind="gameCount"></h3>
+                <p translate="dashboard.boardGames"></p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-cubes"></i>
+            </div>
+            <a href="#" class="small-box-footer"><span translate="dashboard.more"></span> <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div><!-- ./col -->
+    <div class="col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-green">
+            <div class="inner">
+                <h3 ng-bind="playerCount"></h3>
+                <p translate="dashboard.players"></p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-users"></i>
+            </div>
+            <a href="#" class="small-box-footer"><span translate="dashboard.more"></span> <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div><!-- ./col -->
+</div>
