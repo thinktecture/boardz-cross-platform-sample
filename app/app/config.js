@@ -3,7 +3,6 @@
 
     app.module.config(
         /**
-         *
          * @param $translateProvider
          */
         function ($translateProvider) {
@@ -18,7 +17,6 @@
 
     app.module.run(
         /**
-         *
          * @param $rootScope
          * @param $state
          * @param {Security} security
@@ -34,5 +32,13 @@
                     $state.go('login');
                 }
             });
+        });
+
+    app.module.config(
+        /**
+         * @param $httpProvider
+         */
+        function($httpProvider) {
+            $httpProvider.interceptors.push('tokenInterceptor');
         });
 }();
