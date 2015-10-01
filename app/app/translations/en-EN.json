@@ -1,4 +1,12 @@
 {
+  "appBranding": {
+    "shortTitle": "B!",
+    "title": "BASTA!"
+  },
+  "common": {
+    "toggleNavigation": "Toggle navigation",
+    "showAll": "Show all"
+  },
   "dashboard": {
     "title": "Dashboard"
   },

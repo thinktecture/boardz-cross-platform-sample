@@ -8,21 +8,21 @@
     <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.css"/>
     <link rel="stylesheet" href="assets/app.css"/>
 </head>
-<body class="hold-transition skin-purple sidebar-mini" ng-app="basta-sample">
+<body class="hold-transition skin-purple sidebar-mini" ng-app="xplatform-sample">
 <div class="wrapper">
     <header class="main-header">
         <!-- Logo -->
         <a href="#" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini">B<strong>!</strong></span>
+            <span class="logo-mini" translate="appBranding.shortTitle"></span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg">BASTA<strong>!</strong></span>
+            <span class="logo-lg" translate="appBranding.title"></span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
             <!-- Sidebar toggle button-->
             <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                <span class="sr-only">Navigation umschalten</span>
+                <span class="sr-only" translate="common.toggleNavigation"></span>
             </a>
 
             <div class="navbar-custom-menu">
@@ -31,10 +31,10 @@
                     <li class="dropdown notifications-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-bell-o"></i>
-                            <span class="label label-warning">1</span>
+                            <span class="label label-warning">99+</span>
                         </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 1 notification</li>
+                        <ul class="dropdown-menu"> class=btn btn-default
+                            <li class="header">You have 99+ notifications</li>
                             <li>
                                 <!-- inner menu: contains the actual data -->
                                 <ul class="menu">
@@ -45,7 +45,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="footer"><a href="#">Alle anzeigen</a></li>
+                            <li class="footer"><a href="#" translate="common.showAll"></a></li>
                         </ul>
                     </li>
                     <li>
@@ -85,9 +85,6 @@
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-            <b>Version</b> 2015
-        </div>
         {{ 'footer.text' | translate }}
     </footer>
 
@@ -97,8 +94,8 @@
             <!-- Home tab content -->
             <div class="tab-pane active" id="control-sidebar-home-tab" ng-controller="languageController as language">
                 <h3 class="control-sidebar-heading" translate="sidebar.language"></h3>
-                <button ng-click="language.switchTo('de-DE')" type="button" translate="sidebar.languages.deDE"></button>
-                <button ng-click="language.switchTo('en-EN')" type="button" translate="sidebar.languages.enEN"></button>
+                <button class="btn btn-default" ng-click="language.switchTo('de-DE')" type="button" translate="sidebar.languages.deDE"></button>
+                <button class="btn btn-default" ng-click="language.switchTo('en-EN')" type="button" translate="sidebar.languages.enEN"></button>
                 <!-- /.control-sidebar-menu -->
 
             </div>
