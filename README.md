@@ -7,7 +7,8 @@ All the resources for the BASTA! 2015 workshop “Cross-Plattform HTML5 – in A
   * [Android SDK](https://developer.android.com/sdk/index.html)
   * [Windows 10 SDK](https://dev.windows.com/en-us/downloads/windows-10-sdk)
   * [Windows Phone 8.1 SDK](https://dev.windows.com/en-us/develop/download-phone-sdk)
-* Download [node.js](https://nodejs.org/)
+* Download and install [node.js](https://nodejs.org/)
+* Download and install [Atom](https://atom.io/) or another editor of your choice (free: `notepad`, [Visual Studio Code](https://code.visualstudio.com/); commercial: [Sublime Text](https://www.sublimetext.com/), [WebStorm](https://www.jetbrains.com/webstorm/))
 
 ## Third-Party Libraries
 * [AngularJS](https://angularjs.org/), JavaScript framework — HTML enhanced for web apps!
@@ -22,4 +23,7 @@ All the resources for the BASTA! 2015 workshop “Cross-Plattform HTML5 – in A
 * [three.js](http://threejs.org/), JavaScript library for WebGL and 3D content
 
 ## Additional Resources
+* [Cross-platform 2D and 3D visualizations](https://github.com/thinktecture/basta-herbst-2015-2d-3d)
+* [Offline-first architecture for HTML5 apps](https://speakerdeck.com/christianweyer/auch-ohne-netz-offline-first-architekturen-fur-html5-apps)
+* [Leightweight architecture with ASP.NET and SignalR](https://speakerdeck.com/christianweyer/fur-alle-leichtgewichtige-architekturen-mit-asp-dot-net-web-api-and-signalr)
 * [AngularJS/Cordova: Fixing the Windows Phone back button](http://weblogs.thinktecture.com/christian_liebel/2015/07/angularjs-cordova-and-the-windows-phone-back-button.html)
