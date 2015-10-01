@@ -6,7 +6,7 @@ var gulp = require('gulp'),
     NwBuilder = require('nw-builder');
 
 gulp.task('clean', function (done) {
-    del(['app/cordova/www', 'app/cordova/platforms', 'app/cordova/plugins', 'app/nwjs/www'])
+    del(['app/cordova/www', 'app/cordova/platforms', 'app/cordova/plugins', 'app/nwjs/www', 'app/nwjs/build'])
         .then(function () {
             done();
         });
@@ -41,6 +41,8 @@ gulp.task('build:nwjs', ['clean', 'copy-source'], function () {
         version: '0.12.3',
         files: './app/nwjs/**/**',
         buildDir: "./app/nwjs/build",
+        //winIco: "./app/resources/icon.png",
+        macIcns: "./app/resources/icon.icns",
         platforms: ['win32', 'win64', 'osx32', 'osx64', 'linux32', 'linux64']
     });
 
