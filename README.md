@@ -42,6 +42,7 @@ All the resources for the BASTA! 2015 workshop “Cross-Plattform HTML5 – in A
   * [Geolocation Plugin](https://github.com/apache/cordova-plugin-geolocation), allows access to geolocation
   * [Statusbar Plugin](https://github.com/apache/cordova-plugin-statusbar), allows modifying the statusbar
 * [NW.js](http://nwjs.io/)
+  * [nw-builder](https://github.com/nwjs/nw-builder), builds NW.js apps for Mac OS X, Windows and Linux via CLI
 
 ## Additional Resources
 * [Cross-platform 2D and 3D visualizations](https://github.com/thinktecture/basta-herbst-2015-2d-3d)
