@@ -6,6 +6,12 @@ body {
 	cursor: default;
 }
 
+/* Especially to disable nw.js bounce effect: https://github.com/nwjs/nw.js/issues/3109#issuecomment-105283351 */
+html, body {
+	height: 100%;
+	overflow: hidden;
+}
+
 body,
 h1,
 h2,
