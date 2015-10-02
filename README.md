@@ -2,7 +2,7 @@
 All the resources for the BASTA! 2015 workshop “Cross-Plattform HTML5 – in Action!” can be found in this repository.
 
 ## Requirements
-* [NodeJS](http://nodejs.org] NodeJS
+* [NodeJS](http://nodejs.org) NodeJS
 * `npm i -g node-static` Installation of a web server
 * Git-Client (GitHub for Desktop)
 * Postman https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop
@@ -16,6 +16,15 @@ All the resources for the BASTA! 2015 workshop “Cross-Plattform HTML5 – in A
   * [Windows Phone 8.1 SDK](https://dev.windows.com/en-us/develop/download-phone-sdk)
 * Download and install [node.js](https://nodejs.org/)
 * Download and install [Atom](https://atom.io/) or another editor of your choice (free: `notepad`, [Visual Studio Code](https://code.visualstudio.com/); commercial: [Sublime Text](https://www.sublimetext.com/), [WebStorm](https://www.jetbrains.com/webstorm/))
+ 
+
+## Building
+The gulp task will build iOS, Windows Phone, Android phone apps as well as desktop apps for Mac OSX, Windows and Linux. To get it working, please do the following:
+
+* Only after cloning the repo: `npm i` within the root folder of this repository
+* Run `gulp build:cordova` to build all phone related apps
+* Run `gulp build:nwjs` to build all desktop related apps
+* Run `static` within the app/ folder (the first, not the "app/app"-folder) to see the web app when pointing your browser to `http://localhost:8080`.
 
 ## Supported platforms
 * Any modern web browser (Chrome, Firefox, Edge, Safari) by simply hosting it
