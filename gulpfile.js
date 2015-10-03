@@ -43,7 +43,7 @@ gulp.task('build:nwjs', ['clean', 'copy-source'], function () {
         buildDir: "./app/nwjs/build",
         //winIco: "./app/resources/icon.png",
         macIcns: "./app/resources/icon.icns",
-        platforms: ['win32', 'win64', 'osx32', 'osx64', 'linux32', 'linux64']
+        platforms: ['win32', 'win64', 'osx64', 'linux32', 'linux64']
     });
 
     return nw.build();
