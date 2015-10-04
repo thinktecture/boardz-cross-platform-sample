@@ -1,17 +1,17 @@
 {
-  "name": "basta-herbst-2015-xplatform-sample",
+  "name": "boardz-xplatform-sample",
   "version": "1.0.0",
-  "description": "All the resources for the BASTA! 2015 workshop “Cross-Plattform HTML5 – in Action!” can be found in this repository.",
+  "description": "Sample for demonstrating various aspects of modern cross-platform applications.",
   "main": "gulpfile.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thinktecture/basta-herbst-2015-xplatform-sample.git"
+    "url": "git+https://github.com/thinktecture/boardz-cross-platform-sample.git"
   },
   "author": "Thinktecture AG",
   "bugs": {
-    "url": "https://github.com/thinktecture/basta-herbst-2015-xplatform-sample/issues"
+    "url": "https://github.com/thinktecture/boardz-cross-platform-sample/issues"
   },
-  "homepage": "https://github.com/thinktecture/basta-herbst-2015-xplatform-sample#readme",
+  "homepage": "https://github.com/thinktecture/boardz-cross-platform-sample#readme",
   "dependencies": {
     "del": "^2.0.2",
     "gulp": "^3.9.0",
