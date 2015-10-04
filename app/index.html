@@ -6,14 +6,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
 
-    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css"/>
-    <link rel="stylesheet" href="vendor/admin-lte/css/AdminLTE.css"/>
-    <link rel="stylesheet" href="vendor/admin-lte/css/skins/skin-purple.css"/>
-    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.css"/>
-    <link rel="stylesheet" href="vendor/ng-notify/ng-notify.min.css"/>
-    <link rel="stylesheet" href="vendor/angular-loading-bar/loading-bar.css"/>
-    <link rel="stylesheet" href="vendor/leaflet-js/leaflet.css"/>
-    <link rel="stylesheet" href="assets/app.css"/>
+    <!-- inject:css -->
+    <link rel="stylesheet" href="vendor/angular-loading-bar/loading-bar.css">
+    <link rel="stylesheet" href="vendor/leaflet-js/leaflet.css">
+    <link rel="stylesheet" href="vendor/ng-notify/ng-notify.css">
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="vendor/admin-lte/css/AdminLTE.css">
+    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="vendor/admin-lte/css/skins/_all-skins.css">
+    <link rel="stylesheet" href="assets/app.css">
+    <!-- endinject -->
     <link rel="icon" href="assets/favicon.ico"/>
 </head>
 <body class="hold-transition skin-purple sidebar-mini">
@@ -121,28 +124,31 @@
 </div>
 <!-- ./wrapper -->
 
+
 <script src="cordova.js"></script>
 <script src="cordova_plugins.js"></script>
+
+<!-- inject:js -->
 <script src="vendor/winstore-jscompat/winstore-jscompat.js"></script>
 <script src="vendor/jquery/jquery-2.1.4.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.js"></script>
-<script src="vendor/admin-lte/js/app.js"></script>
 <script src="vendor/angular-js/angular.js"></script>
+<script src="vendor/angular-translate/angular-translate.js"></script>
+<script src="vendor/three-js/three.js"></script>
 <script src="vendor/angular-js/angular-animate.js"></script>
 <script src="vendor/angular-js/angular-sanitize.js"></script>
-<script src="vendor/angular-translate/angular-translate.js"></script>
+<script src="vendor/angular-leaflet/angular-leaflet.js"></script>
+<script src="vendor/angular-leaflet/angular-simple-logger.js"></script>
+<script src="vendor/angular-loading-bar/loading-bar.js"></script>
 <script src="vendor/angular-translate/angular-translate-static-file-loader.js"></script>
-<script src="vendor/ui-router/angular-ui-router.js"></script>
 <script src="vendor/fastclick/fastclick.js"></script>
-<script src="vendor/three-js/three.js"></script>
+<script src="vendor/leaflet-js/leaflet.js"></script>
+<script src="vendor/ng-notify/ng-notify.js"></script>
+<script src="vendor/ngCordova/ng-cordova.js"></script>
 <script src="vendor/three-js/TrackballControls.js"></script>
 <script src="vendor/touchpolyfill/touchpolyfill.js"></script>
-<script src="vendor/ng-notify/ng-notify.min.js"></script>
-<script src="vendor/angular-loading-bar/loading-bar.js"></script>
-<script src="vendor/leaflet-js/leaflet.js"></script>
-<script src="vendor/angular-leaflet/angular-simple-logger.js"></script>
-<script src="vendor/angular-leaflet/angular-leaflet.js"></script>
-<script src="vendor/ngCordova/ng-cordova.js"></script>
+<script src="vendor/ui-router/angular-ui-router.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.js"></script>
+<script src="vendor/admin-lte/js/app.js"></script>
 <script src="app/init.js"></script>
 <script src="app/config.js"></script>
 <script src="app/routing.js"></script>
@@ -153,15 +159,16 @@
 <script src="app/login/login.js"></script>
 <script src="app/radiusSearch/radiusSearch.js"></script>
 <script src="app/common/controllers/language.js"></script>
-<script src="app/common/controllers/navigation.js"></script>
 <script src="app/common/controllers/logout.js"></script>
+<script src="app/common/controllers/navigation.js"></script>
 <script src="app/common/interceptors/tokenInterceptor.js"></script>
 <script src="app/common/services/boardGamesApi.js"></script>
-<script src="app/common/services/geolocation.js"></script>
-<script src="app/common/services/playersApi.js"></script>
-<script src="app/common/services/storage.js"></script>
-<script src="app/common/services/security.js"></script>
-<script src="app/common/services/platformInformation.js"></script>
 <script src="app/common/services/camera.js"></script>
+<script src="app/common/services/geolocation.js"></script>
+<script src="app/common/services/platformInformation.js"></script>
+<script src="app/common/services/playersApi.js"></script>
+<script src="app/common/services/security.js"></script>
+<script src="app/common/services/storage.js"></script>
+<!-- endinject -->
 </body>
 </html>
