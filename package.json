@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "gulp-inject": "^3.0.0",
+    "gulp-server-livereload": "^1.5.3",
     "stream-series": "^0.1.1"
   }
 }

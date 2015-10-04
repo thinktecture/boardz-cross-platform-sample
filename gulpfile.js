@@ -5,7 +5,8 @@ var gulp = require('gulp'),
     sh = require('shelljs'),
     NwBuilder = require('nw-builder'),
     inject = require('gulp-inject'),
-    series = require('stream-series');
+    series = require('stream-series'),
+    server = require('gulp-server-livereload');
 
 var targetIndex = 'app/index.html';
 
@@ -106,6 +107,17 @@ gulp.task('index:dev', function () {
 
     return target.pipe(inject(series(vendorCss, appCss, vendorJs, appJs), {relative: true}))
         .pipe(gulp.dest('app'));
+});
+
+gulp.task('watch', ['index:dev'], function () {
+    gulp.watch([
+        'app/**/*.js'
+    ], ['index:dev']);
+    gulp.src('app')
+        .pipe(server({
+            livereload: true,
+            open: true
+        }));
 });
 
 //gulp.task('default', ['clean', 'copy-source', 'build:cordova']);
