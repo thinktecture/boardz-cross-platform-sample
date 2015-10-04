@@ -66,3 +66,7 @@ body,
 [ui-view].ng-leave {
 	display: none;
 }
+
+.content-wrapper {
+	height: 100vh;
+}
