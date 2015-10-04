@@ -1,5 +1,4 @@
-# Workshop “Cross-Plattform HTML5 – in Action!”
-All the resources for the BASTA! 2015 workshop “Cross-Plattform HTML5 – in Action!” can be found in this repository.
+# Sample application for various “Cross-Platform HTML5 – in Action!” workshops
 
 ## Requirements
 * [NodeJS](http://nodejs.org) NodeJS
