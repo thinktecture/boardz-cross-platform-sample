@@ -13,7 +13,7 @@
     ]);
 
     // insert the base URL here
-    app.module.constant('apiBaseUrl', 'https://boardgameapi.azurewebsites.net/');
+    app.module.constant('apiBaseUrl', 'https://boardzapi.azurewebsites.net/');
 
     FastClick.attach(document.body);
 }();

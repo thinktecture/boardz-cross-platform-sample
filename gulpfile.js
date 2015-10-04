@@ -39,6 +39,7 @@ var files = {
         '!app/cordova/**/*.*', // Don't inject cordova files
         '!app/nwjs/**/*.*', // Don't inject nw-js files
         '!app/**/*.min.*', // Don't inject minified files
+        '!app/**/bootstrap-theme.css',
         '!app/**/skin-*.css' // Don't inject skin files from admin-lte
     ]
 };
