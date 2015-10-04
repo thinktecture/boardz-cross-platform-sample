@@ -5,14 +5,21 @@ var gulp = require('gulp'),
     sh = require('shelljs'),
     NwBuilder = require('nw-builder');
 
-gulp.task('clean', function (done) {
-    del(['app/cordova/www', 'app/cordova/platforms', 'app/cordova/plugins', 'app/nwjs/www', 'app/nwjs/build'])
+gulp.task('clean:cordova', function (done) {
+    del(['app/cordova/www', 'app/cordova/platforms', 'app/cordova/plugins'])
         .then(function () {
             done();
         });
 });
 
-gulp.task('copy-source', ['clean'], function () {
+gulp.task('clean:nwjs', function (done) {
+    del(['app/nwjs/www', 'app/nwjs/build'])
+        .then(function () {
+            done();
+        });
+});
+
+gulp.task('copy-source', ['clean:cordova', 'clean:nwjs'], function () {
     return gulp.src([
         'app/**/*.*',
         '!app/cordova/**/*.*',
@@ -22,7 +29,7 @@ gulp.task('copy-source', ['clean'], function () {
         .pipe(gulp.dest('app/nwjs/www'));
 });
 
-gulp.task('build:cordova', ['clean', 'copy-source'], function (done) {
+gulp.task('build:cordova', ['clean:cordova', 'copy-source'], function (done) {
     sh.cd('app/cordova');
     sh.exec('cordova platform add ios');
     sh.exec('cordova platform add android');
@@ -36,7 +43,7 @@ gulp.task('build:cordova', ['clean', 'copy-source'], function (done) {
     done();
 });
 
-gulp.task('build:nwjs', ['clean', 'copy-source'], function () {
+gulp.task('build:nwjs', ['clean:nwjs', 'copy-source'], function () {
     var nw = new NwBuilder({
         version: '0.12.3',
         files: './app/nwjs/**/**',
@@ -49,4 +56,4 @@ gulp.task('build:nwjs', ['clean', 'copy-source'], function () {
     return nw.build();
 });
 
-gulp.task('default', ['clean', 'copy-source', 'build:cordova']);
+//gulp.task('default', ['clean', 'copy-source', 'build:cordova']);
