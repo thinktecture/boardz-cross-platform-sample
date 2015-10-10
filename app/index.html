@@ -18,7 +18,7 @@
     <!-- endinject -->
     <link rel="icon" href="assets/favicon.ico"/>
 </head>
-<body class="hold-transition skin-purple sidebar-mini">
+<body class="hold-transition skin-purple sidebar-mini" body-element>
 <div class="wrapper">
     <header class="main-header">
         <!-- Logo -->
@@ -78,13 +78,13 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li ui-sref-active="active">
-                    <a ui-sref="dashboard"><i class="fa fa-dashboard"></i> <span translate="dashboard.title"></span></a>
+                    <a ui-sref="dashboard" close-sidebar-on-mobile><i class="fa fa-dashboard"></i> <span translate="dashboard.title"></span></a>
                 </li>
                 <li ui-sref-active="active">
-                    <a ui-sref="games"><i class="fa fa-list"></i> <span translate="gameList.title"></span></a>
+                    <a ui-sref="games" close-sidebar-on-mobile><i class="fa fa-list"></i> <span translate="gameList.title"></span></a>
                 </li>
                 <li ui-sref-active="active">
-                    <a ui-sref="radiusSearch"><i class="fa fa-location-arrow"></i> <span translate="radiusSearch.title"></span></a>
+                    <a ui-sref="radiusSearch" close-sidebar-on-mobile><i class="fa fa-location-arrow"></i> <span translate="radiusSearch.title"></span></a>
                 </li>
             </ul>
         </section>
@@ -133,20 +133,20 @@
 <script src="vendor/angular-js/angular.js"></script>
 <script src="vendor/angular-translate/angular-translate.js"></script>
 <script src="vendor/three-js/three.js"></script>
-<script src="vendor/angular-js/angular-animate.js"></script>
-<script src="vendor/angular-js/angular-sanitize.js"></script>
 <script src="vendor/angular-leaflet/angular-leaflet.js"></script>
 <script src="vendor/angular-leaflet/angular-simple-logger.js"></script>
 <script src="vendor/angular-loading-bar/loading-bar.js"></script>
-<script src="vendor/angular-translate/angular-translate-static-file-loader.js"></script>
+<script src="vendor/angular-js/angular-animate.js"></script>
+<script src="vendor/angular-js/angular-sanitize.js"></script>
 <script src="vendor/fastclick/fastclick.js"></script>
+<script src="vendor/angular-translate/angular-translate-static-file-loader.js"></script>
 <script src="vendor/leaflet-js/leaflet.js"></script>
 <script src="vendor/ng-notify/ng-notify.js"></script>
 <script src="vendor/ngCordova/ng-cordova.js"></script>
-<script src="vendor/three-js/TrackballControls.js"></script>
 <script src="vendor/touchpolyfill/touchpolyfill.js"></script>
 <script src="vendor/ui-router/angular-ui-router.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.js"></script>
+<script src="vendor/three-js/TrackballControls.js"></script>
 <script src="vendor/admin-lte/js/app.js"></script>
 <script src="app/init.js"></script>
 <script src="app/config.js"></script>
@@ -160,6 +160,8 @@
 <script src="app/common/controllers/language.js"></script>
 <script src="app/common/controllers/logout.js"></script>
 <script src="app/common/controllers/navigation.js"></script>
+<script src="app/common/directives/bodyElement.js"></script>
+<script src="app/common/directives/closeSidebarOnMobile.js"></script>
 <script src="app/common/interceptors/tokenInterceptor.js"></script>
 <script src="app/common/services/boardGamesApi.js"></script>
 <script src="app/common/services/camera.js"></script>
