@@ -5,23 +5,19 @@ var gulp = require('gulp'),
     path = require('path'),
     buildConfig = require('../gulp.config');
 
+function getMappedSourceFiles(files, baseFolder) {
+    return files.map(function (file) {
+        return path.join(baseFolder, file);
+    });
+}
+
 function getSourceFiles(baseFolder) {
     return [].concat(
-        buildConfig.source.files.vendor.js.map(function (file) {
-            return path.join(baseFolder, file);
-        }),
-        buildConfig.source.files.vendor.css.map(function (file) {
-            return path.join(baseFolder, file);
-        }),
-        buildConfig.source.files.app.js.map(function (file) {
-            return path.join(baseFolder, file);
-        }),
-        buildConfig.source.files.app.html.map(function (file) {
-            return path.join(baseFolder, file);
-        }),
-        buildConfig.source.files.app.css.map(function (file) {
-            return path.join(baseFolder, file);
-        })
+        getMappedSourceFiles(buildConfig.source.files.vendor.js, baseFolder),
+        getMappedSourceFiles(buildConfig.source.files.vendor.css, baseFolder),
+        getMappedSourceFiles(buildConfig.source.files.app.js, baseFolder),
+        getMappedSourceFiles(buildConfig.source.files.app.html, baseFolder),
+        getMappedSourceFiles(buildConfig.source.files.app.css, baseFolder)
     );
 }
 
@@ -30,26 +26,31 @@ function getSources(baseFolder, read) {
         read = true;
     }
 
-    return gulp.src(getSourceFiles(baseFolder), { read: !!read, base: buildConfig.source.folder });
+    return gulp.src(getSourceFiles(baseFolder), { read: !!read, base: baseFolder });
 }
 
-function getAssets(baseFolder, read) {
+function getAssets(baseFolder, read, copyWithoutStructure) {
     if (read === undefined) {
         read = true;
     }
 
+    var config = {
+        read: read
+    };
+
+    if (!copyWithoutStructure) {
+        config.base = baseFolder;
+    }
+
     return gulp.src([].concat(
-            buildConfig.source.files.vendor.assets.map(function (file) {
-                return path.join(baseFolder, file);
-            }),
-            buildConfig.source.files.app.assets.map(function (file) {
-                return path.join(baseFolder, file);
-            })
+            getMappedSourceFiles(buildConfig.source.files.vendor.assets, baseFolder),
+            getMappedSourceFiles(buildConfig.source.files.app.assets, baseFolder)
         )
-        , { read: !!read, base: buildConfig.source.folder });
+        , config);
 }
 
 module.exports = {
+    getMappedSourceFiles: getMappedSourceFiles,
     getSourceFiles: getSourceFiles,
     getSources: getSources,
     getAssets: getAssets

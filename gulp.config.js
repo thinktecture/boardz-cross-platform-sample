@@ -15,10 +15,10 @@ module.exports = {
                     'app/**/*.html'
                 ],
                 css: [
-                    'assets/**/*.*'
+                    'css/**/*.css'
                 ],
                 assets: [
-                    'app/**/*.json'
+                    'assets/**/*.*'
                 ]
             },
             vendor: {
@@ -36,9 +36,7 @@ module.exports = {
                     'vendor/admin-lte/**/*.css'
                 ],
                 assets: [
-                    '!vendor/**/*.css',
-                    '!vendor/**/*.js',
-                    'vendor/**/*.*'
+                    'vendor/**/!(*.js|*.css)'
                 ]
             }
         }
@@ -46,7 +44,15 @@ module.exports = {
     targets: {
         buildFolder: 'build/',
         distFolder: 'dist/',
+        tempFolder: '.temp/',
         cordovaFolder: 'cordova/',
-        nwjsFolder: 'nwjs/'
-    }
+        assetsFolder: 'assets/',
+        nwjsFolder: 'nwjs/',
+        minified: {
+            js: 'app.js',
+            css: 'app.css',
+            templateCache: 'ng-templates.js'
+        }
+    },
+    angularModuleName: 'xplatform-sample'
 };

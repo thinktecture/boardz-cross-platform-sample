@@ -1,6 +1,7 @@
 'use strict';
 
 require('./gulpTasks/dev');
+require('./gulpTasks/dist');
 
 /*
 var gulp = require('gulp'),
