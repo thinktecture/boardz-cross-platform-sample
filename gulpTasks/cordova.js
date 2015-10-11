@@ -41,7 +41,7 @@ gulp.task('cordova:build', function (done) {
     sh.exec('cordova plugin add cordova-plugin-camera');
     sh.exec('cordova plugin add cordova-plugin-crosswalk-webview');
     sh.exec('cordova build');
-    sh.exec('..');
+    sh.cd('..');
     done();
 });
 
