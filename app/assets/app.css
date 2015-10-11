@@ -67,6 +67,25 @@ body,
 	display: none;
 }
 
+/*
+ * I currently don't like the calc idea here, but AdminLTE does a lot of calculations to set several "min-height"
+ * of elements. We could use the "fixed" option of AdminLTE, but that is not include a fixed footer as well
+ * as the content would still show a "jumping"-effect.
+ *
+ * So with the next to css selectors we'll do our own "fixed" layout. This may not be the best idea, but we do not want
+ * to change the app.js from AdminLTE removing the calculations. AdminLTE3 will later use Flexbox making a
+ * static footer/header super easy. But for now, this absolutely elegant (*cough*) solution works. :)
+ */
 .content-wrapper {
-	height: 100vh;
+	height: calc(100vh - 50px - 51px);
+	overflow-y: scroll;
+}
+
+@media only screen and (max-width: 768px) {
+	/*
+	 * When Admin LTE switches to mobile phone layout, there will be 2 50px height headers while to footer is still 51px
+	 */
+	.content-wrapper {
+		height: calc(100vh - 2 * 50px - 51px);
+	}
 }
