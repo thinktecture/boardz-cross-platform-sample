@@ -7,7 +7,7 @@
          */
         function ($translateProvider) {
             $translateProvider.useStaticFilesLoader({
-                prefix: 'app/translations/',
+                prefix: 'assets/translations/',
                 suffix: '.json'
             });
 
