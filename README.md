@@ -21,9 +21,18 @@
 The gulp task will build iOS, Windows Phone, Android phone apps as well as desktop apps for Mac OSX, Windows and Linux. To get it working, please do the following:
 
 * Only after cloning the repo: `npm i` within the root folder of this repository
-* Run `gulp build:cordova` to build all phone related apps
-* Run `gulp build:nwjs` to build all desktop related apps
-* Run `static` within the app/ folder (the first, not the "app/app"-folder) to see the web app when pointing your browser to `http://localhost:8080`.
+* Run `gulp dev:watch` to start a live server, which is best when developing the app
+* Run `gulp` to build all apps in release mode (will execute `gulp build:all:release`)
+* Debug Mode: Use the following gulp tasks to build the apps in debug mode
+    * Run `gulp build:all` to build all apps in debug mode
+    * Run `gulp dist:default` to build the web app in (and use `static` within the dist/ folder to explore the app)
+    * Run `gulp cordova:default` to build all phone related apps
+    * Run `gulp nwjs:default` to build all desktop related apps
+* Release Mode: Use the following gulp tasks to build the apps in release mode
+    * Run `gulp build:all:release` to build all apps in debug mode
+    * Run `gulp dist:release` to build the web app in (and use `static` within the dist/ folder to explore the app)
+    * Run `gulp cordova:release` to build all phone related apps
+    * Run `gulp nwjs:release` to build all desktop related apps
 
 ## Supported platforms
 * Any modern web browser (Chrome, Firefox, Edge, Safari) by simply hosting it
