@@ -254,3 +254,5 @@ FakesAssemblies/
 _Pvt_Extensions
 app/nwjs/www
 cache
+dist
+resources
