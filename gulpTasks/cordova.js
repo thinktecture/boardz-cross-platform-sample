@@ -37,6 +37,7 @@ gulp.task('cordova:build', function (done) {
     sh.exec('cordova plugin add cordova-plugin-statusbar');
     sh.exec('cordova plugin add cordova-plugin-geolocation');
     sh.exec('cordova plugin add cordova-plugin-camera');
+    sh.exec('cordova plugin add cordova-plugin-crosswalk-webview');
     sh.exec('cp -r "' + path.join('..', buildConfig.targets.resourcesFolder) + '" resources/');
     sh.exec('ionic resources');
     sh.exec('cordova build');
