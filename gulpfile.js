@@ -3,6 +3,7 @@
 require('./gulpTasks/dev');
 require('./gulpTasks/dist');
 require('./gulpTasks/cordova');
+require('./gulpTasks/nwjs');
 
 /*
 var gulp = require('gulp'),
