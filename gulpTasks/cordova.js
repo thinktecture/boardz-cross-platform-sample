@@ -31,16 +31,17 @@ gulp.task('cordova:copy-source', function () {
 // TODO: Use Gulp Cordova?
 gulp.task('cordova:build', function (done) {
     sh.cd(buildConfig.targets.cordovaFolder);
+    sh.exec('cp -r "' + path.join('..', buildConfig.targets.resourcesFolder) + '" resources/');
     sh.exec('cordova platform add ios');
     sh.exec('cordova platform add android');
     sh.exec('cordova platform add windows');
+    sh.exec('ionic resources');
     sh.exec('cordova plugin add cordova-plugin-statusbar');
     sh.exec('cordova plugin add cordova-plugin-geolocation');
     sh.exec('cordova plugin add cordova-plugin-camera');
     sh.exec('cordova plugin add cordova-plugin-crosswalk-webview');
-    sh.exec('cp -r "' + path.join('..', buildConfig.targets.resourcesFolder) + '" resources/');
-    sh.exec('ionic resources');
     sh.exec('cordova build');
+    sh.exec('..');
     done();
 });
 
