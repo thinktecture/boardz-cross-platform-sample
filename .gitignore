@@ -256,3 +256,5 @@ nwjs/www
 cache
 dist
 .temp
+
+cordova/resources
