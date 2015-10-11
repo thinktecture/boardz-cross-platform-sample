@@ -14,7 +14,8 @@ var gulp = require('gulp'),
 
 gulp.task('nwjs:clean', function (done) {
     del([
-        path.join(buildConfig.targets.nwjsFolder, 'www')
+        path.join(buildConfig.targets.nwjsFolder, 'www'),
+        path.join(buildConfig.targets.nwjsFolder, 'build')
     ])
         .then(function () {
             done();
