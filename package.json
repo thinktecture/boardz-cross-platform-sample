@@ -21,6 +21,8 @@
   "devDependencies": {
     "gulp-inject": "^3.0.0",
     "gulp-server-livereload": "^1.5.3",
+    "gulp-watch": "^4.3.5",
+    "run-sequence": "^1.1.4",
     "stream-series": "^0.1.1"
   }
 }
