@@ -6,7 +6,7 @@
 platforms/
 plugins/
 
-app/cordova/www/
+cordova/www/
 
 # res
 resources/signing
@@ -252,7 +252,7 @@ FakesAssemblies/
 **/*.Server/GeneratedArtifacts
 **/*.Server/ModelManifest.xml
 _Pvt_Extensions
-app/nwjs/www
+nwjs/www
 cache
 dist
 resources
