@@ -35,3 +35,5 @@ gulp.task('build:all', function (done) {
 });
 
 gulp.task('default', ['build:all:release']);
+
+gulp.task('watch', ['dev:watch']);
