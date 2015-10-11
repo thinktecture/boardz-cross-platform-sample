@@ -71,14 +71,15 @@ gulp.task('copy-source', ['clean:cordova', 'clean:nwjs'], function () {
 
 gulp.task('build:cordova', ['clean:cordova', 'copy-source'], function (done) {
     sh.cd('app/cordova');
+    sh.exec('cp -r ../resources .');
     sh.exec('cordova platform add ios');
     sh.exec('cordova platform add android');
     sh.exec('cordova platform add windows');
+    sh.exec('ionic resources');
     sh.exec('cordova plugin add org.apache.cordova.statusbar');
     sh.exec('cordova plugin add cordova-plugin-geolocation');
     sh.exec('cordova plugin add cordova-plugin-camera');
-    sh.exec('cp -r ../resources .');
-    sh.exec('ionic resources');
+    sh.exec('cordova plugin add cordova-plugin-crosswalk-webview');
     sh.exec('cordova build');
     done();
 });
