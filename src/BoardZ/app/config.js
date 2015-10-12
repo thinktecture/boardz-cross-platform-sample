@@ -22,7 +22,7 @@
          * @param ngNotify
          * @param {Security} security
          */
-        function ($rootScope, $state, ngNotify, security) {
+        function ($rootScope, $state, ngNotify, security, nativeMenu) {
             $rootScope.$on('needsAuthentication', function (event, currentState) {
                 $state.go('login', {
                     redirectTo: currentState
