@@ -60,10 +60,11 @@ gulp.task('dev:start-live-server', function () {
 
 gulp.task('dev:watch', function () {
     runSequence('dev:default', 'dev:start-live-server', function () {
-        gulp.watch(utils.getSourceFiles(buildConfig.source.folder), ['dev:inject']);
-
-        gulp.src(utils.getSourceFiles(buildConfig.source.folder), { base: buildConfig.source.folder })
-            .pipe(watch(buildConfig.source.folder, { base: buildConfig.source.folder }))
+        watch(buildConfig.source.folder, { base: buildConfig.source.folder }, function (vinyl) {
+            if (vinyl.event && (vinyl.event === 'add' || vinyl.event === 'unlink' || vinyl.path.indexOf('index.html') > -1)) {
+                gulp.start('dev:inject');
+            }
+        })
             .pipe(gulp.dest(buildConfig.targets.buildFolder));
     });
 });
