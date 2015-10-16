@@ -31,7 +31,7 @@
                         str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
                     return str.join("&");
                 },
-                headers: { "Content-Type": "application/x-www-form-urlencoded" }
+                headers: {"Content-Type": "application/x-www-form-urlencoded"}
             })
                 .then(function (response) {
                     // We assume we get a valid bearer token
@@ -39,9 +39,7 @@
                         token = response.data.access_token;
                         user = username;
 
-                        if (rememberMe) {
-                            saveUserData(token, username);
-                        }
+                        saveUserData(token, username, rememberMe);
 
                         return token;
                     }
@@ -73,14 +71,19 @@
             saveUserData('', '');
         };
 
-        function saveUserData(obtainedToken, obtainedUser) {
-            localStorage.setItem(tokenStorageKey, obtainedToken);
-            localStorage.setItem(userStorageKey, obtainedUser);
+        function saveUserData(obtainedToken, obtainedUser, rememberMe) {
+            if(rememberMe) {
+                localStorage.setItem(tokenStorageKey, obtainedToken);
+                localStorage.setItem(userStorageKey, obtainedUser);
+            } else {
+                sessionStorage.setItem(tokenStorageKey, obtainedToken);
+                sessionStorage.setItem(userStorageKey, obtainedUser);
+            }
         }
 
         function initialize() {
-            var cachedToken = localStorage.getItem(tokenStorageKey);
-            var cachedUser = localStorage.getItem(userStorageKey);
+            var cachedToken = localStorage.getItem(tokenStorageKey) || sessionStorage.getItem(tokenStorageKey);
+            var cachedUser = localStorage.getItem(userStorageKey) || sessionStorage.getItem(userStorageKey);
 
             if (cachedToken && cachedToken !== null) {
                 token = cachedToken;
