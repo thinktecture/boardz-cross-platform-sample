@@ -7,10 +7,11 @@ body {
 }
 
 /* Especially to disable nw.js bounce effect: https://github.com/nwjs/nw.js/issues/3109#issuecomment-105283351 */
-html, body {
+/*html, body {
 	height: 100%;
 	overflow: hidden;
 }
+*/
 
 body,
 h1,
