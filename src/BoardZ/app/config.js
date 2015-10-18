@@ -1,4 +1,4 @@
-!function ($, jQuery, window, document) {
+!function ($, jQuery, window) {
     'use strict';
 
     app.module.config(
@@ -20,9 +20,11 @@
          * @param $rootScope
          * @param $state
          * @param ngNotify
+         * @param {NativeMenu} nativeMenu
+         * @param {PlatformInformation} platformInformation
          * @param {Security} security
          */
-        function ($rootScope, $state, ngNotify, security, nativeMenu) {
+        function ($rootScope, $state, ngNotify, security, nativeMenu, platformInformation) {
             $rootScope.$on('needsAuthentication', function (event, currentState) {
                 $state.go('login', {
                     redirectTo: currentState
@@ -48,6 +50,18 @@
                 sticky: false,
                 html: true
             });
+
+            nativeMenu.init();
+
+            document.addEventListener('keyup', function(e) {
+                if(platformInformation.isNwjs()) {
+                    if (e.ctrlKey && e.shiftKey && e.keyCode == 68) {
+                        e.preventDefault();
+
+                        require('nw.gui').Window.get().showDevTools();
+                    }
+                }
+            }, false);
         });
 
     app.module.config(

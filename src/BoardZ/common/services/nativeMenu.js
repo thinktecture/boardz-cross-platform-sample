@@ -6,17 +6,19 @@
      * @constructor
      */
     function NativeMenu(platformInformation, $log) {
-        if (platformInformation.isNwjs()) {
-            var gui = require('nw.gui');
+        this.init = function() {
+            if (platformInformation.isNwjs()) {
+                var gui = require('nw.gui');
 
-            var nativeMenuBar = new gui.Menu({ type: 'menubar' });
+                var nativeMenuBar = new gui.Menu({ type: 'menubar' });
 
-            if (process.platform === 'darwin') {
-                nativeMenuBar.createMacBuiltin('BoardZ!');
+                if (process.platform === 'darwin') {
+                    nativeMenuBar.createMacBuiltin('BoardZ!');
+                }
+
+                var window = gui.Window.get();
+                window.menu = nativeMenuBar;
             }
-
-            var window = gui.Window.get();
-            window.menu = nativeMenuBar;
         }
     }
 
