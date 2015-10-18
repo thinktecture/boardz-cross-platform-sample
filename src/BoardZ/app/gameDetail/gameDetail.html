@@ -32,7 +32,7 @@
     </div>
 </div>
 
-<div class="row" ng-show="game.id">
+<div class="row" ng-if="game.id">
     <div class="col-md-4 col-xs-12">
         <div class="box box-solid box-primary">
             <div class="box-header with-border">
@@ -83,9 +83,10 @@
                 <p ng-hide="center || locationError" translate="gameDetails.iAmGaming.gettingPosition"></p>
 
                 <p ng-show="locationError" class="text-danger" translate="gameDetails.iAmGaming.positionError"></p>
-                <leaflet ng-if="center" style="height: 250px" defaults="defaults" markers="markers" center="center"></leaflet>
+                <leaflet ng-if="center" style="height: 250px;" defaults="defaults" markers="markers" lf-center="center"></leaflet>
             </div>
             <!-- /.box-body -->
         </div>
     </div>
 </div>
+

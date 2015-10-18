@@ -40,6 +40,7 @@
             geolocation.getCoordinatesFromSensor()
                 .then(function (coordinates) {
                     $timeout(function () {
+                        console.log('Got coords');
                         $scope.center = {
                             lat: coordinates.latitude,
                             lng: coordinates.longitude,

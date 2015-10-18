@@ -96,3 +96,8 @@ body,
 		height: calc(100vh - 2 * 50px - 51px);
 	}
 }
+
+img.leaflet-tile {
+	/* work-around from here: https://github.com/CloudMade/Leaflet/issues/161 */
+	outline: 1px solid transparent;
+}
