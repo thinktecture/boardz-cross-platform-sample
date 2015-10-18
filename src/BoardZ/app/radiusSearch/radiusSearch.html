@@ -16,7 +16,7 @@
     <ul class="list-group">
         <li class="list-group-item" ng-repeat="result in results">
             <span class="badge">{{result.distance | number:0}} km</span>
-            <img src="{{result.player.imageUrl}}" class="player-image" ng-if="result.player.imageUrl" />
+            <img ng-src="{{result.player.imageUrl}}" class="player-image" ng-if="result.player.imageUrl" />
             {{result.player.name}}
         </li>
     </ul>
