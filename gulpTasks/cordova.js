@@ -14,9 +14,7 @@ var gulp = require('gulp'),
 
 gulp.task('cordova:clean', function (done) {
     del([
-        path.join(buildConfig.targets.cordovaFolder, 'www'),
-        path.join(buildConfig.targets.cordovaFolder, 'platforms'),
-        path.join(buildConfig.targets.cordovaFolder, 'plugins')
+        path.join(buildConfig.targets.cordovaFolder, 'www')
     ])
         .then(function () {
             done();
@@ -32,15 +30,8 @@ gulp.task('cordova:copy-source', function () {
 gulp.task('cordova:build', function (done) {
     sh.cd(buildConfig.targets.cordovaFolder);
     sh.exec('cp -r "' + path.join('..', buildConfig.targets.resourcesFolder) + '" resources/');
-    sh.exec('cordova platform add ios');
-    sh.exec('cordova platform add android');
-    sh.exec('cordova platform add windows');
     sh.exec('ionic resources');
-    sh.exec('cordova plugin add cordova-plugin-statusbar');
-    sh.exec('cordova plugin add cordova-plugin-splashscreen');
-    sh.exec('cordova plugin add cordova-plugin-geolocation');
-    sh.exec('cordova plugin add cordova-plugin-camera');
-    sh.exec('cordova plugin add cordova-plugin-crosswalk-webview');
+    sh.exec('cordova prepare');
     sh.exec('cordova build');
     sh.cd('..');
     done();
