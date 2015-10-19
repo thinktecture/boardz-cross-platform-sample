@@ -54,7 +54,7 @@ gulp.task('dev:start-live-server', function () {
     gulp.src(buildConfig.targets.buildFolder)
         .pipe(server({
             livereload: true,
-            open: true
+            open: false
         }));
 });
 

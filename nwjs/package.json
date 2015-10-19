@@ -1,7 +1,7 @@
 {
   "name": "BoardZ!",
   "version": "1.0.0",
-  "main": "http://localhost:8000/index.html",
+  "main": "www/index.html",
   "window": {
     "title": "BoardZ! Desktop",
     "toolbar": false,

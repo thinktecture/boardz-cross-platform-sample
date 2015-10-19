@@ -9,6 +9,7 @@ var gulp = require('gulp'),
     del = require('del'),
     runSequence = require('run-sequence'),
     NwBuilder = require('nw-builder'),
+    watch = require('gulp-watch'),
     path = require('path'),
     buildConfig = require('../gulp.config');
 
@@ -39,6 +40,15 @@ gulp.task('nwjs:build', function () {
 
     return nw.build();
 });
+
+gulp.task('nwjs:watch', function () {
+    gulp.start('dev:watch');
+    runSequence('nwjs:default', function () {
+        watch(buildConfig.targets.buildFolder, { base: buildConfig.targets.buildFolder })
+            .pipe(gulp.dest(path.join(buildConfig.targets.nwjsFolder, 'www')));
+    });
+});
+
 
 gulp.task('nwjs:default', function (done) {
     runSequence(

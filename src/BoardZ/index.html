@@ -120,5 +120,29 @@
 
 <!-- inject:js -->
 <!-- endinject -->
+
+
+<script>
+    if (window.require) {
+        var gulp = require('gulp');
+        gulp.task('reload', function () {
+            if (location) location.reload();
+        });
+
+        gulp.task('css', function () {
+            console.log('reload');
+            var styles = document.querySelectorAll('link[rel=stylesheet]');
+
+            for (var i = 0; i < styles.length; i++) {
+                // reload styles
+                var restyled = styles[i].getAttribute('href') + '?v=' + (new Date()).getTime();
+                styles[i].setAttribute('href', restyled);
+            }
+        });
+
+        gulp.watch('**/+(*.js|*.html)', ['reload']);
+        gulp.watch(['**/*.css'], ['css']);
+    }
+</script>
 </body>
 </html>
