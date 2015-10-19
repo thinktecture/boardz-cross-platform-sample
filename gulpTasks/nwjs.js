@@ -42,7 +42,7 @@ gulp.task('nwjs:build', function () {
 });
 
 gulp.task('nwjs:watch', function () {
-    gulp.start('dev:watch');
+    gulp.start('dev:livereload');
     runSequence('nwjs:default', function () {
         watch(buildConfig.targets.buildFolder, { base: buildConfig.targets.buildFolder })
             .pipe(gulp.dest(path.join(buildConfig.targets.nwjsFolder, 'www')));

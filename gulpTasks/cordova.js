@@ -13,6 +13,7 @@ var gulp = require('gulp'),
     server = require('gulp-server-livereload'),
     path = require('path'),
     tap = require('gulp-tap'),
+    rename = require('gulp-rename'),
     buildConfig = require('../gulp.config');
 
 gulp.task('cordova:clean', function (done) {
@@ -22,6 +23,17 @@ gulp.task('cordova:clean', function (done) {
         .then(function () {
             done();
         });
+});
+
+gulp.task('cordova:config-for-livereload', function () {
+    gulp.src(path.join(buildConfig.assetFolder, 'config_livereload.xml'), { base: buildConfig.assetFolder })
+        .pipe(rename('config.xml'))
+        .pipe(gulp.dest(buildConfig.targets.cordovaFolder));
+});
+
+gulp.task('cordova:config-for-default', function () {
+    gulp.src(path.join(buildConfig.assetFolder, 'config.xml'), { base: buildConfig.assetFolder })
+        .pipe(gulp.dest(buildConfig.targets.cordovaFolder));
 });
 
 gulp.task('cordova:copy-source', function () {
@@ -38,20 +50,35 @@ gulp.task('cordova:start-live-server:ios', function () {
 });
 
 gulp.task('cordova:watch:ios', function () {
-    gulp.start('dev:watch');
-    runSequence('cordova:default', 'cordova:start-live-server:ios',  function () {
-        watch(buildConfig.targets.buildFolder, { base: buildConfig.targets.buildFolder })
-            .pipe(gulp.dest(path.join(buildConfig.targets.cordovaFolder, 'www')))
-            .pipe(tap(function () {
-                sh.cd(buildConfig.targets.cordovaFolder);
-                sh.exec('cordova prepare');
-                sh.cd('..');
-            }));
-    });
+   // gulp.start('dev:watch');
+    runSequence('cordova:clean',
+        'dist:default',
+        'cordova:copy-source',
+        'cordova:config-for-livereload',
+        'cordova:build:ios',
+        'cordova:start-live-server:ios',
+        function () {
+            watch(buildConfig.source.folder, { base: buildConfig.source.folder })
+                .pipe(gulp.dest(path.join(buildConfig.targets.cordovaFolder, 'www')))
+                .pipe(tap(function () {
+                    sh.cd(buildConfig.targets.cordovaFolder);
+                    sh.exec('cordova prepare ios');
+                    sh.cd('..');
+                }));
+        });
 });
 
-// TODO: Use Gulp Cordova?
-gulp.task('cordova:build', function (done) {
+gulp.task('cordova:build:ios', function (done) {
+    sh.cd(buildConfig.targets.cordovaFolder);
+    sh.exec('cp -r "' + path.join('..', buildConfig.targets.resourcesFolder) + '" resources/');
+    sh.exec('ionic resources');
+    sh.exec('cordova prepare ios');
+    sh.exec('cordova build ios');
+    sh.cd('..');
+    done();
+});
+
+gulp.task('cordova:build:all', function (done) {
     sh.cd(buildConfig.targets.cordovaFolder);
     sh.exec('cp -r "' + path.join('..', buildConfig.targets.resourcesFolder) + '" resources/');
     sh.exec('ionic resources');
@@ -66,7 +93,8 @@ gulp.task('cordova:default', function (done) {
         'cordova:clean',
         'dist:default',
         'cordova:copy-source',
-        'cordova:build',
+        'cordova:config-for-default',
+        'cordova:build:all',
         done
     );
 });
@@ -76,7 +104,8 @@ gulp.task('cordova:release', function (done) {
         'cordova:clean',
         'dist:release',
         'cordova:copy-source',
-        'cordova:build',
+        'cordova:config-for-default',
+        'cordova:build:all',
         done
     );
 });

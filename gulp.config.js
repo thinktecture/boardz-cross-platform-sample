@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    assetFolder: 'assetFiles/',
     source: {
         folder: 'src/BoardZ/',
         index: 'index.html',

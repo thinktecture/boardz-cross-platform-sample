@@ -58,13 +58,23 @@ gulp.task('dev:start-live-server', function () {
         }));
 });
 
-gulp.task('dev:watch', function () {
+gulp.task('dev:livereload', function () {
     runSequence('dev:default', 'dev:start-live-server', function () {
-        watch(buildConfig.source.folder, { base: buildConfig.source.folder }, function (vinyl) {
-            if (vinyl.event && (vinyl.event === 'add' || vinyl.event === 'unlink' || vinyl.path.indexOf('index.html') > -1)) {
-                gulp.start('dev:inject');
-            }
-        })
-            .pipe(gulp.dest(buildConfig.targets.buildFolder));
+        deltaWatch();
     });
 });
+
+gulp.task('dev:watch', function () {
+    runSequence('dev:default', function () {
+        deltaWatch();
+    });
+});
+
+function deltaWatch() {
+    watch(buildConfig.source.folder, { base: buildConfig.source.folder }, function (vinyl) {
+        if (vinyl.event && (vinyl.event === 'add' || vinyl.event === 'unlink' || vinyl.path.indexOf('index.html') > -1)) {
+            gulp.start('dev:inject');
+        }
+    })
+        .pipe(gulp.dest(buildConfig.targets.buildFolder));
+}
