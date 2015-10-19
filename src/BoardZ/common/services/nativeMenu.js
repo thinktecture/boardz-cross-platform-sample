@@ -16,6 +16,16 @@
                     nativeMenuBar.createMacBuiltin('BoardZ!');
                 }
 
+                var gamesListMenuItems = new gui.Menu();
+                gamesListMenuItems.append(new gui.MenuItem({ label: 'Show...' }));
+
+                nativeMenuBar.append(
+                    new gui.MenuItem({
+                        label: 'Games List',
+                        submenu: gamesListMenuItems
+                    })
+                );
+
                 var window = gui.Window.get();
                 window.menu = nativeMenuBar;
             }
