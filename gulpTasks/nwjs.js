@@ -49,7 +49,6 @@ gulp.task('nwjs:watch', function () {
     });
 });
 
-
 gulp.task('nwjs:default', function (done) {
     runSequence(
         'nwjs:clean',

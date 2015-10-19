@@ -7,7 +7,7 @@
   <author email="office@thinktecture.com" href="http://www.thinktecture.com">
         Thinktecture AG
     </author>
-  <content src="http://localhost:8000/index.html"/>
+  <content src="index.html"/>
   <plugin name="cordova-plugin-whitelist" version="1"/>
   <plugin name="cordova-plugin-statusbar" spec="~1.0.1"/>
   <plugin name="cordova-plugin-splashscreen" spec="~2.1.0"/>
