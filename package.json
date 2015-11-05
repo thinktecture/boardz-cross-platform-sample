@@ -14,6 +14,7 @@
   "homepage": "https://github.com/thinktecture/boardz-cross-platform-sample#readme",
   "devDependencies": {
     "del": "^2.0.2",
+    "electron-packager": "^5.1.1",
     "event-stream": "^3.3.1",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",

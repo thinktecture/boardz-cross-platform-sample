@@ -4,6 +4,7 @@ require('./gulpTasks/dev');
 require('./gulpTasks/dist');
 require('./gulpTasks/cordova');
 require('./gulpTasks/nwjs');
+require('./gulpTasks/electron');
 
 var gulp = require('gulp'),
     runSequence = require('run-sequence');

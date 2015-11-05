@@ -1,4 +1,4 @@
-// Contains all cordova related tasks
+// Contains all nw.js related tasks
 
 'use strict';
 

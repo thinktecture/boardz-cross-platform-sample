@@ -258,3 +258,5 @@ dist
 .temp
 
 cordova/resources
+electron-build
+electron/www

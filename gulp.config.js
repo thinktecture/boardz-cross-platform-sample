@@ -49,6 +49,7 @@ module.exports = {
         cordovaFolder: 'cordova/',
         assetsFolder: 'assets/',
         nwjsFolder: 'nwjs/',
+        electronFolder: 'electron/',
         resourcesFolder: 'resources/',
         minified: {
             js: 'app.js',
