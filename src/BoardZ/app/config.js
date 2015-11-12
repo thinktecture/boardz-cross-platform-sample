@@ -30,7 +30,7 @@
                     redirectTo: currentState
                 });
             });
-
+            
             $rootScope.$on('$stateChangeStart', function (event, toState) {
                 if (toState.name === 'login') {
                     return;

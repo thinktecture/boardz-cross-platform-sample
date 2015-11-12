@@ -15,8 +15,7 @@ var gulp = require('gulp'),
 
 gulp.task('electron:clean', function (done) {
     del([
-        path.join(buildConfig.targets.electronFolder, 'www'),
-        path.join(buildConfig.targets.electronFolder, 'build')
+        path.join(buildConfig.targets.electronFolder, 'www')
     ])
         .then(function () {
             done();
