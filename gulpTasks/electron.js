@@ -34,7 +34,7 @@ gulp.task('electron:build', function () {
         name: 'BoardZ',
         platform: 'win32,darwin',
         arch: 'x64',
-        version: '0.34.2',
+        version: '0.34.3',
         overwrite: true
     };
     electronPackager(opts, function done (err, appPath) {
