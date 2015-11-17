@@ -14,7 +14,7 @@ gulp.task('build:all:release', function (done) {
         'dist:release',
         'cordova:clean',
         'cordova:copy-source',
-        'cordova:build',
+        'cordova:build:all',
         'nwjs:clean',
         'nwjs:copy-source',
         'nwjs:build',
