@@ -73,7 +73,7 @@
     <splash src="resources/ios/splash/Default~iphone.png" width="320" height="480"/>
   </platform>
   <preference name="StatusBarOverlaysWebView" value="false"/>
-  <preference name="StatusBarBackgroundColor" value="#555299"/>
+  <preference name="StatusBarBackgroundColor" value="#367fa9"/>
   <preference name="StatusBarStyle" value="lightcontent"/>
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="SplashScreen" value="screen"/>
