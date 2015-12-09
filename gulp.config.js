@@ -10,7 +10,8 @@ module.exports = {
                 js: [
                     'app/init.js',
                     'app/**/*.js',
-                    'common/**/*.js'
+                    'common/**/*.js',
+                    'common/**/*.json'
                 ],
                 html: [
                     'app/**/*.html'

@@ -101,3 +101,8 @@ img.leaflet-tile {
 	/* work-around from here: https://github.com/CloudMade/Leaflet/issues/161 */
 	outline: 1px solid transparent;
 }
+
+.wrapper {
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
+}

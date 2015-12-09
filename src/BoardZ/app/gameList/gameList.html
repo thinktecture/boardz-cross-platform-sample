@@ -10,7 +10,8 @@
 <div class="row">
     <div class="col-md-12">
         <ul class="list-group" ng-if="games" style="margin-top: 15px">
-            <li class="list-group-item" ng-repeat="game in games"><a ui-sref="games.detail({gameId: game.id})">{{game.name}}</a>
+            <li class="list-group-item" ng-repeat="game in games track by game.id">
+                <a ui-sref="games.detail({gameId: game.id})">{{game.name}}</a>
             </li>
         </ul>
         <div class="alert alert-info" ng-if="games.length === 0" translate="gameList.noGames"></div>

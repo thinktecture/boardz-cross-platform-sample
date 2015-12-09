@@ -85,8 +85,9 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
+
         <!-- Main content -->
-        <section class="content" ui-view="main">
+        <section class="content scrolling-module" ui-view="main">
 
         </section>
         <!-- /.content -->
@@ -115,13 +116,19 @@
 </div>
 <!-- ./wrapper -->
 
+<script>
+    var AdminLTEOptions = {
+        navbarMenuSlimscroll: true,
+        sidebarSlimScroll: true
+    };
+</script>
 
 <script src="cordova.js"></script>
 
 <!-- inject:js -->
 <!-- endinject -->
 
-
+<!-- Live reload of CSS styles without reloading the page -->
 <script>
     if (window.require) {
         var gulp = require('gulp');
