@@ -12,13 +12,13 @@
     "title": "Dashboard",
     "boardGames": "Board Games",
     "players": "Players",
-    "more": "More info"
+    "more": "More..."
   },
   "gameList": {
     "title": "Game List",
     "error": "Unable to retrieve list of games.",
     "noGames": "No games were found.",
-    "add": "Add game"
+    "add": "New"
   },
   "radiusSearch": {
     "title": "Radius Search",

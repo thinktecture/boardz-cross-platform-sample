@@ -12,13 +12,13 @@
     "title": "Dashboard",
     "boardGames": "Brettspiele",
     "players": "Spieler",
-    "more": "Mehr erfahren"
+    "more": "Mehr..."
   },
   "gameList": {
     "title": "Spieleliste",
     "error": "Fehler beim Abrufen der Spieleliste.",
     "noGames": "Es konnten keine Spiele gefunden werden.",
-    "add": "Spiel hinzufügen"
+    "add": "Neu"
   },
   "radiusSearch": {
     "title": "Umkreissuche",
