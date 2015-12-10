@@ -26,7 +26,9 @@ module.exports = {
             vendor: {
                 js: [
                     'vendor/winstore-jscompat/*.js',
+                    'vendor/hammerjs/hammer.js',
                     'vendor/jquery/*.js',
+                    'vendor/jquery/jquery.hammer.js',
                     'vendor/angular-js/angular.js',
                     'vendor/angular-translate/angular-translate.js',
                     'vendor/three-js/three.js',

@@ -348,6 +348,40 @@ function _init() {
                       && $('body').hasClass('sidebar-mini'))) {
         this.expandOnHover();
       }
+
+      // Touch Slide in (https://github.com/almasaeed2010/AdminLTE/issues/357)
+      $('body').hammer().on('swiperight', function(e) {
+        e.preventDefault();
+        //OPEN
+        if ($(window).width() > (screenSizes.sm - 1)) {
+          if($("body").hasClass('sidebar-collapse'))
+          {
+            $("body").removeClass('sidebar-collapse');
+          }
+        }else{
+          if (!$("body").hasClass('sidebar-open')) {
+            $("body").addClass('sidebar-open');
+          }
+        }
+
+      });
+
+      $('body').hammer().on('swipeleft', function(e) {
+        e.preventDefault();
+        //CLOSE
+        if ($(window).width() > (screenSizes.sm - 1)) {
+          if(!$("body").hasClass('sidebar-collapse'))
+          {
+            $("body").addClass('sidebar-collapse');
+          }
+        }else{
+          if ($("body").hasClass('sidebar-open')) {
+            $("body").removeClass('sidebar-open');
+            $("body").removeClass('sidebar-collapse');
+          }
+        }
+
+      });
     },
     expandOnHover: function () {
       var _this = this;
