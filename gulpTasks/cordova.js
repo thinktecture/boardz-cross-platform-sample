@@ -92,6 +92,17 @@ gulp.task('cordova:build:all', function (done) {
     done();
 });
 
+gulp.task('cordova:default:ios', function (done) {
+    runSequence(
+        'cordova:clean',
+        'dist:default',
+        'cordova:copy-source',
+        'cordova:config-for-default',
+        'cordova:build:ios',
+        done
+    );
+});
+
 gulp.task('cordova:default', function (done) {
     runSequence(
         'cordova:clean',

@@ -350,7 +350,7 @@ function _init() {
       }
 
       // Touch Slide in (https://github.com/almasaeed2010/AdminLTE/issues/357)
-      $('body').hammer().on('swiperight', function(e) {
+      $('body').hammer().on('panright', function(e) {
         e.preventDefault();
         //OPEN
         if ($(window).width() > (screenSizes.sm - 1)) {
@@ -366,7 +366,7 @@ function _init() {
 
       });
 
-      $('body').hammer().on('swipeleft', function(e) {
+      $('body').hammer().on('panleft', function(e) {
         e.preventDefault();
         //CLOSE
         if ($(window).width() > (screenSizes.sm - 1)) {
