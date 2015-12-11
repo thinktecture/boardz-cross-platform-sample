@@ -23,7 +23,6 @@
                     }
 
                     // Closes the sidebar after clicking on a navigation item
-                    // TODO: Verify, that this is the behavior we want
                     element[0].addEventListener('click', function () {
                         bodyElementController.closeSidebar();
                     });

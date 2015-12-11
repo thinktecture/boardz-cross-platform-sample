@@ -25,8 +25,8 @@
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" ng-model="model.rememberMe"> <span translate="login.rememberMe"></span>
+                                <label for="login" class="btn btn-primary"><span translate="login.rememberMe"></span>
+                                    <input type="checkbox" id="login" class="badgebox"><span class="badge">&check;</span>
                                 </label>
                             </div>
                         </div>
@@ -36,7 +36,7 @@
                 <!-- /.box-body -->
                 <div class="box-footer">
                     <button type="submit" class="btn btn-default" translate="login.cancel"></button>
-                    <button type="submit" class="btn btn-info pull-right" translate="login.signIn" ng-disabled="loginForm.$invalid"></button>
+                    <button type="submit" class="btn btn-primary pull-right" translate="login.signIn" ng-disabled="loginForm.$invalid"></button>
                 </div>
                 <!-- /.box-footer -->
             </form>

@@ -1,4 +1,5 @@
 !function ($, jQuery, window, document) {
+    'use strict';
 
     /**
      * @constructor
@@ -9,7 +10,6 @@
      * @param $stateParams
      * @param {Security} security
      */
-    'use strict';
     function LoginController($scope, $state, $stateParams, security) {
         $scope.model = {};
 

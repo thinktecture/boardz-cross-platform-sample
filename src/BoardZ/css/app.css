@@ -106,3 +106,63 @@ img.leaflet-tile {
 	overflow-y: scroll;
 	-webkit-overflow-scrolling: touch;
 }
+
+/* source: http://bootsnipp.com/snippets/featured/badgebox-css-checkbox-badge */
+
+/* Hiding the checkbox, but allowing it to be focused */
+.badgebox
+{
+	opacity: 0;
+}
+
+.badgebox + .badge
+{
+	/* Move the check mark away when unchecked */
+	text-indent: -999999px;
+	/* Makes the badge's width stay the same checked and unchecked */
+	width: 27px;
+}
+
+.badgebox:focus + .badge
+{
+	/* Set something to make the badge looks focused */
+	/* This really depends on the application, in my case it was: */
+
+	/* Adding a light border */
+	box-shadow: inset 0px 0px 5px;
+	/* Taking the difference out of the padding */
+}
+
+.badgebox:checked + .badge
+{
+	/* Move the check mark back when checked */
+	text-indent: 0;
+}
+
+/* Flatten da boostrap */
+.well, .navbar-inner, .popover, .btn, .tooltip, input, select, textarea, pre, .progress, .modal, .add-on, .alert, .table-bordered, .nav>.active>a, .dropdown-menu, .tooltip-inner, .badge, .label, .img-polaroid, li, ul {
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+	-webkit-border-radius: 0px !important;
+	-moz-border-radius: 0px !important;
+	border-radius: 0px !important;
+	border-collapse: collapse !important;
+	background-image: none !important;
+	-webkit-appearance: none;
+}
+
+/* Orange loading bar */
+#loading-bar .bar {
+	background: #ffa500;
+}
+#loading-bar-spinner .spinner-icon {
+	border-top-color:  #ffa500;
+	border-left-color: #ffa500;
+}
+#loading-bar .peg {
+	-moz-box-shadow: #ffa500 1px 0 6px 1px;
+	-ms-box-shadow: #ffa500 1px 0 6px 1px;
+	-webkit-box-shadow: #ffa500 1px 0 6px 1px;
+	box-shadow: #ffa500 1px 0 6px 1px;
+}
