@@ -312,7 +312,10 @@ function _init() {
         activate: function (toggleBtn) {
             //Get the screen sizes
             var screenSizes = $.AdminLTE.options.screenSizes,
-                $body = $('body');
+                $body = $('body'),
+                sidebar = $('.main-sidebar'),
+                contentWrapper = $('.content-wrapper'),
+                footer = $('.main-footer');
 
             //Enable sidebar toggle
             $(toggleBtn).on('click', function (e) {
@@ -336,7 +339,7 @@ function _init() {
                 }
             });
 
-            $(".content-wrapper").click(function () {
+            contentWrapper.click(function () {
                 //Enable hide menu when clicking on the content-wrapper on small screens
                 if ($(window).width() <= (screenSizes.sm - 1) && $body.hasClass("sidebar-open")) {
                     $body.removeClass('sidebar-open');
@@ -350,37 +353,105 @@ function _init() {
                 this.expandOnHover();
             }
 
-            // Touch Slide in (https://github.com/almasaeed2010/AdminLTE/issues/357)
-            $body.hammer().on('swiperight', function (e) {
-                e.preventDefault();
-                //OPEN
-                if ($(window).width() > (screenSizes.sm - 1)) {
-                    if ($body.hasClass('sidebar-collapse')) {
-                        $body.removeClass('sidebar-collapse');
-                    }
-                } else {
-                    if (!$body.hasClass('sidebar-open')) {
-                        $body.addClass('sidebar-open');
-                    }
-                }
+            if ($(window).width() < (screenSizes.sm)) {
+                var lastDeltaX;
+                var absoluteSidebarPosition;
+                var startPosition;
 
-            });
+                var sidebarTransition = sidebar.css('transition');
+                var contentWrapperTransition = contentWrapper.css('transition');
+                var footerTransition = footer.css('transition');
 
-            $body.hammer().on('swipeleft', function (e) {
-                e.preventDefault();
-                //CLOSE
-                if ($(window).width() > (screenSizes.sm - 1)) {
-                    if (!$body.hasClass('sidebar-collapse')) {
-                        $body.addClass('sidebar-collapse');
-                    }
-                } else {
+                $body.hammer().on('panstart', function () {
+                    lastDeltaX = 0;
+                    absoluteSidebarPosition = startPosition = 0;
+
+                    sidebar.css('transition', 'none');
+                    contentWrapper.css('transition', 'none');
+                    footer.css('transition', 'none');
+
                     if ($body.hasClass('sidebar-open')) {
-                        $body.removeClass('sidebar-open');
-                        $body.removeClass('sidebar-collapse');
-                    }
-                }
+                        startPosition = 230;
 
-            });
+                        sidebar.css('transform', 'translate(' + (absoluteSidebarPosition - 230) + 'px, 0)');
+                        contentWrapper.css('transform', 'translate(' + absoluteSidebarPosition + 'px, 0)');
+                        footer.css('transform', 'translate(' + absoluteSidebarPosition + 'px, 0)');
+
+                        $body.removeClass('sidebar-open');
+                    }
+                });
+
+                $body.hammer().on('pan', function (e) {
+                    e.preventDefault();
+
+                    var eventDeltaX = e.gesture.deltaX;
+                    var deltaX = eventDeltaX - lastDeltaX;
+
+                    absoluteSidebarPosition = startPosition + eventDeltaX;
+
+                    lastDeltaX = deltaX;
+
+                    if (absoluteSidebarPosition < 0) {
+                        absoluteSidebarPosition = 0;
+                    }
+
+                    // Max position of sidebar
+                    if (absoluteSidebarPosition > 230) {
+                        absoluteSidebarPosition = 230;
+                    }
+
+                    sidebar.css('transform', 'translate(' + (absoluteSidebarPosition - 230) + 'px, 0)');
+                    contentWrapper.css('transform', 'translate(' + absoluteSidebarPosition + 'px, 0)');
+                    footer.css('transform', 'translate(' + absoluteSidebarPosition + 'px, 0)');
+                });
+
+                $body.hammer().on('panend', function () {
+                    sidebar.css('transform', '');
+                    contentWrapper.css('transform', '');
+                    footer.css('transform', '');
+                    sidebar.css('transition', sidebarTransition);
+                    contentWrapper.css('transition', contentWrapperTransition);
+                    footer.css('transition', footerTransition);
+                    if (absoluteSidebarPosition > 230 / 2) {
+                        $body.addClass('sidebar-open').trigger('expanded.pushMenu');
+                    }
+                    else {
+                        $body.removeClass('sidebar-open').removeClass('sidebar-collapse').trigger('collapsed.pushMenu');
+                    }
+                });
+            }
+
+            /*// Touch Slide in (https://github.com/almasaeed2010/AdminLTE/issues/357)
+             $body.hammer().on('swiperight', function (e) {
+             e.preventDefault();
+             //OPEN
+             if ($(window).width() > (screenSizes.sm - 1)) {
+             if ($body.hasClass('sidebar-collapse')) {
+             $body.removeClass('sidebar-collapse');
+             }
+             } else {
+             if (!$body.hasClass('sidebar-open')) {
+             $body.addClass('sidebar-open');
+             }
+             }
+
+             });
+
+             $body.hammer().on('swipeleft', function (e) {
+             e.preventDefault();
+             //CLOSE
+             if ($(window).width() > (screenSizes.sm - 1)) {
+             if (!$body.hasClass('sidebar-collapse')) {
+             $body.addClass('sidebar-collapse');
+             }
+             } else {
+             if ($body.hasClass('sidebar-open')) {
+             $body.removeClass('sidebar-open');
+             $body.removeClass('sidebar-collapse');
+             }
+             }
+
+             });*/
         },
         expandOnHover: function () {
             var _this = this;
