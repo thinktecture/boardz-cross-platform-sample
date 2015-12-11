@@ -45,8 +45,8 @@
     "username": "Benutzername",
     "password": "Passwort",
     "cancel": "Abbrechen",
-    "signIn": "Einloggen",
-    "rememberMe": "Eingeloggt bleiben",
+    "signIn": "Anmelden",
+    "rememberMe": "Anmeldung merken",
     "error": "Login nicht möglich. Bitte prüfen Sie Ihre Eingaben und versuches Sie es erneut!"
   },
   "gameDetails": {
