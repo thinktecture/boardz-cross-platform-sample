@@ -311,7 +311,8 @@ function _init() {
   $.AdminLTE.pushMenu = {
     activate: function (toggleBtn) {
       //Get the screen sizes
-      var screenSizes = $.AdminLTE.options.screenSizes;
+      var screenSizes = $.AdminLTE.options.screenSizes,
+          $body = $('body');
 
       //Enable sidebar toggle
       $(toggleBtn).on('click', function (e) {
@@ -319,65 +320,65 @@ function _init() {
 
         //Enable sidebar push menu
         if ($(window).width() > (screenSizes.sm - 1)) {
-          if ($("body").hasClass('sidebar-collapse')) {
-            $("body").removeClass('sidebar-collapse').trigger('expanded.pushMenu');
+          if ($body.hasClass('sidebar-collapse')) {
+            $body.removeClass('sidebar-collapse').trigger('expanded.pushMenu');
           } else {
-            $("body").addClass('sidebar-collapse').trigger('collapsed.pushMenu');
+            $body.addClass('sidebar-collapse').trigger('collapsed.pushMenu');
           }
         }
         //Handle sidebar push menu for small screens
         else {
-          if ($("body").hasClass('sidebar-open')) {
-            $("body").removeClass('sidebar-open').removeClass('sidebar-collapse').trigger('collapsed.pushMenu');
+          if ($body.hasClass('sidebar-open')) {
+            $body.removeClass('sidebar-open').removeClass('sidebar-collapse').trigger('collapsed.pushMenu');
           } else {
-            $("body").addClass('sidebar-open').trigger('expanded.pushMenu');
+            $body.addClass('sidebar-open').trigger('expanded.pushMenu');
           }
         }
       });
 
       $(".content-wrapper").click(function () {
         //Enable hide menu when clicking on the content-wrapper on small screens
-        if ($(window).width() <= (screenSizes.sm - 1) && $("body").hasClass("sidebar-open")) {
-          $("body").removeClass('sidebar-open');
+        if ($(window).width() <= (screenSizes.sm - 1) && $body.hasClass("sidebar-open")) {
+          $body.removeClass('sidebar-open');
         }
       });
 
       //Enable expand on hover for sidebar mini
       if ($.AdminLTE.options.sidebarExpandOnHover
-              || ($('body').hasClass('fixed')
-                      && $('body').hasClass('sidebar-mini'))) {
+              || ($body.hasClass('fixed')
+                      && $body.hasClass('sidebar-mini'))) {
         this.expandOnHover();
       }
 
       // Touch Slide in (https://github.com/almasaeed2010/AdminLTE/issues/357)
-      $('body').hammer().on('panright', function(e) {
+      $body.hammer().on('swiperight', function(e) {
         e.preventDefault();
         //OPEN
         if ($(window).width() > (screenSizes.sm - 1)) {
-          if($("body").hasClass('sidebar-collapse'))
+          if($body.hasClass('sidebar-collapse'))
           {
-            $("body").removeClass('sidebar-collapse');
+            $body.removeClass('sidebar-collapse');
           }
         }else{
-          if (!$("body").hasClass('sidebar-open')) {
-            $("body").addClass('sidebar-open');
+          if (!$body.hasClass('sidebar-open')) {
+            $body.addClass('sidebar-open');
           }
         }
 
       });
 
-      $('body').hammer().on('panleft', function(e) {
+      $body.hammer().on('swipeleft', function(e) {
         e.preventDefault();
         //CLOSE
         if ($(window).width() > (screenSizes.sm - 1)) {
-          if(!$("body").hasClass('sidebar-collapse'))
+          if(!$body.hasClass('sidebar-collapse'))
           {
-            $("body").addClass('sidebar-collapse');
+            $body.addClass('sidebar-collapse');
           }
         }else{
-          if ($("body").hasClass('sidebar-open')) {
-            $("body").removeClass('sidebar-open');
-            $("body").removeClass('sidebar-collapse');
+          if ($body.hasClass('sidebar-open')) {
+            $body.removeClass('sidebar-open');
+            $body.removeClass('sidebar-collapse');
           }
         }
 
