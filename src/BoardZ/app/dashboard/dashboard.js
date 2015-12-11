@@ -10,7 +10,7 @@
 	 * @param {BoardGamesApi} boardGamesApi
 	 */
 	function DashboardController($scope, playersApi, boardGamesApi) {
-        $scope.playerCount = $scope.gameCount = '?';
+        $scope.playerCount = $scope.gameCount = '...';
 
 		init();
 
