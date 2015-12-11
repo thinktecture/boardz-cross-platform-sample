@@ -339,13 +339,6 @@ function _init() {
                 }
             });
 
-            contentWrapper.click(function () {
-                //Enable hide menu when clicking on the content-wrapper on small screens
-                if ($(window).width() <= (screenSizes.sm - 1) && $body.hasClass("sidebar-open")) {
-                    $body.removeClass('sidebar-open');
-                }
-            });
-
             //Enable expand on hover for sidebar mini
             if ($.AdminLTE.options.sidebarExpandOnHover
                 || ($body.hasClass('fixed')
@@ -357,10 +350,19 @@ function _init() {
                 var lastDeltaX;
                 var absoluteSidebarPosition;
                 var startPosition;
+                var panEndTime;
 
                 var sidebarTransition = sidebar.css('transition');
                 var contentWrapperTransition = contentWrapper.css('transition');
                 var footerTransition = footer.css('transition');
+
+                contentWrapper.click(function () {
+                    //Enable hide menu when clicking on the content-wrapper on small screens
+                    var timeDiff = new Date().getTime() - panEndTime;
+                    if ($body.hasClass("sidebar-open") && timeDiff > 50) {
+                        $body.removeClass('sidebar-open');
+                    }
+                });
 
                 $body.hammer().on('panstart', function () {
                     lastDeltaX = 0;
@@ -412,6 +414,7 @@ function _init() {
                     sidebar.css('transition', sidebarTransition);
                     contentWrapper.css('transition', contentWrapperTransition);
                     footer.css('transition', footerTransition);
+                    panEndTime = new Date().getTime();
                     if (absoluteSidebarPosition > 230 / 2) {
                         $body.addClass('sidebar-open').trigger('expanded.pushMenu');
                     }
