@@ -54,7 +54,7 @@
             nativeMenu.init();
 
             document.addEventListener('keyup', function(e) {
-                if(platformInformation.isNwjs()) {
+                if(platformInformation.isNode()) {
                     if (e.ctrlKey && e.shiftKey && e.keyCode == 68) {
                         e.preventDefault();
 

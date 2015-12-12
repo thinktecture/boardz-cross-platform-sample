@@ -7,7 +7,7 @@
      */
     function NativeMenu(platformInformation, $log) {
         this.init = function() {
-            if (platformInformation.isNwjs()) {
+            if (platformInformation.isNode()) {
                 var gui = require('nw.gui');
 
                 var nativeMenuBar = new gui.Menu({ type: 'menubar' });

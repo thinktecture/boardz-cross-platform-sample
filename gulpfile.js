@@ -27,10 +27,13 @@ gulp.task('build:all', function (done) {
         'dist:default',
         'cordova:clean',
         'cordova:copy-source',
-        'cordova:build',
+        'cordova:build:all',
         'nwjs:clean',
         'nwjs:copy-source',
         'nwjs:build',
+        'electron:clean',
+        'electron:copy-source',
+        'electron:build',
         done
     );
 });

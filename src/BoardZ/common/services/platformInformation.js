@@ -10,28 +10,15 @@
             return !!$window.cordova;
         };
 
-        this.isNwjs = function () {
-            return isInNodeWebkit();
+        this.isNode = function () {
+            var isNode = (typeof process !== "undefined" && typeof require !== "undefined");
+
+            return isNode;
         };
 
         this.isWeb = function () {
-            return !this.isCordova() && !this.isNwjs();
+            return !this.isCordova() && !this.isNode();
         };
-
-        function isInNodeWebkit() {
-            var isNode = (typeof process !== "undefined" && typeof require !== "undefined");
-            var isNodeWebkit = false;
-
-            if (isNode) {
-                try {
-                    isNodeWebkit = (typeof require('nw.gui') !== "undefined");
-                } catch (e) {
-                    isNodeWebkit = false;
-                }
-            }
-
-            return isNodeWebkit;
-        }
     }
 
     app.module.service('platformInformation', PlatformInformation);
