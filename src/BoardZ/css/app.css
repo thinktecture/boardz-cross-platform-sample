@@ -68,12 +68,6 @@ body,
 	display: none;
 }
 
-#loading-bar .bar {
-	height: 1px;
-	border: none;
-	padding: 2px;
-}
-
 /*
  * I currently don't like the calc idea here, but AdminLTE does a lot of calculations to set several "min-height"
  * of elements. We could use the "fixed" option of AdminLTE, but that is not include a fixed footer as well
@@ -155,6 +149,9 @@ img.leaflet-tile {
 /* Orange loading bar */
 #loading-bar .bar {
 	background: #ffa500;
+	height: 1px;
+	border: none;
+	padding: 2px;
 }
 #loading-bar-spinner .spinner-icon {
 	border-top-color:  #ffa500;

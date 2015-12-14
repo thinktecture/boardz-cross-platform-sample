@@ -81,6 +81,9 @@
   <preference name="xwalkVersion" value="14+"/>
   <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect"/>
   <preference name="xwalkMode" value="embedded"/>
+  <platform name="ios">
+    <preference name="Orientation" value="all" />
+  </platform>
   <icon src="resources/android/icon/drawable-xhdpi-icon.png"/>
   <engine name="ios" spec="~3.9.1"/>
   <engine name="android" spec="~4.1.1"/>
