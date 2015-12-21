@@ -30,11 +30,12 @@ gulp.task('electron:copy-source', function () {
 gulp.task('electron:build', function () {
     var opts = {
         dir: buildConfig.targets.electronFolder,
-        out: 'electron-build',
+        out: path.join(buildConfig.targets.electronFolder, 'build'),
         name: 'BoardZ',
-        platform: 'win32,darwin',
+        icon: path.join(buildConfig.targets.resourcesFolder, 'icon.icns'),
+        platform: 'darwin',
         arch: 'x64',
-        version: '0.34.3',
+        version: '0.36.1',
         overwrite: true
     };
     electronPackager(opts, function done (err, appPath) {
@@ -44,6 +45,7 @@ gulp.task('electron:build', function () {
 
 gulp.task('electron:watch', function () {
     gulp.start('dev:livereload');
+
     runSequence('electron:default', function () {
         watch(buildConfig.targets.buildFolder, { base: buildConfig.targets.buildFolder })
             .pipe(gulp.dest(path.join(buildConfig.targets.electronFolder, 'www')));
