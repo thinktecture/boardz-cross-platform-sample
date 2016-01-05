@@ -15,6 +15,8 @@
     // insert the base URL here
     // app.module.constant('apiBaseUrl', 'https://boardzapi.azurewebsites.net/');
     app.module.constant('apiBaseUrl', 'http://10.211.55.3:8080/'); // TODO: Use https for production
+    app.module.constant('idsrvUrl', 'http://10.211.55.3:8000/'); // TODO: Use https for production
+
 
     FastClick.attach(document.body);
 }();

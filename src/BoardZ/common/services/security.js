@@ -6,9 +6,9 @@
      * @public
      *
      * @param $http
-     * @param apiBaseUrl
+     * @param idsrvUrl
      */
-    function Security($http, apiBaseUrl) {
+    function Security($http, idsrvUrl) {
         var tokenStorageKey = 'boardgame.token';
         var userStorageKey = 'boardgame.user';
         var loginPromise;
@@ -20,7 +20,7 @@
                 return loginPromise;
             }
 
-            loginPromise = $http.post(apiBaseUrl + 'idsrv/connect/token', {
+            loginPromise = $http.post(idsrvUrl + 'idsrv/connect/token', {
                 'client_id': 'boardzng',
                 'client_secret': 'secret',
                 'grant_type': 'password',

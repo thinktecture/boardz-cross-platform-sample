@@ -40,6 +40,30 @@
       <HintPath>..\packages\Autofac.WebApi2.3.4.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="BrockAllen.MembershipReboot, Version=8.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BrockAllen.MembershipReboot.8.4.0\lib\net45\BrockAllen.MembershipReboot.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="BrockAllen.MembershipReboot.Ef, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BrockAllen.MembershipReboot.Ef.8.0.0\lib\net45\BrockAllen.MembershipReboot.Ef.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="IdentityManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\IdentityManager.1.0.0-beta5-5\lib\net45\IdentityManager.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="IdentityManager.MembershipReboot, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\IdentityManager.MembershipReboot.1.0.0-beta5-1\lib\net45\IdentityManager.MembershipReboot.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="IdentityModel.Net45, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\IdentityModel.1.2.1\lib\net45\IdentityModel.Net45.dll</HintPath>
       <Private>True</Private>
@@ -89,10 +113,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Swashbuckle.Blue.Core.5.15\lib\net451\Swashbuckle.Core.dll</HintPath>
+      <HintPath>..\packages\Swashbuckle.Core.5.2.2\lib\net40\Swashbuckle.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.20622.1351, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -137,6 +162,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Packages\IdentityServer3.MembershipReboot\IdentityServer3.MembershipReboot.cs" />
+    <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="Controllers\BoardGamesController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="Helpers\DistanceCalculator.cs" />
@@ -145,11 +172,20 @@
     <Compile Include="Models\Packshot.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\IdentityManager\CustomIdentityManagerService.cs" />
+    <Compile Include="Security\IdentityManager\CustomIdentityManagerServiceExtensions.cs" />
     <Compile Include="Security\IdentityServer\Certificate.cs" />
     <Compile Include="Security\IdentityServer\Clients.cs" />
+    <Compile Include="Security\IdentityServer\MembershipRebootUserService.cs" />
     <Compile Include="Security\IdentityServer\Scopes.cs" />
     <Compile Include="Security\IdentityServer\Users.cs" />
-    <Compile Include="Startup.cs" />
+    <Compile Include="Security\MembershipReboot\CustomConfig.cs" />
+    <Compile Include="Security\MembershipReboot\CustomDatabase.cs" />
+    <Compile Include="Security\MembershipReboot\CustomGroup.cs" />
+    <Compile Include="Security\MembershipReboot\CustomUser.cs" />
+    <Compile Include="StartupApi.cs" />
+    <Compile Include="StartupIdentityManager.cs" />
+    <Compile Include="StartupIdentityServer.cs" />
     <Compile Include="Storages\PlayersStorage.cs" />
     <Compile Include="Storages\BoardGameStorage.cs" />
     <Compile Include="Storages\IStorage.cs" />
@@ -158,14 +194,6 @@
     <None Include="app.config" />
     <None Include="packages.config" />
     <EmbeddedResource Include="Security\IdentityServer\idsrv3test.pfx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="SwaggerUi\CustomAssets\lang\en.js" />
-    <Content Include="SwaggerUi\CustomAssets\lang\es.js" />
-    <Content Include="SwaggerUi\CustomAssets\lang\pt.js" />
-    <Content Include="SwaggerUi\CustomAssets\lang\ru.js" />
-    <Content Include="SwaggerUi\CustomAssets\lang\tr.js" />
-    <Content Include="SwaggerUi\CustomAssets\lang\translator.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
