@@ -20,8 +20,11 @@
                 return loginPromise;
             }
 
-            loginPromise = $http.post(apiBaseUrl + 'token', {
+            loginPromise = $http.post(apiBaseUrl + 'idsrv/connect/token', {
+                'client_id': 'boardzng',
+                'client_secret': 'secret',
                 'grant_type': 'password',
+                'scope': 'default',
                 username: username,
                 password: password
             }, {
