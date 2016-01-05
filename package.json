@@ -35,7 +35,7 @@
     "gulp-uglify": "^1.4.1",
     "gulp-watch": "^4.3.5",
     "merge2": "^0.3.6",
-    "nw-builder": "^2.0.2",
+    "nw-builder": "^2.2.0",
     "run-sequence": "^1.1.4",
     "shelljs": "^0.5.3",
     "stream-series": "^0.1.1"
