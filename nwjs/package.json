@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "main": "www/index.html",
   "window": {
-    "title": "BoardZ! Desktop",
+    "title": "BoardZ!",
     "toolbar": false,
     "resizable": true,
     "fullscreen": false,
     "width": 1024,
-    "height": 768
+    "height": 700,
+    "icon": "www/assets/icon.png"
   }
 }
