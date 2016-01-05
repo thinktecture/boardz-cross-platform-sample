@@ -183,9 +183,10 @@
     <Compile Include="Security\MembershipReboot\CustomDatabase.cs" />
     <Compile Include="Security\MembershipReboot\CustomGroup.cs" />
     <Compile Include="Security\MembershipReboot\CustomUser.cs" />
-    <Compile Include="StartupApi.cs" />
-    <Compile Include="StartupIdentityManager.cs" />
-    <Compile Include="StartupIdentityServer.cs" />
+    <Compile Include="FullStartup.cs" />
+    <Compile Include="ApiStartup.cs" />
+    <Compile Include="IdentityManagerStartup.cs" />
+    <Compile Include="IdentityServerStartup.cs" />
     <Compile Include="Storages\PlayersStorage.cs" />
     <Compile Include="Storages\BoardGameStorage.cs" />
     <Compile Include="Storages\IStorage.cs" />

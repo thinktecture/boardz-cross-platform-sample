@@ -4,7 +4,7 @@ using Owin;
 
 namespace BoardGame.Api
 {
-    public class StartupIdentityManager
+    public class IdentityManagerStartup
     {
         public void Configuration(IAppBuilder appBuilder)
         {

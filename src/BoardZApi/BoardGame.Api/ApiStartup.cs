@@ -17,7 +17,7 @@ using IdentityServer3.AccessTokenValidation;
 
 namespace BoardGame.Api
 {
-    public class StartupApi
+    public class ApiStartup
     {
         public void Configuration(IAppBuilder appBuilder)
         {
@@ -39,7 +39,7 @@ namespace BoardGame.Api
         private IContainer CreateAutofacContainer()
         {
             var containerBuilder = new ContainerBuilder();
-            containerBuilder.RegisterApiControllers(typeof (StartupApi).Assembly);
+            containerBuilder.RegisterApiControllers(typeof (ApiStartup).Assembly);
 
             containerBuilder.RegisterType<BoardGameStorage>()
                 .As<IStorage<Models.BoardGame>>()
