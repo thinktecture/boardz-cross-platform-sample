@@ -14,9 +14,6 @@
         $scope.model = {};
 
         $scope.login = function () {
-            if (!$scope.model.username || !$scope.model.password) {
-                return;
-            }
 
             $scope.error = false;
             security.login($scope.model.username, $scope.model.password, $scope.model.rememberMe)
