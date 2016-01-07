@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IdentityModel.Tokens;
 using System.IO;
 using System.Net.Http.Formatting;
 using System.Reflection;
@@ -23,6 +24,9 @@ namespace BoardGame.Api
         {
             var container = CreateAutofacContainer();
             var httpConfiguration = CreateHttpConfiguration(container);
+
+            // The Microsoft Jwt mis-maps the role claim; so prevent the mapping to still be able to access roles:
+            JwtSecurityTokenHandler.InboundClaimTypeMap.Remove("role");
 
             appBuilder.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
             {

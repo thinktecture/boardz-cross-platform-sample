@@ -58,6 +58,7 @@ namespace BoardGame.Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [ResponseType(typeof(Guid))]
+        [Authorize (Roles = "gameadmin")]
         public IHttpActionResult Add(Models.BoardGame game)
         {
             game.UserName = GetCurrentUsername();
@@ -84,6 +85,7 @@ namespace BoardGame.Api.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete]
+        [Authorize(Roles = "gameadmin")]
         public IHttpActionResult Remove(Guid id)
         {
             _storage.Delete(id);
@@ -96,6 +98,7 @@ namespace BoardGame.Api.Controllers
         /// <param name="game"></param>
         /// <returns></returns>
         [HttpPut]
+        [Authorize(Roles = "gameadmin")]
         public IHttpActionResult Update(Models.BoardGame game)
         {
             game.UserName = GetCurrentUsername();
