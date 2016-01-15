@@ -35,7 +35,7 @@ gulp.task('electron:build', function () {
         icon: path.join(buildConfig.targets.resourcesFolder, 'icon.icns'),
         platform: 'darwin',
         arch: 'x64',
-        version: '0.36.1',
+        version: '0.36.4',
         overwrite: true
     };
     electronPackager(opts, function done (err, appPath) {
