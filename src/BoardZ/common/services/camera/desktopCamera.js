@@ -31,6 +31,7 @@
 
                 if (!mediaDevices.getUserMedia) {
                     defer.reject('Platform does not support getUserMedia-API');
+                    return defer.promise;
                 }
 
                 mediaDevices.getUserMedia({ video: true, audio: false })
