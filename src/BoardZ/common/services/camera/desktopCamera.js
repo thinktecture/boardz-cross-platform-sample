@@ -56,7 +56,11 @@
                                     var url = canvasElement.toDataURL('image/png');
 
                                     videoElement.pause();
-                                    stream.stop();
+
+                                    if (stream.stop) {
+                                        stream.stop();
+                                    }
+
                                     defer.resolve(url);
                                 }, 500);
                             });
