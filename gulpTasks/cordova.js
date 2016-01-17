@@ -75,7 +75,6 @@ gulp.task('cordova:watch:ios', function () {
 gulp.task('cordova:build:ios', function (done) {
     sh.cd(buildConfig.targets.cordovaFolder);
     sh.exec('cordova prepare ios');
-    sh.exec('cp -r "' + path.join('..', buildConfig.targets.resourcesFolder) + '" resources/');
     sh.exec('ionic resources');
     sh.exec('cordova build ios');
     sh.cd('..');
@@ -85,11 +84,15 @@ gulp.task('cordova:build:ios', function (done) {
 gulp.task('cordova:build:all', function (done) {
     sh.cd(buildConfig.targets.cordovaFolder);
     sh.exec('cordova prepare');
-    sh.exec('cp -r "' + path.join('..', buildConfig.targets.resourcesFolder) + '" resources/');
     sh.exec('ionic resources');
     sh.exec('cordova build');
     sh.cd('..');
     done();
+});
+
+gulp.task('cordova:prepare:resources', function () {
+    return gulp.src(path.join(buildConfig.targets.resourcesFolder, '*.*'))
+        .pipe(gulp.dest(path.join(buildConfig.targets.cordovaFolder, 'resources')));
 });
 
 gulp.task('cordova:default:ios', function (done) {
@@ -98,6 +101,7 @@ gulp.task('cordova:default:ios', function (done) {
         'dist:default',
         'cordova:copy-source',
         'cordova:config-for-default',
+        'cordova:prepare:resources',
         'cordova:build:ios',
         done
     );
@@ -109,6 +113,7 @@ gulp.task('cordova:default', function (done) {
         'dist:default',
         'cordova:copy-source',
         'cordova:config-for-default',
+        'cordova:prepare:resources',
         'cordova:build:all',
         done
     );
@@ -120,6 +125,7 @@ gulp.task('cordova:release', function (done) {
         'dist:release',
         'cordova:copy-source',
         'cordova:config-for-default',
+        'cordova:prepare:resources',
         'cordova:build:all',
         done
     );
