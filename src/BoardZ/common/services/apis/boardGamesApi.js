@@ -9,8 +9,8 @@
      * @param {string} apiBaseUrl
      */
     function BoardGamesApi($http, apiBaseUrl) {
-        //var baseUrl = apiBaseUrl + 'api/BoardGames/';
-        var baseUrl = "common/services/apis/games.json?";
+        var baseUrl = apiBaseUrl + 'api/BoardGames/';
+        //var baseUrl = "common/services/apis/games_100.json?";
 
         /**
          * @returns {Promise}
