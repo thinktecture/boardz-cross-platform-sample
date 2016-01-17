@@ -312,6 +312,8 @@ function _init() {
         activate: function (toggleBtn) {
             //Get the screen sizes
             var screenSizes = $.AdminLTE.options.screenSizes,
+                // The delta in pixels which the user has to travel before activating the swipe in menu
+                swipeInActivateDeltaInPixels = 50,
                 $body = $('body'),
                 sidebar = $('.main-sidebar'),
                 contentWrapper = $('.content-wrapper'),
@@ -390,6 +392,10 @@ function _init() {
                     var deltaX = eventDeltaX - lastDeltaX;
 
                     absoluteSidebarPosition = startPosition + eventDeltaX;
+
+                    if (Math.abs(absoluteSidebarPosition) < swipeInActivateDeltaInPixels) {
+                        return;
+                    }
 
                     lastDeltaX = deltaX;
 
