@@ -15,9 +15,9 @@
 		init();
 
 		function init() {
-			playersApi.list()
-				.then(function (results) {
-					$scope.playerCount = results.length;
+			playersApi.getPlayerCount()
+				.then(function (result) {
+					$scope.playerCount = result;
 				});
 
 			boardGamesApi.list()

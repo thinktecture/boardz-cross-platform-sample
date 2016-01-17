@@ -49,5 +49,10 @@ namespace BoardGame.Api.Storages
         {
             return _storage.Values;
         }
+    
+        public int Count()
+        {
+            return _storage.Count;
+        }
     }
 }

@@ -12,5 +12,6 @@ namespace BoardGame.Api.Storages
         void Delete(Guid id);
         void Update(T item);
         ICollection<T> List();
+        int Count();
     }
 }

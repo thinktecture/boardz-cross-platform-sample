@@ -35,6 +35,17 @@ namespace BoardGame.Api.Controllers
         }
 
         /// <summary>
+        /// Returns the playing players count.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [ResponseType(typeof(int))]
+        public IHttpActionResult PlayerCount()
+        {
+            return Ok(_storage.Count());
+        }
+
+        /// <summary>
         /// Adds a new player
         /// </summary>
         /// <param name="player"></param>

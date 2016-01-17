@@ -20,6 +20,14 @@
         };
 
         /**
+         * @returns {*}
+         */
+        this.getPlayerCount = function () {
+            return $http.get(baseUrl + 'PlayerCount')
+                .then(unwrapData);
+        };
+
+        /**
          * @param {string} id
          * @returns {Promise}
          */
