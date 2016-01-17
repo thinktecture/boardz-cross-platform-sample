@@ -20,7 +20,7 @@ app.on('ready', function () {
         'node-integration': false
     });
 
-    mainWindow.loadUrl('file://' + __dirname + '/www/index.html');
+    mainWindow.loadUrl('file://' + __dirname + '/index.html');
 
     mainWindow.webContents.on('did-finish-load', function () {
         mainWindow.setTitle(app.getName());

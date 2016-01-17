@@ -18,6 +18,9 @@ gulp.task('build:all:release', function (done) {
         'nwjs:clean',
         'nwjs:copy-source',
         'nwjs:build',
+        'electron:clean',
+        'electron:copy-source',
+        'electron:build',
         done
     );
 });
