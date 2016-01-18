@@ -26,7 +26,7 @@ app.on('ready', function () {
         'node-integration': false
     });
 
-    globalShortcut.register('CMD+Shift+d', function(){
+    globalShortcut.register('CmdOrCtrl+Shift+d', function(){
         mainWindow.webContents.openDevTools();
     });
 
