@@ -1,8 +1,9 @@
 'use strict';
-
-var app = require('app');
-var BrowserWindow = require('browser-window');
-var Menu = require("menu");
+var electron = require('electron'),
+  app = electron.app,
+  BrowserWindow = electron.BrowserWindow,
+  Menu = electron.Menu,
+  globalShortcut = electron.globalShortcut;
 
 var mainWindow = null;
 
@@ -13,6 +14,10 @@ app.on('window-all-closed', function () {
     }
 });
 
+app.on('will-quit', function(){
+   globalShortcut.unregisterAll();
+});
+
 app.on('ready', function () {
     mainWindow = new BrowserWindow({
         title: "BoardZ!",
@@ -21,12 +26,16 @@ app.on('ready', function () {
         'node-integration': false
     });
 
+    globalShortcut.register('CMD+Shift+d', function(){
+        mainWindow.webContents.openDevTools();
+    });
+
     mainWindow.loadUrl('file://' + __dirname + '/index.html');
 
     mainWindow.webContents.on('did-finish-load', function () {
         mainWindow.setTitle(app.getName());
     });
-    
+
     mainWindow.on('closed', function () {
         mainWindow = null;
     });
