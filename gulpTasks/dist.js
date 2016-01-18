@@ -118,6 +118,12 @@ gulp.task('dist:inject', function () {
         .pipe(gulp.dest(buildConfig.targets.distFolder));
 });
 
+// Copy an empty cordova file to prevent 404 error
+gulp.task('dist:copy-empty-cordova-js', function () {
+    return gulp.src(path.join(buildConfig.targets.buildFolder, 'cordova.js'))
+        .pipe(gulp.dest(buildConfig.targets.distFolder));
+});
+
 // Copies only the sources from build to dist, so a "dev" package for cordova and nwjs can be created
 gulp.task('dist:default', function (done) {
     runSequence(
@@ -142,6 +148,7 @@ gulp.task('dist:release', function (done) {
             'dist:uglify:css'
         ],
         'dist:inject',
+        'dist:copy-empty-cordova-js',
         done
     );
 });
