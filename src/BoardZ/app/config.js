@@ -51,6 +51,7 @@
                 html: true
             });
 
+            // TODO: move this nw.js-specific code into seperate file
             nativeMenu.init();
 
             document.addEventListener('keyup', function(e) {

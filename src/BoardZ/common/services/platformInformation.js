@@ -10,14 +10,24 @@
             return !!$window.cordova;
         };
 
-        this.isNode = function () {
-            var isNode = (typeof process !== "undefined" && typeof require !== "undefined");
+        this.isElectron = function() {
+            return navigator.userAgent.match(/Electron/) != null;
+        };
 
-            return isNode;
+        this.isNode = function () {
+            return typeof process !== "undefined" && typeof require !== "undefined";
+        };
+
+        this.isRunningOnMobile = function() {
+            return this.isCordova();
+        };
+
+        this.isRunningOnDesktop = function() {
+          return this.isNode() || this.isElectron();
         };
 
         this.isWeb = function () {
-            return !this.isCordova() && !this.isNode();
+            return !this.isRunningOnMobile() && !this.isRunningOnDesktop();
         };
     }
 
