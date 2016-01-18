@@ -34,7 +34,7 @@ gulp.task('nwjs:build', function () {
         files: path.join(buildConfig.targets.nwjsFolder, '**', '*.*'),
         buildDir: path.join(buildConfig.targets.nwjsFolder, 'build'),
         winIco: path.join(buildConfig.targets.resourcesFolder, 'icon.ico'),
-        //macIcns: path.join(buildConfig.targets.resourcesFolder, 'icon.icns'),
+        macIcns: path.join(buildConfig.targets.resourcesFolder, 'icon.icns'),
         platforms: ['win32', 'win64', 'osx64', 'linux32', 'linux64'],
         zip: false
     });
