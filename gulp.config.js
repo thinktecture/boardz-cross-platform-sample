@@ -8,6 +8,7 @@ module.exports = {
         files: {
             app: {
                 js: [
+                    'cordova.js',
                     'app/init.js',
                     'app/**/*.js',
                     'common/**/*.js',
