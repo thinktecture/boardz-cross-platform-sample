@@ -10,6 +10,7 @@ module.exports = {
                     'app/**/*.ts'
                 ],
                 html: [
+                    'init-main.js',
                     'index.html',
                     'app/**/*.html'
                 ],
@@ -25,8 +26,9 @@ module.exports = {
                 './node_modules/systemjs/dist/system-polyfills.js',
                 './node_modules/angular2/bundles/angular2-polyfills.js',
                 './node_modules/systemjs/dist/system.src.js',
-                './node_modules/rxjs/bundles/Rx.js',
-                './node_modules/angular2/bundles/angular2.dev.js'
+                './node_modules/rxjs/**/*.js',
+                './node_modules/angular2/bundles/angular2.dev.js',
+                './node_modules/angular2/bundles/http.dev.js',
             ]
         }
     },
