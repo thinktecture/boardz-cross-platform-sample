@@ -9,7 +9,10 @@
   },
   "scripts": {
     "build-all": "gulp build:all:release",
-    "gulp": "gulp"
+    "gulp": "gulp",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "start": "\"npm run tsc:w\""
   },
   "author": "Thinktecture AG",
   "bugs": {
@@ -17,9 +20,26 @@
   },
   "homepage": "https://github.com/thinktecture/boardz-cross-platform-sample#readme",
   "devDependencies": {
-    "del": "^2.0.2",
-    "event-stream": "^3.3.1",
     "gulp": "^3.9.0",
+    "gulp-server-livereload": "^1.5.3",
+    "gulp-watch": "^4.3.5",
+    "del": "^2.0.2",
+
+
+    "gulp-typescript": "^2.10.0",
+    "gulp-sourcemaps": "^1.6.0",
+
+    "angular2": "^2.0.0-beta.3",
+    "typescript": "^1.8.0",
+
+    "es6-shim": "^0.33.3",
+    "rxjs": "5.0.0-beta.0",
+    "systemjs": "0.19.6",
+
+
+
+    "es6-promise": "^3.0.2",
+    "event-stream": "^3.3.1",
     "gulp-awesome-electron": "git+https://github.com/ThorstenHans/gulp-awesome-electron.git",
     "gulp-concat": "^2.6.0",
     "gulp-filelog": "^0.4.1",
@@ -30,15 +50,15 @@
     "gulp-ng-template": "^0.2.1",
     "gulp-rename": "^1.2.2",
     "gulp-rewrite-css": "0.0.7",
-    "gulp-server-livereload": "^1.5.3",
     "gulp-symdest": "^1.0.0",
     "gulp-tap": "^0.1.3",
     "gulp-uglify": "^1.4.1",
-    "gulp-watch": "^4.3.5",
     "merge2": "^0.3.6",
     "nw-builder": "^2.2.0",
+    "reflect-metadata": "0.1.2",
     "run-sequence": "^1.1.4",
     "shelljs": "^0.5.3",
-    "stream-series": "^0.1.1"
+    "stream-series": "^0.1.1",
+    "zone.js": "0.5.11"
   }
 }

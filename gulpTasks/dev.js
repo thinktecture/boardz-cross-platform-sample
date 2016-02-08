@@ -3,14 +3,27 @@
 'use strict';
 
 var gulp = require('gulp'),
-    del = require('del'),
     buildConfig = require('../gulp.config'),
+    del = require('del'),
     path = require('path'),
-    inject = require('gulp-inject'),
-    watch = require('gulp-watch'),
-    server = require('gulp-server-livereload'),
     runSequence = require('run-sequence'),
+    server = require('gulp-server-livereload'),
+    watch = require('gulp-watch'),
+
+    ts = require('gulp-typescript'),
+    tsConfig = ts.createProject(buildConfig.ts.config),
+    sourcemaps = require('gulp-sourcemaps'),
+
+
+
+    inject = require('gulp-inject'),
     utils = require('./utils.js');
+
+function mapFiles(files, baseFolder) {
+    return files.map(function (file) {
+        return path.join(baseFolder, file);
+    });
+}
 
 gulp.task('dev:clean', function (done) {
     del([
@@ -21,60 +34,59 @@ gulp.task('dev:clean', function (done) {
         });
 });
 
-gulp.task('dev:copy-assets', function () {
-    return utils.getAssets(buildConfig.source.folder)
+gulp.task('dev:copy-dependencies', function() {
+    gulp.src(buildConfig.source.files.dependencies, {base: './node_modules'})
+        .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, 'node_modules/')));
+});
+
+gulp.task('dev:copy-html', function() {
+    gulp.src(mapFiles(buildConfig.source.files.app.html, buildConfig.source.folder))
         .pipe(gulp.dest(buildConfig.targets.buildFolder));
 });
 
-gulp.task('dev:copy-source', function () {
-    return utils.getSources(buildConfig.source.folder)
-        .pipe(gulp.dest(buildConfig.targets.buildFolder));
-});
-
-gulp.task('dev:inject', function () {
-    var injectables = utils.getSources(buildConfig.targets.buildFolder, false);
-
-    return gulp.src(path.join(buildConfig.source.folder, buildConfig.source.index))
-        .pipe(inject(injectables, {
-            ignorePath: buildConfig.targets.buildFolder,
-            addRootSlash: false
+gulp.task('dev:build', function() {
+    gulp.src(mapFiles(buildConfig.source.files.app.ts, buildConfig.source.folder))
+        .pipe(sourcemaps.init())
+        .pipe(ts(tsConfig))
+        .pipe(sourcemaps.write('.', {
+            includeContent: false,
+            sourceRoot: '../src/BoardZ/app/'
         }))
-        .pipe(gulp.dest(buildConfig.targets.buildFolder));
+        .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, buildConfig.targets.tsOutputFolder)));
 });
 
 gulp.task('dev:default', function (done) {
     runSequence('dev:clean',
+        'dev:copy-html',
+        'dev:copy-dependencies',
+        'dev:build',
+   /*
         'dev:copy-source',
         'dev:copy-assets',
         'dev:inject',
+   */
         done);
 });
 
 gulp.task('dev:start-live-server', function () {
+
     gulp.src(buildConfig.targets.buildFolder)
+        .pipe(server({
+            livereload: false,
+            open: false
+        }));
+});
+
+
+gulp.task('dev:livereload', function () {
+
+    runSequence('dev:default');
+    gulp.watch(mapFiles(buildConfig.source.files.app.html, buildConfig.source.folder), ['dev:copy-html']);
+    gulp.watch(mapFiles(buildConfig.source.files.app.ts, buildConfig.source.folder), ['dev:build']);
+
+    gulp.src('./build')
         .pipe(server({
             livereload: true,
             open: false
         }));
 });
-
-gulp.task('dev:livereload', function () {
-    runSequence('dev:default', 'dev:start-live-server', function () {
-        deltaWatch();
-    });
-});
-
-gulp.task('dev:watch', function () {
-    runSequence('dev:default', function () {
-        deltaWatch();
-    });
-});
-
-function deltaWatch() {
-    watch(buildConfig.source.folder, { base: buildConfig.source.folder }, function (vinyl) {
-        if (vinyl.event && (vinyl.event === 'add' || vinyl.event === 'unlink' || vinyl.path.indexOf('index.html') > -1)) {
-            gulp.start('dev:inject');
-        }
-    })
-        .pipe(gulp.dest(buildConfig.targets.buildFolder));
-}
