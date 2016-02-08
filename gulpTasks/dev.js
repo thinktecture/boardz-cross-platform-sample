@@ -14,8 +14,6 @@ var gulp = require('gulp'),
     tsConfig = ts.createProject(buildConfig.ts.config),
     sourcemaps = require('gulp-sourcemaps'),
 
-
-
     inject = require('gulp-inject'),
     utils = require('./utils.js');
 
@@ -26,9 +24,7 @@ function mapFiles(files, baseFolder) {
 }
 
 gulp.task('dev:clean', function (done) {
-    del([
-        buildConfig.targets.buildFolder
-    ])
+    del(buildConfig.targets.buildFolder + '/**/*', { force: true })
         .then(function () {
             done();
         });
@@ -84,7 +80,7 @@ gulp.task('dev:livereload', function () {
     gulp.watch(mapFiles(buildConfig.source.files.app.html, buildConfig.source.folder), ['dev:copy-html']);
     gulp.watch(mapFiles(buildConfig.source.files.app.ts, buildConfig.source.folder), ['dev:build']);
 
-    gulp.src('./build')
+    gulp.src(buildConfig.targets.buildFolder)
         .pipe(server({
             livereload: true,
             open: false
