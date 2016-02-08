@@ -1,8 +1,9 @@
-import {Component} from "angular2/core";
-import {LoginService} from "../../services/login/login-service";
+import {Component} from 'angular2/core';
+import {LoginService} from '../../services/login/login-service';
 
 @Component({
     selector: 'login-form',
+    providers: [LoginService],
     template: `
         <input type="text" [(ngModel)]="credentialModel.username" />
         <input type="password" [(ngModel)]="credentialModel.password" />

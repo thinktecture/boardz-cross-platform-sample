@@ -10,7 +10,6 @@ module.exports = {
                     'app/**/*.ts'
                 ],
                 html: [
-                    'init-main.js',
                     'index.html',
                     'app/**/*.html'
                 ],

@@ -1,4 +1,4 @@
-"use strict";
+declare var System: any;
 
 (function() {
     System.config({
@@ -9,7 +9,4 @@
             }
         }
     });
-
-    System.import('app/main')
-        .then(null, console.error.bind(console));
 })();

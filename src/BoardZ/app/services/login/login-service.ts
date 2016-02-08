@@ -1,15 +1,20 @@
-import {Injectable, Inject} from "angular2/core";
-import {Http, Headers} from "angular2/http";
-import {Configuration} from "../../app-config";
-import 'rxjs/add/operator/map';
+import {Injectable, Inject} from 'angular2/core';
+import {Http, Headers} from 'angular2/http';
+import {Configuration} from '../../app-config';
 
 @Injectable()
 export class LoginService {
-    private _token: string;
+    private _token: string = null;
 
     constructor(@Inject('app.config') private _config: Configuration, private _http: Http) { }
 
+    unauthenticate() : void {
+        console.log('Unauthenticating...');
+        this._token = null;
+    }
+
     authenticate (username: string, password: string): void {
+        this.unauthenticate();
 
         let body = 'grant_type=password&username=' + username + '&password=' + password,
             headers = new Headers();
@@ -31,7 +36,7 @@ export class LoginService {
     }
 
     saveToken (token: string): void {
-        console.log('Savin token: ' + token);
+        console.log('Saving token: ' + token);
         this._token = token;
     }
 

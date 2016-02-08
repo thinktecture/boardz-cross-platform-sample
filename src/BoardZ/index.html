@@ -15,11 +15,16 @@
     <script src="./node_modules/angular2/bundles/http.dev.js"></script>
 
     <!-- 2. Configure SystemJS -->
-    <script src="./init-main.js"></script>
+    <script src="./app/init-systemjs.js"></script>
 
+    <!-- 3. Load initial app component -->
+    <script>
+        System.import('app/main')
+                .then(null, console.error.bind(console));
+    </script>
 </head>
 
-<!-- 3. Display the application -->
+<!-- 4. Display the application -->
 <body>
     <boardz-app>Loading...</boardz-app>
 </body>
