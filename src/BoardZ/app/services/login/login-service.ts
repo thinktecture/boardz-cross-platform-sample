@@ -43,6 +43,8 @@ export class LoginService {
                 .map(response => <TokenData>response.json()),
             multiplexer = new Subject();
 
+        // need to subscribe via a relay object as multiple subscriptions on the request object
+        // will cause multiple requests
         multiplexer.subscribe(
             tokenData => this.saveToken(tokenData.access_token),
             error => this.handleError(error)
