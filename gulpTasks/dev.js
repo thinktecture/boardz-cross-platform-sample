@@ -35,6 +35,11 @@ gulp.task('dev:copy-dependencies', function() {
         .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, 'node_modules/')));
 });
 
+gulp.task('dev:copy-assets', function() {
+    gulp.src(mapFiles(buildConfig.source.files.app.assets, buildConfig.source.folder))
+        .pipe(gulp.dest(buildConfig.targets.buildFolder));
+});
+
 gulp.task('dev:copy-html', function() {
     gulp.src(mapFiles(buildConfig.source.files.app.html, buildConfig.source.folder))
         .pipe(gulp.dest(buildConfig.targets.buildFolder));
@@ -54,6 +59,7 @@ gulp.task('dev:build', function() {
 gulp.task('dev:default', function (done) {
     runSequence('dev:clean',
         'dev:copy-html',
+        'dev:copy-assets',
         'dev:copy-dependencies',
         'dev:build',
    /*
