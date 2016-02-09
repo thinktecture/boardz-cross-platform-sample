@@ -2,6 +2,8 @@ import {Component, provide} from 'angular2/core';
 import {Http, HTTP_PROVIDERS} from 'angular2/http';
 
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/publish';
+import 'rxjs/add/operator/publishReplay';
 
 import {ApplicationConfiguration} from './app-config';
 import {LoginService} from './services/login/login-service';
