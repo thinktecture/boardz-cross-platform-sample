@@ -3,9 +3,8 @@ import {Http, Headers, RequestOptions, Response} from 'angular2/http';
 import {Configuration} from '../../app-config';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
-import createLanguageServiceSourceFile = ts.createLanguageServiceSourceFile;
 
-interface TokenData{
+interface TokenData {
     access_token: string;
     token_type: string;
     expires_in: number;
@@ -16,7 +15,6 @@ export class LoginService {
 
     private _token: string = null;
     private _lastLoginUnsuccessful: boolean = false;
-
 
     get token(): string {
         return this._token;
@@ -41,7 +39,7 @@ export class LoginService {
             options = new RequestOptions( { headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'})}),
             request = this._http.post(this._config.apiEndpoint + 'token', body, options)
                 .map(response => <TokenData>response.json()),
-            multiplexer = new Subject();
+            multiplexer = new Subject<TokenData>();
 
         // need to subscribe via a relay object as multiple subscriptions on the request object
         // will cause multiple requests
@@ -54,7 +52,7 @@ export class LoginService {
         return multiplexer;
     }
 
-    handleError (error: Response) {
+    handleError (error: TokenData) {
         console.log('Error: ' + error);
 
         this._lastLoginUnsuccessful = true;

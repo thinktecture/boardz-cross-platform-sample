@@ -28,6 +28,7 @@ module.exports = {
                 './node_modules/rxjs/**/*.js',
                 './node_modules/angular2/bundles/angular2.dev.js',
                 './node_modules/angular2/bundles/http.dev.js',
+                './node_modules/angular2/bundles/router.dev.js'
             ]
         }
     },
