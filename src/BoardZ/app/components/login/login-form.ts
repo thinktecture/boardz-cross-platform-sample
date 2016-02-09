@@ -1,6 +1,6 @@
 import {Component} from 'angular2/core';
 import {FORM_DIRECTIVES, FormBuilder, Validators, ControlGroup} from 'angular2/common';
-import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
+import {Router, ROUTER_DIRECTIVES, CanDeactivate, ComponentInstruction} from 'angular2/router';
 
 import {LoginService} from '../../services/login/login-service';
 
@@ -9,7 +9,7 @@ import {LoginService} from '../../services/login/login-service';
     directives: [FORM_DIRECTIVES, ROUTER_DIRECTIVES],
     templateUrl: 'components/login/login-form.html'
 })
-export class LoginForm {
+export class LoginForm implements CanDeactivate {
 
     public credentialForm: ControlGroup;
     public loginError: boolean = false;
@@ -40,5 +40,9 @@ export class LoginForm {
     setError(value: boolean) {
         console.log('Setting error state to: ' + value);
         this.loginError = value;
+    }
+
+    routerCanDeactivate(next: ComponentInstruction, prev: ComponentInstruction) {
+        return !this.loginError && this._loginService.isLoggedIn;
     }
 }
