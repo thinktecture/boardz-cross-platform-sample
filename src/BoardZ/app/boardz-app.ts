@@ -43,8 +43,8 @@ import {Headerbar} from './components/headerbar/headerbar';
     templateUrl: 'app/boardz-app.html'
 })
 @RouteConfig([
-    { path: '/dashboard', component: Dashboard, name: 'Dashboard' },
-    { path: '/login', component: LoginForm, name: 'Login' }
+    { path: '/dashboard', component: Dashboard, name: 'Dashboard', data: { displayName: 'Dashboard' } },
+    { path: '/login', component: LoginForm, name: 'Login', data: { displayName: 'Login' }}
 ])
 export class BoardzApp {
 

@@ -61,7 +61,7 @@
                     </li>
                 </ul>
             </div>
-
+<!--
             <div class="item dropdown" #notifications [hidden]="!loginService.isLoggedIn">
                 <a class="dropdown-toggle" (click)="notifications.classList.toggle('open');">
                     <i class="fa fa-lg fa-bell"></i>
@@ -76,6 +76,7 @@
                     </li>
                 </ul>
             </div>
+-->
         </div>
 
         <div class="row">
@@ -84,11 +85,10 @@
             </div>
             <div class="col-xs-4 meta">
                 <div class="page">
-                    Todo: Route name
+                    {{currentLocation}}
                 </div>
-                <div class="breadcrumb-links">
-                    Breadcrumbs?
-                </div>
+
+                <breadcrumb></breadcrumb>
             </div>
         </div>
     </div>
