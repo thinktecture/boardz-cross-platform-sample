@@ -8,8 +8,7 @@
     "url": "git+https://github.com/thinktecture/boardz-cross-platform-sample.git"
   },
   "scripts": {
-    "build-all": "gulp build:all:release",
-    "gulp": "gulp",
+    "gulp": "gulp"
   },
   "author": "Thinktecture AG",
   "bugs": {
