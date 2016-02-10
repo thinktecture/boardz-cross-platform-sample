@@ -1,12 +1,11 @@
 <div class="row header">
     <div class="col-xs-12">
         <div class="user pull-right">
-            <div class="item dropdown">
-                <a href="#" class="dropdown-toggle">
-                    <img src="img/avatar.jpg">
+
+            <div class="item dropdown" #usermenu>
+                <a class="dropdown-toggle" (click)="usermenu.classList.toggle('open');" >
+                    <i class="fa fa-lg fa-user"></i>
                 </a>
-
-
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li class="dropdown-header">
                         Joe Bloggs
@@ -35,9 +34,10 @@
                     </li>
                 </ul>
             </div>
-            <div class="item dropdown">
-                <a href="#" class="dropdown-toggle">
-                    <i class="fa fa-bell-o"></i>
+
+            <div class="item dropdown" #notifications>
+                <a class="dropdown-toggle" (click)="notifications.classList.toggle('open');">
+                    <i class="fa fa-lg fa-bell"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li class="dropdown-header">
