@@ -2,6 +2,10 @@
     .user > .item[hidden] {
         display: none;
     }
+
+    .row.header .user > .item > .dropdown-menu i {
+        line-height: .75em;
+    }
 </style>
 <div class="row header">
     <div class="col-xs-12">
@@ -37,15 +41,15 @@
                     <li class="divider"></li>
                     <li class="link">
                         <a (click)="loginService.unauthenticate(); $event.preventDefault(); user.classList.toggle('open');">
-                            Logout
+                            <i class="fa fa-sign-out fa-fw"></i> Logout
                         </a>
                     </li>
                 </ul>
             </div>
 
             <div class="item dropdown" #settings>
-                <a class="dropdown-toggle" (click)="settings.classList.toggle('open');">
-                    <i class="fa fa-lg fa-gear"></i>
+                <a class="dropdown-toggle" (click)="settings.classList.toggle('open'); settingsicon.classList.toggle('fa-spin');">
+                    <i class="fa fa-lg fa-gear" #settingsicon></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li class="dropdown-header">
