@@ -10,10 +10,7 @@ export class Sidebar {
 
     public expanded: boolean = true;
 
-    constructor() {}
-
     toggleSidebar(): void {
         this.expanded = !this.expanded;
-        console.log('Toggled sidebar. New state: ' + this.expanded);
     }
 }

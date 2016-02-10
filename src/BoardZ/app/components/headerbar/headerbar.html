@@ -2,8 +2,8 @@
     <div class="col-xs-12">
         <div class="user pull-right">
 
-            <div class="item dropdown" #usermenu>
-                <a class="dropdown-toggle" (click)="usermenu.classList.toggle('open');" >
+            <div class="item dropdown" #user>
+                <a class="dropdown-toggle" (click)="user.classList.toggle('open');">
                     <i class="fa fa-lg fa-user"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
@@ -35,6 +35,21 @@
                 </ul>
             </div>
 
+            <div class="item dropdown" #settings>
+                <a class="dropdown-toggle" (click)="settings.classList.toggle('open');">
+                    <i class="fa fa-lg fa-gear"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li class="dropdown-header">
+                        Settings
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">Language selector!</a>
+                    </li>
+                </ul>
+            </div>
+
             <div class="item dropdown" #notifications>
                 <a class="dropdown-toggle" (click)="notifications.classList.toggle('open');">
                     <i class="fa fa-lg fa-bell"></i>
@@ -50,12 +65,18 @@
                 </ul>
             </div>
         </div>
-        <div class="meta">
-            <div class="page">
-                Dashboard
+
+        <div class="row">
+            <div class="col-xs-1" [hidden]="!showAppname">
+                <h3>BZ!</h3>
             </div>
-            <div class="breadcrumb-links">
-                Home / Dashboard
+            <div class="col-xs-4 meta">
+                <div class="page">
+                    Todo: Route name
+                </div>
+                <div class="breadcrumb-links">
+                    Breadcrumbs?
+                </div>
             </div>
         </div>
     </div>
