@@ -1,0 +1,31 @@
+<div id="sidebar-wrapper">
+    <ul class="sidebar">
+        <li class="sidebar-main">
+            <a (click)="toggleSidebar()">BoardZ!
+                <span class="menu-icon glyphicon glyphicon-transfer"></span>
+            </a>
+        </li>
+        <li class="sidebar-title"><span>NAVIGATION</span></li>
+        <li class="sidebar-list">
+            <a [routerLink]="['Dashboard']">Dashboard <span class="menu-icon fa fa-dashboard"></span></a>
+        </li>
+        <li class="sidebar-list">
+            <a href="#/tables">Tables <span class="menu-icon fa fa-table"></span></a>
+        </li>
+    </ul>
+    <div class="sidebar-footer">
+        <div class="col-xs-4">
+            <a href="http://thinktecture.com">
+                Thinktecture
+            </a>
+        </div>
+        <div class="col-xs-4">
+        </div>
+        <div class="col-xs-4">
+            <a href="https://github.com/thinktecture/boardz-cross-platform-sample" target="_blank">
+                Github
+            </a>
+        </div>
+
+    </div>
+</div>

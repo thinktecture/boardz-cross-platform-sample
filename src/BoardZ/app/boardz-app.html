@@ -1,0 +1,21 @@
+<div id="page-wrapper" [class.open]="sidebar.expanded">
+
+    <sidebar #sidebar></sidebar>
+
+    <div id="content-wrapper">
+        <div class="page-content">
+
+            <headerbar></headerbar>
+
+            <!-- Main Content -->
+            <div ui-view>
+
+                <router-outlet></router-outlet>
+
+            </div>
+
+        </div><!-- End Page Content -->
+    </div><!-- End Content Wrapper -->
+
+
+</div><!-- End Page Wrapper -->

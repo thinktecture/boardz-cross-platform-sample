@@ -31,30 +31,30 @@ gulp.task('dev:clean', function (done) {
 });
 
 gulp.task('dev:copy-template', function() {
-    gulp.src(mapFiles(buildConfig.source.files.main, buildConfig.source.folder))
-        .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder)));
+    var files = mapFiles(buildConfig.source.files.main, buildConfig.source.folder);
+    files = files.concat(buildConfig.source.files.template);
 
-    gulp.src(buildConfig.source.files.template)
+    return gulp.src(files)
         .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder)));
 });
 
 gulp.task('dev:copy-script-dependencies', function() {
-    gulp.src(buildConfig.source.files.script_dependencies, { base: './node_modules' })
+    return gulp.src(buildConfig.source.files.script_dependencies, { base: './node_modules' })
         .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, 'scripts/')));
 });
 
 gulp.task('dev:copy-app-assets', function() {
-    gulp.src(mapFiles(buildConfig.source.files.app.assets, buildConfig.source.folder))
+    return gulp.src(mapFiles(buildConfig.source.files.app.assets, buildConfig.source.folder))
         .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, buildConfig.targets.appFolder)));
 });
 
 gulp.task('dev:copy-app-html', function() {
-    gulp.src(mapFiles(buildConfig.source.files.app.html, buildConfig.source.folder))
+    return gulp.src(mapFiles(buildConfig.source.files.app.html, buildConfig.source.folder))
         .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, buildConfig.targets.appFolder)));
 });
 
 gulp.task('dev:build', function() {
-    gulp.src(mapFiles(buildConfig.source.files.app.ts, buildConfig.source.folder))
+    return gulp.src(mapFiles(buildConfig.source.files.app.ts, buildConfig.source.folder))
         .pipe(sourcemaps.init())
         .pipe(ts(tsConfig))
         .pipe(sourcemaps.write('.', {
@@ -64,19 +64,20 @@ gulp.task('dev:build', function() {
         .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, buildConfig.targets.appFolder)));
 });
 
-gulp.task('dev:default', function (done) {
-    runSequence('dev:clean',
+gulp.task('dev:default', ['dev:clean'], function (done) {
+    return runSequence(
+        'dev:copy-script-dependencies',
+        'dev:build',
         'dev:copy-template',
         'dev:copy-app-html',
         'dev:copy-app-assets',
-        'dev:copy-script-dependencies',
-        'dev:build',
-        done);
+        function() { done(); }
+    );
 });
 
 gulp.task('dev:start-live-server', function () {
 
-    gulp.src(buildConfig.targets.buildFolder)
+    return gulp.src(buildConfig.targets.buildFolder)
         .pipe(server({
             livereload: false,
             open: false
@@ -84,13 +85,12 @@ gulp.task('dev:start-live-server', function () {
 });
 
 
-gulp.task('dev:livereload', function () {
+gulp.task('dev:livereload', ['dev:default'], function () {
 
-    runSequence('dev:default');
-    gulp.watch(mapFiles(buildConfig.source.files.app.html, buildConfig.source.folder), ['dev:copy-html']);
+    gulp.watch(mapFiles(buildConfig.source.files.app.html, buildConfig.source.folder), ['dev:copy-app-html']);
     gulp.watch(mapFiles(buildConfig.source.files.app.ts, buildConfig.source.folder), ['dev:build']);
 
-    gulp.src(buildConfig.targets.buildFolder)
+    return gulp.src(buildConfig.targets.buildFolder)
         .pipe(server({
             livereload: true,
             open: false
