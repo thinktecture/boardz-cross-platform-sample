@@ -1,8 +1,11 @@
 import {Injectable, Inject} from 'angular2/core';
-import {Http, Headers, RequestOptions, Response} from 'angular2/http';
-import {Configuration} from '../../app-config';
+import {Http, Headers, RequestOptions} from 'angular2/http';
+import {Router} from 'angular2/router';
+
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
+
+import {Configuration} from '../../app-config';
 
 interface TokenData {
     access_token: string;
@@ -15,6 +18,11 @@ export class LoginService {
 
     private _token: string = null;
     private _lastLoginUnsuccessful: boolean = false;
+    private _username: string = null;
+
+    get username(): string {
+        return this._username;
+    }
 
     get token(): string {
         return this._token;
@@ -24,12 +32,19 @@ export class LoginService {
         return this._token !== null;
     }
 
-    constructor(@Inject('app.config') private _config: Configuration, private _http: Http) { }
+    constructor(
+        @Inject('app.config') private _config: Configuration,
+        private _http: Http,
+        private _router: Router)
+    { }
 
     unauthenticate() : void {
         console.log('Unauthenticating...');
         this._lastLoginUnsuccessful = false;
         this._token = null;
+        this._username = null;
+
+        this._router.navigate(['Login']);
     }
 
     authenticate (username: string, password: string): Observable<TokenData> {
@@ -44,7 +59,10 @@ export class LoginService {
         // need to subscribe via a relay object as multiple subscriptions on the request object
         // will cause multiple requests
         multiplexer.subscribe(
-            tokenData => this.saveToken(tokenData.access_token),
+            tokenData => {
+                this.saveToken(tokenData.access_token);
+                this._username = username;
+            },
             error => this.handleError(error)
         );
 

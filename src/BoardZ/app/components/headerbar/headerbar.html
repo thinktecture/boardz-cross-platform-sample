@@ -1,15 +1,22 @@
+<style type="text/css">
+    .user > .item[hidden] {
+        display: none;
+    }
+</style>
 <div class="row header">
     <div class="col-xs-12">
         <div class="user pull-right">
 
-            <div class="item dropdown" #user>
+            <div class="item dropdown" [hidden]="!loginService.isLoggedIn" #user>
+
                 <a class="dropdown-toggle" (click)="user.classList.toggle('open');">
                     <i class="fa fa-lg fa-user"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li class="dropdown-header">
-                        Joe Bloggs
+                        Hello, <strong>{{loginService.username}}</strong>
                     </li>
+                    <!--
                     <li class="divider"></li>
                     <li class="link">
                         <a href="#">
@@ -26,9 +33,10 @@
                             Menu Item
                         </a>
                     </li>
+                    -->
                     <li class="divider"></li>
                     <li class="link">
-                        <a href="#">
+                        <a (click)="loginService.unauthenticate(); $event.preventDefault(); user.classList.toggle('open');">
                             Logout
                         </a>
                     </li>
@@ -50,7 +58,7 @@
                 </ul>
             </div>
 
-            <div class="item dropdown" #notifications>
+            <div class="item dropdown" #notifications [hidden]="!loginService.isLoggedIn">
                 <a class="dropdown-toggle" (click)="notifications.classList.toggle('open');">
                     <i class="fa fa-lg fa-bell"></i>
                 </a>
