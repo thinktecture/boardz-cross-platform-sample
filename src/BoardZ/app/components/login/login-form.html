@@ -1,23 +1,64 @@
 <style>
-    .ng-invalid {
-        border: 1px solid red;
+    .btn[disabled] {
+        pointer-events: auto;
     }
 </style>
-<form [ngFormModel]="credentialForm" (submit)="doLogin($event)">
+<div class="col-md-12">
+    <form class="form-horizontal" [ngFormModel]="credentialForm" (submit)="doLogin($event)">
 
-    <label for="username">User name: </label>
-    <input id="username" type="text" ngControl="username" placeholder="User name" />
-    <span [hidden]="credentialForm.controls['username'].valid || credentialForm.controls['username'].pristine" class="ng-invalid">Username is required</span>
+    <div class="panel panel-primary">
 
-    <label for="password">Password: </label>
-    <input id="password" type="password" ngControl="password" placeholer="Password" />
-    <span [hidden]="credentialForm.controls['password'].valid || credentialForm.controls['password'].pristine" class="ng-invalid">Password is required</span>
+        <div class="panel-heading">
+            <h3 class="panel-title">Login</h3>
+        </div>
 
-    <button (click)="doLogin($event)" >Login</button>
+        <div class="panel-body">
 
-    <div [hidden]="!loginError" class="ng-invalid">
-        Login failed.
+            <div class="form-group" [ngClass]="{ 'has-error': !isUsernameValid }">
+                <label for="username" class="col-sm-2 control-label">User name</label>
+                <div class="col-sm-10">
+                    <input class="form-control" id="username" type="text" ngControl="username" placeholder="User name" />
+                    <div [hidden]="isUsernameValid">
+                        <span class="help-block">Username is required</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" [ngClass]="{ 'has-error': !isPasswordValid }">
+                <label for="password" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                    <input class="form-control" id="password" type="password" ngControl="password" placeholder="Password" />
+                    <div class="well well-sm" [hidden]="isPasswordValid">
+                        <p><span class="label label-danger">Required:</span> Password is required</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TODO: store credentials -->
+
+            <div class="form-group" [hidden]="!loginError">
+                <div class="col-sm-2">&nbsp;</div>
+                <div class="alert alert-warning col-sm-10 pull-right">
+                    <strong>Login failed.</strong> Please check your credentials and try again.
+                </div>
+            </div>
+
+            <div class="form-group" [hidden]="!triedAbort">
+                <div class="col-sm-2">&nbsp;</div>
+                <div class="alert alert-warning col-sm-10 pull-right">
+                    <strong>Cannot abort.</strong> In order to use the BoardZ! app, you need to log in.
+                </div>
+            </div>
+
+        </div>
+
+        <div class="panel-footer clearfix">
+            <div class="pull-right">
+                <button type="button" class="btn btn-default" (click)="tryAbort($event)" >Abort</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!credentialForm.valid" (click)="doLogin($event)" >Login</button>
+            </div>
+        </div>
+
     </div>
-    <br/>
-    <span>Test: Try to navigate to <a [routerLink]="['Dashboard']">Dashboard</a></span>
-</form>
+    </form>
+</div>
