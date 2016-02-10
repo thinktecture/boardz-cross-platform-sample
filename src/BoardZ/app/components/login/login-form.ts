@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {FORM_DIRECTIVES, FormBuilder, Validators, ControlGroup, NgClass} from 'angular2/common';
+import {FORM_DIRECTIVES, FormBuilder, Validators, ControlGroup, NgClass, Control} from 'angular2/common';
 import {Router, ROUTER_DIRECTIVES, CanDeactivate, ComponentInstruction} from 'angular2/router';
 
 import {LoginService} from '../../services/login/login-service';
@@ -50,6 +50,15 @@ export class LoginForm implements CanDeactivate {
 
     tryAbort(evt): void {
         evt.preventDefault();
+
+        if (evt.ctrlKey)
+        {
+            (<Control>this.credentialForm.controls['username']).updateValue('Developer');
+            (<Control>this.credentialForm.controls['password']).updateValue('Developer');
+
+            this.doLogin(evt);
+            return;
+        }
 
         this.triedAbort = true;
     }

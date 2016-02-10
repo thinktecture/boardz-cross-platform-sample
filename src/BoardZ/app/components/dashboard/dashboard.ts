@@ -3,8 +3,7 @@ import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 @Component({
     directives: [ROUTER_DIRECTIVES],
-    template: `<h1>Dashboard</h1>
-    <span>Test: Try to navigate to <a [routerLink]="['Login']">Login</a></span>`
+    templateUrl: 'app/components/dashboard/dashboard.html'
 })
 export class Dashboard {
 

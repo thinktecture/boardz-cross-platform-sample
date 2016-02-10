@@ -7,12 +7,18 @@
         </li>
         <li class="sidebar-title"><span>NAVIGATION</span></li>
         <li class="sidebar-list">
-            <a [routerLink]="['Dashboard']">Dashboard <span class="menu-icon fa fa-dashboard"></span></a>
+            <a [routerLink]="['Dashboard']">Dashboard <span title="Dashboard" class="menu-icon fa fa-dashboard"></span></a>
         </li>
+
         <li class="sidebar-list">
-            <a href="#/tables">Tables <span class="menu-icon fa fa-table"></span></a>
+            <a [routerLink]="['Games']">Games list<span title="Games list" class="menu-icon fa fa-list"></span></a>
+        </li>
+
+        <li class="sidebar-list">
+            <a [routerLink]="['RadiusSearch']">Radius search<span title="Radius search" class="menu-icon fa fa-location-arrow"></span></a>
         </li>
     </ul>
+
     <div class="sidebar-footer">
         <div class="col-xs-4">
             <a href="http://thinktecture.com">
