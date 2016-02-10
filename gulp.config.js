@@ -3,14 +3,15 @@
 module.exports = {
     source: {
         folder: './src/BoardZ/',
-        index: 'index.html',
         files: {
+            main: [
+                'index.html'
+            ],
             app: {
                 ts: [
                     'app/**/*.ts'
                 ],
                 html: [
-                    'index.html',
                     'app/**/*.html'
                 ],
                 css: [
@@ -20,15 +21,12 @@ module.exports = {
                     'assets/**/*.*'
                 ]
             },
-            dependencies: [
-                './node_modules/es6-shim/es6-shim.min.js',
-                './node_modules/systemjs/dist/system-polyfills.js',
-                './node_modules/angular2/bundles/angular2-polyfills.js',
-                './node_modules/systemjs/dist/system.src.js',
+            template: ['./node_modules/rdash-ui/dist/**/*.*'],
+            script_dependencies: [
+                './node_modules/es6-shim/es6-shim.*',
+                './node_modules/systemjs/dist/*.*',
                 './node_modules/rxjs/**/*.js',
-                './node_modules/angular2/bundles/angular2.dev.js',
-                './node_modules/angular2/bundles/http.dev.js',
-                './node_modules/angular2/bundles/router.dev.js'
+                './node_modules/angular2/bundles/**/*',
             ]
         }
     },
@@ -37,7 +35,7 @@ module.exports = {
     },
     targets: {
         buildFolder: './build',
-        tsOutputFolder: 'app/',
+        appFolder: 'app',
         minified: {
             js: 'app.js',
             css: 'app.css',

@@ -7,7 +7,7 @@ import {LoginService} from '../../services/login/login-service';
 @Component({
     selector: 'login-form',
     directives: [FORM_DIRECTIVES, ROUTER_DIRECTIVES],
-    templateUrl: 'components/login/login-form.html'
+    templateUrl: 'app/components/login/login-form.html'
 })
 export class LoginForm implements CanDeactivate {
 

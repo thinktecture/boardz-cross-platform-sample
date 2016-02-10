@@ -30,19 +30,27 @@ gulp.task('dev:clean', function (done) {
         });
 });
 
-gulp.task('dev:copy-dependencies', function() {
-    gulp.src(buildConfig.source.files.dependencies, {base: './node_modules'})
-        .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, 'node_modules/')));
+gulp.task('dev:copy-template', function() {
+    gulp.src(mapFiles(buildConfig.source.files.main, buildConfig.source.folder))
+        .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder)));
+
+    gulp.src(buildConfig.source.files.template)
+        .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder)));
 });
 
-gulp.task('dev:copy-assets', function() {
+gulp.task('dev:copy-script-dependencies', function() {
+    gulp.src(buildConfig.source.files.script_dependencies, { base: './node_modules' })
+        .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, 'scripts/')));
+});
+
+gulp.task('dev:copy-app-assets', function() {
     gulp.src(mapFiles(buildConfig.source.files.app.assets, buildConfig.source.folder))
-        .pipe(gulp.dest(buildConfig.targets.buildFolder));
+        .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, buildConfig.targets.appFolder)));
 });
 
-gulp.task('dev:copy-html', function() {
+gulp.task('dev:copy-app-html', function() {
     gulp.src(mapFiles(buildConfig.source.files.app.html, buildConfig.source.folder))
-        .pipe(gulp.dest(buildConfig.targets.buildFolder));
+        .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, buildConfig.targets.appFolder)));
 });
 
 gulp.task('dev:build', function() {
@@ -53,20 +61,16 @@ gulp.task('dev:build', function() {
             includeContent: false,
             sourceRoot: '../src/BoardZ/app/'
         }))
-        .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, buildConfig.targets.tsOutputFolder)));
+        .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, buildConfig.targets.appFolder)));
 });
 
 gulp.task('dev:default', function (done) {
     runSequence('dev:clean',
-        'dev:copy-html',
-        'dev:copy-assets',
-        'dev:copy-dependencies',
+        'dev:copy-template',
+        'dev:copy-app-html',
+        'dev:copy-app-assets',
+        'dev:copy-script-dependencies',
         'dev:build',
-   /*
-        'dev:copy-source',
-        'dev:copy-assets',
-        'dev:inject',
-   */
         done);
 });
 
