@@ -6,6 +6,18 @@
             </div>
 
             <div class="panel-body">
+                <table class="table table-condensed table-striped table-hover">
+                    <thead>
+                        <th class="col-md-2">Name</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="#game of games">
+                            <td>{{game.name}}</td>
+                            <td>{{game.description}}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
         </div>

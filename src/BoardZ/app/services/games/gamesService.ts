@@ -6,7 +6,7 @@ import {Configuration} from '../../app-config';
 import {Logger} from '../logging/logger';
 
 // Only for testing purposes:
-import {GAMES} from './games_1000';
+import {GAMES} from './games_100';
 
 export interface Packshot {
     frontImageUrl?: string;
