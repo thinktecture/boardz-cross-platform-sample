@@ -54,8 +54,7 @@ import {Games} from './components/games/games';
 @RouteConfig([
     { path: '/', component: Dashboard, name: 'Dashboard', useAsDefault: true, data: { displayName: 'Dashboard' }},
     { path: '/login', component: LoginForm, name: 'Login', data: { displayName: 'Login' }},
-    { path: '/games/...', component: Games, name: 'Games', data: { displayName: 'Games' }}, // prepare for nested routes
-    // { path: '/games', component: GameList, name: 'GameList', data: { displayName: 'Games overview' }},
+    { path: '/games/...', component: Games, name: 'Games', data: { displayName: 'Games' }} // prepare for nested routes
 ])
 export class BoardzApp {
 

@@ -7,9 +7,9 @@ import {Logger} from '../../services/logging/logger';
 @Component({
     selector: 'breadcrumb',
     template: `
-    <div class="breadcrumb-links">
+    <div class="breadcrumb-links">Path:
         <span *ngFor="#crumb of crumbs;#last = last;">
-            Path: <a href="#" (click)="navigate($event, crumb.url)">{{ crumb.display }}</a>
+            <a href="#" (click)="navigate($event, crumb.url)">{{ crumb.display }}</a>
             <span *ngIf="!last"> &gt; </span>
         </span>
     </div>`
