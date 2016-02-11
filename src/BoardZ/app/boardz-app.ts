@@ -13,6 +13,7 @@ import {LoginService} from './services/login/loginService';
 import {DashboardService} from './services/dashboard/dashboardService';
 import {Logger, LogLevel} from './services/logging/logger';
 import {AuthenticationRequestOptions} from './services/http/authenticationRequestOptions';
+import {GamesService} from './services/games/gamesService';
 
 // components
 import {LoginForm} from './components/login/loginform';
@@ -35,6 +36,7 @@ import {GamesList} from './components/games/gameslist';
         // Our own stuff:
         LoginService,
         DashboardService,
+        GamesService,
         // override default request options with ours that add additional headers
         [provide(RequestOptions, { useClass: AuthenticationRequestOptions })],
     ],
