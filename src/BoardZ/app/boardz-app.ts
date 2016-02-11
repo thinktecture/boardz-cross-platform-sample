@@ -20,7 +20,8 @@ import {LoginForm} from './components/login/loginform';
 import {Dashboard} from './components/dashboard/dashboard';
 import {Sidebar} from './components/sidebar/sidebar';
 import {Headerbar} from './components/headerbar/headerbar';
-import {GamesList} from './components/games/gameslist';
+import {GameList} from './components/games/gameList';
+import {GameDetails} from './components/games/gameDetails';
 
 @Component({
     selector: 'boardz-app',
@@ -53,7 +54,8 @@ import {GamesList} from './components/games/gameslist';
 @RouteConfig([
     { path: '/dashboard', component: Dashboard, name: 'Dashboard', data: { displayName: 'Dashboard' }},
     { path: '/login', component: LoginForm, name: 'Login', data: { displayName: 'Login' }},
-    { path: '/games', component: GamesList, name: 'GamesList', data: { displayName: 'Games overview' }}
+    { path: '/games', component: GameList, name: 'GameList', data: { displayName: 'Games overview' }},
+    { path: '/games/details/:id', component: GameDetails, name: 'GameDetails', data: { displayName: 'Game details' }}
 ])
 export class BoardzApp {
 

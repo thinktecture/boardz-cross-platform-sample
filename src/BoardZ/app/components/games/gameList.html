@@ -12,7 +12,7 @@
                         <th>Description</th>
                     </thead>
                     <tbody>
-                        <tr *ngFor="#game of games">
+                        <tr *ngFor="#game of games" (click)="gotoDetails(game)">
                             <td>{{game.name}}</td>
                             <td>{{game.description}}</td>
                         </tr>

@@ -46,4 +46,11 @@ export class GamesService {
             .toPromise();
     }
 
+    public getGame(id: string): Promise<Game> {
+        return this.fetchGames()
+            .flatMap(games => Observable.fromArray(games))
+            .filter(game => game.id === id)
+            .toPromise();
+    }
+
 }
