@@ -1,4 +1,4 @@
-import {Injectable, Inject} from 'angular2/core';
+import {Injectable} from 'angular2/core';
 import {Http, Headers, RequestOptions} from 'angular2/http';
 import {Router} from 'angular2/router';
 
@@ -7,6 +7,7 @@ import {Subject} from 'rxjs/Subject';
 
 import {Configuration} from '../../app-config';
 import {Logger} from '../logging/logger';
+import {TokenDataStore} from './tokenDataStore';
 
 interface TokenData {
     access_token: string;
@@ -17,34 +18,32 @@ interface TokenData {
 @Injectable()
 export class LoginService {
 
-    private _token: string = null;
     private _lastLoginUnsuccessful: boolean = false;
-    private _username: string = null;
 
-    get username(): string {
-        return this._username;
+    get authenticated(): boolean {
+        return this._tokenStore.token !== null;
     }
 
-    get token(): string {
-        return this._token;
+    get username(): string {
+        return this._tokenStore.username;
     }
 
     get isLoggedIn(): boolean {
-        return this._token !== null;
+        return this._tokenStore.token !== null;
     }
 
     constructor(
-        @Inject('app.config') private _config: Configuration,
+        private _config: Configuration,
         private _logger: Logger,
         private _http: Http,
-        private _router: Router)
+        private _router: Router,
+        private _tokenStore: TokenDataStore)
     { }
 
     unauthenticate() : void {
         this._logger.logDebug('LoginService.unauthenticate called');
         this._lastLoginUnsuccessful = false;
-        this._token = null;
-        this._username = null;
+        this._tokenStore.token = null;
 
         this._router.navigate(['Login']);
     }
@@ -63,7 +62,11 @@ export class LoginService {
         multiplexer.subscribe(
             tokenData => {
                 this.saveToken(tokenData.access_token);
-                this._username = username;
+                this._tokenStore.username = username;
+
+                let expiryDate = new Date();
+                expiryDate.setSeconds(expiryDate.getSeconds() + tokenData.expires_in);
+                this._tokenStore.tokenExpiry = expiryDate;
             },
             error => this.handleError(error)
         );
@@ -82,7 +85,7 @@ export class LoginService {
         this._logger.logVerbose('LoginService.saveToken: Saving token ' + token);
 
         this._lastLoginUnsuccessful = false;
-        this._token = token;
+        this._tokenStore.token = token;
     }
 }
 

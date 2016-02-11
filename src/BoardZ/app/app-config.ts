@@ -1,7 +1,8 @@
-export interface Configuration {
-    apiEndpoint: string
+
+export class Configuration {
+    apiEndpoint: string;
 }
 
-export const ApplicationConfiguration: Configuration = {
-    apiEndpoint: 'http://localhost:50464/'
+export class ApplicationConfiguration extends Configuration {
+    apiEndpoint: string = 'http://localhost:50464/';
 }
