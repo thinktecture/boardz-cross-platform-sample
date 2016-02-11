@@ -20,8 +20,7 @@ import {LoginForm} from './components/login/loginform';
 import {Dashboard} from './components/dashboard/dashboard';
 import {Sidebar} from './components/sidebar/sidebar';
 import {Headerbar} from './components/headerbar/headerbar';
-import {GameList} from './components/games/gameList';
-import {GameDetails} from './components/games/gameDetails';
+import {Games} from './components/games/games';
 
 @Component({
     selector: 'boardz-app',
@@ -34,12 +33,13 @@ import {GameDetails} from './components/games/gameDetails';
         // Special static config type
         [provide(Configuration, { useValue: new ApplicationConfiguration() })],
 
+        // override default request options with ours that add additional headers
+        [provide(RequestOptions, { useClass: AuthenticationRequestOptions })],
+
         // Our own stuff:
         LoginService,
         DashboardService,
         GamesService,
-        // override default request options with ours that add additional headers
-        [provide(RequestOptions, { useClass: AuthenticationRequestOptions })],
     ],
     directives: [
         // Angular stuff
@@ -52,18 +52,16 @@ import {GameDetails} from './components/games/gameDetails';
     templateUrl: 'app/boardz-app.html'
 })
 @RouteConfig([
-    { path: '/dashboard', component: Dashboard, name: 'Dashboard', data: { displayName: 'Dashboard' }},
+    { path: '/', component: Dashboard, name: 'Dashboard', useAsDefault: true, data: { displayName: 'Dashboard' }},
     { path: '/login', component: LoginForm, name: 'Login', data: { displayName: 'Login' }},
-    { path: '/games', component: GameList, name: 'GameList', data: { displayName: 'Games overview' }},
-    { path: '/games/details/:id', component: GameDetails, name: 'GameDetails', data: { displayName: 'Game details' }}
+    { path: '/games/...', component: Games, name: 'Games', data: { displayName: 'Games' }}, // prepare for nested routes
+    // { path: '/games', component: GameList, name: 'GameList', data: { displayName: 'Games overview' }},
 ])
 export class BoardzApp {
 
-    constructor(router: Router, logger: Logger) {
+    constructor(logger: Logger) {
         // configure logger
         logger.maximumLogLevel = LogLevel.Verbose;
-
-        router.navigate(['Dashboard']); // try to navigate to dashboard, will be redirected to Login if required by CanActivate there
     }
 
 }
