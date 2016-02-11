@@ -7,6 +7,7 @@ export enum LogLevel {
     Info,
     Debug,
     Verbose,
+    Ultra,
 }
 
 @Injectable()
@@ -23,6 +24,10 @@ export class Logger {
             return;
 
         this.doLog(this.formatMessage(logLevel, message));
+    }
+
+    public logUltra(message: string): void {
+        this.log(message, LogLevel.Ultra);
     }
 
     public logVerbose(message: string): void {
