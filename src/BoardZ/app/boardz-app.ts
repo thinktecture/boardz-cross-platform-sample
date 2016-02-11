@@ -1,18 +1,18 @@
 // angular2 stuff
 import {Component, provide} from 'angular2/core';
 import {FormBuilder} from 'angular2/common';
-import {Http, HTTP_PROVIDERS, RequestOptions} from 'angular2/http';
-import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
+import {HTTP_PROVIDERS, Http, XHRBackend, RequestOptions, ConnectionBackend} from 'angular2/http';
+import {ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';
 
 // rx operators - ALL you can eat
 import 'rxjs/Rx';
 
 // services
+import {HttpAuth} from './services/http/HttpAuth';
 import {ApplicationConfiguration, Configuration} from './app-config';
 import {LoginService} from './services/login/loginService';
 import {DashboardService} from './services/dashboard/dashboardService';
 import {Logger, LogLevel} from './services/logging/logger';
-import {AuthenticationRequestOptions} from './services/http/authenticationRequestOptions';
 import {GamesService} from './services/games/gamesService';
 
 // components
@@ -26,15 +26,15 @@ import {Games} from './components/games/games';
     selector: 'boardz-app',
     providers: [
         // Angular stuff
-        Http,
         HTTP_PROVIDERS,
         FormBuilder,
 
         // Special static config type
-        [provide(Configuration, { useValue: new ApplicationConfiguration() })],
+        provide(Configuration, { useValue: new ApplicationConfiguration() }),
 
-        // override default request options with ours that add additional headers
-        [provide(RequestOptions, { useClass: AuthenticationRequestOptions })],
+        // override default http request options with ours that add additional headers
+        provide(ConnectionBackend, { useClass: XHRBackend }), // need to tweak injection a bit...
+        provide(Http, { useClass: HttpAuth }),
 
         // Our own stuff:
         LoginService,
