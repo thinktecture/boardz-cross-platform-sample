@@ -6,6 +6,7 @@ import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 
 import {Configuration} from '../../app-config';
+import {Logger} from '../logging/logger';
 
 interface TokenData {
     access_token: string;
@@ -34,12 +35,13 @@ export class LoginService {
 
     constructor(
         @Inject('app.config') private _config: Configuration,
+        private _logger: Logger,
         private _http: Http,
         private _router: Router)
     { }
 
     unauthenticate() : void {
-        console.log('Unauthenticating...');
+        this._logger.logDebug('LoginService.unauthenticate called');
         this._lastLoginUnsuccessful = false;
         this._token = null;
         this._username = null;
@@ -71,13 +73,13 @@ export class LoginService {
     }
 
     handleError (error: TokenData) {
-        console.log('Error: ' + error);
+        this._logger.logDebug('LoginService encountered an error: ' + error);
 
         this._lastLoginUnsuccessful = true;
     }
 
     saveToken (token: string): void {
-        console.log('Saving token: ' + token);
+        this._logger.logVerbose('LoginService.saveToken: Saving token ' + token);
 
         this._lastLoginUnsuccessful = false;
         this._token = token;

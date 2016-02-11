@@ -4,6 +4,7 @@ import {Router} from 'angular2/router';
 
 import {LoginService} from '../../services/login/login-service';
 import {Breadcrumb} from '../breadcrumb/breadcrumb';
+import {Logger} from '../../services/logging/logger';
 
 @Component({
     selector: 'headerbar',
@@ -20,12 +21,14 @@ export class Headerbar {
     public settingsmenuOpen: boolean = false;
     public notificationsOpen: boolean = false;
 
-    constructor(public loginService: LoginService, private _router: Router) {
+    constructor(public loginService: LoginService, private _router: Router, private _logger: Logger) {
         while (this._router.parent) {
             this._router = this._router.parent;
         }
 
         this._router.subscribe(routeUrl => {
+            this._logger.logVerbose('Headerbar detected routing to: ' + routeUrl);
+
             this._router.recognize(routeUrl).then(instruction => {
                 while (instruction.child) {
                     instruction = instruction.child;

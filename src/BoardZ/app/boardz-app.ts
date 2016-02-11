@@ -12,12 +12,14 @@ import 'rxjs/add/operator/publishReplay';
 // services
 import {ApplicationConfiguration} from './app-config';
 import {LoginService} from './services/login/login-service';
+import {LOGGING_PROVIDERS} from './services/logging/loggingProviders';
 
 // components
 import {LoginForm} from './components/login/login-form';
 import {Dashboard} from './components/dashboard/dashboard';
 import {Sidebar} from './components/sidebar/sidebar';
 import {Headerbar} from './components/headerbar/headerbar';
+import {Logger, LogLevel} from './services/logging/logger';
 
 @Component({
     selector: 'boardz-app',
@@ -30,6 +32,7 @@ import {Headerbar} from './components/headerbar/headerbar';
         [provide('app.config', {useValue: ApplicationConfiguration})],
 
         // Our own stuff:
+        LOGGING_PROVIDERS,
         LoginService
     ],
     directives: [
@@ -48,7 +51,10 @@ import {Headerbar} from './components/headerbar/headerbar';
 ])
 export class BoardzApp {
 
-    constructor(router: Router) {
+    constructor(router: Router, logger: Logger) {
+        // configure logger
+        logger.maximumLogLevel = LogLevel.Verbose;
+
         router.navigate(['Login']);
     }
 

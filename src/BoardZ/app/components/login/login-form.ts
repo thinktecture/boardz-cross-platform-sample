@@ -3,6 +3,7 @@ import {FORM_DIRECTIVES, FormBuilder, Validators, ControlGroup, NgClass, Control
 import {Router, ROUTER_DIRECTIVES, CanDeactivate, ComponentInstruction} from 'angular2/router';
 
 import {LoginService} from '../../services/login/login-service';
+import {Logger} from '../../services/logging/logger';
 
 @Component({
     selector: 'login-form',
@@ -23,7 +24,7 @@ export class LoginForm implements CanDeactivate {
         return this.credentialForm.controls['password'].valid || this.credentialForm.controls['password'].pristine
     }
 
-    constructor(private _router: Router, private _loginService: LoginService, formBuilder: FormBuilder) {
+    constructor(private _router: Router, private _loginService: LoginService, private _logger: Logger, formBuilder: FormBuilder) {
         this.credentialForm = formBuilder.group({
             username: ['', Validators.required],
             password: ['', Validators.required]
@@ -31,7 +32,7 @@ export class LoginForm implements CanDeactivate {
     }
 
     doLogin(evt): void {
-        console.log('Submitting by event: ' + evt.toString())
+        this._logger.logDebug('LoginForm.doLogin called via event: ' + evt.toString());
         evt.preventDefault();
 
         this.triedAbort = false;
@@ -39,7 +40,7 @@ export class LoginForm implements CanDeactivate {
         var username = this.credentialForm.controls['username'].value,
             password = this.credentialForm.controls['password'].value;
 
-        console.log('Calling "authenticate" and submitting: ' + username + ':' + password);
+        this._logger.logVerbose('LoginForm.doLogin calling "authenticate" and submitting: ' + username + ':' + password);
 
         this._loginService.authenticate(username, password)
             .subscribe(
@@ -53,6 +54,7 @@ export class LoginForm implements CanDeactivate {
 
         if (evt.ctrlKey)
         {
+            this._logger.logDebug('LoginForm: Developer-shortcut activated.');
             (<Control>this.credentialForm.controls['username']).updateValue('Developer');
             (<Control>this.credentialForm.controls['password']).updateValue('Developer');
 
@@ -64,7 +66,7 @@ export class LoginForm implements CanDeactivate {
     }
 
     setError(value: boolean) {
-        console.log('Setting error state to: ' + value);
+        this._logger.logDebug('LoginForm.setError: Setting error state to: ' + value);
         this.loginError = value;
     }
 
