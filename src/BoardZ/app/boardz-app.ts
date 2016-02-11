@@ -53,7 +53,7 @@ import {GamesList} from './components/games/gameslist';
 @RouteConfig([
     { path: '/dashboard', component: Dashboard, name: 'Dashboard', data: { displayName: 'Dashboard' }},
     { path: '/login', component: LoginForm, name: 'Login', data: { displayName: 'Login' }},
-    { path: '/games', component: GamesList, name: 'GamesList', data: { displayName: 'Games list' }}
+    { path: '/games', component: GamesList, name: 'GamesList', data: { displayName: 'Games overview' }}
 ])
 export class BoardzApp {
 
