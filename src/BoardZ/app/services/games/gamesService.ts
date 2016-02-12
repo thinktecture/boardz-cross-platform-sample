@@ -1,5 +1,5 @@
 import {Injectable} from 'angular2/core';
-import {Http} from 'angular2/http';
+import {Http, Headers} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 
 import {Configuration} from '../../app-config';
@@ -30,6 +30,16 @@ export class GamesService {
         this.baseUrl = config.apiEndpoint + 'api/BoardGames/';
     }
 
+    private buildOptions() {
+        let headers = new Headers();
+        headers.append('Accept', 'application/json');
+        headers.append('Accept', 'text/plain');
+        headers.append('Accept', '*/*');
+        headers.append('Content-Type', 'application/json;charset=UTF-8');
+
+        return { headers: headers };
+    }
+
     private fetchGames(): Observable<Game[]> {
         return this._http.get(this.baseUrl + 'List').map(response => (<Game[]>response.json()));
     }
@@ -50,28 +60,22 @@ export class GamesService {
             .toPromise();
     }
 
-    public saveOrUpdateGame(game: Game) {
-        let result: Promise<string>;
-
-        if (game.id === null) {
-            result = this.addGame(game);
-        } else {
-            result = this.updateGame(game);
-        }
-
-        result.then(id => this._logger.logInfo('game updated: ' + id));
-    }
-
     public addGame(game: Game): Promise<string> {
-        return this._http.put(this.baseUrl + 'Add', JSON.stringify(game))
-            .map(response => <string>response.text())
+        return this._http.post(this.baseUrl + 'Add', JSON.stringify(game), this.buildOptions())
+            .map(response => <string>response.json())
             .toPromise()
     }
 
     public updateGame(game: Game): Promise<string> {
-        return this._http.put(this.baseUrl + 'Update', JSON.stringify(game))
+        return this._http.put(this.baseUrl + 'Update', JSON.stringify(game), this.buildOptions())
             .map(response => game.id)
             .toPromise()
+    }
+
+    public deleteGame(id: string): Promise<string> {
+        return this._http.delete(this.baseUrl + 'Remove?id=' + id)
+            .map(response => <string>response.text())
+            .toPromise();
     }
 
 }

@@ -14,6 +14,8 @@ import {Logger} from '../../services/logging/logger';
 })
 export class GameDetails implements OnInit {
 
+    private _needsReset: boolean = false;
+
     public active = true;
     public model: Game = new Game();
     public originalModel: Game = new Game();
@@ -35,7 +37,10 @@ export class GameDetails implements OnInit {
 
     loadGame(id: string): void {
         this._gameService.getGame(id)
-            .then(game => this.originalModel = this.deepClone(this.model = game))
+            .then(game => {
+                this.originalModel = this.deepClone(this.model = game);
+                if (this._needsReset) this.reset();
+            })
             .catch(error => this._logger.logError('Could not find game. Error was: ' + error));
     }
 
@@ -48,6 +53,8 @@ export class GameDetails implements OnInit {
     }
 
     reset(): void {
+        this._needsReset = false;
+
         // Based on: https://angular.io/docs/ts/latest/guide/forms.html
         this.model = this.deepClone(this.originalModel);
 
@@ -56,8 +63,20 @@ export class GameDetails implements OnInit {
         setTimeout(() => this.active = true, 0);
     }
 
-    saveGame(): void {
-        this._gameService.saveOrUpdateGame(this.model)
-            ; // .then(id => this.loadGame(id));
+    saveChanges(): void {
+        if (this.model.id === null) {
+            this._gameService.addGame(this.model)
+                .then(newId => { this._needsReset = true; this.loadGame(newId); });
+        } else {
+            this._gameService.updateGame(this.model)
+                .then(oldId => { this._needsReset = true; this.loadGame(oldId); });
+        }
+    }
+
+    deleteGame(): void {
+        if (window.confirm('Really delete the game "' + this.originalModel.name + '" ?')) {
+            this._gameService.deleteGame(this.originalModel.id);
+            this.abort();
+        }
     }
 }

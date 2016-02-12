@@ -36,6 +36,7 @@
                 <button type="button" class="btn btn-default" (click)="abort()">Abort</button>
                 <button type="button" class="btn btn-default" (click)="reset()">Reset</button>
                 <button type="submit" class="btn btn-primary" [disabled]="!form.valid || !form.dirty">Save</button>
+                <button type="button" class="btn btn-danger" *ngIf="model.id !== null" (click)="deleteGame()">Delete</button>
             </div>
         </div>
 
