@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {TokenDataStore} from '../login/tokenDataStore';
 
 @Injectable()
-export class HttpAuth extends Http {
+export class AuthenticatedHttp extends Http {
 
     constructor(protected _backend: ConnectionBackend, protected _defaultOptions: RequestOptions, protected _tokenStore: TokenDataStore) {
         super(_backend, _defaultOptions);
@@ -30,7 +30,7 @@ export class HttpAuth extends Http {
         return super.put(url, body, options);
     }
 
-    delete (url: string, options?: RequestOptionsArgs): Observable<Response> {
+    delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
         options = this.prepareOptions(options);
         return super.delete(url, options);
     }

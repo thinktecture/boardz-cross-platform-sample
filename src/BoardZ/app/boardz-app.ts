@@ -8,7 +8,7 @@ import {ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';
 import 'rxjs/Rx';
 
 // services
-import {HttpAuth} from './services/http/HttpAuth';
+import {AuthenticatedHttp} from './services/http/AuthenticatedHttp';
 import {ApplicationConfiguration, Configuration} from './app-config';
 import {LoginService} from './services/login/loginService';
 import {DashboardService} from './services/dashboard/dashboardService';
@@ -34,7 +34,7 @@ import {Games} from './components/games/games';
 
         // override default http request options with ours that add additional headers
         provide(ConnectionBackend, { useClass: XHRBackend }), // need to tweak injection a bit...
-        provide(Http, { useClass: HttpAuth }),
+        provide(Http, { useClass: AuthenticatedHttp }),
 
         // Our own stuff:
         LoginService,
