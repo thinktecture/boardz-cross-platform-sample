@@ -22,6 +22,10 @@
         </li>
 
         <li class="sidebar-list">
+            <a [routerLink]="['Notifications']">Notifications<span title="Notifications" class="menu-icon fa fa-warning"></span></a>
+        </li>
+
+        <li class="sidebar-list">
             <a (click)="$event.preventDefault(); loginService.unauthenticate();">Logout<span title="Logout" class="menu-icon fa fa-sign-out"></span></a>
         </li>
         </customGroup>

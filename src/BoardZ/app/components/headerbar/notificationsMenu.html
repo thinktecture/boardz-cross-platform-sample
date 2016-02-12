@@ -1,8 +1,7 @@
-<div class="user pull-right">
-    <div class="item dropdown" #notifications>
-        <a class="dropdown-toggle" (click)="notifications.classList.toggle('open'); blink(icon);">
-            <i class="fa fa-lg fa-bell-o"></i>
-            <!-- <i class="fa fa-lg fa-bell-o fa-c-warning fa-2x" #icon></i> -->
+<div class="user pull-right" [hidden]="notifications.length < 1">
+    <div class="item dropdown" #notificationHandle>
+        <a class="dropdown-toggle" (click)="notificationHandle.classList.toggle('open');">
+            <i class="fa fa-lg fa-bell-o {{highestNotificationColorCssClass}}" #notificationIcon></i>
         </a>
         <ul class="dropdown-menu dropdown-menu-right">
             <li class="dropdown-header">
@@ -10,36 +9,17 @@
             </li>
             <li class="divider"></li>
 
-            <li>
-                <div class="alert alert-success alert-dismissable">
-                    Game saved successfully
-                    <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+            <li *ngFor="#notification of notifications">
+                <div class="alert alert-dismissable {{getAlertClass(notification.type)}}">
+                    <i class="fa {{notification.iconCssClass}}" *ngIf="notification.iconCssClass !== null"></i>
+                    {{notification.message}}
+                    <button type="button" class="close" data-dismiss="alert" (click)="dismiss(notification)"><span>&times;</span></button>
                 </div>
             </li>
 
-            <li>
-                <div class="alert alert-warning alert-dismissable">
-                    Another Notification
-                    <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                </div>
-            </li>
-
-            <li>
-                <div class="alert alert-info alert-dismissable">
-                    <i class="fa fa-windows"></i>
-                    <strong>Hello!</strong> You have mail!
-                    <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                </div>
-            </li>
-
-            <li>
-                <div class="alert alert-danger alert-dismissable">
-                    <i class="fa fa-frown-o"></i>
-                    We had an error: Something could not be loaded because of an extensive error with the
-                    database. However, this is quite some text for this notification and this needs to look
-                    okay.
-                    <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                </div>
+            <li class="divider"></li>
+            <li (click)="dismissAll()">
+                <a>Dismiss all notifications</a>
             </li>
         </ul>
     </div>

@@ -4,6 +4,7 @@ import {Router, ROUTER_DIRECTIVES, CanDeactivate, ComponentInstruction} from 'an
 
 import {LoginService} from '../../services/login/loginService';
 import {Logger} from '../../services/logging/logger';
+import {NotificationService} from '../../services/notifications/notificationService';
 
 @Component({
     selector: 'login-form',
@@ -25,7 +26,7 @@ export class LoginForm implements CanDeactivate {
         return this.credentialForm.controls['password'].valid || this.credentialForm.controls['password'].pristine
     }
 
-    constructor(private _router: Router, private _loginService: LoginService, private _logger: Logger, formBuilder: FormBuilder) {
+    constructor(private _router: Router, private _loginService: LoginService, private _logger: Logger, private _notificationService: NotificationService, formBuilder: FormBuilder) {
         this.credentialForm = formBuilder.group({
             username: ['', Validators.required],
             password: ['', Validators.required]
@@ -46,7 +47,7 @@ export class LoginForm implements CanDeactivate {
         this._loginService.authenticate(username, password)
             .subscribe(
                 () => { this.setError(false); this._router.navigate(['Dashboard']) },
-                () => { this.setError(true); }
+                () => { this.setError(true); this._notificationService.notifyError('Login was unsuccessful.'); }
             );
     }
 

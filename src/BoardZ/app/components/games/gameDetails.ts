@@ -6,6 +6,7 @@ import {assertionsEnabled} from 'angular2/src/facade/lang';
 import {Game, GamesService} from '../../services/games/gamesService';
 import {Logger} from '../../services/logging/logger';
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
+import {NotificationService} from '../../services/notifications/notificationService';
 
 @Component({
     selector: 'gameDetail',
@@ -27,7 +28,7 @@ export class GameDetails implements OnInit {
     get diagnostic() { return JSON.stringify(this.model); }
     get originalDiagnostic() { return JSON.stringify(this.originalModel); }
 
-    constructor(private _logger: Logger, private _gameService: GamesService, private _router: Router, private _routeParams: RouteParams) {
+    constructor(private _logger: Logger, private _gameService: GamesService, private _router: Router, private _routeParams: RouteParams, private _notificationService: NotificationService) {
         this.diagnosticEnabled = assertionsEnabled();
     }
 
@@ -47,7 +48,10 @@ export class GameDetails implements OnInit {
                 this.originalModel = this.deepClone(this.model = game);
                 if (this._needsReset) this.reset();
             })
-            .catch(error => this._logger.logError('Could not find game. Error was: ' + error));
+            .catch(error => {
+                this._logger.logError('Could not find game. Error was: ' + error);
+                this._notificationService.notifyError('Could not load game data.');
+            });
     }
 
     deepClone<T>(obj: T): T {
@@ -72,17 +76,31 @@ export class GameDetails implements OnInit {
     saveChanges(): void {
         if (this.model.id === null) {
             this._gameService.addGame(this.model)
-                .then(newId => { this._needsReset = true; this.loadGame(newId); });
+                .then(newId => {
+                    this._notificationService.notifySuccess('New game was added.')
+                    this._needsReset = true;
+                    this.loadGame(newId);
+                })
+                .catch(() => this._notificationService.notifyError('Could not save new game.'));
         } else {
             this._gameService.updateGame(this.model)
-                .then(oldId => { this._needsReset = true; this.loadGame(oldId); });
+                .then(oldId => {
+                    this._notificationService.notifySuccess('Game data was updated.')
+                    this._needsReset = true;
+                    this.loadGame(oldId);
+                })
+                .catch(() => this._notificationService.notifyError('Could not update game data.'));
         }
     }
 
     deleteGame(): void {
         if (window.confirm('Really delete the game "' + this.originalModel.name + '" ?')) {
-            this._gameService.deleteGame(this.originalModel.id);
-            this.abort();
+            this._gameService.deleteGame(this.originalModel.id)
+                .then(() => {
+                    this._notificationService.notifySuccess('Game data was deleted.');
+                    this.abort();
+                })
+                .catch(() => this._notificationService.notifyError('Could not delete game data.'));
         }
     }
 }

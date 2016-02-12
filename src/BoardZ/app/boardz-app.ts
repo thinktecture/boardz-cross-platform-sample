@@ -14,6 +14,7 @@ import {LoginService} from './services/login/loginService';
 import {DashboardService} from './services/dashboard/dashboardService';
 import {Logger, LogLevel} from './services/logging/logger';
 import {GamesService} from './services/games/gamesService';
+import {NotificationService} from './services/notifications/notificationService';
 
 // components
 import {LoginForm} from './components/login/loginform';
@@ -21,6 +22,7 @@ import {Dashboard} from './components/dashboard/dashboard';
 import {Sidebar} from './components/sidebar/sidebar';
 import {Headerbar} from './components/headerbar/headerbar';
 import {Games} from './components/games/games';
+import {Notifications} from './components/notifications/notifications';
 
 @Component({
     selector: 'boardz-app',
@@ -37,9 +39,11 @@ import {Games} from './components/games/games';
         provide(Http, { useClass: AuthenticatedHttp }),
 
         // Our own stuff:
+        NotificationService,
         LoginService,
         DashboardService,
         GamesService,
+        Notifications,
     ],
     directives: [
         // Angular stuff
@@ -54,6 +58,7 @@ import {Games} from './components/games/games';
 @RouteConfig([
     { path: '/', component: Dashboard, name: 'Dashboard', useAsDefault: true, data: { displayName: 'Dashboard' }},
     { path: '/login', component: LoginForm, name: 'Login', data: { displayName: 'Login' }},
+    { path: '/notifications', component: Notifications, name: 'Notifications', data: { displayName: 'Notifications' }},
     { path: '/games/...', component: Games, name: 'Games', data: { displayName: 'Games' }} // prepare for nested routes
 ])
 export class BoardzApp {
