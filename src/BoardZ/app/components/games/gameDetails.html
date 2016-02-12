@@ -1,5 +1,48 @@
-<div>Game details:</div>
-<div *ngIf="game">
-    <h2>{{game.name}}</h2>
+<div class="col-md-12">
+    <div class="panel panel-primary">
+        <form ngForm class="form-horizontal" #form="ngForm" (submit)="saveChanges($event)" *ngIf="active">
 
+        <div class="panel-heading">
+            <h3 *ngIf="model.id === null" class="panel-title">New game</h3>
+            <h3 *ngIf="model.id !== null" class="panel-title">Game details</h3>
+        </div>
+
+        <div class="panel-body" *ngIf="true"> <!-- this ngif is a workaround for issue https://github.com/angular/angular/issues/6374 -->
+
+                <div class="form-group" [class.has-error]="!name.pristine && !name.valid"> <!-- this will not work without the fix above -->
+                    <label for="name" class="col-sm-2 control-label">Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="name" class="form-control" placeholder="Game name" required
+                               [(ngModel)]="model.name" ngControl="name" #name="ngForm" />
+                        <div class="alert alert-danger" [hidden]="name.pristine || name.valid">
+                            Game name is required
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" [class.has-error]="!description.pristine && !description.valid">
+                    <label for="description" class="col-sm-2 control-label">Description</label>
+                    <div class="col-sm-10">
+                        <textarea id="description" class="form-control" rows="3" placeholder="Game description" required
+                                  [(ngModel)]="model.description" ngControl="description" #description="ngForm" ></textarea>
+                        <div class="alert alert-danger" [hidden]="description.pristine || description.valid">
+                            Game description is required
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <div class="panel-footer clearfix">
+            <div class="pull-right">
+                <button type="button" class="btn btn-default" (click)="reset($event)">Abort</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!form.valid" (click)="saveChanges($event)">Save</button>
+            </div>
+        </div>
+
+        </form>
+    </div>
+
+<pre>Diagnostic:
+Live: {{diagnostic}}
+
+Original: {{originalDiagnostic}}</pre>
 </div>
