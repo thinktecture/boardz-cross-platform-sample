@@ -6,15 +6,20 @@ import {Breadcrumb} from '../breadcrumb/breadcrumb';
 import {Logger} from '../../services/logging/logger';
 import {TokenDataStore} from '../../services/login/tokenDataStore';
 import {UserMenu} from './usermenu';
+import {NotificationsMenu} from './notificationsMenu';
+import {SettingsMenu} from './settingsMenu';
+import {LoginService} from '../../services/login/loginService';
 
 @Component({
     selector: 'headerbar',
-    directives: [NgClass, Breadcrumb, UserMenu],
+    directives: [NgClass, Breadcrumb, UserMenu, SettingsMenu, NotificationsMenu],
     templateUrl: 'app/components/headerbar/headerbar.html'
 })
 export class Headerbar {
     @Input()
     public showAppname: boolean;
+
+    public loggedIn: boolean = false;
 
     public currentLocation: string = 'BoardZ!';
     public showUser: boolean = true;
@@ -22,7 +27,15 @@ export class Headerbar {
     public settingsmenuOpen: boolean = false;
     public notificationsOpen: boolean = false;
 
-    constructor(public tokenStore: TokenDataStore, private _router: Router, private _logger: Logger) {
+    constructor(public loginService: LoginService, public tokenStore: TokenDataStore, private _router: Router, private _logger: Logger) {
+
+        tokenStore.check()
+            .subscribe(result => {
+                this._logger.logDebug('Headerbar: Received notification about tokenstore status change. Result: ' + result);
+                this.loggedIn = result
+            });
+
+
         while (this._router.parent) {
             this._router = this._router.parent;
         }

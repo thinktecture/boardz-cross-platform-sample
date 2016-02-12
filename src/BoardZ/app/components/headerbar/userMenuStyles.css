@@ -1,0 +1,11 @@
+.user.pull-right {
+    min-width: unset;
+}
+
+.user > .item[hidden] {
+    display: none;
+}
+
+.dropdown-menu li i {
+    line-height: .75em;
+}
