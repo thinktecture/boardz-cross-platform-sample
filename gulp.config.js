@@ -15,6 +15,7 @@ module.exports = {
                     'app/**/*.html'
                 ],
                 css: [
+                    'app/**/*.css',
                     'css/**/*.css'
                 ],
                 assets: [

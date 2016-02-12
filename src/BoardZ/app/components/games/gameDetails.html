@@ -1,6 +1,6 @@
 <div class="col-md-12">
     <div class="panel panel-primary">
-        <form ngForm class="form-horizontal" #form="ngForm" (submit)="saveChanges($event)" *ngIf="active">
+        <form ngForm class="form-horizontal" #form="ngForm" (ngSubmit)="saveChanges()" *ngIf="active">
 
         <div class="panel-heading">
             <h3 *ngIf="model.id === null" class="panel-title">New game</h3>
@@ -33,8 +33,9 @@
         </div>
         <div class="panel-footer clearfix">
             <div class="pull-right">
-                <button type="button" class="btn btn-default" (click)="reset($event)">Abort</button>
-                <button type="submit" class="btn btn-primary" [disabled]="!form.valid" (click)="saveChanges($event)">Save</button>
+                <button type="button" class="btn btn-default" (click)="abort()">Abort</button>
+                <button type="button" class="btn btn-default" (click)="reset()">Reset</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!form.valid || !form.dirty">Save</button>
             </div>
         </div>
 

@@ -48,6 +48,12 @@ gulp.task('dev:copy-app-assets', function() {
         .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, buildConfig.targets.appFolder)));
 });
 
+gulp.task('dev:copy-app-styles', function() {
+    return gulp.src(mapFiles(buildConfig.source.files.app.css, buildConfig.source.folder))
+        .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, buildConfig.targets.appFolder)));
+});
+
+
 gulp.task('dev:copy-app-html', function() {
     return gulp.src(mapFiles(buildConfig.source.files.app.html, buildConfig.source.folder))
         .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, buildConfig.targets.appFolder)));
@@ -70,13 +76,13 @@ gulp.task('dev:default', ['dev:clean'], function (done) {
         'dev:build',
         'dev:copy-template',
         'dev:copy-app-html',
+        'dev:copy-app-styles',
         'dev:copy-app-assets',
         function() { done(); }
     );
 });
 
 gulp.task('dev:start-live-server', function () {
-
     return gulp.src(buildConfig.targets.buildFolder)
         .pipe(server({
             livereload: false,
@@ -86,7 +92,6 @@ gulp.task('dev:start-live-server', function () {
 
 
 gulp.task('dev:livereload', ['dev:default'], function () {
-
     gulp.watch(mapFiles(buildConfig.source.files.app.html, buildConfig.source.folder), ['dev:copy-app-html']);
     gulp.watch(mapFiles(buildConfig.source.files.app.ts, buildConfig.source.folder), ['dev:build']);
 

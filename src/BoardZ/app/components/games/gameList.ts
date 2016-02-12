@@ -1,6 +1,7 @@
 import {Component, OnInit} from 'angular2/core';
-import {Game, GamesService} from '../../services/games/gamesService';
 import {Router} from 'angular2/router';
+
+import {Game, GamesService} from '../../services/games/gamesService';
 
 @Component({
     selector: 'gamelist',
@@ -12,12 +13,16 @@ export class GameList implements OnInit {
 
     constructor(private _gamesService: GamesService, private _router: Router) {     }
 
-    getGames() {
+    getGames(): void {
         this._gamesService.getGames()
             .then(games => this.games = games);
     }
 
-    gotoDetails(game: Game) {
+    addNew(): void {
+        this._router.navigate(['GameDetails', { id: 'new' }])
+    }
+
+    gotoDetails(game: Game): void {
         this._router.navigate(['GameDetails', { id: game.id}])
     }
 

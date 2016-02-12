@@ -5,9 +5,6 @@ import {Observable} from 'rxjs/Observable';
 import {Configuration} from '../../app-config';
 import {Logger} from '../logging/logger';
 
-// Only for testing purposes:
-import {GAMES} from './games_100';
-
 export class Packshot {
     frontImageUrl: string;
     topImageUrl: string;
@@ -17,7 +14,7 @@ export class Packshot {
 }
 
 export class Game {
-    id: string;
+    id: string = null;
     name: string;
     description: string;
     packshot: Packshot;
@@ -38,27 +35,16 @@ export class GamesService {
     }
 
     public getGames() : Promise<Game[]> {
-        // return Promise.resolve(<Game[]>GAMES);
-
         return this.fetchGames().toPromise();
     }
 
     public getGamesCount(): Promise<number> {
-        // return Promise.resolve(GAMES.length);
-
         return this.fetchGames()
             .map(games => games.length)
             .toPromise();
     }
 
     public getGame(id: string): Promise<Game> {
-        /*
-        for (let i = 0; i < GAMES.length; i++) {
-            if (GAMES[i].id === id)
-                return Promise.resolve(GAMES[i]);
-        }
-        return Promise.reject(Error('Game with id ' + id + ' not found.'));
-        */
         return this._http.get(this.baseUrl + 'Single?id=' + id)
             .map(response => <Game>response.json())
             .toPromise();

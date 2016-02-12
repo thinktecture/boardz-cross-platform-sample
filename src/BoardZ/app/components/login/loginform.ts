@@ -8,7 +8,8 @@ import {Logger} from '../../services/logging/logger';
 @Component({
     selector: 'login-form',
     directives: [FORM_DIRECTIVES, ROUTER_DIRECTIVES, NgClass],
-    templateUrl: 'app/components/login/loginform.html'
+    templateUrl: 'app/components/login/loginform.html',
+    styleUrls: ['app/components/common/formStyles.css']
 })
 export class LoginForm implements CanDeactivate {
 

@@ -1,6 +1,6 @@
 import {Component, OnInit} from 'angular2/core';
 import {ControlContainer, FORM_PROVIDERS} from 'angular2/common';
-import {RouteParams} from 'angular2/router';
+import {RouteParams, Router} from 'angular2/router';
 
 import {Game, GamesService} from '../../services/games/gamesService';
 import {Logger} from '../../services/logging/logger';
@@ -8,6 +8,7 @@ import {Logger} from '../../services/logging/logger';
 @Component({
     selector: 'gameDetail',
     templateUrl: 'app/components/games/gameDetails.html',
+    styleUrls: ['app/components/common/formStyles.css'],
     providers: [FORM_PROVIDERS],
     inputs: ['game']
 })
@@ -20,12 +21,12 @@ export class GameDetails implements OnInit {
     get diagnostic() { return JSON.stringify(this.model); }
     get originalDiagnostic() { return JSON.stringify(this.originalModel); }
 
-    constructor(private _logger: Logger, private _gameService: GamesService, private _routeParams: RouteParams) {}
+    constructor(private _logger: Logger, private _gameService: GamesService, private _router: Router, private _routeParams: RouteParams) {}
 
     ngOnInit(): void {
         let id = this._routeParams.get('id');
 
-        if (id === null) {
+        if (id === 'new') {
             this.originalModel = this.deepClone(this.model = new Game());
         } else {
             this.loadGame(id);
@@ -42,7 +43,11 @@ export class GameDetails implements OnInit {
         return <T>JSON.parse(JSON.stringify(obj));
     }
 
-    reset(evt): void {
+    abort(): void {
+        this._router.navigate(['GameList']);
+    }
+
+    reset(): void {
         // Based on: https://angular.io/docs/ts/latest/guide/forms.html
         this.model = this.deepClone(this.originalModel);
 
@@ -51,7 +56,7 @@ export class GameDetails implements OnInit {
         setTimeout(() => this.active = true, 0);
     }
 
-    saveGame(event): void {
+    saveGame(): void {
         this._gameService.saveOrUpdateGame(this.model)
             ; // .then(id => this.loadGame(id));
     }
