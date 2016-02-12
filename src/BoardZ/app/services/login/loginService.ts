@@ -38,7 +38,10 @@ export class LoginService {
         private _http: Http,
         private _router: Router,
         private _tokenStore: TokenDataStore)
-    { }
+    {
+        this._tokenStore.check()
+            .subscribe((value) => { if (!value) this.unauthenticate(); });
+    }
 
     unauthenticate() : void {
         this._logger.logDebug('LoginService.unauthenticate called');

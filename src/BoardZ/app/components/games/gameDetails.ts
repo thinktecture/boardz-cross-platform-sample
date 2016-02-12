@@ -1,10 +1,11 @@
 import {Component, OnInit} from 'angular2/core';
-import {ControlContainer, FORM_PROVIDERS} from 'angular2/common';
-import {RouteParams, Router} from 'angular2/router';
+import {FORM_PROVIDERS} from 'angular2/common';
+import {RouteParams, Router, CanActivate} from 'angular2/router';
+import {assertionsEnabled} from 'angular2/src/facade/lang';
 
 import {Game, GamesService} from '../../services/games/gamesService';
 import {Logger} from '../../services/logging/logger';
-import {assertionsEnabled} from 'angular2/src/facade/lang';
+import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 
 @Component({
     selector: 'gameDetail',
@@ -13,6 +14,7 @@ import {assertionsEnabled} from 'angular2/src/facade/lang';
     providers: [FORM_PROVIDERS],
     inputs: ['game']
 })
+@NeedsAuthentication()
 export class GameDetails implements OnInit {
 
     private _needsReset: boolean = false;

@@ -9,17 +9,9 @@ export const isLoggedIn = (to: ComponentInstruction, from: ComponentInstruction,
     let tokenStore: TokenDataStore = injector.get(TokenDataStore);
     let router: Router = injector.get(Router);
 
-    // return a promise that resolves true/false
-    return new Promise((resolve) => {
+    if (tokenStore.token !== null)
+        return true;
 
-        tokenStore.check()
-            .subscribe((result) => {
-                if (result) {
-                    resolve(true);
-                } else {
-                    router.navigate(['/Login', {target}]);
-                    resolve(false);
-                }
-            });
-    });
+    router.navigate(['/Login', {target}]);
+    return false;
 };

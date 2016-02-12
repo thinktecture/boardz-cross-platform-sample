@@ -1,13 +1,14 @@
 import {Component} from 'angular2/core';
 import {ROUTER_DIRECTIVES, CanActivate} from 'angular2/router';
 import {DashboardService} from '../../services/dashboard/dashboardService';
-import {isLoggedIn} from '../../services/routing/isLoggedIn';
+// import {isLoggedIn} from '../../services/routing/isLoggedIn';
+import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 
 @Component({
     directives: [ROUTER_DIRECTIVES],
     templateUrl: 'app/components/dashboard/dashboard.html'
 })
-@CanActivate((to, from) => isLoggedIn(to, from))
+@NeedsAuthentication()
 export class Dashboard {
 
     playerCount: number = 0;

@@ -2,11 +2,13 @@ import {Component, OnInit} from 'angular2/core';
 import {Router} from 'angular2/router';
 
 import {Game, GamesService} from '../../services/games/gamesService';
+import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 
 @Component({
     selector: 'gamelist',
     templateUrl: 'app/components/games/gameList.html'
 })
+@NeedsAuthentication()
 export class GameList implements OnInit {
 
     public games: Game[];
