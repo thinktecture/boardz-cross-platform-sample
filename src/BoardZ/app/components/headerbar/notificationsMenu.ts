@@ -81,8 +81,7 @@ export class NotificationsMenu {
 
     private updateIconColor() {
         var highest = NotificationType.Information;
-
-        debugger;
+        
         for (let i = 0; i < this.notifications.length; i++) {
             if (this.notifications[i].type > highest) {
                 highest = this.notifications[i].type;
