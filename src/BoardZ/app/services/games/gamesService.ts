@@ -8,49 +8,84 @@ import {Logger} from '../logging/logger';
 // Only for testing purposes:
 import {GAMES} from './games_100';
 
-export interface Packshot {
-    frontImageUrl?: string;
-    topImageUrl?: string;
-    leftImageUrl?: string;
-    rightImageUrl?: string;
-    bottomImageUrl?: string;
+export class Packshot {
+    frontImageUrl: string;
+    topImageUrl: string;
+    leftImageUrl: string;
+    rightImageUrl: string;
+    bottomImageUrl: string;
 }
 
-export interface Game {
+export class Game {
     id: string;
     name: string;
-    description?: string;
-    packshot?: Packshot;
-    userName?: string;
+    description: string;
+    packshot: Packshot;
+    userName: string;
 }
 
 @Injectable()
 export class GamesService {
 
-    constructor(private _config: Configuration, private _logger: Logger, private _http: Http){ }
+    private baseUrl: string;
+
+    constructor(private _logger: Logger, private _http: Http, config: Configuration) {
+        this.baseUrl = config.apiEndpoint + 'api/BoardGames/';
+    }
 
     private fetchGames(): Observable<Game[]> {
-        return Observable.of(<Game[]>GAMES);
-
-       //  return this._http.get(this._config.apiEndpoint + 'api/BoardGames/List').map(response => (<Game[]>response.json()));
+        return this._http.get(this.baseUrl + 'List').map(response => (<Game[]>response.json()));
     }
 
     public getGames() : Promise<Game[]> {
-        return this.fetchGames()
-            .toPromise();
+        // return Promise.resolve(<Game[]>GAMES);
+
+        return this.fetchGames().toPromise();
     }
 
     public getGamesCount(): Promise<number> {
+        // return Promise.resolve(GAMES.length);
+
         return this.fetchGames()
-            .map(result => result.length)
+            .map(games => games.length)
             .toPromise();
     }
 
     public getGame(id: string): Promise<Game> {
-        return this.fetchGames()
-            .flatMap(games => Observable.fromArray(games))
-            .filter(game => game.id === id)
+        /*
+        for (let i = 0; i < GAMES.length; i++) {
+            if (GAMES[i].id === id)
+                return Promise.resolve(GAMES[i]);
+        }
+        return Promise.reject(Error('Game with id ' + id + ' not found.'));
+        */
+        return this._http.get(this.baseUrl + 'Single?id=' + id)
+            .map(response => <Game>response.json())
             .toPromise();
+    }
+
+    public saveOrUpdateGame(game: Game) {
+        let result: Promise<string>;
+
+        if (game.id === null) {
+            result = this.addGame(game);
+        } else {
+            result = this.updateGame(game);
+        }
+
+        result.then(id => this._logger.logInfo('game updated: ' + id));
+    }
+
+    public addGame(game: Game): Promise<string> {
+        return this._http.put(this.baseUrl + 'Add', JSON.stringify(game))
+            .map(response => <string>response.text())
+            .toPromise()
+    }
+
+    public updateGame(game: Game): Promise<string> {
+        return this._http.put(this.baseUrl + 'Update', JSON.stringify(game))
+            .map(response => game.id)
+            .toPromise()
     }
 
 }
