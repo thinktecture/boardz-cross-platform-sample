@@ -21,7 +21,11 @@ module.exports = {
                     'assets/**/*.*'
                 ]
             },
-            template: ['./node_modules/rdash-ui/dist/**/*.*'],
+            template: [
+                './node_modules/rdash-ui/dist/**/*.*',
+                './node_modules/bootstrap/dist/+(css|fonts)/*.*',
+                './node_modules/font-awesome/+(css|fonts)/*.*'
+            ],
             script_dependencies: [
                 './node_modules/es6-shim/es6-shim.*',
                 './node_modules/systemjs/dist/*.*',
