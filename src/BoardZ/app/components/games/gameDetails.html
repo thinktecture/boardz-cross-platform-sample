@@ -43,8 +43,29 @@
         </form>
     </div>
 
-<pre>Diagnostic:
+    <pre *ngIf="diagnosticEnabled">Diagnostic:
 Live: {{diagnostic}}
 
 Original: {{originalDiagnostic}}</pre>
+
+</div>
+
+<div class="row" *ngIf="model.id !== null">
+    <div class="col-md-4 col-xs-12">
+        <div class="widget">
+            <div class="widget-header">
+                <i class="fa fa-user"></i>
+                I am gaming!
+            </div>
+
+            <div class="widget-body">
+                <p>The "I am gaming!" function uploads an image and your current position for other gamers to join you on your journey!</p>
+
+                <p class="text-center">
+                    <button type="button" class="btn btn-success"><i class="fa fa-flag-checkered fa-4x"></i></button>
+                </p>
+            </div>
+
+        </div>
+    </div>
 </div>

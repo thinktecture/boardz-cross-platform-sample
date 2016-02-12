@@ -4,6 +4,7 @@ import {RouteParams, Router} from 'angular2/router';
 
 import {Game, GamesService} from '../../services/games/gamesService';
 import {Logger} from '../../services/logging/logger';
+import {assertionsEnabled} from 'angular2/src/facade/lang';
 
 @Component({
     selector: 'gameDetail',
@@ -16,6 +17,7 @@ export class GameDetails implements OnInit {
 
     private _needsReset: boolean = false;
 
+    public diagnosticEnabled: boolean;
     public active = true;
     public model: Game = new Game();
     public originalModel: Game = new Game();
@@ -23,7 +25,9 @@ export class GameDetails implements OnInit {
     get diagnostic() { return JSON.stringify(this.model); }
     get originalDiagnostic() { return JSON.stringify(this.originalModel); }
 
-    constructor(private _logger: Logger, private _gameService: GamesService, private _router: Router, private _routeParams: RouteParams) {}
+    constructor(private _logger: Logger, private _gameService: GamesService, private _router: Router, private _routeParams: RouteParams) {
+        this.diagnosticEnabled = assertionsEnabled();
+    }
 
     ngOnInit(): void {
         let id = this._routeParams.get('id');
