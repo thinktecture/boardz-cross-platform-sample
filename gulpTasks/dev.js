@@ -65,7 +65,7 @@ gulp.task('dev:build', function() {
         .pipe(ts(tsConfig))
         .pipe(sourcemaps.write('.', {
             includeContent: false,
-            sourceRoot: '../src/BoardZ/app/'
+            sourceRoot: '/src/BoardZ/app/'
         }))
         .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, buildConfig.targets.appFolder)));
 });
