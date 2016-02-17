@@ -13,8 +13,8 @@ export enum NotificationType {
 export class Notification {
     constructor(
         public message: string,
-        public type?: NotificationType = NotificationType.Information,
-        public iconCssClass?: string = null
+        public type: NotificationType = NotificationType.Information,
+        public iconCssClass: string = null
     ) { }
 }
 
