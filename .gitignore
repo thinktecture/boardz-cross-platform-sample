@@ -260,3 +260,4 @@ dist
 cordova/resources
 electron-build
 electron/www
+typings
