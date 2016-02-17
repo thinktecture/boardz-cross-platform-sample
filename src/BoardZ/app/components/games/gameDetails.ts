@@ -1,4 +1,4 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit, Injector} from 'angular2/core';
 import {FORM_PROVIDERS} from 'angular2/common';
 import {RouteParams, Router, CanActivate} from 'angular2/router';
 import {assertionsEnabled} from 'angular2/src/facade/lang';
@@ -18,9 +18,9 @@ import {NotificationService} from '../../services/notifications/notificationServ
 @NeedsAuthentication()
 export class GameDetails implements OnInit {
 
-    private _needsReset: boolean = false;
+    private _needsReset: boolean;
+    private _diagnosticsEnabled: boolean;
 
-    public diagnosticEnabled: boolean;
     public active = true;
     public model: Game = new Game();
     public originalModel: Game = new Game();
@@ -28,8 +28,8 @@ export class GameDetails implements OnInit {
     get diagnostic() { return JSON.stringify(this.model); }
     get originalDiagnostic() { return JSON.stringify(this.originalModel); }
 
-    constructor(private _logger: Logger, private _gameService: GamesService, private _router: Router, private _routeParams: RouteParams, private _notificationService: NotificationService) {
-        this.diagnosticEnabled = assertionsEnabled();
+    constructor(private _logger: Logger, private _gameService: GamesService, private _router: Router, private _routeParams: RouteParams, private _notificationService: NotificationService, private _injector: Injector) {
+        this._diagnosticsEnabled = _injector.get('inDiagnosticsMode');
     }
 
     ngOnInit(): void {

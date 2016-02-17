@@ -14,7 +14,7 @@ import {TokenDataStore} from './services/login/tokenDataStore';
 bootstrap(BoardzApp, [
     ROUTER_PROVIDERS,            // Bootstrap the initial routing stuff
     provide(LocationStrategy, { useClass: HashLocationStrategy }), // best for auto-reloading
-
+    provide("inDiagnosticsMode", {useValue: true}),
     // These are required before activating the Main component that defines the other dependencies
     LOGGING_PROVIDERS,
     TokenDataStore,
