@@ -9,7 +9,7 @@ var gulp = require('gulp'),
     runSequence = require('run-sequence'),
     server = require('gulp-server-livereload'),
     watch = require('gulp-watch'),
-
+    cssmin = require('gulp-minify-css'),
     ts = require('gulp-typescript'),
     tsConfig = ts.createProject(buildConfig.ts.config),
     sourcemaps = require('gulp-sourcemaps'),
@@ -50,6 +50,13 @@ gulp.task('dev:copy-app-assets', function() {
 
 gulp.task('dev:copy-app-styles', function() {
     return gulp.src(mapFiles(buildConfig.source.files.app.css, buildConfig.source.folder))
+        .pipe(cssmin())
+        .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, buildConfig.targets.stylesFolder)));
+});
+
+gulp.task('dev:copy-component-styles', function() {
+    return gulp.src(mapFiles(buildConfig.source.files.app.componentCss, buildConfig.source.folder))
+        .pipe(cssmin())
         .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, buildConfig.targets.appFolder)));
 });
 
@@ -77,6 +84,7 @@ gulp.task('dev:default', ['dev:clean'], function (done) {
         'dev:copy-template',
         'dev:copy-app-html',
         'dev:copy-app-styles',
+        'dev:copy-component-styles',
         'dev:copy-app-assets',
         function() { done(); }
     );

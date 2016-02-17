@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {FORM_DIRECTIVES, FormBuilder, Validators, ControlGroup, NgClass, Control} from 'angular2/common';
+import {FormBuilder, Validators, ControlGroup, Control} from 'angular2/common';
 import {Router, ROUTER_DIRECTIVES, CanDeactivate, ComponentInstruction} from 'angular2/router';
 
 import {LoginService} from '../../services/login/loginService';
@@ -8,9 +8,8 @@ import {NotificationService} from '../../services/notifications/notificationServ
 
 @Component({
     selector: 'login-form',
-    directives: [FORM_DIRECTIVES, ROUTER_DIRECTIVES, NgClass],
-    templateUrl: 'app/components/login/loginform.html',
-    styleUrls: ['app/components/common/formStyles.css']
+    directives: [ROUTER_DIRECTIVES],
+    templateUrl: 'app/components/login/loginform.html'
 })
 export class LoginForm implements CanDeactivate {
 

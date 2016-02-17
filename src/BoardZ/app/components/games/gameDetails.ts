@@ -11,7 +11,6 @@ import {NotificationService} from '../../services/notifications/notificationServ
 @Component({
     selector: 'gameDetail',
     templateUrl: 'app/components/games/gameDetails.html',
-    styleUrls: ['app/components/common/formStyles.css'],
     providers: [FORM_PROVIDERS],
     inputs: ['game']
 })

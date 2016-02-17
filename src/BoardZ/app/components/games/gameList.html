@@ -1,28 +1,27 @@
 <div class="col-md-12">
-        <p>
-            <button class="btn btn-primary" (click)="addNew($event)">Add new</button>
-        </p>
+    <p>
+        <button class="btn btn-primary" (click)="addNew($event)">Add new</button>
+    </p>
 
-        <div class="panel panel-primary">
+    <div class="panel panel-primary">
 
-            <div class="panel-heading">
-                <h3 class="panel-title">Games</h3>
-            </div>
-
-            <div class="panel-body">
-                <table class="table table-condensed table-striped table-hover">
-                    <thead>
-                        <th class="col-md-2">Name</th>
-                        <th>Description</th>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="#game of games" (click)="gotoDetails(game)">
-                            <td>{{game.name}}</td>
-                            <td>{{game.description}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
+        <div class="panel-heading">
+            <h3 class="panel-title">Games</h3>
         </div>
+
+        <div class="panel-body">
+            <table class="table table-condensed table-striped table-hover">
+                <thead>
+                <th class="col-md-2">Name</th>
+                <th>Description</th>
+                </thead>
+                <tbody>
+                <tr *ngFor="#game of games" (click)="gotoDetails(game)">
+                    <td>{{game.name}}</td>
+                    <td>{{game.description}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

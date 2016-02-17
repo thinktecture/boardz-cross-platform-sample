@@ -15,8 +15,11 @@ module.exports = {
                     'app/**/*.html'
                 ],
                 css: [
-                    'app/**/*.css',
+
                     'css/**/*.css'
+                ],
+                componentCss: [
+                    'app/**/*.css'
                 ],
                 assets: [
                     'assets/**/*.*'
@@ -41,6 +44,7 @@ module.exports = {
     targets: {
         buildFolder: './build',
         appFolder: 'app',
+        stylesFolder: 'css',
         minified: {
             js: 'app.js',
             css: 'app.css',
