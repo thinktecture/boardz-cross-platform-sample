@@ -1,7 +1,6 @@
-import {Component} from 'angular2/core';
-import {ROUTER_DIRECTIVES, CanActivate} from 'angular2/router';
+import {Component, OnInit} from 'angular2/core';
+import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {DashboardService} from '../../services/dashboard/dashboardService';
-// import {isLoggedIn} from '../../services/routing/isLoggedIn';
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 
 @Component({
@@ -9,13 +8,17 @@ import {NeedsAuthentication} from '../../decorators/needsAuthentication';
     templateUrl: 'app/components/dashboard/dashboard.html'
 })
 @NeedsAuthentication()
-export class Dashboard {
+export class Dashboard implements OnInit {
 
-    playerCount: number = 0;
-    gameCount: number = 0;
+    public playerCount: number = 0;
+    public gameCount: number = 0;
 
-    constructor(dashboardService: DashboardService) {
-        dashboardService.getPlayerCount().then(result => this.playerCount = result);
-        dashboardService.getGameCount().then(result => this.gameCount = result);
+    constructor(private _dashboardService: DashboardService) {
+
+    }
+
+    ngOnInit(): any {
+        this._dashboardService.getPlayerCount().then(result => this.playerCount = result);
+        this._dashboardService.getGameCount().then(result => this.gameCount = result);
     }
 }
