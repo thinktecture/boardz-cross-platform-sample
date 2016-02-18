@@ -5,11 +5,7 @@ import {Logger} from '../../services/logging/logger';
 
 @Component({
     selector: 'notificationsMenu',
-    templateUrl: 'app/components/headerbar/notificationsMenu.html',
-    styleUrls: [
-        'app/components/headerbar/userMenuStyles.css',
-        'app/components/headerbar/notificationMenuStyles.css'
-    ]
+    templateUrl: 'app/components/headerbar/notificationsMenu.html'
 })
 export class NotificationsMenu {
 

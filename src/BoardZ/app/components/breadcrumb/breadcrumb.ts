@@ -1,18 +1,11 @@
 import {Component} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {ResolvedInstruction} from 'angular2/src/router/instruction';
-
 import {Logger} from '../../services/logging/logger';
 
 @Component({
     selector: 'breadcrumb',
-    template: `
-    <div class="breadcrumb-links">Path:
-        <span *ngFor="#crumb of crumbs;#last = last;">
-            <a href="#" (click)="navigate($event, crumb.url)">{{ crumb.display }}</a>
-            <span *ngIf="!last"> &gt; </span>
-        </span>
-    </div>`
+    templateUrl: 'app/components/breadcrumb/breadcrumb.html'
 })
 export class Breadcrumb {
     public crumbs: any[];

@@ -1,21 +1,20 @@
 import {Injectable} from 'angular2/core';
-import {Http} from 'angular2/http';
-
-import {Configuration} from '../../app-config';
 import {GamesService} from '../games/gamesService';
+import {AuthenticatedHttp} from '../http/AuthenticatedHttp';
 
 @Injectable()
 export class DashboardService {
 
-    constructor (private _config: Configuration, private _http: Http, private _gameService: GamesService) { }
+    constructor(private _http: AuthenticatedHttp, private _gameService: GamesService) {
+    }
 
-    getPlayerCount(): Promise<number> {
-        return this._http.get(this._config.apiEndpoint + 'api/Players/PlayerCount')
+    public getPlayerCount(): Promise<number> {
+        return this._http.get(`api/players/playercount`)
             .map(response => parseInt(response.text()))
             .toPromise();
     }
 
-    getGameCount(): Promise<number> {
+    public getGameCount(): Promise<number> {
         return this._gameService.getGamesCount();
     }
 }

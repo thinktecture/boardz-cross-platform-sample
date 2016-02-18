@@ -2,27 +2,11 @@ import {Component} from 'angular2/core';
 import {NotificationService} from '../../services/notifications/notificationService';
 @Component({
     selector: 'notifications',
-    template: `<div class="row">
-        <div class="col-md-12">
-            <h1>Notification test sender</h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <form class="form-inline">
-                <label for="message">Message: </label>
-                <input type="text" size="20" class="form-control" id="message" placeholder="Your message" #msg required />
-                <label>  Send as: </label>
-                <button type="button" class="btn btn-info btn-default" (click)="notificationService.notifyInformation(msg.value)">Info</button>
-                <button type="button" class="btn btn-success btn-default" (click)="notificationService.notifySuccess(msg.value)">Success</button>
-                <button type="button" class="btn btn-warning btn-default" (click)="notificationService.notifyWarning(msg.value)">Warning</button>
-                <button type="button" class="btn btn-danger btn-default" (click)="notificationService.notifyError(msg.value)">Error</button>
-            </form>
-        </div>
-    </div>`
+    templateUrl: 'app/components/notifications/notifications.html'
 })
 export class Notifications {
 
-    constructor(public notificationService: NotificationService) { }
+    constructor(public notificationService: NotificationService) {
+    }
 
 }

@@ -1,21 +1,18 @@
 import {Component} from 'angular2/core';
 import {ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';
-import {GameDetails} from './gameDetails';
-import {GameList} from './gameList';
+import {GameDetails} from './details';
+import {GameList} from './list';
 
 @Component({
     selector: 'games',
     directives: [ROUTER_DIRECTIVES],
-    template: `
-    <div class="row">
-        <div class="col-md-12">
-            <h1>Games</h1>
-        </div>
-    </div>
-    <router-outlet></router-outlet>`
+    templateUrl: 'app/components/games/games.html'
 })
 @RouteConfig([
-    { path: '/', component: GameList, name: 'GameList', useAsDefault: true, data: { displayName: 'Game overview' }},
-    { path: '/details/:id', component: GameDetails, name: 'GameDetails', data: { displayName: 'Game details' }}
+    { path: '/', component: GameList, name: 'GameList', useAsDefault: true, data: { displayName: 'Game overview' } },
+    { path: '/create', component: GameDetails, name: 'CreateGame', data: { displayName: 'Create a new Game' } },
+    { path: '/details/:id', component: GameDetails, name: 'GameDetails', data: { displayName: 'Game details' } }
 ])
-export class Games {}
+export class Games {
+
+}

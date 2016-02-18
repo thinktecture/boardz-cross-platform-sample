@@ -3,19 +3,22 @@
 import {bootstrap} from 'angular2/platform/browser';
 import {ComponentRef, provide, enableProdMode} from 'angular2/core';
 import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
-
 import {BoardzApp} from './boardz-app';
 import {appInjector} from './services/routing/appInjector';
 import {LOGGING_PROVIDERS} from './services/logging/loggingProviders';
 import {TokenDataStore} from './services/login/tokenDataStore';
+import {HTTP_PROVIDERS} from 'angular2/http';
+import 'rxjs/Rx';
 
-// enableProdMode();  // turns off Angulars 2nd change detection pass and assertions, also disables our diagnostic output
+// rx operators - ALL you can eat
+
+enableProdMode();
 
 bootstrap(BoardzApp, [
-    ROUTER_PROVIDERS,            // Bootstrap the initial routing stuff
-    provide(LocationStrategy, { useClass: HashLocationStrategy }), // best for auto-reloading
-    provide("inDiagnosticsMode", {useValue: true}),
-    // These are required before activating the Main component that defines the other dependencies
+    HTTP_PROVIDERS,
+    ROUTER_PROVIDERS,
+    provide(LocationStrategy, { useClass: HashLocationStrategy }),
+    provide("inDiagnosticsMode", { useValue: true }),
     LOGGING_PROVIDERS,
     TokenDataStore,
 ]).then((appRef: ComponentRef) => {

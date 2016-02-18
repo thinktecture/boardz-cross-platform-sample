@@ -1,21 +1,24 @@
-<div id="page-wrapper" [class.open]="sidebar.expanded">
-
-    <sidebar #sidebar></sidebar>
-
-    <div id="content-wrapper">
-        <div class="page-content">
-
-            <headerbar [showAppname]="!sidebar.expanded"></headerbar>
-
-            <!-- Main Content -->
-            <div ui-view>
-
-                <router-outlet></router-outlet>
-
-            </div>
-
-        </div><!-- End Page Content -->
-    </div><!-- End Content Wrapper -->
+<headerbar></headerbar>
+<sidebar></sidebar>
 
 
-</div><!-- End Page Wrapper -->
+<div class="content-wrapper" style="min-height: 100%;">
+    <section class="content scrolling-module">
+        <router-outlet></router-outlet>
+    </section>
+</div>
+<footer class="main-footer">
+    <span translate="footer.text"></span>&nbsp;
+</footer>
+<aside class="control-sidebar control-sidebar-dark">
+    <div class="tab-content">
+        <div class="tab-pane active" id="control-sidebar-home-tab" ng-controller="languageController as language">
+            <h3 class="control-sidebar-heading" translate="sidebar.language"></h3>
+            <button class="btn btn-default" ng-click="language.switchTo('de-DE')" type="button"
+                    translate="sidebar.languages.deDE"></button>
+            <button class="btn btn-default" ng-click="language.switchTo('en-US')" type="button"
+                    translate="sidebar.languages.enUS"></button>
+        </div>
+    </div>
+</aside>
+<div class="control-sidebar-bg"></div>

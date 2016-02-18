@@ -49,13 +49,12 @@
     </div>
 
     <pre *ngIf="_diagnosticsEnabled">Diagnostic:
-Live: {{diagnostic}}
-
-Original: {{originalDiagnostic}}</pre>
-
+        Live: {{diagnostic | json}}
+        Original: {{originalDiagnostic | json}}
+    </pre>
 </div>
 
-<div class="row" *ngIf="model.id !== null">
+<div class="row" *ngIf="model.id">
     <div class="col-md-4 col-xs-12">
         <div class="widget">
             <div class="widget-header">

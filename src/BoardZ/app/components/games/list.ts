@@ -7,7 +7,7 @@ import {NotificationService} from '../../services/notifications/notificationServ
 
 @Component({
     selector: 'gamelist',
-    templateUrl: 'app/components/games/gameList.html'
+    templateUrl: 'app/components/games/list.html'
 })
 @NeedsAuthentication()
 export class GameList implements OnInit {
@@ -23,7 +23,7 @@ export class GameList implements OnInit {
     }
 
     addNew(): void {
-        this._router.navigate(['GameDetails', { id: 'new' }])
+        this._router.navigate(['CreateGame'])
     }
 
     gotoDetails(game: Game): void {

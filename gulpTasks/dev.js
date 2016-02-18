@@ -10,10 +10,11 @@ var gulp = require('gulp'),
     server = require('gulp-server-livereload'),
     watch = require('gulp-watch'),
     cssmin = require('gulp-minify-css'),
+    filelog = require('gulp-filelog'),
+    concat = require('gulp-concat'),
     ts = require('gulp-typescript'),
     tsConfig = ts.createProject(buildConfig.ts.config),
     sourcemaps = require('gulp-sourcemaps'),
-
     inject = require('gulp-inject'),
     utils = require('./utils.js');
 
@@ -31,21 +32,36 @@ gulp.task('dev:clean', function (done) {
 });
 
 gulp.task('dev:copy-template', function() {
-    var files = mapFiles(buildConfig.source.files.main, buildConfig.source.folder);
-    files = files.concat(buildConfig.source.files.template);
+    var sources = gulp.src(buildConfig.source.files.injectables);
 
-    return gulp.src(files)
+    return gulp.src(mapFiles(buildConfig.source.files.main, buildConfig.source.folder))
+        .pipe(inject(sources, {addRootSlash:false, ignorePath: buildConfig.targets.buildFolder}))
         .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder)));
 });
 
-gulp.task('dev:copy-script-dependencies', function() {
-    return gulp.src(buildConfig.source.files.script_dependencies, { base: './node_modules' })
+gulp.task('dev:copy-vendor-scripts', function() {
+    return gulp.src(buildConfig.source.files.script_dependencies)
+        .pipe(filelog())
+        .pipe(concat(buildConfig.targets.vendorMinJs))
         .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, 'scripts/')));
 });
 
+
+gulp.task('dev:copy-fonts', function(){
+    return gulp.src(buildConfig.source.files.vendorFonts)
+        .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, 'fonts')));
+})
 gulp.task('dev:copy-app-assets', function() {
     return gulp.src(mapFiles(buildConfig.source.files.app.assets, buildConfig.source.folder))
         .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, buildConfig.targets.appFolder)));
+});
+
+gulp.task('dev:vendor-css', function(){
+    return gulp.src(buildConfig.source.files.vendorStylesheets)
+        .pipe(concat(buildConfig.targets.vendorMinCss))
+        .pipe(cssmin())
+        .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, buildConfig.targets.stylesFolder)));
+
 });
 
 gulp.task('dev:copy-app-styles', function() {
@@ -79,8 +95,10 @@ gulp.task('dev:build', function() {
 
 gulp.task('dev:default', ['dev:clean'], function (done) {
     return runSequence(
-        'dev:copy-script-dependencies',
+        'dev:copy-vendor-scripts',
         'dev:build',
+        'dev:vendor-css',
+        'dev:copy-fonts',
         'dev:copy-template',
         'dev:copy-app-html',
         'dev:copy-app-styles',

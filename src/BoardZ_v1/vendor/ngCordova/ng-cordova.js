@@ -6212,7 +6212,7 @@ angular.module('ngCordova.plugins.touchid', [])
         if (!window.cordova) {
           defer.reject('Not supported without cordova.js');
         } else {
-          touchid.authenticate(function (value) {
+          touchid.challenge(function (value) {
             defer.resolve(value);
           }, function (err) {
             defer.reject(err);
@@ -6414,7 +6414,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -6462,7 +6462,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -6512,7 +6512,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -6561,7 +6561,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -6613,7 +6613,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -6669,7 +6669,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -6723,7 +6723,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -6781,7 +6781,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -6832,7 +6832,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -6884,7 +6884,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -6936,7 +6936,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                                     if(parameterMap.hasOwnProperty("oauth_token") === false) {
                                         deferred.reject("Oauth request token was not received");
                                     }
-                                    var browserRef = window.open('https://api.twitter.com/oauth/authenticate?oauth_token=' + parameterMap.oauth_token, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                                    var browserRef = window.open('https://api.twitter.com/oauth/challenge?oauth_token=' + parameterMap.oauth_token, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
                                     browserRef.addEventListener('loadstart', function(event) {
                                         if((event.url).indexOf(redirect_uri) === 0) {
                                             var callbackResponse = (event.url).split("?")[1];
@@ -6996,7 +6996,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -7044,7 +7044,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -7106,7 +7106,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -7157,7 +7157,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -7258,7 +7258,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -7281,7 +7281,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                                 redirect_uri = options.redirect_uri;
                             }
                         }
-                        var browserRef = window.open('https://foursquare.com/oauth2/authenticate?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                        var browserRef = window.open('https://foursquare.com/oauth2/challenge?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
                         browserRef.addEventListener('loadstart', function (event) {
                             if ((event.url).indexOf(redirect_uri) === 0) {
                             	browserRef.removeEventListener("exit",function(event){});
@@ -7310,7 +7310,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -7408,7 +7408,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -7455,7 +7455,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -7510,7 +7510,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                     }
                 } else
                 {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -7559,7 +7559,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -7607,7 +7607,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -7656,7 +7656,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -7705,7 +7705,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -7753,7 +7753,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -7802,7 +7802,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -7853,7 +7853,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -7904,7 +7904,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -7953,7 +7953,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             },
@@ -8001,7 +8001,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
                 } else {
-                    deferred.reject("Cannot authenticate via a web browser");
+                    deferred.reject("Cannot challenge via a web browser");
                 }
                 return deferred.promise;
             }

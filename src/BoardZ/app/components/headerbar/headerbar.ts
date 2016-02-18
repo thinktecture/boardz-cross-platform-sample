@@ -5,14 +5,12 @@ import {Router} from 'angular2/router';
 import {Breadcrumb} from '../breadcrumb/breadcrumb';
 import {Logger} from '../../services/logging/logger';
 import {TokenDataStore} from '../../services/login/tokenDataStore';
-import {UserMenu} from './usermenu';
 import {NotificationsMenu} from './notificationsMenu';
-import {SettingsMenu} from './settingsMenu';
 import {LoginService} from '../../services/login/loginService';
 
 @Component({
     selector: 'headerbar',
-    directives: [NgClass, Breadcrumb, UserMenu, SettingsMenu, NotificationsMenu],
+    directives: [NgClass, Breadcrumb, NotificationsMenu],
     templateUrl: 'app/components/headerbar/headerbar.html'
 })
 export class Headerbar {
@@ -23,8 +21,6 @@ export class Headerbar {
 
     public currentLocation: string = 'BoardZ!';
     public showUser: boolean = true;
-    public useremenuOpen: boolean = false;
-    public settingsmenuOpen: boolean = false;
     public notificationsOpen: boolean = false;
 
     constructor(public loginService: LoginService, public tokenStore: TokenDataStore, private _router: Router, private _logger: Logger) {
@@ -51,5 +47,12 @@ export class Headerbar {
                 this.currentLocation = instruction.component.routeData.get('displayName');
             });
         });
+    }
+
+    logout(event): void {
+        event.preventDefault();
+
+        this.loginService.logout();
+
     }
 }

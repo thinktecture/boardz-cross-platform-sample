@@ -2,40 +2,35 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"/>
 
     <title>BoardZ v2</title>
 
-    <link rel="stylesheet" href="./css/bootstrap.css" />
-    <link rel="stylesheet" href="./css/font-awesome.css" />
-    <link rel="stylesheet" href="./css/rdash.css" />
-    <link rel="stylesheet" href="./css/app.css" />
-    <!-- 1. Load libraries -->
-    <!-- IE required polyfills, in this exact order -->
-    <script src="./scripts/es6-shim/es6-shim.min.js"></script>
-    <script src="./scripts/systemjs/dist/system-polyfills.js"></script>
+    <!-- inject:css -->
+    <!-- endinject -->
 
-    <script src="./scripts/angular2/bundles/angular2-polyfills.js"></script>
-    <script src="./scripts/systemjs/dist/system.src.js"></script>
-    <script src="./scripts/rxjs/bundles/Rx.js"></script>
-    <script src="./scripts/angular2/bundles/angular2.dev.js"></script>
-    <script src="./scripts/angular2/bundles/http.dev.js"></script>
-    <script src="./scripts/angular2/bundles/router.dev.js"></script>
 
-    <!-- 2. Configure SystemJS -->
-    <script src="./app/init-systemjs.js"></script>
 
-    <!-- 3. Load initial app component -->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <boardz-app></boardz-app>
+    </div>
+
+    <!-- inject:js -->
+    <!-- endinject -->
+
     <script>
+        System.config({
+            packages: {
+                app: {
+                    format: 'register',
+                    defaultExtension: 'js'
+                }
+            }
+        });
         System.import('app/main')
                 .then(null, console.error.bind(console));
     </script>
-</head>
-
-
-<!-- 4. Display the application -->
-<body>
-    <boardz-app></boardz-app>
 </body>
-
 </html>

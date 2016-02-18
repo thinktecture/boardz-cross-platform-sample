@@ -1,7 +1,6 @@
 import {Component} from 'angular2/core';
 import {FormBuilder, Validators, ControlGroup, Control} from 'angular2/common';
 import {Router, ROUTER_DIRECTIVES, CanDeactivate, ComponentInstruction} from 'angular2/router';
-
 import {LoginService} from '../../services/login/loginService';
 import {Logger} from '../../services/logging/logger';
 import {NotificationService} from '../../services/notifications/notificationService';
@@ -9,7 +8,7 @@ import {NotificationService} from '../../services/notifications/notificationServ
 @Component({
     selector: 'login-form',
     directives: [ROUTER_DIRECTIVES],
-    templateUrl: 'app/components/login/loginform.html'
+    templateUrl: 'app/components/login/login.html'
 })
 export class LoginForm implements CanDeactivate {
 
@@ -32,7 +31,7 @@ export class LoginForm implements CanDeactivate {
         });
     }
 
-    doLogin(evt): void {
+    public doLogin(evt): void {
         this._logger.logDebug('LoginForm.doLogin called via event: ' + evt.toString());
         evt.preventDefault();
 
@@ -41,20 +40,25 @@ export class LoginForm implements CanDeactivate {
         var username = this.credentialForm.controls['username'].value,
             password = this.credentialForm.controls['password'].value;
 
-        this._logger.logVerbose('LoginForm.doLogin calling "authenticate" and submitting: ' + username + ':' + password);
+        this._logger.logVerbose('LoginForm.doLogin calling "challenge" and submitting: ' + username + ':' + password);
 
-        this._loginService.authenticate(username, password)
+        this._loginService.challenge(username, password)
             .subscribe(
-                () => { this.setError(false); this._router.navigate(['Dashboard']) },
-                () => { this.setError(true); this._notificationService.notifyError('Login was unsuccessful.'); }
+                () => {
+                    this.setError(false);
+                    this._router.navigate(['Dashboard'])
+                },
+                () => {
+                    this.setError(true);
+                    this._notificationService.notifyError('Login was unsuccessful.');
+                }
             );
     }
 
-    tryAbort(evt): void {
+    public tryAbort(evt): void {
         evt.preventDefault();
 
-        if (evt.ctrlKey)
-        {
+        if (evt.ctrlKey) {
             this._logger.logDebug('LoginForm: Developer-shortcut activated.');
             (<Control>this.credentialForm.controls['username']).updateValue('Developer');
             (<Control>this.credentialForm.controls['password']).updateValue('Developer');
@@ -72,6 +76,6 @@ export class LoginForm implements CanDeactivate {
     }
 
     routerCanDeactivate(next: ComponentInstruction, prev: ComponentInstruction) {
-        return !this.loginError && this._loginService.isLoggedIn;
+        return !this.loginError && this._loginService.isAuthenticated;
     }
 }

@@ -1,17 +1,15 @@
 import {Component, OnInit, Injector} from 'angular2/core';
-import {FORM_PROVIDERS} from 'angular2/common';
-import {RouteParams, Router, CanActivate} from 'angular2/router';
-import {assertionsEnabled} from 'angular2/src/facade/lang';
-
+import {RouteParams, Router} from 'angular2/router';
 import {Game, GamesService} from '../../services/games/gamesService';
 import {Logger} from '../../services/logging/logger';
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 import {NotificationService} from '../../services/notifications/notificationService';
+import {JsonPipe} from 'angular2/common';
 
 @Component({
     selector: 'gameDetail',
-    templateUrl: 'app/components/games/gameDetails.html',
-    providers: [FORM_PROVIDERS],
+    pipes: [JsonPipe],
+    templateUrl: 'app/components/games/details.html',
     inputs: ['game']
 })
 @NeedsAuthentication()
@@ -24,9 +22,6 @@ export class GameDetails implements OnInit {
     public model: Game = new Game();
     public originalModel: Game = new Game();
 
-    get diagnostic() { return JSON.stringify(this.model); }
-    get originalDiagnostic() { return JSON.stringify(this.originalModel); }
-
     constructor(private _logger: Logger, private _gameService: GamesService, private _router: Router, private _routeParams: RouteParams, private _notificationService: NotificationService, private _injector: Injector) {
         this._diagnosticsEnabled = _injector.get('inDiagnosticsMode');
     }
@@ -34,17 +29,18 @@ export class GameDetails implements OnInit {
     ngOnInit(): void {
         let id = this._routeParams.get('id');
 
-        if (id === 'new') {
-            this.originalModel = this.deepClone(this.model = new Game());
-        } else {
-            this.loadGame(id);
+        if (!id) {
+            this.originalModel = this._gameService.deepClone(this.model = new Game());
+            return;
         }
+        this.loadGame(id);
+
     }
 
-    loadGame(id: string): void {
+    private loadGame(id: string): void {
         this._gameService.getGame(id)
             .then(game => {
-                this.originalModel = this.deepClone(this.model = game);
+                this.originalModel = this._gameService.deepClone(this.model = game);
                 if (this._needsReset) this.reset();
             })
             .catch(error => {
@@ -53,26 +49,22 @@ export class GameDetails implements OnInit {
             });
     }
 
-    deepClone<T>(obj: T): T {
-        return <T>JSON.parse(JSON.stringify(obj));
-    }
-
-    abort(): void {
+    public abort(): void {
         this._router.navigate(['GameList']);
     }
 
-    reset(): void {
+    public reset(): void {
         this._needsReset = false;
 
         // Based on: https://angular.io/docs/ts/latest/guide/forms.html
-        this.model = this.deepClone(this.originalModel);
+        this.model = this._gameService.deepClone(this.originalModel);
 
         // workaround to re-initialize the actual form controls states
         this.active = false;
         setTimeout(() => this.active = true, 0);
     }
 
-    saveChanges(): void {
+    public saveChanges(): void {
         if (this.model.id === null) {
             this._gameService.addGame(this.model)
                 .then(newId => {
@@ -92,7 +84,7 @@ export class GameDetails implements OnInit {
         }
     }
 
-    deleteGame(): void {
+    public deleteGame(): void {
         if (window.confirm('Really delete the game "' + this.originalModel.name + '" ?')) {
             this._gameService.deleteGame(this.originalModel.id)
                 .then(() => {

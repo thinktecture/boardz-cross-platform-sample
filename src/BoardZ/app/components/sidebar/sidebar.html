@@ -1,56 +1,15 @@
-<div id="sidebar-wrapper">
-    <ul class="sidebar">
-        <li class="sidebar-main">
-            <a (click)="toggleSidebar()">BoardZ!
-                <span class="menu-icon glyphicon glyphicon-transfer"></span>
-            </a>
-        </li>
-
-        <li class="sidebar-title"><span>NAVIGATION</span></li>
-
-        <customGroup [hidden]="!loginService.authenticated">
-        <li class="sidebar-list">
-            <a [routerLink]="['Dashboard']">Dashboard <span title="Dashboard" class="menu-icon fa fa-dashboard"></span></a>
-        </li>
-
-        <li class="sidebar-list">
-            <a [routerLink]="['Games', 'GameList']">Games overview<span title="Games overview" class="menu-icon fa fa-list"></span></a>
-        </li>
-
-        <li class="sidebar-list">
-            <!-- <a [routerLink]="['RadiusSearch']">Radius search<span title="Radius search" class="menu-icon fa fa-location-arrow"></span></a> -->
-        </li>
-
-        <li class="sidebar-list">
-            <a [routerLink]="['Notifications']">Notifications<span title="Notifications" class="menu-icon fa fa-warning"></span></a>
-        </li>
-
-        <li class="sidebar-list">
-            <a (click)="$event.preventDefault(); loginService.unauthenticate();">Logout<span title="Logout" class="menu-icon fa fa-sign-out"></span></a>
-        </li>
-        </customGroup>
-
-        <customGroup [hidden]="loginService.authenticated">
-        <li class="sidebar-list">
-            <a [routerLink]="['Login']">Login<span title="Login" class="menu-icon fa fa-sign-in"></span></a>
-        </li>
-        </customGroup>
-    </ul>
-
-    <div class="sidebar-footer">
-
-        <div class="col-xs-4">
-            <a href="http://thinktecture.com">
-                Thinktecture
-            </a>
-        </div>
-        <div class="col-xs-4">
-        </div>
-        <div class="col-xs-4">
-            <a href="https://github.com/thinktecture/boardz-cross-platform-sample" target="_blank">
-                Github
-            </a>
-        </div>
-
-    </div>
-</div>
+<aside class="main-sidebar">
+    <section class="sidebar">
+        <ul class="sidebar-menu">
+               <li ui-sref-active="active">
+                   <a [routerLink]="['Dashboard']"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
+               </li>
+               <li ui-sref-active="active">
+                   <a [routerLink]="['Games', 'GameList']"><i class="fa fa-list"></i><span>Games overview</span></a>
+               </li>
+               <li ui-sref-active="active">
+                   <!--  <a [routerLink]="['RadiusSearch']">Radius search<span title="Radius search" class="menu-icon fa fa-location-arrow"></span></a>-->
+            </li>
+        </ul>
+    </section>
+</aside>
