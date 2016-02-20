@@ -43,14 +43,14 @@ gulp.task('dev:copy-template', function() {
 gulp.task('dev:copy-vendor-scripts', function() {
     return gulp.src(buildConfig.source.files.script_dependencies)
         .pipe(concat(buildConfig.targets.vendorMinJs))
-        .pipe(uglify())
+    //    .pipe(uglify())
         .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, 'scripts/')));
 });
 
 gulp.task('private:copy-shim', function(){
     // es6shim cant be bundled with angular-polyfills see https://github.com/angular/angular/issues/6706
     return gulp.src(buildConfig.source.files.shim)
-      //  .pipe(uglify())
+       .pipe(uglify())
         .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, 'scripts/')))
 });
 

@@ -12,7 +12,7 @@ import 'rxjs/Rx';
 
 // rx operators - ALL you can eat
 
-enableProdMode();
+//enableProdMode();
 
 bootstrap(BoardzApp, [
     HTTP_PROVIDERS,
