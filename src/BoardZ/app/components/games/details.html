@@ -4,15 +4,9 @@
             <h3 *ngIf="model.id === null" class="box-title">New game</h3>
             <h3 *ngIf="model.id !== null" class="box-title">Game details</h3>
         </div>
-        <!-- /.box-header -->
-        <!-- form start -->
-        <form ngForm class="form-horizontal" #form="ngForm" (ngSubmit)="saveChanges()" *ngIf="active">
-
+        <form ngForm class="form-horizontal" #form="ngForm" (ngSubmit)="saveChanges()">
             <div class="panel-body" *ngIf="true">
-                <!-- this ngif is a workaround for issue https://github.com/angular/angular/issues/6374 -->
-
                 <div class="form-group" [class.has-error]="!name.pristine && !name.valid">
-                    <!-- this will not work without the fix above -->
                     <label for="name" class="col-sm-2 control-label">Name</label>
                     <div class="col-sm-10">
                         <input type="text" id="name" class="form-control" placeholder="Game name" required
@@ -22,7 +16,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="form-group" [class.has-error]="!description.pristine && !description.valid">
                     <label for="description" class="col-sm-2 control-label">Description</label>
                     <div class="col-sm-10">
@@ -35,8 +28,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- /.box-body -->
             <div class="box-footer">
                 <div class="pull-right">
                     <button type="button" class="btn btn-default" (click)="abort()">Abort</button>
@@ -47,35 +38,37 @@
                     </button>
                 </div>
             </div>
-            <!-- /.box-footer -->
         </form>
     </div>
-
-
-
-    <pre *ngIf="_diagnosticsEnabled">Diagnostic:
-        Live: {{diagnostic | json}}
-        Original: {{originalDiagnostic | json}}
-    </pre>
 </div>
 
 <div class="row" *ngIf="model.id">
     <div class="col-md-4 col-xs-12">
-        <div class="widget">
-            <div class="widget-header">
-                <i class="fa fa-user"></i>
-                I am gaming!
+        <div class="box box-success box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">I'm playing this game</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+                    </button>
+                </div>
             </div>
-
-            <div class="widget-body">
+            <div class="box-body">
                 <p>The "I am gaming!" function uploads an image and your current position for other gamers to join you
                     on your journey!</p>
-
-                <p class="text-center">
-                    <button type="button" class="btn btn-success"><i class="fa fa-flag-checkered fa-4x"></i></button>
-                </p>
+            </div>
+            <div class="box-footer">
+                <button type="button" class="btn btn-flat btn-block btn-success">opt in <i class="fa fa-flag-checkered"></i> </button>
             </div>
 
         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <diagnostic [is-diagnostic-enabled]="_diagnosticEnabled" [title]="'original'"
+                    [data]="originalModel"></diagnostic>
+    </div>
+    <div class="col-md-6">
+        <diagnostic [is-diagnostic-enabled]="_diagnosticEnabled" [title]="'current'" [data]="model"></diagnostic>
     </div>
 </div>

@@ -4,11 +4,11 @@ import {Game, GamesService} from '../../services/games/gamesService';
 import {Logger} from '../../services/logging/logger';
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 import {NotificationService} from '../../services/notifications/notificationService';
-import {JsonPipe} from 'angular2/common';
+import {DiagnosticComponent} from '../diagnostic/diagnostic';
 
 @Component({
     selector: 'gameDetail',
-    pipes: [JsonPipe],
+    directives: [DiagnosticComponent],
     templateUrl: 'app/components/games/details.html',
     inputs: ['game']
 })
@@ -16,14 +16,14 @@ import {JsonPipe} from 'angular2/common';
 export class GameDetails implements OnInit {
 
     private _needsReset: boolean;
-    private _diagnosticsEnabled: boolean;
+    private _diagnosticEnabled: boolean;
 
     public active = true;
     public model: Game = new Game();
     public originalModel: Game = new Game();
 
     constructor(private _logger: Logger, private _gameService: GamesService, private _router: Router, private _routeParams: RouteParams, private _notificationService: NotificationService, private _injector: Injector) {
-        this._diagnosticsEnabled = _injector.get('inDiagnosticsMode');
+        this._diagnosticEnabled = _injector.get('inDiagnosticsMode');
     }
 
     ngOnInit(): void {
