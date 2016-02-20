@@ -16,6 +16,7 @@ var gulp = require('gulp'),
     tsConfig = ts.createProject(buildConfig.ts.config),
     sourcemaps = require('gulp-sourcemaps'),
     inject = require('gulp-inject'),
+    uglify = require('gulp-uglify'),
     utils = require('./utils.js');
 
 function mapFiles(files, baseFolder) {
@@ -41,9 +42,16 @@ gulp.task('dev:copy-template', function() {
 
 gulp.task('dev:copy-vendor-scripts', function() {
     return gulp.src(buildConfig.source.files.script_dependencies)
-        .pipe(filelog())
         .pipe(concat(buildConfig.targets.vendorMinJs))
+        .pipe(uglify())
         .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, 'scripts/')));
+});
+
+gulp.task('private:copy-shim', function(){
+    // es6shim cant be bundled with angular-polyfills see https://github.com/angular/angular/issues/6706
+    return gulp.src(buildConfig.source.files.shim)
+      //  .pipe(uglify())
+        .pipe(gulp.dest(path.join(buildConfig.targets.buildFolder, 'scripts/')))
 });
 
 
@@ -96,6 +104,7 @@ gulp.task('dev:build', function() {
 gulp.task('dev:default', ['dev:clean'], function (done) {
     return runSequence(
         'dev:copy-vendor-scripts',
+        'private:copy-shim',
         'dev:build',
         'dev:vendor-css',
         'dev:copy-fonts',
