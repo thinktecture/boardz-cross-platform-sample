@@ -4,53 +4,31 @@
     </div>
 
     <div class="col-md-6">
-        <div class="panel bg-aqua">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <div class="huge">
-                            {{gameCount}}
-                        </div>
-                        <h2>Games</h2>
-                    </div>
-                    <div class="col-xs-6 text-right">
-                        <i class="fa fa-cubes fa-widget"></i>
-                    </div>
-                </div>
+        <div class="small-box bg-aqua">
+            <div class="inner">
+                <h3>{{gameCount}}</h3>
+
+                <p>Games</p>
             </div>
-            <a [routerLink]="['Games', 'GameList']">
-                <div class="panel-footer">
-                    <span class="pull-left">View Details</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                    <div class="clearfix"></div>
-                </div>
-            </a>
+            <div class="icon">
+                <i class="fa fa-gamepad"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
-
     <div class="col-md-6">
-        <div class="panel bg-green">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <div class="huge">
-                            {{playerCount}}
-                        </div>
-                        <h2>Player</h2>
-                    </div>
-                    <div class="col-xs-6 text-right">
-                        <i class="fa fa-users fa-widget"></i>
-                    </div>
-                </div>
+        <div class="small-box bg-yellow">
+            <div class="inner">
+                <h3>{{playerCount}}</h3>
+
+                <p>Players</p>
             </div>
-            <a>
-                <div class="panel-footer">
-                    <span class="pull-left">View Details</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                    <div class="clearfix"></div>
-                </div>
-            </a>
+            <div class="icon">
+                <i class="fa fa-users"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
+
     </div>
 
 </div>
