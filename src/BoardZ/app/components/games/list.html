@@ -1,7 +1,7 @@
 <div class="col-md-12">
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">Games</h3>
+            <h3 class="box-title">All Games</h3>
 
             <div class="box-tools">
                 <button class="btn btn-box-tool" [routerLink]="['CreateGame']"><i class="fa fa-plus"></i> Add new Game</button>
@@ -16,7 +16,7 @@
                         <th>Description</th>
 
                     </tr>
-                    <tr *ngFor="#game of games" (click)="gotoDetails(game)">
+                    <tr *ngFor="#game of games" (click)="gotoDetails(game)" class="respond-click">
                         <td>{{game.name}}</td>
                         <td>{{game.description}}</td>
                     </tr>

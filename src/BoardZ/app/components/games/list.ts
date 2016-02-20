@@ -16,18 +16,14 @@ export class GameList implements OnInit {
 
     constructor(private _gamesService: GamesService, private _router: Router, private _notificationService: NotificationService) {
     }
-
-    getGames(): void {
-        this._gamesService.getGames()
-            .then(games => this.games = games)
-            .catch(error => this._notificationService.notifyError('Error while fetching games data.'));
-    }
-
+    
     gotoDetails(game: Game): void {
         this._router.navigate(['GameDetails', { id: game.id }])
     }
 
     ngOnInit() {
-        this.getGames();
+        this._gamesService.getGames()
+            .then(games => this.games = games)
+            .catch(error => this._notificationService.notifyError('Error while fetching games data.'));
     }
 }
