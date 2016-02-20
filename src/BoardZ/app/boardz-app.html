@@ -13,11 +13,9 @@
 <aside class="control-sidebar control-sidebar-dark">
     <div class="tab-content">
         <div class="tab-pane active" id="control-sidebar-home-tab" ng-controller="languageController as language">
-            <h3 class="control-sidebar-heading" translate="sidebar.language"></h3>
-            <button class="btn btn-default" ng-click="language.switchTo('de-DE')" type="button"
-                    translate="sidebar.languages.deDE"></button>
-            <button class="btn btn-default" ng-click="language.switchTo('en-US')" type="button"
-                    translate="sidebar.languages.enUS"></button>
+            <h3 class="control-sidebar-heading">Select Language</h3>
+            <button class="btn btn-xs btn-default" ng-click="language.switchTo('de-DE')" type="button">German</button>
+            <button class="btn btn-xs btn-default" ng-click="language.switchTo('en-US')" type="button">English</button>
         </div>
     </div>
 </aside>
