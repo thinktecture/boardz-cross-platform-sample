@@ -45,21 +45,7 @@ export class HeaderComponent implements OnInit {
             this.loggedIn = result
         });
     }
-
-    public getIconClass(type: NotificationType): string {
-        switch (type) {
-            case NotificationType.Information:
-                return 'fa-c-info';
-            case NotificationType.Success:
-                return 'fa-c-success';
-            case NotificationType.Warning:
-                return 'fa-c-warning';
-            case NotificationType.Error:
-                return 'fa-c-danger';
-            default:
-                return 'fa-c-info';
-        }
-    }
+ 
 
     public dismiss(notification: Notification): boolean {
         if (notification) {
