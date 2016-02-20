@@ -4,31 +4,9 @@
     </div>
 
     <div class="col-md-6">
-        <div class="small-box bg-aqua">
-            <div class="inner">
-                <h3>{{gameCount}}</h3>
-
-                <p>Games</p>
-            </div>
-            <div class="icon">
-                <i class="fa fa-gamepad"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
+        <widget [caption]="'Games'" [color]="'aqua'" [count]="gameCount" [icon]="'gamepad'"></widget>
     </div>
     <div class="col-md-6">
-        <div class="small-box bg-yellow">
-            <div class="inner">
-                <h3>{{playerCount}}</h3>
-
-                <p>Players</p>
-            </div>
-            <div class="icon">
-                <i class="fa fa-users"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
-
+        <widget [caption]="'Players'" [color]="'yellow'" [count]="playerCount" [icon]="'users'"></widget>
     </div>
-
 </div>

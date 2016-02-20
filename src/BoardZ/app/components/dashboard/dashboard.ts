@@ -2,9 +2,10 @@ import {Component, OnInit} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {DashboardService} from '../../services/dashboard/dashboardService';
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
+import {WidgetComponent} from '../widget/widget';
 
 @Component({
-    directives: [ROUTER_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, WidgetComponent],
     templateUrl: 'app/components/dashboard/dashboard.html'
 })
 @NeedsAuthentication()
