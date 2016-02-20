@@ -126,13 +126,7 @@ gulp.task('dev:start-live-server', function () {
 });
 
 
-gulp.task('dev:livereload', ['dev:default'], function () {
+gulp.task('dev:watch', ['dev:default'], function () {
     gulp.watch(mapFiles(buildConfig.source.files.app.html, buildConfig.source.folder), ['dev:copy-app-html']);
     gulp.watch(mapFiles(buildConfig.source.files.app.ts, buildConfig.source.folder), ['dev:build']);
-
-    return gulp.src(buildConfig.targets.buildFolder)
-        .pipe(server({
-            livereload: true,
-            open: false
-        }));
 });
