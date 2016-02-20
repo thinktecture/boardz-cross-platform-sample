@@ -1,11 +1,12 @@
 <div class="col-md-12">
-    <div class="panel panel-primary">
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 *ngIf="model.id === null" class="box-title">New game</h3>
+            <h3 *ngIf="model.id !== null" class="box-title">Game details</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
         <form ngForm class="form-horizontal" #form="ngForm" (ngSubmit)="saveChanges()" *ngIf="active">
-
-            <div class="panel-heading">
-                <h3 *ngIf="model.id === null" class="panel-title">New game</h3>
-                <h3 *ngIf="model.id !== null" class="panel-title">Game details</h3>
-            </div>
 
             <div class="panel-body" *ngIf="true">
                 <!-- this ngif is a workaround for issue https://github.com/angular/angular/issues/6374 -->
@@ -34,7 +35,9 @@
                     </div>
                 </div>
             </div>
-            <div class="panel-footer clearfix">
+
+            <!-- /.box-body -->
+            <div class="box-footer">
                 <div class="pull-right">
                     <button type="button" class="btn btn-default" (click)="abort()">Abort</button>
                     <button type="button" class="btn btn-default" (click)="reset()">Reset</button>
@@ -44,9 +47,11 @@
                     </button>
                 </div>
             </div>
-
+            <!-- /.box-footer -->
         </form>
     </div>
+
+
 
     <pre *ngIf="_diagnosticsEnabled">Diagnostic:
         Live: {{diagnostic | json}}
