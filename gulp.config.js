@@ -7,7 +7,9 @@ module.exports = {
             injectables: [
                 './build/scripts/es6-shim.min.js',
                 './build/scripts/vendor.min.js',
-                './build/css/vendor.min.css'
+                './build/css/vendor.min.css',
+                './build/css/app.css'
+
             ],
             main: [
                 'index.html'

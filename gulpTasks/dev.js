@@ -103,16 +103,16 @@ gulp.task('dev:build', function() {
 
 gulp.task('dev:default', ['dev:clean'], function (done) {
     return runSequence(
-        'dev:copy-vendor-scripts',
+        ['dev:copy-vendor-scripts',
         'private:copy-shim',
         'dev:build',
         'dev:vendor-css',
         'dev:copy-fonts',
-        'dev:copy-template',
         'dev:copy-app-html',
         'dev:copy-app-styles',
         'dev:copy-component-styles',
-        'dev:copy-app-assets',
+        'dev:copy-app-assets'],
+        'dev:copy-template',
         function() { done(); }
     );
 });
