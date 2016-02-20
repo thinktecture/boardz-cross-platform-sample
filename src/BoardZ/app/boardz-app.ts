@@ -4,14 +4,14 @@ import {ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';
 import {LoginForm} from './components/login/login';
 import {Dashboard} from './components/dashboard/dashboard';
 import {Sidebar} from './components/sidebar/sidebar';
-import {Headerbar} from './components/headerbar/headerbar';
+import {HeaderComponent} from './components/header/header';
 import {Games} from './components/games/games';
 import {Notifications} from './components/notifications/notifications';
 import {Logger, LogLevel} from './services/logging/logger';
 import {APP_SERVICES} from './services/all';
 
 
-interface AdminLteFix extends Window{
+interface AdminLteFix extends Window {
     initAdminLTE():void;
 }
 
@@ -20,7 +20,7 @@ declare var window: AdminLteFix;
 @Component({
     selector: 'boardz-app',
     providers: APP_SERVICES,
-    directives: [ROUTER_DIRECTIVES, Sidebar, Headerbar],
+    directives: [ROUTER_DIRECTIVES, Sidebar, HeaderComponent],
     templateUrl: 'app/boardz-app.html'
 })
 @RouteConfig([
@@ -30,14 +30,14 @@ declare var window: AdminLteFix;
     { path: '/games/...', component: Games, name: 'Games', data: { displayName: 'Games' } } // prepare for nested routes
 ])
 export class BoardzApp implements AfterViewInit {
+
     ngAfterViewInit(): any {
-        if(window.initAdminLTE){
+        if (window.initAdminLTE) {
             window.initAdminLTE();
         }
     }
 
     constructor(logger: Logger) {
-        // configure logger
         logger.maximumLogLevel = LogLevel.Verbose;
     }
 
