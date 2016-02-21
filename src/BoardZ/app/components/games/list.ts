@@ -1,8 +1,9 @@
 import {Component, OnInit} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
-import {Game, GamesService} from '../../services/games/gamesService';
+import {GamesService} from '../../services/games/gamesService';
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 import {NotificationService} from '../../services/notifications/notificationService';
+import {Game} from '../../models/game';
 
 @Component({
     selector: 'gamelist',
