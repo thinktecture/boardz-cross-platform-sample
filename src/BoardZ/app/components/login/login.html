@@ -1,59 +1,56 @@
 <div class="col-md-12">
     <form class="form-horizontal" [ngFormModel]="credentialForm" (submit)="doLogin($event)">
 
-    <div class="panel panel-primary">
+        <div class="box box-solid box-primary">
+            <div class="box-header with-border"><i class="fa fa-lock"></i>
+                <h3 class="box-title ng-scope">Login</h3></div>
+            <div class="box-body">
+                <div class="form-group" [ngClass]="{ 'has-error': !isUsernameValid }">
+                    <label for="username" class="col-sm-2 control-label">User name</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" id="username" type="text" ngControl="username"
+                               placeholder="User name"/>
+                        <div [hidden]="isUsernameValid">
+                            <span class="help-block">Username is required</span>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="panel-heading">
-            <h3 class="panel-title">Login</h3>
-        </div>
+                <div class="form-group" [ngClass]="{ 'has-error': !isPasswordValid }">
+                    <label for="password" class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" id="password" type="password" ngControl="password"
+                               placeholder="Password"/>
+                        <div class="well well-sm" [hidden]="isPasswordValid">
+                            <p><span class="label label-danger">Required:</span> Password is required</p>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="panel-body">
+                <!-- TODO: store credentials -->
 
-            <div class="form-group" [ngClass]="{ 'has-error': !isUsernameValid }">
-                <label for="username" class="col-sm-2 control-label">User name</label>
-                <div class="col-sm-10">
-                    <input class="form-control" id="username" type="text" ngControl="username" placeholder="User name" />
-                    <div [hidden]="isUsernameValid">
-                        <span class="help-block">Username is required</span>
+                <div class="form-group" [hidden]="!loginError">
+                    <div class="col-sm-2">&nbsp;</div>
+                    <div class="alert alert-warning col-sm-10 pull-right">
+                        <strong>Login failed.</strong> Please check your credentials and try again.
+                    </div>
+                </div>
+
+                <div class="form-group" [hidden]="!triedAbort">
+                    <div class="col-sm-2">&nbsp;</div>
+                    <div class="alert alert-warning col-sm-10 pull-right">
+                        <strong>Cannot abort.</strong> In order to use the BoardZ! app, you need to log in.
                     </div>
                 </div>
             </div>
-
-            <div class="form-group" [ngClass]="{ 'has-error': !isPasswordValid }">
-                <label for="password" class="col-sm-2 control-label">Password</label>
-                <div class="col-sm-10">
-                    <input class="form-control" id="password" type="password" ngControl="password" placeholder="Password" />
-                    <div class="well well-sm" [hidden]="isPasswordValid">
-                        <p><span class="label label-danger">Required:</span> Password is required</p>
-                    </div>
+            <div class="box-footer">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-default" (click)="tryAbort($event)">Abort</button>
+                    <button type="submit" class="btn btn-primary"
+                            [disabled]="!credentialForm.valid && !credentialForm.pristine">Login
+                    </button>
                 </div>
-            </div>
-
-            <!-- TODO: store credentials -->
-
-            <div class="form-group" [hidden]="!loginError">
-                <div class="col-sm-2">&nbsp;</div>
-                <div class="alert alert-warning col-sm-10 pull-right">
-                    <strong>Login failed.</strong> Please check your credentials and try again.
-                </div>
-            </div>
-
-            <div class="form-group" [hidden]="!triedAbort">
-                <div class="col-sm-2">&nbsp;</div>
-                <div class="alert alert-warning col-sm-10 pull-right">
-                    <strong>Cannot abort.</strong> In order to use the BoardZ! app, you need to log in.
-                </div>
-            </div>
-
-        </div>
-
-        <div class="panel-footer clearfix">
-            <div class="pull-right">
-                <button type="button" class="btn btn-default" (click)="tryAbort($event)" >Abort</button>
-                <button type="submit" class="btn btn-primary" [disabled]="!credentialForm.valid && !credentialForm.pristine">Login</button>
             </div>
         </div>
-
-    </div>
     </form>
 </div>
