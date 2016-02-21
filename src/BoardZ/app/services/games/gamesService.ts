@@ -3,22 +3,10 @@ import {Headers} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 import {Logger} from '../logging/logger';
 import {AuthenticatedHttp} from '../http/AuthenticatedHttp';
+import {Game} from '../../models/game';
 
-export class Packshot {
-    frontImageUrl: string;
-    topImageUrl: string;
-    leftImageUrl: string;
-    rightImageUrl: string;
-    bottomImageUrl: string;
-}
 
-export class Game {
-    id: string = null;
-    name: string;
-    description: string;
-    packshot: Packshot;
-    userName: string;
-}
+
 
 @Injectable()
 export class GamesService {
