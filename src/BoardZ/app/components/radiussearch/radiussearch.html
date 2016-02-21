@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-md-12">
+        <h2>Find players around you</h2>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-xs-8">
+        <select class="form-control">
+            <option label="5 km" value="5">5 km</option>
+            <option label="10 km" value="10" selected="selected">10 km</option>
+            <option label="25 km" value="25">25 km</option>
+            <option label="50 km" value="50">50 km</option>
+            <option label="100 km" value="100">100 km</option>
+            <option label="250 km" value="250">250 km</option>
+            <option label="1000 km" value="1000">1000 km</option>
+        </select>
+    </div>
+    <div class="col-xs-4">
+        <button class="btn btn-primary btn-block ng-scope" (click)="search()" [disabled]="!_coordinates">Search</button>
+    </div>
+
+</div>
