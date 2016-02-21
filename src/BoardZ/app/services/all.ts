@@ -7,6 +7,8 @@ import {provide} from 'angular2/core';
 import {ApplicationConfiguration, Configuration} from '../app-config';
 import {Http, ConnectionBackend, XHRBackend} from 'angular2/http';
 import {AuthenticatedHttp} from './http/AuthenticatedHttp';
+import {GeolocationService} from './geolocation/geolocation.service';
+import {PlayersService} from './players/players.service';
 
 export var APP_SERVICES = [
     provide(Configuration, { useValue: new ApplicationConfiguration() }),
@@ -17,6 +19,8 @@ export var APP_SERVICES = [
     provide(Logger, { useClass: Logger }),
     provide(LogLevel, { useValue: LogLevel }),
     provide(GamesService, { useClass: GamesService }),
+    provide(GeolocationService, {useClass: GeolocationService}),
+    provide(PlayersService, {useClass: PlayersService}),
     provide(NotificationService, { useClass: NotificationService })
 ];
 
