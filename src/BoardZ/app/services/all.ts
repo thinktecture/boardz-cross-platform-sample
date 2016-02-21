@@ -23,8 +23,3 @@ export var APP_SERVICES = [
     provide(PlayersService, {useClass: PlayersService}),
     provide(NotificationService, { useClass: NotificationService })
 ];
-
-
-export const TEST_SERVICES = [
-    LoginService, DashboardService
-];
