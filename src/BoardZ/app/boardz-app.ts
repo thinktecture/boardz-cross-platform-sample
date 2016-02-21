@@ -9,6 +9,7 @@ import {Games} from './components/games/games';
 import {Notifications} from './components/notifications/notifications';
 import {Logger, LogLevel} from './services/logging/logger';
 import {APP_SERVICES} from './services/all';
+import {RadiusSearchComponent} from './components/radiussearch/radiussearch';
 
 
 interface AdminLteFix extends Window {
@@ -27,7 +28,8 @@ declare var window: AdminLteFix;
     { path: '/', component: Dashboard, name: 'Dashboard', useAsDefault: true, data: { displayName: 'Dashboard' } },
     { path: '/login', component: LoginForm, name: 'Login', data: { displayName: 'Login' } },
     { path: '/notifications', component: Notifications, name: 'Notifications', data: { displayName: 'Notifications' } },
-    { path: '/games/...', component: Games, name: 'Games', data: { displayName: 'Games' } } // prepare for nested routes
+    { path: '/games/...', component: Games, name: 'Games', data: { displayName: 'Games' } } ,
+    { path: '/radiussearch', component: RadiusSearchComponent, name: 'RadiusSearch', data : {displayName: 'Radius Search'}}
 ])
 export class BoardzApp implements AfterViewInit {
 
