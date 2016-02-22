@@ -10,6 +10,7 @@ using Autofac.Integration.WebApi;
 using BoardGame.Api.Helpers;
 using BoardGame.Api.Security;
 using BoardGame.Api.Storages;
+using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Owin;
@@ -26,6 +27,7 @@ namespace BoardGame.Api
 
             SecurityStartup.Configuration(appBuilder);
             appBuilder.UseWebApi(httpConfiguration);
+            appBuilder.MapSignalR();
         }
 
         private IContainer CreateAutofacContainer()
