@@ -1,6 +1,6 @@
 import {Injectable} from 'angular2/core';
-import {GamesService} from '../games/gamesService';
-import {AuthenticatedHttp} from '../http/AuthenticatedHttp';
+import {AuthenticatedHttp} from './authenticated.http';
+import {GamesService} from './games.service';
 
 @Injectable()
 export class DashboardService {

@@ -2,10 +2,11 @@ import {Component, OnInit} from 'angular2/core';
 import {NgClass} from 'angular2/common';
 import {Router} from 'angular2/router';
 import {Breadcrumb} from '../breadcrumb/breadcrumb';
-import {Logger} from '../../services/logging/logger';
-import {TokenDataStore} from '../../services/login/tokenDataStore';
-import {LoginService} from '../../services/login/loginService';
-import {NotificationService, Notification, NotificationType} from '../../services/notifications/notificationService';
+import {Notification} from '../../models/notification';
+import {LoginService} from '../../services/login.service';
+import {TokenDataStore} from '../../services/token.service';
+import {NotificationService} from '../../services/notification.service';
+import {Logger} from '../../services/log.service';
 
 @Component({
     selector: 'boardz-header',

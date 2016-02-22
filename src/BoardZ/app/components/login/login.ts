@@ -1,9 +1,9 @@
 import {Component} from 'angular2/core';
 import {FormBuilder, Validators, ControlGroup, Control} from 'angular2/common';
 import {Router, ROUTER_DIRECTIVES, CanDeactivate, ComponentInstruction} from 'angular2/router';
-import {LoginService} from '../../services/login/loginService';
-import {Logger} from '../../services/logging/logger';
-import {NotificationService} from '../../services/notifications/notificationService';
+import {LoginService} from '../../services/login.service';
+import {Logger} from '../../services/log.service';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
     selector: 'login-form',

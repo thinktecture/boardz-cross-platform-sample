@@ -4,16 +4,17 @@ import {Component, Input} from 'angular2/core';
     selector: 'picture-it',
     templateUrl: 'app/components/pictureit/pictureit.html'
 })
-export class PictureItComponenet{
-    
-    @Input('picture-url') _pictureUrl: string;
-    
-    
-    constructor(){
-        
+export class PictureItComponenet {
+
+    @Input('picture-url')
+    _pictureUrl: string;
+
+
+    constructor() {
+
     }
-    
-    public takePicture(){
-        
+
+    public takePicture() {
+
     }
 }

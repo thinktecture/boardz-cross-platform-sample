@@ -1,5 +1,5 @@
 import {Injectable} from 'angular2/core';
-import {Logger} from './logger';
+import {Logger} from './log.service';
 
 @Injectable()
 export class ConsoleLogger extends Logger {

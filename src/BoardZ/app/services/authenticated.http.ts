@@ -1,8 +1,9 @@
 import {Injectable} from 'angular2/core';
-import {Http, ConnectionBackend, RequestOptions, Request, RequestOptionsArgs, Response, Headers} from 'angular2/http';
+import {Http, ConnectionBackend, RequestOptions, RequestOptionsArgs, Response, Headers} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
-import {TokenDataStore} from '../login/tokenDataStore';
-import {Configuration} from '../../app-config';
+import {Configuration} from '../app-config';
+import {TokenDataStore} from './token.service';
+
 
 @Injectable()
 export class AuthenticatedHttp extends Http {

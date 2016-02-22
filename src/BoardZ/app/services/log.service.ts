@@ -1,14 +1,5 @@
 import {Injectable} from 'angular2/core';
-
-export enum LogLevel {
-    Critical,
-    Error,
-    Warning,
-    Info,
-    Debug,
-    Verbose,
-    Ultra,
-}
+import {LogLevel} from '../models/loglevel';
 
 @Injectable()
 export class Logger {
@@ -67,6 +58,7 @@ export class Logger {
     }
 
     protected formatMessage(logLevel: LogLevel, message: string): string {
-        return this.getIsoDate() + ' [' + this.getLogLevelName(logLevel) + ']: ' + message;;
+        return this.getIsoDate() + ' [' + this.getLogLevelName(logLevel) + ']: ' + message;
+        ;
     }
 }

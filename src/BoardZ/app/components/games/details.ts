@@ -1,13 +1,13 @@
 import {Component, OnInit, Injector} from 'angular2/core';
 import {RouteParams, Router} from 'angular2/router';
-import {GamesService} from '../../services/games/gamesService';
-import {Logger} from '../../services/logging/logger';
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
-import {NotificationService} from '../../services/notifications/notificationService';
 import {DiagnosticComponent} from '../diagnostic/diagnostic';
 import {LocateItComponent} from '../locateit/locateit';
 import {PictureItComponenet} from '../pictureit/pictureit';
 import {Game} from '../../models/game';
+import {Logger} from '../../services/log.service';
+import {GamesService} from '../../services/games.service';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
     selector: 'gameDetail',

@@ -1,8 +1,8 @@
 import {Component, OnInit} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
-import {DashboardService} from '../../services/dashboard/dashboardService';
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 import {WidgetComponent} from '../widget/widget';
+import {DashboardService} from '../../services/dashboard.service';
 
 @Component({
     directives: [ROUTER_DIRECTIVES, WidgetComponent],

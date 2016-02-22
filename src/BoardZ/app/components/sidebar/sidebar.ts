@@ -1,7 +1,6 @@
 import {Component} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
-
-import {LoginService} from '../../services/login/loginService';
+import {LoginService} from '../../services/login.service';
 
 @Component({
     selector: 'sidebar',
@@ -12,7 +11,8 @@ export class Sidebar {
 
     public expanded: boolean = true;
 
-    constructor(public loginService: LoginService) {}
+    constructor(public loginService: LoginService) {
+    }
 
     toggleSidebar(): void {
         this.expanded = !this.expanded;

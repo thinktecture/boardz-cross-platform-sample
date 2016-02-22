@@ -1,7 +1,7 @@
 import {Component} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {ResolvedInstruction} from 'angular2/src/router/instruction';
-import {Logger} from '../../services/logging/logger';
+import {Logger} from '../../services/log.service';
 
 @Component({
     selector: 'breadcrumb',

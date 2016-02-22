@@ -3,15 +3,10 @@ import {Http, Headers, RequestOptions} from 'angular2/http';
 import {Router} from 'angular2/router';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
-import {Configuration} from '../../app-config';
-import {Logger} from '../logging/logger';
-import {TokenDataStore} from './tokenDataStore';
-
-interface TokenData {
-    access_token: string;
-    token_type: string;
-    expires_in: number;
-}
+import {TokenDataStore} from './token.service';
+import {Configuration} from '../app-config';
+import {Logger} from './log.service';
+import {TokenData} from '../models/tokendata';
 
 @Injectable()
 export class LoginService {
@@ -62,9 +57,7 @@ export class LoginService {
             request = this._http.post(this._config.apiEndpoint + 'token', body, options)
                 .map(response => <TokenData>response.json()),
             multiplexer = new Subject<TokenData>();
-
-        // need to subscribe via a relay object as multiple subscriptions on the request object
-        // will cause multiple requests
+        
         multiplexer.subscribe(
             tokenData => {
                 this.saveToken(tokenData.access_token);

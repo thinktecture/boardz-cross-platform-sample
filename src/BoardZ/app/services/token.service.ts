@@ -1,7 +1,6 @@
 import {Injectable} from 'angular2/core';
 import {Observable} from 'rxjs/Observable';
-
-import {Logger} from '../logging/logger';
+import {Logger} from './log.service';
 
 const tokenKey: string = 'Authentication::Token';
 const usernameKey: string = 'Authentication::Username';
@@ -73,7 +72,7 @@ export class TokenDataStore {
         }
     }
 
-    check() : Observable<boolean> {
+    check(): Observable<boolean> {
         return Observable.of(this._authenticated);
     }
 }

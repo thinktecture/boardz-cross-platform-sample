@@ -1,12 +1,9 @@
 import {Injectable} from 'angular2/core';
 import {Headers} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
-import {Logger} from '../logging/logger';
-import {AuthenticatedHttp} from '../http/AuthenticatedHttp';
-import {Game} from '../../models/game';
-
-
-
+import {Logger} from './log.service';
+import {AuthenticatedHttp} from './authenticated.http';
+import {Game} from '../models/game';
 
 @Injectable()
 export class GamesService {

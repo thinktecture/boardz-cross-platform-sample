@@ -1,43 +1,16 @@
 import {Injectable} from 'angular2/core';
-
-import {Logger} from '../logging/logger';
 import {Subject} from 'rxjs/Subject';
-
-export enum NotificationType {
-    Information,
-    Success,
-    Warning,
-    Error,
-}
-
-export class Notification {
-    constructor(
-        public message: string,
-        public type: NotificationType = NotificationType.Information
-    ) { }
-
-    get iconCssClass(){
-        switch (this.type) {
-            case NotificationType.Information:
-                return 'fa-info';
-            case NotificationType.Success:
-                return 'fa-hand-peace-o';
-            case NotificationType.Warning:
-                return 'fa-warning';
-            case NotificationType.Error:
-                return 'fa-exclamation-triangle danger';
-            default:
-                return 'fa-info';
-        }
-    }
-}
+import {Logger} from './log.service';
+import {Notification} from '../models/notification';
+import {NotificationType} from '../models/notificationtype';
 
 @Injectable()
 export class NotificationService {
 
     public notifications: Subject<Notification> = new Subject<Notification>();
 
-    constructor(private _logger: Logger) { }
+    constructor(private _logger: Logger) {
+    }
 
     public notify(notification: Notification) {
         if (!notification.message) {

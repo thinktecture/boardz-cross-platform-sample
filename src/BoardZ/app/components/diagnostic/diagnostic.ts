@@ -7,8 +7,11 @@ import {JsonPipe} from 'angular2/common';
     pipes: [JsonPipe],
     templateUrl: 'app/components/diagnostic/diagnostic.html'
 })
-export class DiagnosticComponent{
-    @Input('is-diagnostic-enabled') _isDiagnosticEnabled: boolean;
-    @Input('data') _data: any;
-    @Input('title') _title:string;
+export class DiagnosticComponent {
+    @Input('is-diagnostic-enabled')
+    _isDiagnosticEnabled: boolean;
+    @Input('data')
+    _data: any;
+    @Input('title')
+    _title: string;
 }

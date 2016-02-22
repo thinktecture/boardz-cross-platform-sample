@@ -1,9 +1,9 @@
 import {Component, OnInit} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
-import {GamesService} from '../../services/games/gamesService';
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
-import {NotificationService} from '../../services/notifications/notificationService';
 import {Game} from '../../models/game';
+import {GamesService} from '../../services/games.service';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
     selector: 'gamelist',
@@ -17,7 +17,7 @@ export class GameList implements OnInit {
 
     constructor(private _gamesService: GamesService, private _router: Router, private _notificationService: NotificationService) {
     }
-    
+
     gotoDetails(game: Game): void {
         this._router.navigate(['GameDetails', { id: game.id }])
     }

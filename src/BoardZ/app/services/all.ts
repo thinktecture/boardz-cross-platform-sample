@@ -1,14 +1,14 @@
-import {LoginService} from './login/loginService';
-import {DashboardService} from './dashboard/dashboardService';
-import {Logger, LogLevel} from './logging/logger';
-import {GamesService} from './games/gamesService';
-import {NotificationService} from './notifications/notificationService';
 import {provide} from 'angular2/core';
 import {ApplicationConfiguration, Configuration} from '../app-config';
-import {Http, ConnectionBackend, XHRBackend} from 'angular2/http';
-import {AuthenticatedHttp} from './http/AuthenticatedHttp';
-import {GeolocationService} from './geolocation/geolocation.service';
-import {PlayersService} from './players/players.service';
+import {ConnectionBackend, XHRBackend} from 'angular2/http';
+import {AuthenticatedHttp} from './authenticated.http';
+import {LoginService} from './login.service';
+import {DashboardService} from './dashboard.service';
+import {LogLevel} from '../models/loglevel';
+import {GamesService} from './games.service';
+import {GeolocationService} from './geolocation.service';
+import {PlayersService} from './players.service';
+import {NotificationService} from './notification.service';
 
 export var APP_SERVICES = [
     provide(Configuration, { useValue: new ApplicationConfiguration() }),
@@ -16,10 +16,9 @@ export var APP_SERVICES = [
     provide(AuthenticatedHttp, { useClass: AuthenticatedHttp }),
     provide(LoginService, { useClass: LoginService }),
     provide(DashboardService, { useClass: DashboardService }),
-    provide(Logger, { useClass: Logger }),
     provide(LogLevel, { useValue: LogLevel }),
     provide(GamesService, { useClass: GamesService }),
-    provide(GeolocationService, {useClass: GeolocationService}),
-    provide(PlayersService, {useClass: PlayersService}),
+    provide(GeolocationService, { useClass: GeolocationService }),
+    provide(PlayersService, { useClass: PlayersService }),
     provide(NotificationService, { useClass: NotificationService })
 ];

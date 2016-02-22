@@ -1,20 +1,19 @@
 import {Component, OnInit} from 'angular2/core';
 import {GeoLocation} from '../../models/geolocation';
-import {GeolocationService} from '../../services/geolocation/geolocation.service';
-
+import {GeolocationService} from '../../services/geolocation.service';
 @Component({
     templateUrl: 'app/components/radiussearch/radiussearch.html'
 })
-export class RadiusSearchComponent implements OnInit{
+export class RadiusSearchComponent implements OnInit {
 
     private _coordinates: GeoLocation;
 
-    constructor(private _geoLocationService: GeolocationService){
+    constructor(private _geoLocationService: GeolocationService) {
 
     }
 
-    public ngOnInit(){
+    public ngOnInit() {
         this._geoLocationService.locate()
-            .then((coordinates)=> this._coordinates = coordinates);
+            .then((coordinates: GeoLocation)=> this._coordinates = coordinates);
     }
 }
