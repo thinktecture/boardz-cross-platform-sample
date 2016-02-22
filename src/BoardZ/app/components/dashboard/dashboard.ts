@@ -2,7 +2,8 @@ import {Component, OnInit} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 import {WidgetComponent} from '../widget/widget';
-import {DashboardService} from '../../services/dashboard.service';
+import {GamesService} from '../../services/games.service';
+import {PlayersService} from '../../services/players.service';
 
 @Component({
     directives: [ROUTER_DIRECTIVES, WidgetComponent],
@@ -14,12 +15,14 @@ export class Dashboard implements OnInit {
     public playerCount: number = 0;
     public gameCount: number = 0;
 
-    constructor(private _dashboardService: DashboardService) {
+    constructor(private _gamesService: GamesService, private _playersService: PlayersService) {
 
     }
 
     ngOnInit(): any {
-        this._dashboardService.getPlayerCount().then(result => this.playerCount = result);
-        this._dashboardService.getGameCount().then(result => this.gameCount = result);
+        this._playersService.getPlayerCount()
+            .subscribe(result => this.playerCount = result);
+        this._gamesService.getGameCount()
+            .subscribe(result => this.gameCount = result);
     }
 }
