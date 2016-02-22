@@ -17,7 +17,7 @@ export class NotificationService {
             return;
         }
 
-        this._logger.logDebug('NotificationService.notify received notifiction: ' + JSON.stringify(notification));
+        this._logger.logDebug('NotificationService.notify received notification: ' + JSON.stringify(notification));
         this.notifications.next(notification);
     }
 

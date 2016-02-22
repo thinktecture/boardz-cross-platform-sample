@@ -7,6 +7,7 @@ import {TokenDataStore} from './token.service';
 import {Configuration} from '../app-config';
 import {Logger} from './log.service';
 import {TokenData} from '../models/tokendata';
+import {SignalRService} from './signalr.service';
 
 @Injectable()
 export class LoginService {
@@ -25,7 +26,9 @@ export class LoginService {
                 private _logger: Logger,
                 private _http: Http,
                 private _router: Router,
-                private _tokenStore: TokenDataStore) {
+                private _tokenStore: TokenDataStore,
+                private _signalRService: SignalRService
+    ) {
         this._tokenStore.check()
             .subscribe((value) => {
                 if (!value) this.logout();
@@ -37,6 +40,8 @@ export class LoginService {
      */
     public logout(): void {
         this._logger.logDebug('LoginService.logout called');
+
+        this._signalRService.stop();
         this._lastLoginUnsuccessful = false;
         this._tokenStore.token = null;
 

@@ -36,7 +36,8 @@ module.exports = {
                 './src/BoardZ/vendor/bootstrap/css/bootstrap.css',
                 './src/BoardZ/vendor/admin-lte/css/AdminLTE.css',
                 './src/BoardZ/vendor/admin-lte/css/skins/_all-skins.css',
-                './src/BoardZ/vendor/font-awesome/css/font-awesome.css'
+                './src/BoardZ/vendor/font-awesome/css/font-awesome.css',
+                './src/BoardZ/vendor/pNotify/pnotify.custom.css'
             ],
             vendorFonts: [
                 './src/BoardZ/vendor/font-awesome/fonts/*.*',
@@ -47,6 +48,8 @@ module.exports = {
                 './src/BoardZ/vendor/hammerjs/hammer.js',
                 './src/BoardZ/vendor/jquery/jquery-2.1.4.js',
                 './src/BoardZ/vendor/jquery/jquery.hammer.js',
+                './src/BoardZ/vendor/pNotify/pnotify.custom.js',
+                './src/BoardZ/vendor/signalr/signalr.js',
                 './src/BoardZ/vendor/bootstrap/js/bootstrap.js',
                 './src/BoardZ/vendor/fastclick/fastclick.js',
                 './src/BoardZ/vendor/admin-lte/js/app.js',

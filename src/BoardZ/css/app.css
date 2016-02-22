@@ -13,3 +13,8 @@
 .danger{
   color:#dd4b39;
 }
+
+.stack-bar-top {
+  top: 0;
+  right: 0;
+}

@@ -8,6 +8,8 @@ import {Game} from '../../models/game';
 import {Logger} from '../../services/log.service';
 import {GamesService} from '../../services/games.service';
 import {NotificationService} from '../../services/notification.service';
+import {SignalRService} from '../../services/signalr.service';
+import {LoginService} from '../../services/login.service';
 
 @Component({
     selector: 'gameDetail',
@@ -25,7 +27,14 @@ export class GameDetails implements OnInit {
     public model: Game = new Game();
     public originalModel: Game = new Game();
 
-    constructor(private _logger: Logger, private _gameService: GamesService, private _router: Router, private _routeParams: RouteParams, private _notificationService: NotificationService, private _injector: Injector) {
+    constructor(private _logger: Logger,
+                private _gameService: GamesService,
+                private _router: Router,
+                private _routeParams: RouteParams,
+                private _notificationService: NotificationService,
+                private _signalRService: SignalRService,
+                private _loginService: LoginService,
+                private _injector: Injector) {
         this._diagnosticEnabled = _injector.get('inDiagnosticsMode');
     }
 
@@ -105,5 +114,10 @@ export class GameDetails implements OnInit {
                     () => this._notificationService.notifyError('Could not delete game data.')
                 );
         }
+    }
+
+    public iAmPlaying(): void {
+        this._signalRService.sendIAmGaming(this._loginService.username, this.model.name);
+        // TODO: Implement the whole method. ;-)
     }
 }

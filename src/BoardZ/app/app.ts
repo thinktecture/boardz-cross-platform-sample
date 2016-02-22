@@ -10,7 +10,10 @@ import {APP_SERVICES} from './services/all';
 import {RadiusSearchComponent} from './components/radiussearch/radiussearch';
 import {Logger} from './services/log.service';
 import {LogLevel} from './models/loglevel';
-
+import {SignalRService} from './services/signalr.service';
+import {LoginService} from './services/login.service';
+import {NotificationService} from './services/notification.service';
+import {UiNotificationService} from './services/ui.notification.service';
 
 interface AdminLteFix extends Window {
     initAdminLTE():void;
@@ -37,10 +40,25 @@ export class BoardzApp implements AfterViewInit {
         if (window.initAdminLTE) {
             window.initAdminLTE();
         }
+
+        if (this._loginService.isAuthenticated) {
+            this._signalRService.start();
+        }
+
+        // TODO: Maybe move this to another place?
+        this._signalRService.someoneJoinedAGame.subscribe(message => {
+            this._notificationService.notifyInformation(message);
+        });
     }
 
-    constructor(logger: Logger) {
+    constructor(private _signalRService: SignalRService,
+                private _loginService: LoginService,
+                private _notificationService: NotificationService,
+                uiNotificationService: UiNotificationService,
+        logger: Logger) {
         logger.maximumLogLevel = LogLevel.Verbose;
+
+        uiNotificationService.subscribeToNotifications();
     }
 
 }

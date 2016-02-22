@@ -4,6 +4,7 @@ import {Router, ROUTER_DIRECTIVES, CanDeactivate, ComponentInstruction} from 'an
 import {LoginService} from '../../services/login.service';
 import {Logger} from '../../services/log.service';
 import {NotificationService} from '../../services/notification.service';
+import {SignalRService} from '../../services/signalr.service';
 
 @Component({
     selector: 'login-form',
@@ -24,7 +25,12 @@ export class LoginForm implements CanDeactivate {
         return this.credentialForm.controls['password'].valid || this.credentialForm.controls['password'].pristine
     }
 
-    constructor(private _router: Router, private _loginService: LoginService, private _logger: Logger, private _notificationService: NotificationService, formBuilder: FormBuilder) {
+    constructor(private _router: Router,
+                private _loginService: LoginService,
+                private _logger: Logger,
+                private _notificationService: NotificationService,
+                private _signalRService: SignalRService,
+                formBuilder: FormBuilder) {
         this.credentialForm = formBuilder.group({
             username: ['', Validators.required],
             password: ['', Validators.required]
@@ -45,6 +51,7 @@ export class LoginForm implements CanDeactivate {
         this._loginService.challenge(username, password)
             .subscribe(
                 () => {
+                    this._signalRService.start();
                     this.setError(false);
                     this._router.navigate(['Dashboard'])
                 },
