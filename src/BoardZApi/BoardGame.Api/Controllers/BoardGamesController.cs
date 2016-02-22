@@ -3,6 +3,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
+using BoardGame.Api.Helpers;
 using BoardGame.Api.Storages;
 
 namespace BoardGame.Api.Controllers
@@ -14,26 +15,7 @@ namespace BoardGame.Api.Controllers
     public class BoardGamesController : ApiController
     {
         private readonly IStorage<Models.BoardGame> _storage;
-
-        private string GetCurrentUsername()
-        {
-            var user = (ClaimsPrincipal) User;
-
-            if (user == null)
-            {
-                throw new Exception("No user found.");
-            }
-
-            var claim = user.FindFirst(ClaimTypes.NameIdentifier);
-
-            if (claim == null)
-            {
-                throw new Exception("Claim not found.");
-            }
-
-            return claim.Value;
-        }
-
+        
         public BoardGamesController(IStorage<Models.BoardGame> storage)
         {
             _storage = storage;
@@ -47,7 +29,7 @@ namespace BoardGame.Api.Controllers
         [ResponseType(typeof(Models.BoardGame[]))]
         public IHttpActionResult List()
         {
-            var username = GetCurrentUsername();
+            var username = User.GetCurrentUsernameOrThrow();
             return Ok(_storage.List().Where(g => g.UserName == username).ToList());
         }
         
@@ -60,7 +42,7 @@ namespace BoardGame.Api.Controllers
         [ResponseType(typeof(Guid))]
         public IHttpActionResult Add(Models.BoardGame game)
         {
-            game.UserName = GetCurrentUsername();
+            game.UserName = User.GetCurrentUsernameOrThrow();
             var result = _storage.Add(game);
 
             return Ok(result);
@@ -98,7 +80,7 @@ namespace BoardGame.Api.Controllers
         [HttpPut]
         public IHttpActionResult Update(Models.BoardGame game)
         {
-            game.UserName = GetCurrentUsername();
+            game.UserName = User.GetCurrentUsernameOrThrow();
             _storage.Update(game);
             return Ok();
         }

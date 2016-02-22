@@ -114,6 +114,7 @@
     <Compile Include="Controllers\BoardGamesController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="Helpers\DistanceCalculator.cs" />
+    <Compile Include="Helpers\IPrincipalExtensions.cs" />
     <Compile Include="Models\BoardGame.cs" />
     <Compile Include="Models\Coordinate.cs" />
     <Compile Include="Models\Packshot.cs" />
