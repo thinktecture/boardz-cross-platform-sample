@@ -1,18 +1,17 @@
 import {Injectable} from 'angular2/core';
 import {Headers} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
-import {Logger} from './log.service';
 import {AuthenticatedHttp} from './authenticated.http';
 import {Game} from '../models/game';
 
 @Injectable()
 export class GamesService {
 
-    constructor(private _logger: Logger, private _http: AuthenticatedHttp) {
+    constructor(private _http: AuthenticatedHttp) {
 
     }
 
-    private buildOptions() {
+    private getRequestOptions() {
         let headers = new Headers();
         headers.append('Accept', 'application/json');
         headers.append('Accept', 'text/plain');
@@ -22,7 +21,7 @@ export class GamesService {
         return { headers: headers };
     }
 
-    private fetchGames(): Observable<Game[]> {
+    public getAll(): Observable<Game[]> {
         return this._http.get('api/boardgames/list').map(response => (<Game[]>response.json()));
     }
 
@@ -30,38 +29,28 @@ export class GamesService {
         return <Game>JSON.parse(JSON.stringify(game));
     }
 
-    public getGames(): Promise<Game[]> {
-        return this.fetchGames().toPromise();
+    public getGameCount(): Observable<number> {
+        return this.getAll().map(games => games.length);
     }
 
-    public getGamesCount(): Promise<number> {
-        return this.fetchGames()
-            .map(games => games.length)
-            .toPromise();
-    }
-
-    public getGame(id: string): Promise<Game> {
+    public getById(id: string): Observable<Game> {
         return this._http.get(`api/boardgames/single?id=${id}`)
-            .map(response => <Game>response.json())
-            .toPromise();
+            .map(response => <Game>response.json());
     }
 
-    public addGame(game: Game): Promise<string> {
-        return this._http.post(`api/boardgames/add`, JSON.stringify(game), this.buildOptions())
-            .map(response => <string>response.json())
-            .toPromise()
+    public addGame(game: Game): Observable<string> {
+        return this._http.post(`api/boardgames/add`, JSON.stringify(game), this.getRequestOptions())
+            .map(response => <string>response.json());
     }
 
-    public updateGame(game: Game): Promise<string> {
-        return this._http.put(`api/boardgames/update`, JSON.stringify(game), this.buildOptions())
-            .map(response => game.id)
-            .toPromise()
+    public updateGame(game: Game): Observable<string> {
+        return this._http.put(`api/boardgames/update`, JSON.stringify(game), this.getRequestOptions())
+            .map(response => game.id);
     }
 
-    public deleteGame(id: string): Promise<string> {
+    public deleteGame(id: string): Observable<string> {
         return this._http.delete(`api/boardgames/remove?id=${id}`)
-            .map(response => <string>response.text())
-            .toPromise();
+            .map(response => <string>response.text());
     }
 
 }

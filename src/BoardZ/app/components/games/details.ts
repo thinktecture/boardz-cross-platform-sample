@@ -41,15 +41,17 @@ export class GameDetails implements OnInit {
     }
 
     private loadGame(id: string): void {
-        this._gameService.getGame(id)
-            .then(game => {
-                this.originalModel = this._gameService.deepClone(this.model = game);
-                if (this._needsReset) this.reset();
-            })
-            .catch(error => {
-                this._logger.logError('Could not find game. Error was: ' + error);
-                this._notificationService.notifyError('Could not load game data.');
-            });
+        this._gameService.getById(id)
+            .subscribe(
+                (game) => {
+                    this.originalModel = this._gameService.deepClone(this.model = game);
+                    if (this._needsReset) this.reset();
+                },
+                (error) => {
+                    this._logger.logError('Could not find game. Error was: ' + error);
+                    this._notificationService.notifyError('Could not load game data.');
+                }
+            );
     }
 
     public abort(): void {
@@ -70,31 +72,38 @@ export class GameDetails implements OnInit {
     public saveChanges(): void {
         if (this.model.id === null) {
             this._gameService.addGame(this.model)
-                .then(newId => {
-                    this._notificationService.notifySuccess('New game was added.')
-                    this._needsReset = true;
-                    this.loadGame(newId);
-                })
-                .catch(() => this._notificationService.notifyError('Could not save new game.'));
+                .subscribe(
+                    (newId) => {
+                        this._notificationService.notifySuccess('New game was added.')
+                        this._needsReset = true;
+                        this.loadGame(newId);
+                    },
+                    ()=> this._notificationService.notifyError('Could not save new game.')
+                );
         } else {
             this._gameService.updateGame(this.model)
-                .then(oldId => {
-                    this._notificationService.notifySuccess('Game data was updated.')
-                    this._needsReset = true;
-                    this.loadGame(oldId);
-                })
-                .catch(() => this._notificationService.notifyError('Could not update game data.'));
+                .subscribe((oldId) => {
+                        this._notificationService.notifySuccess('Game data was updated.')
+                        this._needsReset = true;
+                        this.loadGame(oldId);
+                    },
+                    () => {
+                        this._notificationService.notifyError('Could not update game data.')
+                    }
+                );
         }
     }
 
     public deleteGame(): void {
         if (window.confirm('Really delete the game "' + this.originalModel.name + '" ?')) {
             this._gameService.deleteGame(this.originalModel.id)
-                .then(() => {
-                    this._notificationService.notifySuccess('Game data was deleted.');
-                    this.abort();
-                })
-                .catch(() => this._notificationService.notifyError('Could not delete game data.'));
+                .subscribe(
+                    () => {
+                        this._notificationService.notifySuccess('Game data was deleted.');
+                        this.abort();
+                    },
+                    () => this._notificationService.notifyError('Could not delete game data.')
+                );
         }
     }
 }

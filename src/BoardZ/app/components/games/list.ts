@@ -23,8 +23,10 @@ export class GameList implements OnInit {
     }
 
     ngOnInit() {
-        this._gamesService.getGames()
-            .then(games => this.games = games)
-            .catch(error => this._notificationService.notifyError('Error while fetching games data.'));
+        this._gamesService.getAll()
+            .subscribe(
+                (games)=> this.games = games,
+                (err) => this._notificationService.notifyError('Error while fetching game data')
+            );
     }
 }
