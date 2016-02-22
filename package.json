@@ -10,7 +10,9 @@
   "scripts": {
     "gulp": "gulp",
     "typings": "typings",
-    "postinstall": "typings install"
+    "watch": "gulp dev:watch",
+    "postinstall": "typings install",
+    "start": "live-server build"
   },
   "author": "Thinktecture AG <office@thinktecture.com>",
   "bugs": {
