@@ -9,7 +9,6 @@ import {Logger} from '../../services/log.service';
 import {GamesService} from '../../services/games.service';
 import {NotificationService} from '../../services/notification.service';
 import {SignalRService} from '../../services/signalr.service';
-import {LoginService} from '../../services/login.service';
 
 @Component({
     selector: 'gameDetail',
@@ -33,7 +32,6 @@ export class GameDetails implements OnInit {
                 private _routeParams: RouteParams,
                 private _notificationService: NotificationService,
                 private _signalRService: SignalRService,
-                private _loginService: LoginService,
                 private _injector: Injector) {
         this._diagnosticEnabled = _injector.get('inDiagnosticsMode');
     }
@@ -117,7 +115,7 @@ export class GameDetails implements OnInit {
     }
 
     public iAmPlaying(): void {
-        this._signalRService.sendIAmGaming(this._loginService.username, this.model.name);
+        this._signalRService.sendIAmGaming(this.model.name);
         // TODO: Implement the whole method. ;-)
     }
 }

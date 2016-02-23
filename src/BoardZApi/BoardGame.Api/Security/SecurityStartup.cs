@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security.OAuth;
@@ -21,7 +22,8 @@ namespace BoardGame.Api.Security
                 Provider = new AuthorizationServerProvider()
             });
 
+            appBuilder.Use(typeof(SignalRAuthorizationMiddleware));
             appBuilder.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
-        } 
+        }
     }
 }
