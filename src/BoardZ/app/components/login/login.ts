@@ -35,9 +35,7 @@ export class LoginForm implements CanDeactivate {
         });
     }
 
-    public doLogin(evt): void {
-        evt.preventDefault();
-
+    public doLogin(): void {
         this.triedAbort = false;
 
         var username = this.credentialForm.controls['username'].value,
@@ -55,20 +53,6 @@ export class LoginForm implements CanDeactivate {
                     this._notificationService.notifyError('Login was unsuccessful.');
                 }
             );
-    }
-
-    public tryAbort(evt): void {
-        evt.preventDefault();
-
-        if (evt.ctrlKey) {
-            (<Control>this.credentialForm.controls['username']).updateValue('Developer');
-            (<Control>this.credentialForm.controls['password']).updateValue('Developer');
-
-            this.doLogin(evt);
-            return;
-        }
-
-        this.triedAbort = true;
     }
 
     setError(value: boolean) {
