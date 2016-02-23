@@ -23,7 +23,7 @@ export class PlayersService {
     }
 
     public getAll(): Observable<Player[]> {
-        return this._http.get('api/players/list').map(response => (<Player[]>response.json()));
+        return this._http.get('api/players/list').map(response => <Player[]>response.json());
     }
 
     public getById(id: string): Observable<Player> {
