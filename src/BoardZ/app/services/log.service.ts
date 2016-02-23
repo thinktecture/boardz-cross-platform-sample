@@ -2,7 +2,7 @@ import {Injectable} from 'angular2/core';
 import {LogLevel} from '../models/loglevel';
 
 @Injectable()
-export class Logger {
+export class LogService {
 
     public defaultLogLevel: LogLevel = LogLevel.Info;
     public maximumLogLevel: LogLevel = LogLevel.Warning;
@@ -15,10 +15,6 @@ export class Logger {
             return;
 
         this.doLog(this.formatMessage(logLevel, message));
-    }
-
-    public logUltra(message: string): void {
-        this.log(message, LogLevel.Ultra);
     }
 
     public logVerbose(message: string): void {
