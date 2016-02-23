@@ -14,7 +14,6 @@ export class SignalRService {
 
     public someoneJoinedAGame: EventEmitter<string> = new EventEmitter<string>();
 
-    // TODO: Inject LoginService here. Currently leads to an exception since Angular can not resolve it?
     constructor(private _configuration: Configuration,
                 private _tokenDataStore: TokenDataStore,
                 private _logger: Logger) {
