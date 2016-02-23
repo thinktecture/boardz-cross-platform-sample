@@ -58,25 +58,25 @@ export class LoginService {
         this.logout();
 
         let body = 'grant_type=password&username=' + username + '&password=' + password,
-            options = new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' }) }),
-            request = this._http.post(this._config.apiEndpoint + 'token', body, options)
-                .map(response => <TokenData>response.json()),
-            multiplexer = new Subject<TokenData>();
-        
-        multiplexer.subscribe(
-            tokenData => {
-                this.saveToken(tokenData.access_token);
-                this._tokenStore.username = username;
+            options = new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' }) });
 
-                let expiryDate = new Date();
-                expiryDate.setSeconds(expiryDate.getSeconds() + tokenData.expires_in);
-                this._tokenStore.tokenExpiry = expiryDate;
-            },
-            error => this.handleError(error)
-        );
+        return Observable.create<TokenData>((observer)=>{
+            this._http.post(this._config.apiEndpoint + 'token', body, options)
+                .map(response => <TokenData>response.json())
+                .subscribe(
+                    (tokenData) =>{
+                        this.saveToken(tokenData.access_token);
+                        this._tokenStore.username = username;
 
-        request.subscribe(multiplexer);
-        return multiplexer;
+                        let expiryDate = new Date();
+                        expiryDate.setSeconds(expiryDate.getSeconds() + tokenData.expires_in);
+                        this._tokenStore.tokenExpiry = expiryDate;
+                        observer.next(tokenData);
+                    },
+                    (error) => observer.error(error),
+                    () => observer.complete()
+                );
+        });
     }
 
     handleError(error: TokenData) {
