@@ -6,14 +6,14 @@ import {Component, Input, ChangeDetectionStrategy} from 'angular2/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WidgetComponent {
-    @Input('caption')
-    _caption: string;
-    @Input('count')
-    _count: string;
-    @Input('icon')
-    _icon: string;
-    @Input('color')
-    _color: string;
-    @Input('target')
-    _target: string;
+    @Input()
+    public caption: string;
+    @Input()
+    public count: string;
+    @Input()
+    public icon: string;
+    @Input()
+    public color: string;
+    @Input()
+    public target: string;
 }
