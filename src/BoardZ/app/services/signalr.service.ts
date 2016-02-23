@@ -1,7 +1,7 @@
 import {Injectable, EventEmitter} from 'angular2/core';
 import {Configuration} from '../app-config';
-import {Logger} from './log.service';
 import {TokenDataStore} from './token.service';
+import {NotificationService} from './notification.service';
 
 // jQuery Ahoi
 declare var $;
@@ -15,8 +15,8 @@ export class SignalRService {
     public someoneJoinedAGame: EventEmitter<string> = new EventEmitter<string>();
 
     constructor(private _configuration: Configuration,
-                private _tokenDataStore: TokenDataStore,
-                private _logger: Logger) {
+                private _notifiationService: NotificationService,
+                private _tokenDataStore: TokenDataStore) {
         this._hubConnection = $.hubConnection;
     }
 
@@ -39,13 +39,14 @@ export class SignalRService {
 
         this._playerProxy.on('someoneStartedPlaying', (username, game) => {
             var msg = `${username} started playing ${game}.`;
-            this._logger.logDebug(`Received SignalR message: ${msg}`);
             this.someoneJoinedAGame.emit(msg);
         });
 
         this._connection.start()
-            .done(() => this._logger.logDebug('SignalR connection established.'))
-            .fail(() => this._logger.logError('SignalR connection not established.'));
+            .fail(() => {
+                this._notifiationService.notifyError('Error establishing real-time connection to server.');
+                this.stop();
+            });
     }
 
     public stop(): void {

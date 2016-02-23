@@ -1,7 +1,6 @@
 import {Component} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {ResolvedInstruction} from 'angular2/src/router/instruction';
-import {Logger} from '../../services/log.service';
 
 @Component({
     selector: 'breadcrumb',
@@ -10,14 +9,12 @@ import {Logger} from '../../services/log.service';
 export class Breadcrumb {
     public crumbs: any[];
 
-    constructor(private _router: Router, private _logger: Logger) {
+    constructor(private _router: Router) {
         while (this._router.parent) {
             this._router = this._router.parent;
         }
 
         this._router.subscribe(routeUrl => {
-            this._logger.logVerbose('Breadcrumb detected routing to: ' + routeUrl);
-
             let instructions = [];
             let lastUrl = '';
             this.crumbs = [];

@@ -1,6 +1,5 @@
 import {Injectable} from 'angular2/core';
 import {Observable} from 'rxjs/Observable';
-import {Logger} from './log.service';
 
 const tokenKey: string = 'Authentication::Token';
 const usernameKey: string = 'Authentication::Username';
@@ -11,7 +10,7 @@ export class TokenDataStore {
 
     private _authenticated: boolean;
 
-    constructor(private _logger: Logger) {
+    constructor() {
         var token = this.token;
         if ((typeof token !== 'undefined') && (token !== null))
             this._authenticated = true;
@@ -19,14 +18,11 @@ export class TokenDataStore {
 
     public get token(): string {
         let token = localStorage.getItem(tokenKey);
-        this._logger.logUltra('TokenDataStore: Retrieved token: ' + token);
 
         return token;
     }
 
     public set token(token: string) {
-        this._logger.logUltra('TokenDataStore: Setting token: ' + token);
-
         if (token === null) {
             localStorage.removeItem(tokenKey);
             this.username = null;
@@ -40,14 +36,11 @@ export class TokenDataStore {
 
     public get username(): string {
         let username = localStorage.getItem(usernameKey);
-        this._logger.logUltra('TokenDataStore: Retrieved user name: ' + username);
 
         return username;
     }
 
     public set username(username: string) {
-        this._logger.logUltra('TokenDataStore: Setting user name: ' + username);
-
         if (username === null) {
             localStorage.removeItem(usernameKey);
         } else {
@@ -57,14 +50,10 @@ export class TokenDataStore {
 
     public get tokenExpiry(): Date {
         let value = localStorage.getItem(expiryKey);
-        this._logger.logUltra('TokenDataStore: Retrieved token expiry: ' + value);
-
         return (value !== null) ? new Date(value) : null;
     }
 
     public set tokenExpiry(expiryDate: Date) {
-        this._logger.logUltra('TokenDataStore: Setting token expiry: ' + expiryDate);
-
         if (expiryDate === null) {
             localStorage.removeItem(expiryKey);
         } else {

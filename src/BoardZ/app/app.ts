@@ -8,8 +8,6 @@ import {Games} from './components/games/games';
 import {Notifications} from './components/notifications/notifications';
 import {APP_SERVICES} from './services/all';
 import {RadiusSearchComponent} from './components/radiussearch/radiussearch';
-import {Logger} from './services/log.service';
-import {LogLevel} from './models/loglevel';
 import {SignalRService} from './services/signalr.service';
 import {LoginService} from './services/login.service';
 import {NotificationService} from './services/notification.service';
@@ -54,10 +52,7 @@ export class BoardzApp implements AfterViewInit {
     constructor(private _signalRService: SignalRService,
                 private _loginService: LoginService,
                 private _notificationService: NotificationService,
-                uiNotificationService: UiNotificationService,
-        logger: Logger) {
-        logger.maximumLogLevel = LogLevel.Verbose;
-
+                uiNotificationService: UiNotificationService) {
         uiNotificationService.subscribeToNotifications();
     }
 

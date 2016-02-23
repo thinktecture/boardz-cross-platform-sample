@@ -7,8 +7,6 @@ import {BoardzApp} from './app';
 import {HTTP_PROVIDERS} from 'angular2/http';
 import {TokenDataStore} from './services/token.service';
 import {appInjector} from './services/app.injector';
-import {ConsoleLogger} from './services/console.log.service';
-import {Logger} from './services/log.service';
 import 'rxjs/Rx';
 
 //enableProdMode();
@@ -18,7 +16,6 @@ bootstrap(BoardzApp, [
     ROUTER_PROVIDERS,
     provide(LocationStrategy, { useClass: HashLocationStrategy }),
     provide("inDiagnosticsMode", { useValue: true }),
-    provide(Logger, { useClass: ConsoleLogger }),
     TokenDataStore,
 ]).then((appRef: ComponentRef) => {
     // Store a reference to the injector workaround for Dependency Injection in Router lifecycle hook

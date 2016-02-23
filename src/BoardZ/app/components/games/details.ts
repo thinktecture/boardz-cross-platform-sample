@@ -5,7 +5,6 @@ import {DiagnosticComponent} from '../diagnostic/diagnostic';
 import {LocateItComponent} from '../locateit/locateit';
 import {PictureItComponenet} from '../pictureit/pictureit';
 import {Game} from '../../models/game';
-import {Logger} from '../../services/log.service';
 import {GamesService} from '../../services/games.service';
 import {NotificationService} from '../../services/notification.service';
 import {SignalRService} from '../../services/signalr.service';
@@ -26,8 +25,7 @@ export class GameDetails implements OnInit {
     public model: Game = new Game();
     public originalModel: Game = new Game();
 
-    constructor(private _logger: Logger,
-                private _gameService: GamesService,
+    constructor(private _gameService: GamesService,
                 private _router: Router,
                 private _routeParams: RouteParams,
                 private _notificationService: NotificationService,
@@ -54,10 +52,7 @@ export class GameDetails implements OnInit {
                     this.originalModel = this._gameService.deepClone(this.model = game);
                     if (this._needsReset) this.reset();
                 },
-                (error) => {
-                    this._logger.logError('Could not find game. Error was: ' + error);
-                    this._notificationService.notifyError('Could not load game data.');
-                }
+                (error) => this._notificationService.notifyError('Could not load game data.')
             );
     }
 

@@ -6,7 +6,6 @@ import {Notification} from '../../models/notification';
 import {LoginService} from '../../services/login.service';
 import {TokenDataStore} from '../../services/token.service';
 import {NotificationService} from '../../services/notification.service';
-import {Logger} from '../../services/log.service';
 
 @Component({
     selector: 'boardz-header',
@@ -19,14 +18,12 @@ export class HeaderComponent implements OnInit {
     private notifications: Notification[] = [];
     public currentLocation: string = 'BoardZ!';
 
-    constructor(public loginService: LoginService, private _tokenStore: TokenDataStore, private _notificationService: NotificationService, private _router: Router, private _logger: Logger) {
+    constructor(public loginService: LoginService, private _tokenStore: TokenDataStore, private _notificationService: NotificationService, private _router: Router) {
         while (this._router.parent) {
             this._router = this._router.parent;
         }
 
         this._router.subscribe(routeUrl => {
-            this._logger.logVerbose('Headerbar detected routing to: ' + routeUrl);
-
             this._router.recognize(routeUrl).then(instruction => {
                 while (instruction.child) {
                     instruction = instruction.child;
@@ -41,12 +38,9 @@ export class HeaderComponent implements OnInit {
         this._notificationService.notifications.subscribe(
             (notification) => this.onNotification(notification)
         );
-        this._tokenStore.check().subscribe(result => {
-            this._logger.logDebug('Headerbar: Received notification about tokenstore status change. Result: ' + result);
-            this.loggedIn = result
-        });
+        this._tokenStore.check().subscribe(result => this.loggedIn = result);
     }
- 
+
 
     public dismiss(notification: Notification): boolean {
         if (notification) {

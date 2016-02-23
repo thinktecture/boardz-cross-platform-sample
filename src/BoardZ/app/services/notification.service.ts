@@ -1,6 +1,5 @@
 import {Injectable} from 'angular2/core';
 import {Subject} from 'rxjs/Subject';
-import {Logger} from './log.service';
 import {Notification} from '../models/notification';
 import {NotificationType} from '../models/notificationtype';
 
@@ -9,15 +8,11 @@ export class NotificationService {
 
     public notifications: Subject<Notification> = new Subject<Notification>();
 
-    constructor(private _logger: Logger) {
-    }
-
     public notify(notification: Notification) {
         if (!notification.message) {
             return;
         }
-
-        this._logger.logDebug('NotificationService.notify received notification: ' + JSON.stringify(notification));
+        
         this.notifications.next(notification);
     }
 
