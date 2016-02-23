@@ -49,29 +49,25 @@ export class LoginService {
      * @param password
      * @returns {Subject<TokenData>}
      */
-    public challenge(username: string, password: string): Observable<TokenData> {
+    public challenge(username: string, password: string): Observable<void> {
         this.logout();
 
-        let body = 'grant_type=password&username=' + username + '&password=' + password,
-            options = new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' }) }),
-            request = this._http.post(this._config.apiEndpoint + 'token', body, options)
-                .map(response => <TokenData>response.json()),
-            multiplexer = new Subject<TokenData>();
-        
-        multiplexer.subscribe(
-            tokenData => {
-                this.saveToken(tokenData.access_token);
-                this._tokenStore.username = username;
+        const body = 'grant_type=password&username=' + username + '&password=' + password;
+        const options = new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' }) });
+        const request = this._http.post(this._config.apiEndpoint + 'token', body, options)
+            .map(response => <TokenData>response.json())
+            .map(tokenData => {
+                    this.saveToken(tokenData.access_token);
+                    this._tokenStore.username = username;
 
-                let expiryDate = new Date();
-                expiryDate.setSeconds(expiryDate.getSeconds() + tokenData.expires_in);
-                this._tokenStore.tokenExpiry = expiryDate;
-            },
-            error => this.handleError(error)
-        );
+                    let expiryDate = new Date();
+                    expiryDate.setSeconds(expiryDate.getSeconds() + tokenData.expires_in);
+                    this._tokenStore.tokenExpiry = expiryDate;
+                },
+                error => this.handleError(error)
+            );
 
-        request.subscribe(multiplexer);
-        return multiplexer;
+        return request;
     }
 
     handleError(error: TokenData) {
