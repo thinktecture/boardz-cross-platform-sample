@@ -2,13 +2,13 @@ import {Injectable} from 'angular2/core';
 import {Http, ConnectionBackend, RequestOptions, RequestOptionsArgs, Response, Headers} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 import {Configuration} from '../app-config';
-import {TokenDataStore} from './token.service';
+import {TokenService} from './token.service';
 
 
 @Injectable()
 export class AuthenticatedHttp extends Http {
 
-    constructor(protected _backend: ConnectionBackend, protected _defaultOptions: RequestOptions, protected _config: Configuration, protected _tokenStore: TokenDataStore) {
+    constructor(protected _backend: ConnectionBackend, protected _defaultOptions: RequestOptions, protected _config: Configuration, protected _tokenService: TokenService) {
         super(_backend, _defaultOptions);
     }
     private buildUrl(appendix: string): string{
@@ -56,7 +56,7 @@ export class AuthenticatedHttp extends Http {
     }
 
     protected prepareOptions(options: RequestOptionsArgs): RequestOptionsArgs {
-        var token = this._tokenStore.token;
+        var token = this._tokenService.token;
 
         if (token) {
             options = options ||{ };

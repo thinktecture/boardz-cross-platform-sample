@@ -7,7 +7,7 @@ const usernameKey: string = 'Authentication::Username';
 const expiryKey: string = 'Authentication::TokenExpiration';
 
 @Injectable()
-export class TokenDataStore {
+export class TokenService {
 
     private _authenticated: boolean;
 
@@ -19,13 +19,13 @@ export class TokenDataStore {
 
     public get token(): string {
         let token = localStorage.getItem(tokenKey);
-        this._logService.logVerbose('TokenDataStore: Retrieved token: ' + token);
+        this._logService.logVerbose('TokenService: Retrieved token: ' + token);
 
         return token;
     }
 
     public set token(token: string) {
-        this._logService.logVerbose('TokenDataStore: Setting token: ' + token);
+        this._logService.logVerbose('TokenService: Setting token: ' + token);
 
         if (token === null) {
             localStorage.removeItem(tokenKey);
@@ -40,13 +40,13 @@ export class TokenDataStore {
 
     public get username(): string {
         let username = localStorage.getItem(usernameKey);
-        this._logService.logVerbose('TokenDataStore: Retrieved user name: ' + username);
+        this._logService.logVerbose('TokenService: Retrieved user name: ' + username);
 
         return username;
     }
 
     public set username(username: string) {
-        this._logService.logVerbose('TokenDataStore: Setting user name: ' + username);
+        this._logService.logVerbose('TokenService: Setting user name: ' + username);
 
         if (username === null) {
             localStorage.removeItem(usernameKey);
@@ -57,13 +57,13 @@ export class TokenDataStore {
 
     public get tokenExpiry(): Date {
         let value = localStorage.getItem(expiryKey);
-        this._logService.logVerbose('TokenDataStore: Retrieved token expiry: ' + value);
+        this._logService.logVerbose('TokenService: Retrieved token expiry: ' + value);
 
         return (value !== null) ? new Date(value) : null;
     }
 
     public set tokenExpiry(expiryDate: Date) {
-        this._logService.logVerbose('TokenDataStore: Setting token expiry: ' + expiryDate);
+        this._logService.logVerbose('TokenService: Setting token expiry: ' + expiryDate);
 
         if (expiryDate === null) {
             localStorage.removeItem(expiryKey);

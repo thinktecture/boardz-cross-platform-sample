@@ -3,7 +3,7 @@ import {Http, Headers, RequestOptions} from 'angular2/http';
 import {Router} from 'angular2/router';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
-import {TokenDataStore} from './token.service';
+import {TokenService} from './token.service';
 import {Configuration} from '../app-config';
 import {LogService} from './log.service';
 import {TokenData} from '../models/tokendata';
@@ -15,21 +15,21 @@ export class LoginService {
     private _lastLoginUnsuccessful: boolean;
 
     get isAuthenticated(): boolean {
-        return this._tokenStore.token !== null;
+        return this._tokenService.token !== null;
     }
 
     get username(): string {
-        return this._tokenStore.username;
+        return this._tokenService.username;
     }
 
     constructor(private _config: Configuration,
                 private _logService: LogService,
                 private _http: Http,
                 private _router: Router,
-                private _tokenStore: TokenDataStore,
+                private _tokenService: TokenService,
                 private _signalRService: SignalRService
     ) {
-        this._tokenStore.check()
+        this._tokenService.check()
             .subscribe((value) => {
                 if (!value) this.logout();
             });
@@ -43,7 +43,7 @@ export class LoginService {
 
         this._signalRService.stop();
         this._lastLoginUnsuccessful = false;
-        this._tokenStore.token = null;
+        this._tokenService.token = null;
 
         this._router.navigate(['Login']);
     }
@@ -66,11 +66,11 @@ export class LoginService {
                 .subscribe(
                     (tokenData) =>{
                         this.saveToken(tokenData.access_token);
-                        this._tokenStore.username = username;
+                        this._tokenService.username = username;
 
                         let expiryDate = new Date();
                         expiryDate.setSeconds(expiryDate.getSeconds() + tokenData.expires_in);
-                        this._tokenStore.tokenExpiry = expiryDate;
+                        this._tokenService.tokenExpiry = expiryDate;
                         observer.next(tokenData);
                     },
                     (error) => observer.error(error),
@@ -87,7 +87,7 @@ export class LoginService {
     saveToken(token: string): void {
         this._logService.logVerbose('LoginService.saveToken: Saving token ' + token);
         this._lastLoginUnsuccessful = false;
-        this._tokenStore.token = token;
+        this._tokenService.token = token;
     }
 }
 

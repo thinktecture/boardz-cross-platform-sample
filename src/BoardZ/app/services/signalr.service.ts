@@ -1,7 +1,7 @@
 import {Injectable, EventEmitter} from 'angular2/core';
 import {Configuration} from '../app-config';
 import {LogService} from './log.service';
-import {TokenDataStore} from './token.service';
+import {TokenService} from './token.service';
 
 // jQuery Ahoi
 declare var $;
@@ -15,7 +15,7 @@ export class SignalRService {
     public someoneJoinedAGame: EventEmitter<string> = new EventEmitter<string>();
 
     constructor(private _configuration: Configuration,
-                private _tokenDataStore: TokenDataStore,
+                private _tokenService: TokenService,
                 private _logService: LogService) {
         this._hubConnection = $.hubConnection;
     }
@@ -29,12 +29,12 @@ export class SignalRService {
     }
 
     public start(): void {
-        if (this._connection || !this._tokenDataStore.token) {
+        if (this._connection || !this._tokenService.token) {
             return;
         }
 
         this._connection = this._hubConnection(`${this._configuration.apiEndpoint}signalr`);
-        this._connection.qs = { 'authorization': this._tokenDataStore.token };
+        this._connection.qs = { 'authorization': this._tokenService.token };
         this._playerProxy = this._connection.createHubProxy('playerHub');
 
         this._playerProxy.on('someoneStartedPlaying', (username, game) => {

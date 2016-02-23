@@ -4,7 +4,7 @@ import {Router} from 'angular2/router';
 import {Breadcrumb} from '../breadcrumb/breadcrumb';
 import {Notification} from '../../models/notification';
 import {LoginService} from '../../services/login.service';
-import {TokenDataStore} from '../../services/token.service';
+import {TokenService} from '../../services/token.service';
 import {NotificationService} from '../../services/notification.service';
 import {LogService} from '../../services/log.service';
 
@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
     private notifications: Notification[] = [];
     public currentLocation: string = 'BoardZ!';
 
-    constructor(public loginService: LoginService, private _tokenStore: TokenDataStore, private _notificationService: NotificationService, private _router: Router, private _logService: LogService) {
+    constructor(public loginService: LoginService, private _tokenService: TokenService, private _notificationService: NotificationService, private _router: Router, private _logService: LogService) {
         while (this._router.parent) {
             this._router = this._router.parent;
         }
@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit {
         this._notificationService.notifications.subscribe(
             (notification) => this.onNotification(notification)
         );
-        this._tokenStore.check().subscribe(result => {
+        this._tokenService.check().subscribe(result => {
             this._logService.logDebug('Headerbar: Received notification about tokenstore status change. Result: ' + result);
             this.loggedIn = result
         });
