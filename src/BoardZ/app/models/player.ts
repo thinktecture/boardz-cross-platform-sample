@@ -1,3 +1,3 @@
-export class Player{
+export class Player {
     public id: string;
 }

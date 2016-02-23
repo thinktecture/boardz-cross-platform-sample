@@ -30,7 +30,12 @@ declare var window: AdminLteFix;
     { path: '/login', component: LoginForm, name: 'Login', data: { displayName: 'Login' } },
     { path: '/notifications', component: Notifications, name: 'Notifications', data: { displayName: 'Notifications' } },
     { path: '/games/...', component: Games, name: 'Games', data: { displayName: 'Games' } },
-    { path: '/radiussearch', component: RadiusSearchComponent, name: 'RadiusSearch', data: { displayName: 'Radius Search' } }
+    {
+        path: '/radiussearch',
+        component: RadiusSearchComponent,
+        name: 'RadiusSearch',
+        data: { displayName: 'Radius Search' }
+    }
 ])
 export class BoardzApp implements AfterViewInit {
 

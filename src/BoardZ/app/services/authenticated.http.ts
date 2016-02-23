@@ -11,9 +11,11 @@ export class AuthenticatedHttp extends Http {
     constructor(protected _backend: ConnectionBackend, protected _defaultOptions: RequestOptions, protected _config: Configuration, protected _tokenStore: TokenDataStore) {
         super(_backend, _defaultOptions);
     }
-    private buildUrl(appendix: string): string{
+
+    private buildUrl(appendix: string): string {
         return `${this._config.apiEndpoint}${appendix}`;
     }
+
     request(url: string, options?: RequestOptionsArgs): Observable<Response> {
         url = this.buildUrl(url);
         options = this.prepareOptions(options);
@@ -43,6 +45,7 @@ export class AuthenticatedHttp extends Http {
         options = this.prepareOptions(options);
         return super.delete(url, options);
     }
+
     patch(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
         url = this.buildUrl(url);
         options = this.prepareOptions(options);
@@ -59,7 +62,7 @@ export class AuthenticatedHttp extends Http {
         var token = this._tokenStore.token;
 
         if (token) {
-            options = options ||{ };
+            options = options || {};
 
             if (!options.headers)
                 options.headers = new Headers();

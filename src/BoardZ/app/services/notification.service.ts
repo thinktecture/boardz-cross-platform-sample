@@ -12,7 +12,7 @@ export class NotificationService {
         if (!notification.message) {
             return;
         }
-        
+
         this.notifications.next(notification);
     }
 

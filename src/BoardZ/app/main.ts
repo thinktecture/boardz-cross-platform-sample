@@ -15,7 +15,7 @@ bootstrap(BoardzApp, [
     HTTP_PROVIDERS,
     ROUTER_PROVIDERS,
     provide(LocationStrategy, { useClass: HashLocationStrategy }),
-    provide("inDiagnosticsMode", { useValue: true }),
+    provide('inDiagnosticsMode', { useValue: true }),
     TokenDataStore,
 ]).then((appRef: ComponentRef) => {
     // Store a reference to the injector workaround for Dependency Injection in Router lifecycle hook

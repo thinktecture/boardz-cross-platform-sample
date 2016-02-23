@@ -25,8 +25,7 @@ export class LoginService {
                 private _http: Http,
                 private _router: Router,
                 private _tokenStore: TokenDataStore,
-                private _signalRService: SignalRService
-    ) {
+                private _signalRService: SignalRService) {
         this._tokenStore.check()
             .subscribe((value) => {
                 if (!value) this.logout();
