@@ -1,54 +1,35 @@
 import {Component} from 'angular2/core';
-import {FormBuilder, Validators, ControlGroup, Control} from 'angular2/common';
-import {Router, ROUTER_DIRECTIVES, CanDeactivate, ComponentInstruction} from 'angular2/router';
+import {Router, CanDeactivate, ComponentInstruction} from 'angular2/router';
 import {LoginService} from '../../services/login.service';
 import {LogService} from '../../services/log.service';
 import {NotificationService} from '../../services/notification.service';
 import {SignalRService} from '../../services/signalr.service';
 
 @Component({
-    selector: 'login-form',
-    directives: [ROUTER_DIRECTIVES],
     templateUrl: 'app/components/login/login.html'
 })
 export class LoginForm implements CanDeactivate {
 
-    public credentialForm: ControlGroup;
-    public loginError: boolean = false;
-    public triedAbort: boolean = false;
+    ngOnInit(): any {
 
-    get isUsernameValid(): boolean {
-        return this.credentialForm.controls['username'].valid || this.credentialForm.controls['username'].pristine
     }
 
-    get isPasswordValid(): boolean {
-        return this.credentialForm.controls['password'].valid || this.credentialForm.controls['password'].pristine
-    }
+    public _hasError: boolean = false;
+    private _userName: string;
+    private _password: string;
 
     constructor(private _router: Router,
                 private _loginService: LoginService,
                 private _logService: LogService,
                 private _notificationService: NotificationService,
-                private _signalRService: SignalRService,
-                formBuilder: FormBuilder) {
-        this.credentialForm = formBuilder.group({
-            username: ['', Validators.required],
-            password: ['', Validators.required]
-        });
+                private _signalRService: SignalRService) {
+
     }
 
     public doLogin(evt): void {
         this._logService.logDebug('LoginForm.doLogin called via event: ' + evt.toString());
         evt.preventDefault();
-
-        this.triedAbort = false;
-
-        var username = this.credentialForm.controls['username'].value,
-            password = this.credentialForm.controls['password'].value;
-
-        this._logService.logVerbose('LoginForm.doLogin calling "challenge" and submitting: ' + username + ':' + password);
-
-        this._loginService.challenge(username, password)
+        this._loginService.challenge(this._userName, this._password)
             .subscribe(
                 () => {
                     this._signalRService.start();
@@ -62,27 +43,12 @@ export class LoginForm implements CanDeactivate {
             );
     }
 
-    public tryAbort(evt): void {
-        evt.preventDefault();
-
-        if (evt.ctrlKey) {
-            this._logService.logDebug('LoginForm: Developer-shortcut activated.');
-            (<Control>this.credentialForm.controls['username']).updateValue('Developer');
-            (<Control>this.credentialForm.controls['password']).updateValue('Developer');
-
-            this.doLogin(evt);
-            return;
-        }
-
-        this.triedAbort = true;
-    }
-
     setError(value: boolean) {
         this._logService.logDebug('LoginForm.setError: Setting error state to: ' + value);
-        this.loginError = value;
+        this._hasError = value;
     }
 
     routerCanDeactivate(next: ComponentInstruction, prev: ComponentInstruction) {
-        return !this.loginError && this._loginService.isAuthenticated;
+        return !this._hasError && this._loginService.isAuthenticated;
     }
 }
