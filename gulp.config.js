@@ -12,24 +12,24 @@ module.exports = {
 
             ],
             main: [
-                'index.html'
+                './src/BoardZ/index.html'
             ],
             app: {
                 ts: [
-                    'app/**/*.ts'
+                    './src/BoardZ/app/**/*.ts'
                 ],
                 html: [
-                    'app/**/*.html'
+                    './src/BoardZ/app/**/*.html'
                 ],
                 css: [
 
-                    'css/**/*.css'
+                    './src/BoardZ/css/**/*.css'
                 ],
                 componentCss: [
-                    'app/**/*.css'
+                    './src/BoardZ/app/**/*.css'
                 ],
                 assets: [
-                    'assets/**/*.*'
+                    './src/BoardZ/assets/**/*.*'
                 ]
             },
             vendorStylesheets: [
@@ -65,12 +65,12 @@ module.exports = {
         }
     },
     ts: {
-        config: 'tsconfig.json'
+        config: './tsconfig.json'
     },
     targets: {
         vendorMinJs: 'vendor.min.js',
         vendorMinCss: 'vendor.min.css',
-        buildFolder: 'build',
+        buildFolder: './dist',
         appFolder: 'app',
         stylesFolder: 'css',
         minified: {

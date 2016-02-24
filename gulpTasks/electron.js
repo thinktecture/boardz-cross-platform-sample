@@ -2,9 +2,6 @@
 
 'use strict';
 
-// Require dist tasks
-require('./dist');
-
 var gulp = require('gulp'),
     del = require('del'),
     runSequence = require('run-sequence'),
@@ -12,38 +9,35 @@ var gulp = require('gulp'),
     electron = require('gulp-awesome-electron'),
     symdest = require('gulp-symdest'),
     path = require('path'),
-    buildConfig = require('../gulp.config');
+    config = require('../gulp.config');
 
-gulp.task('electron:clean', function (done) {
-    del([
-        path.join(buildConfig.targets.electronFolder, 'www'),
-        path.join(buildConfig.targets.electronFolder, 'build')
-    ])
-        .then(function () {
-            done();
-        });
+gulp.task('electron:clean', function () {
+    return del([
+        path.join(config.targets.electronFolder, 'www'),
+        path.join(config.targets.electronFolder, 'build')
+    ]);
 });
 
 gulp.task('electron:copy-source', function () {
-    return gulp.src(path.join(buildConfig.targets.distFolder, '**', '*.*'))
-        .pipe(gulp.dest(path.join(buildConfig.targets.electronFolder, 'www')));
+    return gulp.src(path.join(config.targets.buildFolder, '**', '*.*'))
+        .pipe(gulp.dest(path.join(config.targets.electronFolder, 'www')));
 });
 
 function buildAppFor(targetPlatform, target) {
     return gulp.src([
-            path.join(buildConfig.targets.electronFolder, 'package.json'),
-            path.join(buildConfig.targets.electronFolder, 'index.js'),
-            path.join(buildConfig.targets.electronFolder, 'www', '**', '*')
+            path.join(config.targets.electronFolder, 'package.json'),
+            path.join(config.targets.electronFolder, 'index.js'),
+            path.join(config.targets.electronFolder, 'www', '**', '*')
     ])
         .pipe(electron({
-            version: '0.36.4',
+            version: '0.36.7',
             platform: targetPlatform,
             arch: 'x64',
             companyName: 'Thinktecture AG',
-            darwinIcon: path.join(buildConfig.targets.resourcesFolder, 'icon.icns'),
-            winIcon: path.join(buildConfig.targets.resourcesFolder, 'icon.ico')
+            darwinIcon: path.join(config.targets.resourcesFolder, 'icon.icns'),
+            winIcon: path.join(config.targets.resourcesFolder, 'icon.ico')
         }))
-        .pipe(symdest(path.join(buildConfig.targets.electronFolder, 'build', target)));
+        .pipe(symdest(path.join(config.targets.electronFolder, 'build', target)));
 }
 
 gulp.task('electron:build:windows', function () {
@@ -71,8 +65,8 @@ gulp.task('electron:watch', function () {
     gulp.start('dev:livereload');
 
     runSequence('electron:default', function () {
-        watch(buildConfig.targets.buildFolder, { base: buildConfig.targets.buildFolder })
-            .pipe(gulp.dest(path.join(buildConfig.targets.electronFolder, 'www')));
+        watch(config.targets.buildFolder, { base: config.targets.buildFolder })
+            .pipe(gulp.dest(path.join(config.targets.electronFolder, 'www')));
     });
 });
 
