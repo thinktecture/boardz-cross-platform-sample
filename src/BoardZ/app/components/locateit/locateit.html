@@ -8,7 +8,7 @@
         <p [hidden]="!_isLocating">Looking up your location...</p>
 
         <p [hidden]="!_hasError || _isLocating" class="text-danger">Sorry, we can't access your location.</p>
-        <p>{{_coords|json}}</p>
+        <div id="map" style="height: 250px"></div>
     </div>
     <!-- /.box-body -->
 </div>

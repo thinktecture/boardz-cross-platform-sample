@@ -37,7 +37,8 @@ module.exports = {
                 './src/BoardZ/vendor/admin-lte/css/AdminLTE.css',
                 './src/BoardZ/vendor/admin-lte/css/skins/_all-skins.css',
                 './src/BoardZ/vendor/font-awesome/css/font-awesome.css',
-                './src/BoardZ/vendor/pNotify/pnotify.custom.css'
+                './src/BoardZ/vendor/pNotify/pnotify.custom.css',
+                './src/BoardZ/vendor/leaflet-js/leaflet.css'
             ],
             vendorFonts: [
                 './src/BoardZ/vendor/font-awesome/fonts/*.*',
@@ -53,6 +54,7 @@ module.exports = {
                 './src/BoardZ/vendor/bootstrap/js/bootstrap.js',
                 './src/BoardZ/vendor/fastclick/fastclick.js',
                 './src/BoardZ/vendor/admin-lte/js/app.js',
+                './src/BoardZ/vendor/leaflet-js/leaflet-src.js',
                 './node_modules/systemjs/dist/system-polyfills.js',
                 './node_modules/angular2/bundles/angular2-polyfills.js',
                 './node_modules/systemjs/dist/system.src.js',
