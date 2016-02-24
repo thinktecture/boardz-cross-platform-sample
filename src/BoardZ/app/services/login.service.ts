@@ -60,7 +60,7 @@ export class LoginService {
         let body = 'grant_type=password&username=' + username + '&password=' + password,
             options = new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' }) });
 
-        return Observable.create<TokenData>((observer)=>{
+        return Observable.create((observer)=>{
             this._http.post(this._config.apiEndpoint + 'token', body, options)
                 .map(response => <TokenData>response.json())
                 .subscribe(
