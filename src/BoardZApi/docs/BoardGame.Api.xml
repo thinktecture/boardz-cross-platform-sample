@@ -155,5 +155,10 @@
             Base64 Image Url (if player did "i am gaming")
             </summary>
         </member>
+        <member name="P:BoardGame.Api.Models.Player.BoardGameName">
+            <summary>
+            Will only be set when using <see cref="M:BoardGame.Api.Controllers.PlayersController.FindNearby(BoardGame.Api.Models.Coordinate,System.Int32)"/> API
+            </summary>
+        </member>
     </members>
 </doc>

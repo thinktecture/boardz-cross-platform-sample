@@ -1,4 +1,5 @@
 ﻿using System;
+using BoardGame.Api.Controllers;
 
 namespace BoardGame.Api.Models
 {
@@ -28,5 +29,10 @@ namespace BoardGame.Api.Models
         /// Base64 Image Url (if player did "i am gaming")
         /// </summary>
         public string ImageUrl { get; set; }
+
+        /// <summary>
+        /// Will only be set when using <see cref="PlayersController.FindNearby"/> API
+        /// </summary>
+        public string BoardGameName { get; set; }
     }
 }

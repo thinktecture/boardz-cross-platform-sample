@@ -14,12 +14,15 @@ namespace BoardGame.Api.Controllers
     [Authorize]
     public class PlayersController : ApiController
     {
-        private readonly IStorage<Models.Player> _storage;
+        private readonly IStorage<Models.Player> _playerStorage;
+        private readonly IStorage<Models.BoardGame> _boardGamesStorage;
         private readonly DistanceCalculator _distanceCalculator;
 
-        public PlayersController(IStorage<Models.Player> storage, DistanceCalculator distanceCalculator)
+        public PlayersController(IStorage<Models.Player> playerStorage, IStorage<Models.BoardGame> boardGamesStorage,
+            DistanceCalculator distanceCalculator)
         {
-            _storage = storage;
+            _playerStorage = playerStorage;
+            _boardGamesStorage = boardGamesStorage;
             _distanceCalculator = distanceCalculator;
         }
 
@@ -31,7 +34,7 @@ namespace BoardGame.Api.Controllers
         [ResponseType(typeof(Player[]))]
         public IHttpActionResult List()
         {
-            return Ok(_storage.List());
+            return Ok(_playerStorage.List());
         }
 
         /// <summary>
@@ -42,7 +45,7 @@ namespace BoardGame.Api.Controllers
         [ResponseType(typeof(int))]
         public IHttpActionResult PlayerCount()
         {
-            return Ok(_storage.Count());
+            return Ok(_playerStorage.Count());
         }
 
         /// <summary>
@@ -54,7 +57,7 @@ namespace BoardGame.Api.Controllers
         [ResponseType(typeof(Guid))]
         public IHttpActionResult Add(Models.Player player)
         {
-            var result = _storage.Add(player);
+            var result = _playerStorage.Add(player);
 
             return Ok(result);
         }
@@ -68,7 +71,7 @@ namespace BoardGame.Api.Controllers
         [ResponseType(typeof(Player))]
         public IHttpActionResult Single(Guid id)
         {
-            return Ok(_storage.Get(id));
+            return Ok(_playerStorage.Get(id));
         }
 
         /// <summary>
@@ -79,7 +82,7 @@ namespace BoardGame.Api.Controllers
         [HttpDelete]
         public IHttpActionResult Remove(Guid id)
         {
-            _storage.Delete(id);
+            _playerStorage.Delete(id);
             return Ok();
         }
 
@@ -91,7 +94,7 @@ namespace BoardGame.Api.Controllers
         [HttpPut]
         public IHttpActionResult Update(Models.Player player)
         {
-            _storage.Update(player);
+            _playerStorage.Update(player);
             return Ok();
         }
 
@@ -105,8 +108,21 @@ namespace BoardGame.Api.Controllers
         [ResponseType(typeof(PlayerWithDistance[]))]
         public IHttpActionResult FindNearby([FromUri] Coordinate coordinate, int radius)
         {
-            var result = _storage.List()
+            var result = _playerStorage.List()
                 .Where(i => i.Coordinate != null)
+                .Select(p =>
+                {
+                    try
+                    {
+                        p.BoardGameName = _boardGamesStorage.Get(p.BoardGameId).Name;
+                    }
+                    catch
+                    {
+                        // Silently fail, we didn't get the game. Can occur in dev 
+                    }
+
+                    return p;
+                })
                 .Select(c => new PlayerWithDistance()
                 {
                     Player = c,
