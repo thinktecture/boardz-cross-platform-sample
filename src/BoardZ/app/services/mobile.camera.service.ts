@@ -38,5 +38,4 @@ export class MobileCameraService implements ICameraService {
             document.addEventListener('deviceready', onCordovaDeviceReady);
         });
     }
-
 }

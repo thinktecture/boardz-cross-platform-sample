@@ -52,5 +52,4 @@ export class GamesService {
         return this._http.delete(`api/boardgames/remove?id=${id}`)
             .map(response => <string>response.text());
     }
-
 }

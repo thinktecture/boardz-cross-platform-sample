@@ -56,6 +56,4 @@ export class PlayersService {
         return this._http.delete(`api/players/remove?id=${id}`)
             .map(response => <string>response.text());
     }
-
-
 }

@@ -52,7 +52,6 @@ export class GameDetails implements OnInit {
             return;
         }
         this.loadGame(id);
-
     }
 
     private loadGame(id: string): void {
