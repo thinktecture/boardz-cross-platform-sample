@@ -22,13 +22,13 @@ function RegisterTasks(gulp, config) {
     });
 
     gulp.task('[private:cordova]:config-for-livereload', function () {
-        gulp.src(path.join(config.assetFolder, 'config_livereload.xml'), { base: config.assetFolder })
+        gulp.src(path.join(config.cordova, 'config_livereload.xml'), { base: config.cordova })
             .pipe(rename('config.xml'))
             .pipe(gulp.dest(config.targets.cordovaFolder));
     });
 
     gulp.task('[private:cordova]:config-for-default', function () {
-        gulp.src(path.join(config.assetFolder, 'config.xml'), { base: config.assetFolder })
+        gulp.src(path.join(config.cordova, 'config.xml'), { base: config.cordova })
             .pipe(gulp.dest(config.targets.cordovaFolder));
     });
 

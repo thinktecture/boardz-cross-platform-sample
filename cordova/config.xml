@@ -72,9 +72,6 @@
     <splash src="resources/ios/splash/Default@2x~iphone.png" width="640" height="960"/>
     <splash src="resources/ios/splash/Default~iphone.png" width="320" height="480"/>
   </platform>
-  <platform name="ios">
-    <preference name="Orientation" value="all"/>
-  </platform>
   <preference name="StatusBarOverlaysWebView" value="false"/>
   <preference name="StatusBarBackgroundColor" value="#367fa9"/>
   <preference name="StatusBarStyle" value="lightcontent"/>
@@ -84,6 +81,9 @@
   <preference name="xwalkVersion" value="14+"/>
   <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect"/>
   <preference name="xwalkMode" value="embedded"/>
+  <platform name="ios">
+    <preference name="Orientation" value="all" />
+  </platform>
   <icon src="resources/android/icon/drawable-xhdpi-icon.png"/>
   <engine name="ios" spec="~3.9.1"/>
   <engine name="android" spec="~4.1.1"/>
