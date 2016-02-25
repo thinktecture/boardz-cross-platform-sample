@@ -12,6 +12,9 @@ import {SignalRService} from './signalr.service';
 import {UiNotificationService} from './ui.notification.service';
 import {CameraService} from './camera.service';
 import {DesktopCameraService} from './desktop.camera.service';
+import {MobileCameraService} from './mobile.camera.service';
+
+declare var window;
 
 export var APP_SERVICES = [
     provide(Configuration, { useValue: new ApplicationConfiguration() }),
@@ -23,7 +26,7 @@ export var APP_SERVICES = [
     provide(GeolocationService, { useClass: GeolocationService }),
     provide(PlayersService, { useClass: PlayersService }),
     provide(NotificationService, { useClass: NotificationService }),
-    provide(CameraService, { useClass: DesktopCameraService }),
+    provide(CameraService, { useClass: window.cordova ? MobileCameraService : DesktopCameraService }),
     UiNotificationService,
     SignalRService,
 ];
