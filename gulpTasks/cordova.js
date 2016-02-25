@@ -10,8 +10,7 @@ function RegisterTasks(gulp, config) {
         path = require('path'),
         tap = require('gulp-tap'),
         rename = require('gulp-rename');
-
-
+    
     gulp.task('[private:cordova]:clean', function () {
         return del([
             path.join(config.targets.cordovaFolder, 'hooks'),

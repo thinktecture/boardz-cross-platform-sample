@@ -1,44 +1,47 @@
-<div class="col-md-12">
-    <div class="box box-info">
-        <div class="box-header with-border">
-            <h3 *ngIf="model.id === null" class="box-title">New game</h3>
-            <h3 *ngIf="model.id !== null" class="box-title">Game details</h3>
-        </div>
-        <form ngForm class="form-horizontal" #form="ngForm" (ngSubmit)="saveChanges()">
-            <div class="panel-body" *ngIf="true">
-                <div class="form-group" [class.has-error]="!name.pristine && !name.valid">
-                    <label for="name" class="col-sm-2 control-label">Name</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="name" class="form-control" placeholder="Game name" required
-                               [(ngModel)]="model.name" ngControl="name" #name="ngForm"/>
-                        <div class="alert alert-danger" [hidden]="name.pristine || name.valid">
-                            Game name is required
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 *ngIf="model.id === null" class="box-title">New game</h3>
+                <h3 *ngIf="model.id !== null" class="box-title">Game details</h3>
+            </div>
+            <form ngForm class="form-horizontal" #form="ngForm" (ngSubmit)="saveChanges()">
+                <div class="panel-body" *ngIf="true">
+                    <div class="form-group" [class.has-error]="!name.pristine && !name.valid">
+                        <label for="name" class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="name" class="form-control" placeholder="Game name" required
+                                   [(ngModel)]="model.name" ngControl="name" #name="ngForm"/>
+                            <div class="alert alert-danger" [hidden]="name.pristine || name.valid">
+                                Game name is required
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group" [class.has-error]="!description.pristine && !description.valid">
-                    <label for="description" class="col-sm-2 control-label">Description</label>
-                    <div class="col-sm-10">
+                    <div class="form-group" [class.has-error]="!description.pristine && !description.valid">
+                        <label for="description" class="col-sm-2 control-label">Description</label>
+                        <div class="col-sm-10">
                         <textarea id="description" class="form-control" rows="3" placeholder="Game description" required
                                   [(ngModel)]="model.description" ngControl="description"
                                   #description="ngForm"></textarea>
-                        <div class="alert alert-danger" [hidden]="description.pristine || description.valid">
-                            Game description is required
+                            <div class="alert alert-danger" [hidden]="description.pristine || description.valid">
+                                Game description is required
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="box-footer">
-                <div class="pull-right">
-                    <button type="button" class="btn btn-default" (click)="abort()">Abort</button>
-                    <button type="button" class="btn btn-default" (click)="reset()">Reset</button>
-                    <button type="submit" class="btn btn-primary" [disabled]="!form.valid || !form.dirty">Save</button>
-                    <button type="button" class="btn btn-danger" *ngIf="model.id !== null" (click)="deleteGame()">
-                        Delete
-                    </button>
+                <div class="box-footer">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-default" (click)="abort()">Abort</button>
+                        <button type="button" class="btn btn-default" (click)="reset()">Reset</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="!form.valid || !form.dirty">Save
+                        </button>
+                        <button type="button" class="btn btn-danger" *ngIf="model.id !== null" (click)="deleteGame()">
+                            Delete
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -57,7 +60,8 @@
                     on your journey!</p>
             </div>
             <div class="box-footer">
-                <button (click)="iAmPlaying()" [disabled]="!canPlay() || _sending" type="button" class="btn btn-flat btn-block btn-success">opt in <i
+                <button (click)="iAmPlaying()" [disabled]="!canPlay() || _sending" type="button"
+                        class="btn btn-flat btn-block btn-success">opt in <i
                         class="fa fa-flag-checkered"></i></button>
             </div>
 
