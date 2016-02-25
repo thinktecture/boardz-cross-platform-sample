@@ -6,7 +6,7 @@ declare var window;
 
 export class MobileCameraService implements ICameraService {
     public getPhoto(): Observable<string> {
-        return Observable.create((observer: Observer) => {
+        return Observable.create((observer: Observer<string>) => {
             var removeDomListener = () => {
                 document.removeEventListener('deviceready', onCordovaDeviceReady);
             };
