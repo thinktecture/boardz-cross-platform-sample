@@ -17,15 +17,7 @@ function RegisterTasks(gulp, config) {
         inject = require('gulp-inject'),
         uglify = require('gulp-uglify');
 
-
-    gulp.task('dev:clean', function (done) {
-        del(config.targets.buildFolder + '/**/*', { force: true })
-            .then(function () {
-                done();
-            });
-    });
-
-    gulp.task('dev:copy-template', function () {
+    gulp.task('[private-web]:copy-template', function () {
         var sources = gulp.src(config.source.files.injectables);
 
         return gulp.src(config.source.files.main)
@@ -33,56 +25,62 @@ function RegisterTasks(gulp, config) {
             .pipe(gulp.dest(path.join(config.targets.buildFolder)));
     });
 
-    gulp.task('dev:copy-vendor-scripts', function () {
+    gulp.task('[private-web]:copy-vendor-scripts', function () {
         return gulp.src(config.source.files.script_dependencies)
             .pipe(concat(config.targets.vendorMinJs))
             //    .pipe(uglify())
             .pipe(gulp.dest(path.join(config.targets.buildFolder, 'scripts/')));
     });
 
-    gulp.task('private:copy-shim', function () {
+    gulp.task('[private-web]:copy-system-setup-script', function () {
+        return gulp.src(config.source.files.systemSetupScript)
+            .pipe(uglify())
+            .pipe(gulp.dest(path.join(config.targets.buildFolder, 'scripts/')));
+    });
+
+    gulp.task('[private-web]:copy-shim', function () {
         // es6shim cant be bundled with angular-polyfills see https://github.com/angular/angular/issues/6706
         return gulp.src(config.source.files.shim)
             .pipe(uglify())
             .pipe(gulp.dest(path.join(config.targets.buildFolder, 'scripts/')))
     });
 
-    gulp.task('dev:copy-fonts', function () {
+    gulp.task('[private-web]:copy-fonts', function () {
         return gulp.src(config.source.files.vendorFonts)
             .pipe(gulp.dest(path.join(config.targets.buildFolder, 'fonts')));
     });
 
-    gulp.task('dev:copy-app-assets', function () {
+    gulp.task('[private-web]:copy-app-assets', function () {
         return gulp.src(config.source.files.app.assets)
             .pipe(gulp.dest(path.join(config.targets.buildFolder, config.targets.appFolder)));
     });
 
-    gulp.task('dev:vendor-css', function () {
+    gulp.task('[private-web]:vendor-css', function () {
         return gulp.src(config.source.files.vendorStylesheets)
             .pipe(concat(config.targets.vendorMinCss))
             .pipe(cssmin())
             .pipe(gulp.dest(path.join(config.targets.buildFolder, config.targets.stylesFolder)));
     });
 
-    gulp.task('dev:copy-app-styles', function () {
+    gulp.task('[private-web]:copy-app-styles', function () {
         return gulp.src(config.source.files.app.css)
             .pipe(cssmin())
             .pipe(gulp.dest(path.join(config.targets.buildFolder, config.targets.stylesFolder)));
     });
 
-    gulp.task('dev:copy-component-styles', function () {
+    gulp.task('[private-web]:copy-component-styles', function () {
         return gulp.src(config.source.files.app.componentCss)
             .pipe(cssmin())
             .pipe(gulp.dest(path.join(config.targets.buildFolder, config.targets.appFolder)));
     });
 
 
-    gulp.task('dev:copy-app-html', function () {
+    gulp.task('[private-web]:copy-app-html', function () {
         return gulp.src(config.source.files.app.html)
             .pipe(gulp.dest(path.join(config.targets.buildFolder, config.targets.appFolder)));
     });
 
-    gulp.task('dev:build', function () {
+    gulp.task('[private-web]:build-app-scripts', function () {
         return gulp.src(config.source.files.app.ts)
             .pipe(sourcemaps.init())
             .pipe(ts(tsConfig))
@@ -90,23 +88,27 @@ function RegisterTasks(gulp, config) {
             .pipe(gulp.dest(path.join(config.targets.buildFolder, config.targets.appFolder)));
     });
 
-    gulp.task('dev:default', ['dev:clean'], function (done) {
+    gulp.task('build-web', function (done) {
         return runSequence(
-            ['dev:copy-vendor-scripts',
-                'private:copy-shim',
-                'dev:build',
-                'dev:vendor-css',
-                'dev:copy-fonts',
-                'dev:copy-app-html',
-                'dev:copy-app-styles',
-                'dev:copy-component-styles',
-                'dev:copy-app-assets'],
-            'dev:copy-template',
+            'clean',
+            [
+                '[private-web]:copy-vendor-scripts',
+                '[private-web]:copy-system-setup-script',
+                '[private-web]:copy-shim',
+                '[private-web]:build-app-scripts',
+                '[private-web]:vendor-css',
+                '[private-web]:copy-fonts',
+                '[private-web]:copy-app-html',
+                '[private-web]:copy-app-styles',
+                '[private-web]:copy-component-styles',
+                '[private-web]:copy-app-assets'
+            ],
+            '[private-web]:copy-template',
             done
         );
     });
 
-    gulp.task('dev:start-live-server', function () {
+    gulp.task('[private-web]:start-live-server', function () {
         return gulp.src(config.targets.buildFolder)
             .pipe(server({
                 livereload: true,
@@ -115,9 +117,9 @@ function RegisterTasks(gulp, config) {
     });
 
 
-    gulp.task('dev:watch', ['dev:default', 'dev:start-live-server'], function () {
-        gulp.watch(config.source.files.app.html, ['dev:copy-app-html']);
-        gulp.watch(config.source.files.app.ts, ['dev:build']);
+    gulp.task('watch-web', ['build-web', '[private-web]:start-live-server'], function () {
+        gulp.watch(config.source.files.app.html, ['[private-web]:copy-app-html']);
+        gulp.watch(config.source.files.app.ts, ['[private-web]:build-app-scripts']);
     });
 }
 

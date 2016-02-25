@@ -8,6 +8,7 @@ module.exports = {
             injectables: [
                 './dist/www/scripts/es6-shim.min.js',
                 './dist/www/scripts/vendor.min.js',
+                './dist/www/scripts/system.setup.js',
                 './dist/www/css/vendor.min.css',
                 './dist/www/css/app.css'
 
@@ -16,6 +17,7 @@ module.exports = {
             main: [
                 './src/BoardZ/index.html'
             ],
+            systemSetupScript: './src/BoardZ/system.setup.js',
             app: {
                 ts: [
                     './src/BoardZ/app/**/*.ts'

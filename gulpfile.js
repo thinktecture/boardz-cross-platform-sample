@@ -2,6 +2,7 @@
 
 var config = require('./gulp.config'),
     gulp = require('gulp'),
+    del = require('del'),
     runSequence = require('run-sequence'),
     gulptasks = require('require-dir')('./gulpTasks');
 
@@ -12,16 +13,23 @@ for (var gulpTask in gulptasks) {
 
 gulp.task('default', function (done) {
     return runSequence(
-        'dev:default', done
+        'build-web', done
     );
+});
+
+gulp.task('clean', function (done) {
+    del(config.targets.buildFolder + '/**/*', { force: true })
+        .then(function () {
+            done();
+        });
 });
 
 gulp.task('build-all', function (done) {
     return runSequence(
-        'dev:default',
+        'build-web',
         [
-            'electron:default',
-            'cordova:default',
+            'build-electron',
+            'build-cordova',
         ]
         , done
     );

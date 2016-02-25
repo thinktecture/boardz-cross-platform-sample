@@ -12,7 +12,7 @@ function RegisterTasks(gulp, config) {
         rename = require('gulp-rename');
 
 
-    gulp.task('cordova:clean', function () {
+    gulp.task('[private:cordova]:clean', function () {
         return del([
             path.join(config.targets.cordovaFolder, 'hooks'),
             path.join(config.targets.cordovaFolder, 'platforms'),
@@ -22,23 +22,23 @@ function RegisterTasks(gulp, config) {
         ]);
     });
 
-    gulp.task('cordova:config-for-livereload', function () {
+    gulp.task('[private:cordova]:config-for-livereload', function () {
         gulp.src(path.join(config.assetFolder, 'config_livereload.xml'), { base: config.assetFolder })
             .pipe(rename('config.xml'))
             .pipe(gulp.dest(config.targets.cordovaFolder));
     });
 
-    gulp.task('cordova:config-for-default', function () {
+    gulp.task('[private:cordova]:config-for-default', function () {
         gulp.src(path.join(config.assetFolder, 'config.xml'), { base: config.assetFolder })
             .pipe(gulp.dest(config.targets.cordovaFolder));
     });
 
-    gulp.task('cordova:copy-source', function () {
+    gulp.task('[private:cordova]:copy-source', function () {
         return gulp.src(path.join(config.targets.buildFolder, '**', '*.*'))
             .pipe(gulp.dest(path.join(config.targets.cordovaFolder, 'www')));
     });
 
-    gulp.task('cordova:start-live-server:ios', function () {
+    gulp.task('[private:cordova]:start-live-server:ios', function () {
         gulp.src(path.join(config.targets.cordovaFolder, 'platforms', 'ios', 'www'))
             .pipe(server({
                 livereload: true,
@@ -48,12 +48,11 @@ function RegisterTasks(gulp, config) {
 
     gulp.task('cordova:watch:ios', function () {
         // gulp.start('dev:watch');
-        runSequence('cordova:clean',
-            'dist:default',
-            'cordova:copy-source',
-            'cordova:config-for-livereload',
-            'cordova:build:ios',
-            'cordova:start-live-server:ios',
+        runSequence('[private:cordova]:clean',
+            '[private:cordova]:copy-source',
+            '[private:cordova]:config-for-livereload',
+            '[private:cordova]:build:ios',
+            '[private:cordova]:start-live-server:ios',
             function () {
                 watch(config.source.folder, { base: config.source.folder })
                     .pipe(gulp.dest(path.join(config.targets.cordovaFolder, 'www')))
@@ -65,7 +64,7 @@ function RegisterTasks(gulp, config) {
             });
     });
 
-    gulp.task('cordova:build:ios', function (done) {
+    gulp.task('[private:cordova]:build:ios', function (done) {
         sh.cd(config.targets.cordovaFolder);
         sh.exec('cordova prepare ios');
         sh.exec('ionic resources');
@@ -74,7 +73,7 @@ function RegisterTasks(gulp, config) {
         done();
     });
 
-    gulp.task('cordova:build:all', function (done) {
+    gulp.task('[private:cordova]:build:all', function (done) {
         sh.cd(config.targets.cordovaFolder);
         sh.exec('cordova prepare');
         sh.exec('ionic resources');
@@ -83,29 +82,29 @@ function RegisterTasks(gulp, config) {
         done();
     });
 
-    gulp.task('cordova:copy:resources', function () {
+    gulp.task('[private:cordova]:copy:resources', function () {
         return gulp.src(path.join(config.targets.resourcesFolder, '*.*'))
             .pipe(gulp.dest(path.join(config.targets.cordovaFolder, 'resources')));
     });
 
-    gulp.task('cordova:default:ios', function (done) {
+    gulp.task('[private:cordova]:default:ios', function (done) {
         runSequence(
-            'cordova:clean',
-            'cordova:copy-source',
-            'cordova:config-for-default',
-            'cordova:copy:resources',
-            'cordova:build:ios',
+            '[private:cordova]:clean',
+            '[private:cordova]:copy-source',
+            '[private:cordova]:config-for-default',
+            '[private:cordova]:copy:resources',
+            '[private:cordova]:build:ios',
             done
         );
     });
 
-    gulp.task('cordova:default', function (done) {
+    gulp.task('build-cordova', function (done) {
         runSequence(
-            'cordova:clean',
-            'cordova:copy-source',
-            'cordova:config-for-default',
-            'cordova:copy:resources',
-            'cordova:build:all',
+            '[private:cordova]:clean',
+            '[private:cordova]:copy-source',
+            '[private:cordova]:config-for-default',
+            '[private:cordova]:copy:resources',
+            '[private:cordova]:build:all',
             done
         );
     });

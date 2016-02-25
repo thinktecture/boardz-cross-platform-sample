@@ -9,19 +9,19 @@ function RegisterTasks(gulp, config) {
         symdest = require('gulp-symdest'),
         path = require('path');
 
-    gulp.task('electron:clean', function () {
+    gulp.task('[private:electron]:clean', function () {
         return del([
             path.join(config.targets.electronFolder, 'www'),
             path.join(config.targets.electronFolder, 'build')
         ]);
     });
 
-    gulp.task('electron:copy-source', function () {
+    gulp.task('[private:electron]:copy-source', function () {
         return gulp.src(path.join(config.targets.buildFolder, '**', '*.*'))
             .pipe(gulp.dest(path.join(config.targets.electronFolder, 'www')));
     });
 
-    gulp.task('electron:copy-electron-source', function () {
+    gulp.task('[private:electron]:copy-electron-source', function () {
         return gulp.src(path.join(config.source.files.electron))
             .pipe(gulp.dest(path.join(config.targets.electronFolder, 'www')));
     });
@@ -29,54 +29,46 @@ function RegisterTasks(gulp, config) {
     function buildAppFor(targetPlatform, target) {
         return gulp.src(path.join(config.targets.electronFolder, 'www', '**', '*'))
             .pipe(electron({
-                version: '0.36.7',
+                version: '0.36.8',
                 platform: targetPlatform,
                 arch: 'x64',
                 companyName: 'Thinktecture AG',
+                linuxExecutableName: 'BoardZ',
                 darwinIcon: path.join(config.targets.resourcesFolder, 'icon.icns'),
                 winIcon: path.join(config.targets.resourcesFolder, 'icon.ico')
             }))
             .pipe(symdest(path.join(config.targets.electronFolder, 'build', target)));
     }
 
-    gulp.task('electron:build:windows', function () {
+    gulp.task('[private:electron]:build-windows', function () {
         return buildAppFor('win32', 'windows');
     });
 
-    gulp.task('electron:build:osx', function () {
+    gulp.task('[private:electron]:build-osx', function () {
         return buildAppFor('darwin', 'osx');
     });
 
-    gulp.task('electron:build:linux', function () {
+    gulp.task('[private:electron]:build-linux', function () {
         return buildAppFor('linux', 'linux');
     });
 
-    gulp.task('electron:build', function (done) {
+    gulp.task('[private:electron]:build-apps', function (done) {
         runSequence(
-            'electron:build:windows',
-            'electron:build:osx',
-            'electron:build:linux',
+            '[private:electron]:build-windows',
+            '[private:electron]:build-osx',
+            '[private:electron]:build-linux',
             done
         )
     });
 
-    gulp.task('electron:watch', function () {
-        gulp.start('dev:livereload');
-
-        runSequence('electron:default', function () {
-            watch(config.targets.buildFolder, { base: config.targets.buildFolder })
-                .pipe(gulp.dest(path.join(config.targets.electronFolder, 'www')));
-        });
-    });
-
-    gulp.task('electron:default', function (done) {
+    gulp.task('build-electron', function (done) {
         runSequence(
-            'electron:clean',
+            '[private:electron]:clean',
             [
-                'electron:copy-electron-source',
-                'electron:copy-source'
+                '[private:electron]:copy-electron-source',
+                '[private:electron]:copy-source'
             ],
-            'electron:build',
+            '[private:electron]:build-apps',
             done
         );
     });
