@@ -1,6 +1,6 @@
 // main gulpfile
 
-(function() {
+(function () {
     'use strict';
 
     var config = require('./gulp.config'),
