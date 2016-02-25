@@ -11,7 +11,6 @@ module.exports = {
                 './dist/www/scripts/system.setup.js',
                 './dist/www/css/vendor.min.css',
                 './dist/www/css/app.css'
-
             ],
             electron: './src/electron/**/*.*',
             cordova: './src/BoardZ/cordova.js',
@@ -68,7 +67,6 @@ module.exports = {
                 './node_modules/angular2/bundles/angular2.dev.js',
                 './node_modules/angular2/bundles/http.dev.js',
                 './node_modules/angular2/bundles/router.dev.js'
-
             ]
         }
     },
