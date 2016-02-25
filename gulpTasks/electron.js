@@ -29,7 +29,7 @@ function RegisterTasks(gulp, config) {
     function buildAppFor(targetPlatform, target) {
         return gulp.src(path.join(config.targets.electronFolder, 'www', '**', '*'))
             .pipe(electron({
-                version: '0.36.7',
+                version: '0.36.8',
                 platform: targetPlatform,
                 arch: 'x64',
                 companyName: 'Thinktecture AG',
