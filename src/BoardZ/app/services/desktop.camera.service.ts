@@ -21,7 +21,7 @@ export class DesktopCameraService implements ICameraService {
     public getPhoto(): Observable<string> {
         return Observable.fromPromise(
             this.getMediaDevices().getUserMedia({ video: true, audio: false })
-                .then(stream => {
+                .then((stream: any) => {
                         return new Promise((resolve, reject) => {
                             try {
                                 var vendorURL = window.URL || window.webkitURL;
@@ -49,13 +49,13 @@ export class DesktopCameraService implements ICameraService {
                                         }
 
                                         if (stream.getAudioTracks) {
-                                            stream.getAudioTracks().forEach(track => {
+                                            stream.getAudioTracks().forEach((track: any) => {
                                                 track.stop();
                                             });
                                         }
 
                                         if (stream.getVideoTracks) {
-                                            stream.getVideoTracks().forEach(track => {
+                                            stream.getVideoTracks().forEach((track: any) => {
                                                 track.stop();
                                             });
                                         }
