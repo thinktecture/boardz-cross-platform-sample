@@ -1,9 +1,11 @@
 import {Component, Input, ChangeDetectionStrategy} from 'angular2/core';
+import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 @Component({
     selector: 'widget',
     templateUrl: 'app/components/widget/widget.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    directives: [ROUTER_DIRECTIVES]
 })
 export class WidgetComponent {
     @Input('caption')
