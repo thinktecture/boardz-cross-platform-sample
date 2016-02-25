@@ -13,6 +13,8 @@ import {PlayersService} from '../../services/players.service';
 import {Player} from '../../models/player';
 import {GeoLocation} from '../../models/geolocation';
 import {LoginService} from '../../services/login.service';
+import {Notification} from '../../models/notification';
+import {NotificationType} from '../../models/notificationtype';
 
 @Component({
     selector: 'gameDetail',
@@ -144,6 +146,9 @@ export class GameDetails implements OnInit {
         player.imageUrl = this._pictureUrl;
 
         this._playersService.add(player)
-            .subscribe(()=> null);
+            .subscribe(()=> {
+                this._notificationService.notify(new Notification(`Thank's for sharing ${player.name}`, NotificationType.Success));
+
+            });
     }
 }
