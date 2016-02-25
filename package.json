@@ -10,7 +10,7 @@
   "scripts": {
     "gulp": "gulp",
     "typings": "typings",
-    "watch": "gulp dev:watch",
+    "watch": "gulp watch-web",
     "postinstall": "typings install",
     "start": "live-server dist/www"
   },
