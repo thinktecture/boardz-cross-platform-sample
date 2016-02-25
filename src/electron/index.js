@@ -1,9 +1,9 @@
 'use strict';
 var electron = require('electron'),
-  app = electron.app,
-  BrowserWindow = electron.BrowserWindow,
-  Menu = electron.Menu,
-  globalShortcut = electron.globalShortcut;
+    app = electron.app,
+    BrowserWindow = electron.BrowserWindow,
+    Menu = electron.Menu,
+    globalShortcut = electron.globalShortcut;
 
 var mainWindow = null;
 
@@ -14,8 +14,8 @@ app.on('window-all-closed', function () {
     }
 });
 
-app.on('will-quit', function(){
-   globalShortcut.unregisterAll();
+app.on('will-quit', function () {
+    globalShortcut.unregisterAll();
 });
 
 app.on('ready', function () {
@@ -23,16 +23,14 @@ app.on('ready', function () {
         title: "BoardZ!",
         width: 1024,
         height: 768,
-        'node-integration': false
+        nodeIntegration: false
     });
 
-    globalShortcut.register('CmdOrCtrl+Shift+d', function(){
+    globalShortcut.register('CmdOrCtrl+Shift+d', function () {
         mainWindow.webContents.toggleDevTools();
     });
 
     mainWindow.loadURL('file://' + __dirname + '/index.html');
-
-    mainWindow.webContents.toggleDevTools();
     mainWindow.setTitle(app.getName());
 
     mainWindow.on('closed', function () {
@@ -45,9 +43,18 @@ app.on('ready', function () {
             submenu: [
                 { label: "About Application", selector: "orderFrontStandardAboutPanel:" },
                 { type: "separator" },
-                { label: "Reload", accelerator: "Command+R", click: function() { mainWindow.loadURL('file://' + __dirname + '/index.html'); }},
-                { label: "Quit", accelerator: "Command+Q", click: function() { app.quit(); }}
-            ]}, {
+                {
+                    label: "Reload", accelerator: "CmdOrCtrl+R", click: function () {
+                    mainWindow.loadURL('file://' + __dirname + '/index.html');
+                }
+                },
+                {
+                    label: "Quit", accelerator: "Command+Q", click: function () {
+                    app.quit();
+                }
+                }
+            ]
+        }, {
             label: "Edit",
             submenu: [
                 { label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:" },
@@ -57,7 +64,8 @@ app.on('ready', function () {
                 { label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:" },
                 { label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:" },
                 { label: "Select All", accelerator: "CmdOrCtrl+A", selector: "selectAll:" }
-            ]}
+            ]
+        }
         ];
 
         Menu.setApplicationMenu(Menu.buildFromTemplate(template));
