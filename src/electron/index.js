@@ -27,14 +27,13 @@ app.on('ready', function () {
     });
 
     globalShortcut.register('CmdOrCtrl+Shift+d', function(){
-        mainWindow.webContents.openDevTools();
+        mainWindow.webContents.toggleDevTools();
     });
 
-    mainWindow.loadUrl('file://' + __dirname + '/index.html');
+    mainWindow.loadURL('file://' + __dirname + '/index.html');
 
-    mainWindow.webContents.on('did-finish-load', function () {
-        mainWindow.setTitle(app.getName());
-    });
+    mainWindow.webContents.toggleDevTools();
+    mainWindow.setTitle(app.getName());
 
     mainWindow.on('closed', function () {
         mainWindow = null;
@@ -46,6 +45,7 @@ app.on('ready', function () {
             submenu: [
                 { label: "About Application", selector: "orderFrontStandardAboutPanel:" },
                 { type: "separator" },
+                { label: "Reload", accelerator: "Command+R", click: function() { mainWindow.loadURL('file://' + __dirname + '/index.html'); }},
                 { label: "Quit", accelerator: "Command+Q", click: function() { app.quit(); }}
             ]}, {
             label: "Edit",

@@ -12,7 +12,7 @@
     "typings": "typings",
     "watch": "gulp dev:watch",
     "postinstall": "typings install",
-    "start": "live-server build"
+    "start": "live-server dist/www"
   },
   "author": "Thinktecture AG <office@thinktecture.com>",
   "bugs": {
@@ -28,6 +28,7 @@
     "event-stream": "^3.3.1",
     "font-awesome": "^4.5.0",
     "gulp": "^3.9.0",
+    "gulp-atom-electron": "^1.4.0",
     "gulp-awesome-electron": "git+https://github.com/ThorstenHans/gulp-awesome-electron.git",
     "gulp-concat": "^2.6.0",
     "gulp-filelog": "^0.4.1",
@@ -47,8 +48,8 @@
     "gulp-watch": "^4.3.5",
     "merge2": "^0.3.6",
     "nw-builder": "^2.2.0",
-    "rdash-ui": "git+https://github.com/rdash/rdash-ui.git#1.0.1",
     "reflect-metadata": "0.1.2",
+    "require-dir": "^0.3.0",
     "run-sequence": "^1.1.4",
     "rxjs": "5.0.0-beta.0",
     "shelljs": "^0.5.3",

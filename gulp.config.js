@@ -1,16 +1,18 @@
 'use strict';
 
 module.exports = {
+    assetFolder: './assetFiles/',
     source: {
         folder: './src/BoardZ/',
         files: {
             injectables: [
-                './build/scripts/es6-shim.min.js',
-                './build/scripts/vendor.min.js',
-                './build/css/vendor.min.css',
-                './build/css/app.css'
+                './dist/www/scripts/es6-shim.min.js',
+                './dist/www/scripts/vendor.min.js',
+                './dist/www/css/vendor.min.css',
+                './dist/www/css/app.css'
 
             ],
+            electron: './src/electron/**/*.*',
             main: [
                 './src/BoardZ/index.html'
             ],
@@ -72,7 +74,10 @@ module.exports = {
     targets: {
         vendorMinJs: 'vendor.min.js',
         vendorMinCss: 'vendor.min.css',
-        buildFolder: './dist',
+        buildFolder: './dist/www',
+        electronFolder: './dist/desktop',
+        cordovaFolder: './dist/mobile',
+        resourcesFolder: './resources/',
         appFolder: 'app',
         stylesFolder: 'css',
         minified: {
