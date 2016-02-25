@@ -72,7 +72,6 @@ function RegisterTasks(gulp, config) {
             done
         );
     });
-
 }
 
 module.exports = {
