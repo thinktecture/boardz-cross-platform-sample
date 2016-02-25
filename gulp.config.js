@@ -14,6 +14,7 @@ module.exports = {
 
             ],
             electron: './src/electron/**/*.*',
+            cordova: './src/BoardZ/cordova.js',
             main: [
                 './src/BoardZ/index.html'
             ],
