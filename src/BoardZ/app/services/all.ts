@@ -10,6 +10,8 @@ import {PlayersService} from './players.service';
 import {NotificationService} from './notification.service';
 import {SignalRService} from './signalr.service';
 import {UiNotificationService} from './ui.notification.service';
+import {CameraService} from './camera.service';
+import {DesktopCameraService} from './desktop.camera.service';
 
 export var APP_SERVICES = [
     provide(Configuration, { useValue: new ApplicationConfiguration() }),
@@ -21,6 +23,7 @@ export var APP_SERVICES = [
     provide(GeolocationService, { useClass: GeolocationService }),
     provide(PlayersService, { useClass: PlayersService }),
     provide(NotificationService, { useClass: NotificationService }),
+    provide(CameraService, { useClass: DesktopCameraService }),
     UiNotificationService,
     SignalRService,
 ];

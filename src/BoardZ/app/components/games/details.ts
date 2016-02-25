@@ -3,7 +3,7 @@ import {RouteParams, Router} from 'angular2/router';
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 import {DiagnosticComponent} from '../diagnostic/diagnostic';
 import {LocateItComponent} from '../locateit/locateit';
-import {PictureItComponenet} from '../pictureit/pictureit';
+import {PictureItComponent} from '../pictureit/pictureit';
 import {Game} from '../../models/game';
 import {LogService} from '../../services/log.service';
 import {GamesService} from '../../services/games.service';
@@ -12,7 +12,7 @@ import {SignalRService} from '../../services/signalr.service';
 
 @Component({
     selector: 'gameDetail',
-    directives: [DiagnosticComponent, LocateItComponent, PictureItComponenet],
+    directives: [DiagnosticComponent, LocateItComponent, PictureItComponent],
     templateUrl: 'app/components/games/details.html',
     inputs: ['game']
 })
