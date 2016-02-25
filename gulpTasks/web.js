@@ -38,6 +38,12 @@ function RegisterTasks(gulp, config) {
             .pipe(gulp.dest(path.join(config.targets.buildFolder, 'scripts/')));
     });
 
+    gulp.task('[private-web]:copy-cordova-script', function () {
+        return gulp.src(config.source.files.cordova)
+            .pipe(gulp.dest(path.join(config.targets.buildFolder)));
+    });
+
+
     gulp.task('[private-web]:copy-shim', function () {
         // es6shim cant be bundled with angular-polyfills see https://github.com/angular/angular/issues/6706
         return gulp.src(config.source.files.shim)
@@ -94,6 +100,7 @@ function RegisterTasks(gulp, config) {
             [
                 '[private-web]:copy-vendor-scripts',
                 '[private-web]:copy-system-setup-script',
+                '[private-web]:copy-cordova-script',
                 '[private-web]:copy-shim',
                 '[private-web]:build-app-scripts',
                 '[private-web]:vendor-css',

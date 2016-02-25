@@ -50,6 +50,7 @@ function RegisterTasks(gulp, config) {
         // gulp.start('dev:watch');
         runSequence('[private:cordova]:clean',
             '[private:cordova]:copy-source',
+            '[private:cordova]:remove-fake-script',
             '[private:cordova]:config-for-livereload',
             '[private:cordova]:build:ios',
             '[private:cordova]:start-live-server:ios',
@@ -91,6 +92,7 @@ function RegisterTasks(gulp, config) {
         runSequence(
             '[private:cordova]:clean',
             '[private:cordova]:copy-source',
+            '[private:cordova]:remove-fake-script',
             '[private:cordova]:config-for-default',
             '[private:cordova]:copy:resources',
             '[private:cordova]:build:ios',
@@ -98,10 +100,15 @@ function RegisterTasks(gulp, config) {
         );
     });
 
+    gulp.task('[private:cordova]:remove-fake-script', function(){
+        return del(path.join(config.targets.cordovaFolder, 'www', 'cordova.js'));
+    });
+
     gulp.task('build-cordova', function (done) {
         runSequence(
             '[private:cordova]:clean',
             '[private:cordova]:copy-source',
+            '[private:cordova]:remove-fake-script',
             '[private:cordova]:config-for-default',
             '[private:cordova]:copy:resources',
             '[private:cordova]:build:all',
