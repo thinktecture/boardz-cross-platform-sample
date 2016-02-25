@@ -6,7 +6,7 @@
 <div class="row">
 
     <div class="col-xs-8">
-        <select class="form-control">
+        <select class="form-control" [(ngModel)]="_radius">
             <option label="5 km" value="5">5 km</option>
             <option label="10 km" value="10" selected="selected">10 km</option>
             <option label="25 km" value="25">25 km</option>
@@ -17,7 +17,13 @@
         </select>
     </div>
     <div class="col-xs-4">
-        <button class="btn btn-primary btn-block ng-scope" (click)="search()" [disabled]="!_coordinates">Search</button>
+        <button class="btn btn-primary btn-block ng-scope" (click)="search()" [disabled]="!_location">Search</button>
     </div>
 
+</div>
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="well" *ngFor="#player of _players">{{player}}</div>
+    </div>
 </div>

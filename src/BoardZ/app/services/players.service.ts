@@ -36,7 +36,10 @@ export class PlayersService {
 
     public findNearby(radius: number, coordinates: GeoLocation): Observable<Player[]> {
         return this._http.get(`api/players/FindNearby?radius=${radius}&coordinate.latitude=${coordinates.latitude}&coordinate.longitude=${coordinates.longitude}`)
-            .map(r => <Player[]>r.json());
+            .map(r => {
+                console.log(r.json());
+                return r.json();
+            });
     }
 
     public add(player: Player) {
