@@ -3,6 +3,7 @@
 import {bootstrap} from 'angular2/platform/browser';
 import {ComponentRef, provide} from 'angular2/core';
 import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
+import {enableProdMode} from "angular2/core";
 import {BoardzApp} from './app';
 import {HTTP_PROVIDERS} from 'angular2/http';
 import {TokenService} from './services/token.service';
@@ -10,7 +11,7 @@ import {appInjector} from './services/app.injector';
 import {LogService} from './services/log.service';
 import 'rxjs/Rx';
 
-//enableProdMode();
+enableProdMode();
 
 bootstrap(BoardzApp, [
     HTTP_PROVIDERS,
