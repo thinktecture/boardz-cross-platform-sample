@@ -9,6 +9,10 @@ import {LogService} from '../../services/log.service';
 import {GamesService} from '../../services/games.service';
 import {NotificationService} from '../../services/notification.service';
 import {SignalRService} from '../../services/signalr.service';
+import {PlayersService} from '../../services/players.service';
+import {Player} from '../../models/player';
+import {GeoLocation} from '../../models/geolocation';
+import {LoginService} from '../../services/login.service';
 
 @Component({
     selector: 'gameDetail',
@@ -21,6 +25,8 @@ export class GameDetails implements OnInit {
 
     private _needsReset: boolean;
     private _diagnosticEnabled: boolean;
+    private _pictureUrl: string = "";
+    private _coordinates: GeoLocation = null;
 
     public active = true;
     public model: Game = new Game();
@@ -31,7 +37,9 @@ export class GameDetails implements OnInit {
                 private _router: Router,
                 private _routeParams: RouteParams,
                 private _notificationService: NotificationService,
+                private _playersService: PlayersService,
                 private _signalRService: SignalRService,
+                private _loginService: LoginService,
                 private _injector: Injector) {
         this._diagnosticEnabled = _injector.get('inDiagnosticsMode');
     }
@@ -114,8 +122,29 @@ export class GameDetails implements OnInit {
         }
     }
 
+    public useLocation(coordinates: GeoLocation){
+        this._coordinates = coordinates;
+    }
+
+    public usePicture(pictureUrl: string){
+        this._pictureUrl = pictureUrl;
+    }
+
+    public canPlay(){
+        return this._coordinates && this._pictureUrl;
+    }
     public iAmPlaying(): void {
+        if(!this.canPlay()){
+            return;
+        }
         this._signalRService.sendIAmGaming(this.model.name);
-        // TODO: Implement the whole method. ;-)
+        var player = new Player();
+        player.name = this._loginService.username;
+        player.boardGameId  = this.model.id;
+        player.coordinate = this._coordinates;
+        player.imageUrl = this._pictureUrl;
+
+        this._playersService.add(player)
+            .subscribe(()=> null);
     }
 }

@@ -1,6 +1,6 @@
 ///<reference path="../../../../../typings/main/ambient/leaflet/leaflet.d.ts" />
 
-import {Component, Input, OnInit} from 'angular2/core';
+import {Component, Output, OnInit, EventEmitter} from 'angular2/core';
 import {JsonPipe} from 'angular2/common';
 import {GeoLocation} from '../../models/geolocation';
 import {GeolocationService} from '../../services/geolocation.service';
@@ -16,9 +16,9 @@ export class LocateItComponent implements OnInit {
 
     private _hasError: boolean = false;
     private _isLocating: boolean = false;
-
-    @Input('coords')
-    _coords: GeoLocation;
+    private _coords: GeoLocation = null;
+    @Output('onLocated')
+    private _onLocated: EventEmitter<GeoLocation> = new EventEmitter<GeoLocation>();
 
     constructor(private _geolocationService: GeolocationService) {
         L.Icon.Default.imagePath = 'app/images';
@@ -38,6 +38,7 @@ export class LocateItComponent implements OnInit {
                 this._hasError = false;
                 this._isLocating = false;
                 this._coords = coords;
+                this._onLocated.emit(coords);
 
                 this.setMapMarkerAndView();
             })

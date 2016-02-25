@@ -57,17 +57,17 @@
                     on your journey!</p>
             </div>
             <div class="box-footer">
-                <button (click)="iAmPlaying()" type="button" class="btn btn-flat btn-block btn-success">opt in <i
+                <button (click)="iAmPlaying()" [disabled]="!canPlay()" type="button" class="btn btn-flat btn-block btn-success">opt in <i
                         class="fa fa-flag-checkered"></i></button>
             </div>
 
         </div>
     </div>
     <div class="col-md-4 col-xs-12">
-        <picture-it></picture-it>
+        <picture-it (onPictureTaken)="usePicture($event)"></picture-it>
     </div>
     <div class="col-md-4 col-xs-12">
-        <locate-it></locate-it>
+        <locate-it (onLocated)="useLocation($event)"></locate-it>
     </div>
 </div>
 <div class="row">
