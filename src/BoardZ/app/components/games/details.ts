@@ -13,6 +13,8 @@ import {PlayersService} from '../../services/players.service';
 import {Player} from '../../models/player';
 import {GeoLocation} from '../../models/geolocation';
 import {LoginService} from '../../services/login.service';
+import {Notification} from '../../models/notification';
+import {NotificationType} from '../../models/notificationtype';
 
 @Component({
     selector: 'gameDetail',
@@ -27,6 +29,7 @@ export class GameDetails implements OnInit {
     private _diagnosticEnabled: boolean;
     private _pictureUrl: string = "";
     private _coordinates: GeoLocation = null;
+    private _sending: boolean;
 
     public active = true;
     public model: Game = new Game();
@@ -136,6 +139,7 @@ export class GameDetails implements OnInit {
         if(!this.canPlay()){
             return;
         }
+        this._sending = true;
         this._signalRService.sendIAmGaming(this.model.name);
         var player = new Player();
         player.name = this._loginService.username;
@@ -144,6 +148,12 @@ export class GameDetails implements OnInit {
         player.imageUrl = this._pictureUrl;
 
         this._playersService.add(player)
-            .subscribe(()=> null);
+            .subscribe(()=> {
+                this._notificationService.notify(new Notification(`Thank's for sharing ${player.name}`, NotificationType.Success));
+
+            },
+                ()=> console.log('error while uploading'),
+                ()=> this._sending = false
+            );
     }
 }
