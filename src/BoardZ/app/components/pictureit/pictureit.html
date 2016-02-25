@@ -6,8 +6,8 @@
             <button type="button" class="btn btn-primary" (click)="takePicture()"><i
                     class="fa fa-camera-retro fa-2x"></i></button>
         </p>
-        <p [hidden]="!_hasError" class="text-danger ng-scope" style="">
+        <p [hidden]="!hasError" class="text-danger ng-scope" style="">
             Sorry, but we can't access your camera to take a picture. :-(</p>
-        <img *ngIf="_pictureUrl" class="img-responsive" [src]="_pictureUrl">
+        <img *ngIf="pictureUrl" class="img-responsive" [src]="pictureUrl">
     </div>
 </div>
