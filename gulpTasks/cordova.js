@@ -11,7 +11,7 @@ function RegisterTasks(gulp, config) {
         tap = require('gulp-tap'),
         rename = require('gulp-rename');
     
-    gulp.task('[private:cordova]:clean', function () {
+    gulp.task('[private-cordova]:clean', function () {
         return del([
             path.join(config.targets.cordovaFolder, 'hooks'),
             path.join(config.targets.cordovaFolder, 'platforms'),
@@ -21,23 +21,23 @@ function RegisterTasks(gulp, config) {
         ]);
     });
 
-    gulp.task('[private:cordova]:config-for-livereload', function () {
+    gulp.task('[private-cordova]:config-for-livereload', function () {
         gulp.src(path.join(config.cordova, 'config_livereload.xml'), { base: config.cordova })
             .pipe(rename('config.xml'))
             .pipe(gulp.dest(config.targets.cordovaFolder));
     });
 
-    gulp.task('[private:cordova]:config-for-default', function () {
+    gulp.task('[private-cordova]:config-for-default', function () {
         gulp.src(path.join(config.cordova, 'config.xml'), { base: config.cordova })
             .pipe(gulp.dest(config.targets.cordovaFolder));
     });
 
-    gulp.task('[private:cordova]:copy-source', function () {
+    gulp.task('[private-cordova]:copy-source', function () {
         return gulp.src(path.join(config.targets.buildFolder, '**', '*.*'))
             .pipe(gulp.dest(path.join(config.targets.cordovaFolder, 'www')));
     });
 
-    gulp.task('[private:cordova]:start-live-server:ios', function () {
+    gulp.task('[private-cordova]:start-live-server:ios', function () {
         gulp.src(path.join(config.targets.cordovaFolder, 'platforms', 'ios', 'www'))
             .pipe(server({
                 livereload: true,
@@ -47,12 +47,12 @@ function RegisterTasks(gulp, config) {
 
     gulp.task('cordova:watch:ios', function () {
         // gulp.start('dev:watch');
-        runSequence('[private:cordova]:clean',
-            '[private:cordova]:copy-source',
-            '[private:cordova]:remove-fake-script',
-            '[private:cordova]:config-for-livereload',
-            '[private:cordova]:build:ios',
-            '[private:cordova]:start-live-server:ios',
+        runSequence('[private-cordova]:clean',
+            '[private-cordova]:copy-source',
+            '[private-cordova]:remove-fake-script',
+            '[private-cordova]:config-for-livereload',
+            '[private-cordova]:build:ios',
+            '[private-cordova]:start-live-server:ios',
             function () {
                 watch(config.source.folder, { base: config.source.folder })
                     .pipe(gulp.dest(path.join(config.targets.cordovaFolder, 'www')))
@@ -64,7 +64,7 @@ function RegisterTasks(gulp, config) {
             });
     });
 
-    gulp.task('[private:cordova]:build:ios', function (done) {
+    gulp.task('[private-cordova]:build:ios', function (done) {
         sh.cd(config.targets.cordovaFolder);
         sh.exec('cordova prepare ios');
         sh.exec('ionic resources');
@@ -73,7 +73,7 @@ function RegisterTasks(gulp, config) {
         done();
     });
 
-    gulp.task('[private:cordova]:build:all', function (done) {
+    gulp.task('[private-cordova]:build:all', function (done) {
         sh.cd(config.targets.cordovaFolder);
         sh.exec('cordova prepare');
         sh.exec('ionic resources');
@@ -82,35 +82,35 @@ function RegisterTasks(gulp, config) {
         done();
     });
 
-    gulp.task('[private:cordova]:copy:resources', function () {
+    gulp.task('[private-cordova]:copy:resources', function () {
         return gulp.src(path.join(config.targets.resourcesFolder, '*.*'))
             .pipe(gulp.dest(path.join(config.targets.cordovaFolder, 'resources')));
     });
 
-    gulp.task('[private:cordova]:default:ios', function (done) {
+    gulp.task('[private-cordova]:default:ios', function (done) {
         runSequence(
-            '[private:cordova]:clean',
-            '[private:cordova]:copy-source',
-            '[private:cordova]:remove-fake-script',
-            '[private:cordova]:config-for-default',
-            '[private:cordova]:copy:resources',
-            '[private:cordova]:build:ios',
+            '[private-cordova]:clean',
+            '[private-cordova]:copy-source',
+            '[private-cordova]:remove-fake-script',
+            '[private-cordova]:config-for-default',
+            '[private-cordova]:copy:resources',
+            '[private-cordova]:build:ios',
             done
         );
     });
 
-    gulp.task('[private:cordova]:remove-fake-script', function(){
+    gulp.task('[private-cordova]:remove-fake-script', function(){
         return del(path.join(config.targets.cordovaFolder, 'www', 'cordova.js'));
     });
 
     gulp.task('build-cordova', function (done) {
         runSequence(
-            '[private:cordova]:clean',
-            '[private:cordova]:copy-source',
-            '[private:cordova]:remove-fake-script',
-            '[private:cordova]:config-for-default',
-            '[private:cordova]:copy:resources',
-            '[private:cordova]:build:all',
+            '[private-cordova]:clean',
+            '[private-cordova]:copy-source',
+            '[private-cordova]:remove-fake-script',
+            '[private-cordova]:config-for-default',
+            '[private-cordova]:copy:resources',
+            '[private-cordova]:build:all',
             done
         );
     });

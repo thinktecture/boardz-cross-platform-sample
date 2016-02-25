@@ -9,19 +9,19 @@ function RegisterTasks(gulp, config) {
         symdest = require('gulp-symdest'),
         path = require('path');
 
-    gulp.task('[private:electron]:clean', function () {
+    gulp.task('[private-electron]:clean', function () {
         return del([
             path.join(config.targets.electronFolder, 'www'),
             path.join(config.targets.electronFolder, 'build')
         ]);
     });
 
-    gulp.task('[private:electron]:copy-source', function () {
+    gulp.task('[private-electron]:copy-source', function () {
         return gulp.src(path.join(config.targets.buildFolder, '**', '*.*'))
             .pipe(gulp.dest(path.join(config.targets.electronFolder, 'www')));
     });
 
-    gulp.task('[private:electron]:copy-electron-source', function () {
+    gulp.task('[private-electron]:copy-electron-source', function () {
         return gulp.src(path.join(config.electron))
             .pipe(gulp.dest(path.join(config.targets.electronFolder, 'www')));
     });
@@ -40,35 +40,35 @@ function RegisterTasks(gulp, config) {
             .pipe(symdest(path.join(config.targets.electronFolder, 'build', target)));
     }
 
-    gulp.task('[private:electron]:build-windows', function () {
+    gulp.task('[private-electron]:build-windows', function () {
         return buildAppFor('win32', 'windows');
     });
 
-    gulp.task('[private:electron]:build-osx', function () {
+    gulp.task('[private-electron]:build-osx', function () {
         return buildAppFor('darwin', 'osx');
     });
 
-    gulp.task('[private:electron]:build-linux', function () {
+    gulp.task('[private-electron]:build-linux', function () {
         return buildAppFor('linux', 'linux');
     });
 
-    gulp.task('[private:electron]:build-apps', function (done) {
+    gulp.task('[private-electron]:build-apps', function (done) {
         runSequence(
-            '[private:electron]:build-windows',
-            '[private:electron]:build-osx',
-            '[private:electron]:build-linux',
+            '[private-electron]:build-windows',
+            '[private-electron]:build-osx',
+            '[private-electron]:build-linux',
             done
         )
     });
 
     gulp.task('build-electron', function (done) {
         runSequence(
-            '[private:electron]:clean',
+            '[private-electron]:clean',
             [
-                '[private:electron]:copy-electron-source',
-                '[private:electron]:copy-source'
+                '[private-electron]:copy-electron-source',
+                '[private-electron]:copy-source'
             ],
-            '[private:electron]:build-apps',
+            '[private-electron]:build-apps',
             done
         );
     });
