@@ -22,3 +22,7 @@
 .big-space{
   margin-top:30px;
 }
+
+.content-wrapper {
+  overflow-y: scroll;
+}
