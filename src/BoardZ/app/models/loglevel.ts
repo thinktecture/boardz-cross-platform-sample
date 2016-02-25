@@ -5,4 +5,4 @@ export enum LogLevel {
     Info,
     Debug,
     Verbose
-};
+}
