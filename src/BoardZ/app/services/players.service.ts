@@ -4,6 +4,7 @@ import {AuthenticatedHttp} from './authenticated.http';
 import {Headers} from 'angular2/http';
 import {Player} from '../models/player';
 import {Observable} from 'rxjs/Observable';
+import {NearByPlayer} from '../models/nearbyplayer';
 
 @Injectable()
 export class PlayersService {
@@ -34,18 +35,16 @@ export class PlayersService {
         return this.getAll().map(p => p.length)
     }
 
-    public findNearby(radius: number, coordinates: GeoLocation): Observable<Player[]> {
+    public findNearby(radius: number, coordinates: GeoLocation): Observable<NearByPlayer[]> {
         return this._http.get(`api/players/FindNearby?radius=${radius}&coordinate.latitude=${coordinates.latitude}&coordinate.longitude=${coordinates.longitude}`)
             .map(r => {
-                console.log(r.json());
-                return r.json();
+                return <NearByPlayer[]>r.json();
             });
     }
 
-    public add(player: Player) {
+    public add(player: Player): Observable<string> {
         return this._http.post(`api/players/add`, JSON.stringify(player), this.getRequestOptions())
-            .map(response => <string>response.json())
-            .toPromise()
+            .map(response => <string>response.json());
     }
 
     public update(player: any): Observable<string> {
