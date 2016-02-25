@@ -32,7 +32,18 @@ namespace BoardGame.Api.Controllers
             var username = User.GetCurrentUsernameOrThrow();
             return Ok(_storage.List().Where(g => g.UserName == username).ToList());
         }
-        
+
+        /// <summary>
+        /// Returns the games count.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [ResponseType(typeof(int))]
+        public IHttpActionResult GameCount()
+        {
+            return Ok(_storage.Count());
+        }
+
         /// <summary>
         /// Adds a new board game
         /// </summary>

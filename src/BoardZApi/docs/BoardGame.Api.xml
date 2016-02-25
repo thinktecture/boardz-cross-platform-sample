@@ -15,6 +15,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:BoardGame.Api.Controllers.BoardGamesController.GameCount">
+            <summary>
+            Returns the games count.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:BoardGame.Api.Controllers.BoardGamesController.Add(BoardGame.Api.Models.BoardGame)">
             <summary>
             Adds a new board game
