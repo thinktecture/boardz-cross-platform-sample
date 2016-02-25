@@ -29,6 +29,7 @@ export class GameDetails implements OnInit {
     private _diagnosticEnabled: boolean;
     private _pictureUrl: string = "";
     private _coordinates: GeoLocation = null;
+    private _sending: boolean;
 
     public active = true;
     public model: Game = new Game();
@@ -138,6 +139,7 @@ export class GameDetails implements OnInit {
         if(!this.canPlay()){
             return;
         }
+        this._sending = true;
         this._signalRService.sendIAmGaming(this.model.name);
         var player = new Player();
         player.name = this._loginService.username;
@@ -149,6 +151,9 @@ export class GameDetails implements OnInit {
             .subscribe(()=> {
                 this._notificationService.notify(new Notification(`Thank's for sharing ${player.name}`, NotificationType.Success));
 
-            });
+            },
+                ()=> console.log('error while uploading'),
+                ()=> this._sending = false
+            );
     }
 }
