@@ -32,8 +32,8 @@ export class DesktopCameraService implements ICameraService {
 
                                 videoElement.addEventListener('canplay', () => {
                                     var canvasElement = doc.createElement('canvas');
-                                    canvasElement.setAttribute('width', videoElement.videoWidth);
-                                    canvasElement.setAttribute('height', videoElement.videoHeight);
+                                    canvasElement.setAttribute('width', videoElement.videoWidth.toString());
+                                    canvasElement.setAttribute('height', videoElement.videoHeight.toString());
 
                                     // Wait a bit before taking a screenshot so the camera has time to adjust lights
                                     setTimeout(() => {
