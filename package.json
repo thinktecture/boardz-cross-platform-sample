@@ -12,7 +12,7 @@
     "typings": "typings",
     "watch": "gulp watch-web",
     "postinstall": "typings install",
-    "start": "live-server dist/www"
+    "start": "concurrently \"gulp watch-web\" \"live-server dist/www\""
   },
   "author": "Thinktecture AG <office@thinktecture.com>",
   "bugs": {
@@ -22,6 +22,7 @@
   "devDependencies": {
     "angular2": "2.0.0-beta.6",
     "bootstrap": "^3.3.6",
+    "concurrently": "^2.0.0",
     "del": "^2.0.2",
     "es6-promise": "^3.0.2",
     "es6-shim": "^0.33.3",
