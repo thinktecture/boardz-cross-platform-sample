@@ -1,6 +1,0 @@
-<div class="breadcrumb-links">Path:
-        <span *ngFor="#crumb of crumbs;#last = last;">
-            <a href="#" (click)="navigate($event, crumb.url)">{{ crumb.display }}</a>
-            <span *ngIf="!last"> &gt; </span>
-        </span>
-</div>

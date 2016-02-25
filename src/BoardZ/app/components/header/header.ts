@@ -1,7 +1,6 @@
 import {Component, OnInit} from 'angular2/core';
 import {NgClass} from 'angular2/common';
 import {Router} from 'angular2/router';
-import {Breadcrumb} from '../breadcrumb/breadcrumb';
 import {Notification} from '../../models/notification';
 import {LoginService} from '../../services/login.service';
 import {TokenService} from '../../services/token.service';
@@ -10,7 +9,7 @@ import {LogService} from '../../services/log.service';
 
 @Component({
     selector: 'boardz-header',
-    directives: [NgClass, Breadcrumb],
+    directives: [NgClass],
     templateUrl: 'app/components/header/header.html'
 })
 export class HeaderComponent implements OnInit {
