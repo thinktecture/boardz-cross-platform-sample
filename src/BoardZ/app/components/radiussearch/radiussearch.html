@@ -3,8 +3,8 @@
         <h3>Find players around you</h3>
     </div>
 </div>
-<div class="row">
 
+<div class="row">
     <div class="col-xs-8">
         <select class="form-control" [(ngModel)]="_radius">
             <option label="5 km" value="5">5 km</option>
@@ -19,7 +19,6 @@
     <div class="col-xs-4">
         <button class="btn btn-primary btn-block ng-scope" (click)="search()" [disabled]="!_location">Search</button>
     </div>
-
 </div>
 
 <div class="row">

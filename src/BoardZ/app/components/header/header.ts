@@ -69,6 +69,5 @@ export class HeaderComponent implements OnInit {
         event.preventDefault();
 
         this.loginService.logout();
-
     }
 }

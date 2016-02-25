@@ -52,7 +52,5 @@ export class LocateItComponent implements OnInit {
         const coordinates = [this._coords.latitude, this._coords.longitude];
         this.map.setView(coordinates, 13);
         L.marker(coordinates).addTo(this.map);
-
     }
-
 }

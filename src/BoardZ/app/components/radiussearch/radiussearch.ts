@@ -3,6 +3,7 @@ import {GeoLocation} from '../../models/geolocation';
 import {GeolocationService} from '../../services/geolocation.service';
 import {PlayersService} from '../../services/players.service';
 import {Player} from '../../models/player';
+
 @Component({
     templateUrl: 'app/components/radiussearch/radiussearch.html'
 })

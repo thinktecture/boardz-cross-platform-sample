@@ -9,5 +9,4 @@ export class Notifications {
 
     constructor(public notificationService: NotificationService) {
     }
-
 }
