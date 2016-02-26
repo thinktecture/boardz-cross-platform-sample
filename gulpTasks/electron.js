@@ -24,7 +24,7 @@
         });
 
         gulp.task('[private-electron]:copy-electron-source', function () {
-            return gulp.src(path.join(config.electron))
+            return gulp.src(path.join(config.source.files.electron))
                 .pipe(gulp.dest(path.join(config.targets.electronFolder, 'www')));
         });
 

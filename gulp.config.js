@@ -12,7 +12,7 @@ module.exports = {
                 './dist/www/css/vendor.min.css',
                 './dist/www/css/app.css'
             ],
-            electron: './src/electron/**/*.*',
+            electron: './electron/**/*.*',
             cordova: './src/BoardZ/cordova.js',
             main: [
                 './src/BoardZ/index.html'
