@@ -26,3 +26,8 @@
 .content-wrapper {
   overflow-y: scroll;
 }
+
+/* Navigation */
+body .navbar-custom-menu [hidden="true"] {
+  display: none;
+}

@@ -24,6 +24,6 @@ export class PlatformInformationService {
     private guessPlatform(): void {
         this._isMobile = !!window.cordova;
         this._isDesktop = window.navigator.userAgent.match(/Electron/) !== null;
-        this._isWeb = !(this._isMobile && this._isDesktop);
+        this._isWeb = !(this._isMobile || this._isDesktop);
     }
 }

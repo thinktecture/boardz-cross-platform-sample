@@ -6,10 +6,11 @@ import {LoginService} from '../../services/login.service';
 import {TokenService} from '../../services/token.service';
 import {NotificationService} from '../../services/notification.service';
 import {LogService} from '../../services/log.service';
+import {BackButtonDirective} from '../../directives/back.button.directive';
 
 @Component({
     selector: 'boardz-header',
-    directives: [NgClass],
+    directives: [NgClass, BackButtonDirective],
     templateUrl: 'app/components/header/header.html'
 })
 export class HeaderComponent implements OnInit {
