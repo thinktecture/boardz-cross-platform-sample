@@ -20,7 +20,7 @@ app.on('will-quit', function () {
 
 app.on('ready', function () {
     mainWindow = new BrowserWindow({
-        title: "BoardZ!",
+        title: "BoardZ2",
         width: 1024,
         height: 768,
         nodeIntegration: false
