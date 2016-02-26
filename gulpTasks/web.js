@@ -123,7 +123,7 @@
                     open: true
                 }));
         });
-
+    
         gulp.task('watch-web', ['[private-web]:start-live-server'], function () {
             gulp.watch(config.source.files.app.html, ['[private-web]:copy-app-html']);
             gulp.watch(config.source.files.app.ts, ['[private-web]:build-app-scripts']);

@@ -29,7 +29,7 @@ export class LoginForm implements CanDeactivate {
     public doLogin(evt): void {
         this._logService.logDebug('LoginForm.doLogin called via event: ' + evt.toString());
         evt.preventDefault();
-        this._loginService.challenge(this._userName, this._password)
+        this._loginService.login(this._userName, this._password)
             .subscribe(
                 () => {
                     this._signalRService.start();

@@ -54,7 +54,7 @@ export class LoginService {
      * @param password
      * @returns {Subject<TokenData>}
      */
-    public challenge(username: string, password: string): Observable<TokenData> {
+    public login(username: string, password: string): Observable<TokenData> {
         this.logout();
 
         let body = 'grant_type=password&username=' + username + '&password=' + password,
