@@ -12,6 +12,7 @@ import {CameraService} from './camera.service';
 import {DesktopCameraService} from './desktop.camera.service';
 import {MobileCameraService} from './mobile.camera.service';
 import {XHRBackend, ConnectionBackend} from 'angular2/http';
+import {PlatformInformationService} from './platform.information.service';
 
 declare var window;
 
@@ -27,4 +28,5 @@ export var APP_SERVICES = [
     provide(CameraService, { useClass: window.cordova ? MobileCameraService : DesktopCameraService }),
     UiNotificationService,
     SignalRService,
+    PlatformInformationService
 ];

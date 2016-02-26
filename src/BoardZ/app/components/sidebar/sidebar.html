@@ -1,13 +1,13 @@
 <aside class="main-sidebar">
     <section class="sidebar">
         <ul class="sidebar-menu">
-               <li ui-sref-active="active">
+               <li ui-sref-active="active" close-sidebar-on-click>
                    <a [routerLink]="['Dashboard']"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
                </li>
-               <li ui-sref-active="active">
+               <li ui-sref-active="active" close-sidebar-on-click>
                    <a [routerLink]="['Games', 'GameList']"><i class="fa fa-list"></i><span>Games overview</span></a>
                </li>
-               <li ui-sref-active="active">
+               <li ui-sref-active="active" close-sidebar-on-click>
                     <a [routerLink]="['RadiusSearch']"><i class="fa fa-location-arrow"></i><span>Radius search</span></a>
             </li>
         </ul>
