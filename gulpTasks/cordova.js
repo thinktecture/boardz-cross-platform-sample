@@ -24,13 +24,13 @@
         });
 
         gulp.task('[private-cordova]:config-for-livereload', function () {
-            gulp.src(path.join(config.cordova, 'config_livereload.xml'), { base: config.cordova })
+            gulp.src(path.join(config.source.files.cordovaFiles, 'config_livereload.xml'), { base: config.source.files.cordovaFiles })
                 .pipe(rename('config.xml'))
                 .pipe(gulp.dest(config.targets.cordovaFolder));
         });
 
         gulp.task('[private-cordova]:config-for-default', function () {
-            gulp.src(path.join(config.cordova, 'config.xml'), { base: config.cordova })
+            gulp.src(path.join(config.source.files.cordovaFiles, 'config.xml'), { base: config.source.files.cordovaFiles })
                 .pipe(gulp.dest(config.targets.cordovaFolder));
         });
 
@@ -121,5 +121,4 @@
     module.exports = {
         init: RegisterTasks
     };
-
 })();

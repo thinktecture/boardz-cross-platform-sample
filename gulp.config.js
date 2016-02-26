@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    assetFolder: './assetFiles/',
+    
     source: {
         folder: './src/BoardZ/',
         files: {
@@ -12,7 +12,8 @@ module.exports = {
                 './dist/www/css/vendor.min.css',
                 './dist/www/css/app.css'
             ],
-            electron: './electron/**/*.*',
+            electronFiles: './electron/**/*.*',
+            cordovaFiles: './cordova/',
             cordova: './src/BoardZ/cordova.js',
             main: [
                 './src/BoardZ/index.html'
