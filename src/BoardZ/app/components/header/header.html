@@ -7,7 +7,6 @@
         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle</span>
         </a>
-
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
                 <li back-button>
@@ -43,9 +42,9 @@
                 <li *ngIf="loginService.isAuthenticated">
                     <a href (click)="logout($event)"><i class="fa fa-sign-out"></i></a>
                 </li>
-                <li>
+                <!--<li>
                     <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                </li>
+                </li>-->
             </ul>
         </div>
     </nav>
