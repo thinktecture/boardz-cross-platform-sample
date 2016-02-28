@@ -22,7 +22,7 @@
 </div>
 
 <div class="row big-space">
-    <div class="col-xs-12 col-md-3" *ngFor="#p of _players">
+    <div class="col-xs-12 col-md-4" *ngFor="#p of _players">
         <div class="box box-success box-solid">
             <div class="box-header with-border">
                 <h3 class="box-title">{{p.player.name}}</h3>
@@ -33,8 +33,7 @@
             </div>
 
             <div class="box-footer">
-                {{p.distance | number:'1.2-3'}} km away from here
-
+                <span *ngIf="p.distance">{{p.distance}} km away from here</span>
             </div>
         </div>
     </div>
