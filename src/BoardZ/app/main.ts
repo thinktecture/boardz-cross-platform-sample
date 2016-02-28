@@ -16,7 +16,7 @@ bootstrap(BoardzApp, [
     HTTP_PROVIDERS,
     ROUTER_PROVIDERS,
     provide(LocationStrategy, { useClass: HashLocationStrategy }),
-    provide("inDiagnosticsMode", { useValue: true }),
+    provide("inDiagnosticsMode", { useValue: false }),
     provide(LogService, { useClass: LogService }),
     TokenService,
 ]).then((appRef: ComponentRef) => {
