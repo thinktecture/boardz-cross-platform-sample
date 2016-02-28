@@ -105,6 +105,16 @@
             return del(path.join(config.targets.cordovaFolder, 'www', 'cordova.js'));
         });
 
+        gulp.task('[private-cordova]:build-only', function(done){
+            sh.cd(config.targets.cordovaFolder);
+            sh.exec('cordova build ios');
+            sh.cd('..');
+            done();
+        });
+        gulp.task('rebuild-cordova', function(done){
+           runSequence('build-web', '[private-cordova]:copy-source', '[private-cordova]:remove-fake-script', '[private-cordova]:build-only', done);
+        });
+
         gulp.task('build-cordova', function (done) {
             runSequence(
                 '[private-cordova]:clean',
