@@ -18,8 +18,12 @@ export class GameList implements OnInit {
     constructor(private _gamesService: GamesService, private _router: Router, private _notificationService: NotificationService) {
     }
 
-    gotoDetails(game: Game): void {
-        this._router.navigate(['GameDetails', { id: game.id }])
+    public openGameDetails(game: Game): void {
+        this._router.navigate(['GameDetails', { id: game.id }]);
+    }
+
+    public openCreateGame():void{
+        this._router.navigate(['CreateGame']);
     }
 
     ngOnInit() {
