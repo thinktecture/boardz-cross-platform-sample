@@ -20,7 +20,7 @@
                 path.join(config.targets.cordovaFolder, 'plugins'),
                 path.join(config.targets.cordovaFolder, 'resources'),
                 path.join(config.targets.cordovaFolder, 'www')
-            ]);
+            ], {force:true});
         });
 
         gulp.task('[private-cordova]:config-for-livereload', function () {
@@ -117,6 +117,7 @@
 
         gulp.task('build-cordova', function (done) {
             runSequence(
+                'build-web',
                 '[private-cordova]:clean',
                 '[private-cordova]:copy-source',
                 '[private-cordova]:remove-fake-script',

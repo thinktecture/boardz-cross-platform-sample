@@ -20,11 +20,8 @@
         );
     });
 
-    gulp.task('clean', function (done) {
-        del(config.targets.buildFolder + '/**/*', { force: true })
-            .then(function () {
-                done();
-            });
+    gulp.task('clean', function () {
+        return del(config.targets.buildFolder + '/**/*', { force: true });
     });
 
     gulp.task('build-all', function (done) {
