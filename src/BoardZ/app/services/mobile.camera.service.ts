@@ -12,20 +12,19 @@ export class MobileCameraService implements ICameraService {
             };
 
             var onCordovaDeviceReady = () => {
-                const camera = window.camera;
-                const Camera = window.Camera;
+                const camera = window.navigator.camera;
 
                 var options = {
                     quality: 50,
-                    destinationType: Camera.DestinationType.DATA_URL,
-                    sourceType: Camera.PictureSourceType.CAMERA,
-                    encodingType: Camera.EncodingType.PNG,
+                    destinationType: camera.DestinationType.DATA_URL,
+                    sourceType: camera.PictureSourceType.CAMERA,
+                    encodingType: camera.EncodingType.PNG,
                     saveToPhotoAlbum: false,
                     correctOrientation: true
                 };
 
                 camera.getPicture(imageData => {
-                    observer.next(imageData);
+                    observer.next('data:image/png;base64,' + imageData);
                     removeDomListener();
                     observer.complete();
                 }, error => {
