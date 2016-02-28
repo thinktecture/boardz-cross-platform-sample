@@ -149,7 +149,7 @@ export class GameDetails implements OnInit {
 
         this._playersService.add(player)
             .subscribe(()=> {
-                this._notificationService.notify(new Notification(`Thank's for sharing ${player.name}`, NotificationType.Success));
+                this._notificationService.notify(new Notification(`Thanks for sharing, ${player.name}`, NotificationType.Success));
 
             },
                 ()=> console.log('error while uploading'),

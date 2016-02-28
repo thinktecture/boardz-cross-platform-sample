@@ -25,9 +25,22 @@
 
 .content-wrapper {
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Navigation */
 body .navbar-custom-menu [hidden="true"] {
   display: none;
+}
+
+
+body,
+.wrapper {
+  overflow-x: hidden;
+  position: relative;
+}
+
+.wrapper {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
