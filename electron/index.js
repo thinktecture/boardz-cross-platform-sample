@@ -8,10 +8,8 @@ var electron = require('electron'),
 var mainWindow = null;
 
 app.on('window-all-closed', function () {
-    // force app termination on OSX when mainWindow has been closed
-    if (process.platform == 'darwin') {
-        app.quit();
-    }
+    //https://github.com/atom/electron/issues/2312
+    app.quit();
 });
 
 app.on('will-quit', function () {

@@ -74,6 +74,42 @@
                 done
             );
         });
+
+        gulp.task('build-electron-windows', function (done) {
+            runSequence(
+                '[private-electron]:clean',
+                [
+                    '[private-electron]:copy-electron-source',
+                    '[private-electron]:copy-source'
+                ],
+                '[private-electron]:build-windows',
+                done
+            );
+        });
+
+        gulp.task('build-electron-osx', function (done) {
+            runSequence(
+                '[private-electron-osx]:clean',
+                [
+                    '[private-electron]:copy-electron-source',
+                    '[private-electron]:copy-source'
+                ],
+                '[private-electron]:build-osx',
+                done
+            );
+        });
+
+        gulp.task('build-electron-linux', function (done) {
+            runSequence(
+                '[private-electron-osx]:clean',
+                [
+                    '[private-electron]:copy-electron-source',
+                    '[private-electron]:copy-source'
+                ],
+                '[private-electron]:build-linux',
+                done
+            );
+        });
     }
 
     module.exports = {
