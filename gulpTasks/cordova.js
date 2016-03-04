@@ -75,6 +75,24 @@
             done();
         });
 
+        gulp.task('[private-cordova]:build:android', function (done) {
+            sh.cd(config.targets.cordovaFolder);
+            sh.exec('cordova prepare android');
+            sh.exec('ionic resources');
+            sh.exec('cordova build android');
+            sh.cd('..');
+            done();
+        });
+
+        gulp.task('[private-cordova]:build:windows', function (done) {
+            sh.cd(config.targets.cordovaFolder);
+            sh.exec('cordova prepare windows');
+            sh.exec('ionic resources');
+            sh.exec('cordova build windows');
+            sh.cd('..');
+            done();
+        });
+
         gulp.task('[private-cordova]:build:all', function (done) {
             sh.cd(config.targets.cordovaFolder);
             sh.exec('cordova prepare');
@@ -112,7 +130,7 @@
             done();
         });
         gulp.task('rebuild-cordova', function(done){
-           runSequence('build-web', '[private-cordova]:copy-source', '[private-cordova]:remove-fake-script', '[private-cordova]:build-only', done);
+            runSequence('build-web', '[private-cordova]:copy-source', '[private-cordova]:remove-fake-script', '[private-cordova]:build-only', done);
         });
 
         gulp.task('build-cordova', function (done) {
@@ -124,6 +142,45 @@
                 '[private-cordova]:config-for-default',
                 '[private-cordova]:copy:resources',
                 '[private-cordova]:build:all',
+                done
+            );
+        });
+
+        gulp.task('build-cordova-ios', function (done) {
+            runSequence(
+                'build-web',
+                '[private-cordova]:clean',
+                '[private-cordova]:copy-source',
+                '[private-cordova]:remove-fake-script',
+                '[private-cordova]:config-for-default',
+                '[private-cordova]:copy:resources',
+                '[private-cordova]:build:ios',
+                done
+            );
+        });
+
+        gulp.task('build-cordova-android', function (done) {
+            runSequence(
+                'build-web',
+                '[private-cordova]:clean',
+                '[private-cordova]:copy-source',
+                '[private-cordova]:remove-fake-script',
+                '[private-cordova]:config-for-default',
+                '[private-cordova]:copy:resources',
+                '[private-cordova]:build:android',
+                done
+            );
+        });
+
+        gulp.task('build-cordova-windows', function (done) {
+            runSequence(
+                'build-web',
+                '[private-cordova]:clean',
+                '[private-cordova]:copy-source',
+                '[private-cordova]:remove-fake-script',
+                '[private-cordova]:config-for-default',
+                '[private-cordova]:copy:resources',
+                '[private-cordova]:build:windows',
                 done
             );
         });

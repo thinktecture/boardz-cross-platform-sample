@@ -33,7 +33,7 @@
                 .pipe(electron({
                     version: '0.36.8',
                     platform: targetPlatform,
-                    arch: 'x64',
+                    arch: 'ia32',
                     companyName: 'Thinktecture AG',
                     linuxExecutableName: 'BoardZ',
                     darwinIcon: path.join(config.targets.resourcesFolder, 'icon.icns'),
@@ -71,6 +71,42 @@
                     '[private-electron]:copy-source'
                 ],
                 '[private-electron]:build-apps',
+                done
+            );
+        });
+
+        gulp.task('build-electron-windows', function (done) {
+            runSequence(
+                '[private-electron]:clean',
+                [
+                    '[private-electron]:copy-electron-source',
+                    '[private-electron]:copy-source'
+                ],
+                '[private-electron]:build-windows',
+                done
+            );
+        });
+
+        gulp.task('build-electron-osx', function (done) {
+            runSequence(
+                '[private-electron-osx]:clean',
+                [
+                    '[private-electron]:copy-electron-source',
+                    '[private-electron]:copy-source'
+                ],
+                '[private-electron]:build-osx',
+                done
+            );
+        });
+
+        gulp.task('build-electron-linux', function (done) {
+            runSequence(
+                '[private-electron-osx]:clean',
+                [
+                    '[private-electron]:copy-electron-source',
+                    '[private-electron]:copy-source'
+                ],
+                '[private-electron]:build-linux',
                 done
             );
         });
