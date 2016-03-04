@@ -7,7 +7,7 @@
         var del = require('del'),
             runSequence = require('run-sequence'),
             watch = require('gulp-watch'),
-            electron = require('gulp-atom-electron'),
+            electron = require('gulp-awesome-electron'),
             symdest = require('gulp-symdest'),
             path = require('path');
 
