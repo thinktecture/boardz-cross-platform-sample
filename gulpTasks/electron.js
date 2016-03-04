@@ -33,7 +33,7 @@
                 .pipe(electron({
                     version: '0.36.8',
                     platform: targetPlatform,
-                    arch: 'ia32',
+                    arch: 'x64',
                     companyName: 'Thinktecture AG',
                     linuxExecutableName: 'BoardZ',
                     darwinIcon: path.join(config.targets.resourcesFolder, 'icon.icns'),
