@@ -1,11 +1,16 @@
 'use strict';
+
 var electron = require('electron'),
     app = electron.app,
     BrowserWindow = electron.BrowserWindow,
     Menu = electron.Menu,
-    globalShortcut = electron.globalShortcut;
+    Tray = require('tray'),
+    globalShortcut = electron.globalShortcut,
+    path = require('path');
 
 var mainWindow = null;
+var trayIconPath = path.join(__dirname, 'icon.png');
+var trayApp = null;
 
 app.on('window-all-closed', function () {
     //https://github.com/atom/electron/issues/2312
@@ -24,6 +29,24 @@ app.on('ready', function () {
         nodeIntegration: false
     });
 
+    var contextMenu = Menu.buildFromTemplate([
+        {
+            label: 'Radius Search...',
+            type: 'normal',
+            click: function () {
+
+            }
+        },
+        {
+            label: 'Quit',
+            accelerator: 'Command+Q',
+            selector: 'terminate:'
+        }
+    ]);
+    trayApp = new Tray(trayIconPath);
+    trayApp.setToolTip('BoardZ2');
+    trayApp.setContextMenu(contextMenu);
+    
     globalShortcut.register('CmdOrCtrl+Shift+d', function () {
         mainWindow.webContents.toggleDevTools();
     });
@@ -39,8 +62,8 @@ app.on('ready', function () {
         var template = [{
             label: "Application",
             submenu: [
-                { label: "About Application", selector: "orderFrontStandardAboutPanel:" },
-                { type: "separator" },
+                {label: "About Application", selector: "orderFrontStandardAboutPanel:"},
+                {type: "separator"},
                 {
                     label: "Reload", accelerator: "CmdOrCtrl+R", click: function () {
                     mainWindow.loadURL('file://' + __dirname + '/index.html');
@@ -55,13 +78,13 @@ app.on('ready', function () {
         }, {
             label: "Edit",
             submenu: [
-                { label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:" },
-                { label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", selector: "redo:" },
-                { type: "separator" },
-                { label: "Cut", accelerator: "CmdOrCtrl+X", selector: "cut:" },
-                { label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:" },
-                { label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:" },
-                { label: "Select All", accelerator: "CmdOrCtrl+A", selector: "selectAll:" }
+                {label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:"},
+                {label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", selector: "redo:"},
+                {type: "separator"},
+                {label: "Cut", accelerator: "CmdOrCtrl+X", selector: "cut:"},
+                {label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:"},
+                {label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:"},
+                {label: "Select All", accelerator: "CmdOrCtrl+A", selector: "selectAll:"}
             ]
         }
         ];
