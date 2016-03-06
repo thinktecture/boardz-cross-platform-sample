@@ -29,7 +29,7 @@
         gulp.task('[private-web]:copy-vendor-scripts', function () {
             return gulp.src(config.source.files.script_dependencies)
                 .pipe(concat(config.targets.vendorMinJs))
-                //    .pipe(uglify())
+                //.pipe(uglify())
                 .pipe(gulp.dest(path.join(config.targets.buildFolder, 'scripts/')));
         });
 
@@ -133,5 +133,4 @@
     module.exports = {
         init: RegisterTasks
     };
-
 })();

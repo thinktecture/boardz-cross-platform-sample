@@ -14,12 +14,13 @@ import {SignalRService} from './services/signalr.service';
 import {LoginService} from './services/login.service';
 import {NotificationService} from './services/notification.service';
 import {UiNotificationService} from './services/ui.notification.service';
+import {PlatformInformationService} from "./services/platform.information.service";
 
 interface AdminLteFix extends Window {
     initAdminLTE():void;
 }
 
-declare var window: AdminLteFix;
+declare var window:AdminLteFix;
 
 @Component({
     selector: 'boardz-app',
@@ -28,15 +29,20 @@ declare var window: AdminLteFix;
     templateUrl: 'app/app.html'
 })
 @RouteConfig([
-    { path: '/', component: Dashboard, name: 'Dashboard', useAsDefault: true, data: { displayName: 'Dashboard' } },
-    { path: '/login', component: LoginForm, name: 'Login', data: { displayName: 'Login' } },
-    { path: '/notifications', component: Notifications, name: 'Notifications', data: { displayName: 'Notifications' } },
-    { path: '/games/...', component: Games, name: 'Games', data: { displayName: 'Games' } },
-    { path: '/radiussearch', component: RadiusSearchComponent, name: 'RadiusSearch', data: { displayName: 'Radius Search' } }
+    {path: '/', component: Dashboard, name: 'Dashboard', useAsDefault: true, data: {displayName: 'Dashboard'}},
+    {path: '/login', component: LoginForm, name: 'Login', data: {displayName: 'Login'}},
+    {path: '/notifications', component: Notifications, name: 'Notifications', data: {displayName: 'Notifications'}},
+    {path: '/games/...', component: Games, name: 'Games', data: {displayName: 'Games'}},
+    {
+        path: '/radiussearch',
+        component: RadiusSearchComponent,
+        name: 'RadiusSearch',
+        data: {displayName: 'Radius Search'}
+    }
 ])
 export class BoardzApp implements AfterViewInit {
 
-    ngAfterViewInit(): any {
+    ngAfterViewInit():any {
         if (window.initAdminLTE) {
             window.initAdminLTE();
         }
@@ -51,14 +57,22 @@ export class BoardzApp implements AfterViewInit {
         });
     }
 
-    constructor(private _signalRService: SignalRService,
-                private _loginService: LoginService,
-                private _notificationService: NotificationService,
-                uiNotificationService: UiNotificationService,
-        logService: LogService) {
-        logService.maximumLogLevel = LogLevel.Verbose;
+    constructor(private _signalRService:SignalRService,
+                private _loginService:LoginService,
+                private _notificationService:NotificationService,
+                private _platformInformationService:PlatformInformationService,
+                private _uiNotificationService:UiNotificationService,
+                private _logService:LogService) {
+        _logService.maximumLogLevel = LogLevel.Verbose;
 
-        uiNotificationService.subscribeToNotifications();
+        _uiNotificationService.subscribeToNotifications();
+
+        /*
+        if (_platformInformationService.isDesktop) {
+            require('electron').ipcRenderer.on('doRadiusSearch', function (event, message) {
+                console.log("Inside doRadiusSearch...");
+            });
+        }
+        */
     }
-
 }

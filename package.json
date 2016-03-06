@@ -12,7 +12,7 @@
     "typings": "typings",
     "watch": "gulp watch-web",
     "postinstall": "typings install",
-    "start": "gulp watch"
+    "build": "gulp"
   },
   "author": "Thinktecture AG <office@thinktecture.com>",
   "bugs": {
