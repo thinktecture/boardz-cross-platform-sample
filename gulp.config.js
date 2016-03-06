@@ -7,6 +7,7 @@ module.exports = {
         files: {
             injectables: [
                 './dist/www/scripts/es6-shim.min.js',
+                './dist/www/scripts/shims_for_IE.js',
                 './dist/www/scripts/vendor.min.js',
                 './dist/www/scripts/system.setup.js',
                 './dist/www/css/vendor.min.css',
@@ -49,7 +50,10 @@ module.exports = {
                 './src/BoardZ/vendor/font-awesome/fonts/*.*',
                 './src/BoardZ/vendor/bootstrap/fonts/*.*'
             ],
-            shim: ['./node_modules/es6-shim/es6-shim.min.js'],
+            shim: [
+                './node_modules/es6-shim/es6-shim.min.js',
+                './node_modules/angular2/es6/dev/src/testing/shims_for_IE.js'
+            ],
             script_dependencies: [
                 './src/BoardZ/vendor/hammerjs/hammer.js',
                 './src/BoardZ/vendor/jquery/jquery-2.1.4.js',
