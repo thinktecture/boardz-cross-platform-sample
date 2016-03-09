@@ -24,7 +24,6 @@ import {NotificationType} from '../../models/notificationtype';
 })
 @NeedsAuthentication()
 export class GameDetails implements OnInit {
-
     private _needsReset: boolean;
     private _diagnosticEnabled: boolean;
     private _pictureUrl: string = "";

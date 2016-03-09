@@ -3,7 +3,6 @@ import {LogLevel} from '../models/loglevel';
 
 @Injectable()
 export class LogService {
-
     public defaultLogLevel: LogLevel = LogLevel.Info;
     public maximumLogLevel: LogLevel = LogLevel.Warning;
 

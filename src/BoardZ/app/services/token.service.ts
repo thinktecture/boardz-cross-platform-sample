@@ -8,7 +8,6 @@ const expiryKey: string = 'Authentication::TokenExpiration';
 
 @Injectable()
 export class TokenService {
-
     private _authenticated: boolean;
 
     constructor(private _logService: LogService) {

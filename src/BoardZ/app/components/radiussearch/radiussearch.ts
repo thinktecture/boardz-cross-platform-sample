@@ -10,13 +10,11 @@ import {NearByPlayer} from '../../models/nearbyplayer';
     pipes: [DecimalPipe]
 })
 export class RadiusSearchComponent implements OnInit {
-
     private _location: GeoLocation;
     private _radius: number = 10;
     private _players: NearByPlayer[];
 
     constructor(private _geoLocationService: GeolocationService, private _playersService: PlayersService) {
-
     }
 
     public ngOnInit() {

@@ -11,12 +11,10 @@ import {PlayersService} from '../../services/players.service';
 })
 @NeedsAuthentication()
 export class Dashboard implements OnInit {
-
     public playerCount: number = 0;
     public gameCount: number = 0;
 
     constructor(private _gamesService: GamesService, private _playersService: PlayersService) {
-
     }
 
     ngOnInit(): any {

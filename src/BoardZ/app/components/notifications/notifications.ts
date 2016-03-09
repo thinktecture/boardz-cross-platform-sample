@@ -6,7 +6,6 @@ import {NotificationService} from '../../services/notification.service';
     templateUrl: 'app/components/notifications/notifications.html'
 })
 export class Notifications {
-
     constructor(public notificationService: NotificationService) {
     }
 }

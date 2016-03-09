@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {Router, CanDeactivate, ComponentInstruction} from 'angular2/router';
+import {Router} from 'angular2/router';
 import {LoginService} from '../../services/login.service';
 import {LogService} from '../../services/log.service';
 import {NotificationService} from '../../services/notification.service';
@@ -9,26 +9,22 @@ import {SignalRService} from '../../services/signalr.service';
     templateUrl: 'app/components/login/login.html'
 })
 export class LoginForm {
-
-    ngOnInit(): any {
-
-    }
-
-    public _hasError: boolean = false;
     private _userName: string;
     private _password: string;
 
+    public _hasError: boolean = false;
+    
     constructor(private _router: Router,
                 private _loginService: LoginService,
                 private _logService: LogService,
                 private _notificationService: NotificationService,
                 private _signalRService: SignalRService) {
-
     }
 
     public doLogin(evt): void {
         this._logService.logDebug('LoginForm.doLogin called via event: ' + evt.toString());
         evt.preventDefault();
+        
         this._loginService.login(this._userName, this._password)
             .subscribe(
                 () => {

@@ -11,15 +11,14 @@ import {GeolocationService} from '../../services/geolocation.service';
     templateUrl: 'app/components/locateit/locateit.html'
 })
 export class LocateItComponent implements OnInit {
-
-    public map;
-
     private _hasError: boolean = false;
     private _isLocating: boolean = false;
     private _coords: GeoLocation = null;
     @Output('onLocated')
     private _onLocated: EventEmitter<GeoLocation> = new EventEmitter<GeoLocation>();
 
+    public map;
+    
     constructor(private _geolocationService: GeolocationService) {
         L.Icon.Default.imagePath = 'app/images';
     }

@@ -8,9 +8,7 @@ import {NearByPlayer} from '../models/nearbyplayer';
 
 @Injectable()
 export class PlayersService {
-
     constructor(private _http: AuthenticatedHttp) {
-
     }
 
     private getRequestOptions() {

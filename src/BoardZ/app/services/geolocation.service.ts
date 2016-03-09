@@ -3,7 +3,6 @@ import {GeoLocation} from '../models/geolocation';
 
 @Injectable()
 export class GeolocationService {
-
     public locate() {
         return new Promise((resolve, reject)=> {
             if (window.navigator && window.navigator.geolocation) {

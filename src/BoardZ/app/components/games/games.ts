@@ -14,5 +14,4 @@ import {GameList} from './list';
     { path: '/details/:id', component: GameDetails, name: 'GameDetails', data: { displayName: 'Game details' } }
 ])
 export class Games {
-
 }

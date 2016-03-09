@@ -11,7 +11,6 @@ import {SignalRService} from './signalr.service';
 
 @Injectable()
 export class LoginService {
-
     private _lastLoginUnsuccessful: boolean;
 
     get isAuthenticated(): boolean {

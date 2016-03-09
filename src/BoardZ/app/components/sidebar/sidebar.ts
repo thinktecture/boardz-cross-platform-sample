@@ -9,7 +9,6 @@ import {CloseSidebarOnClickDirective} from '../../directives/close.sidebar.on.cl
     templateUrl: 'app/components/sidebar/sidebar.html'
 })
 export class Sidebar {
-
     public expanded: boolean = true;
 
     constructor(public loginService: LoginService) {

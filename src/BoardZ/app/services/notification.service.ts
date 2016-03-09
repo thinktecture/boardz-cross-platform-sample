@@ -6,7 +6,6 @@ import {NotificationType} from '../models/notificationtype';
 
 @Injectable()
 export class NotificationService {
-
     public notifications: Subject<Notification> = new Subject<Notification>();
 
     constructor(private _logService: LogService) {

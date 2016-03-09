@@ -6,9 +6,7 @@ import {Game} from '../models/game';
 
 @Injectable()
 export class GamesService {
-
     constructor(private _http: AuthenticatedHttp) {
-
     }
 
     private getRequestOptions() {

@@ -13,6 +13,7 @@ export const NeedsAuthentication = () => {
             return true;
 
         router.navigate(['/Login', { target }]);
+        
         return false;
     });
 }

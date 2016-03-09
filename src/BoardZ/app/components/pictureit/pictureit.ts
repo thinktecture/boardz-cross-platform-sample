@@ -6,7 +6,8 @@ import {CameraService} from '../../services/camera.service';
     templateUrl: 'app/components/pictureit/pictureit.html'
 })
 export class PictureItComponent {
-    @Output('onPictureTaken') private _onPictureTaken: EventEmitter<string> = new EventEmitter<string>();
+    @Output('onPictureTaken')
+    private _onPictureTaken: EventEmitter<string> = new EventEmitter<string>();
 
     public pictureUrl: string;
     public hasError: boolean;

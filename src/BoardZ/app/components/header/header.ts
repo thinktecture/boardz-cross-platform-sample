@@ -14,9 +14,9 @@ import {BackButtonDirective} from '../../directives/back.button.directive';
     templateUrl: 'app/components/header/header.html'
 })
 export class HeaderComponent implements OnInit {
+    private notifications: Notification[] = [];
 
     public loggedIn: boolean = false;
-    private notifications: Notification[] = [];
     public currentLocation: string = 'BoardZ!';
 
     constructor(public loginService: LoginService, private _tokenService: TokenService, private _notificationService: NotificationService, private _router: Router, private _logService: LogService) {
@@ -46,7 +46,6 @@ export class HeaderComponent implements OnInit {
             this.loggedIn = result
         });
     }
- 
 
     public dismiss(notification: Notification): boolean {
         if (notification) {
