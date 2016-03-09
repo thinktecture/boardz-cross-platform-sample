@@ -8,7 +8,7 @@ import {SignalRService} from '../../services/signalr.service';
 @Component({
     templateUrl: 'app/components/login/login.html'
 })
-export class LoginForm implements CanDeactivate {
+export class LoginForm {
 
     ngOnInit(): any {
 
@@ -46,9 +46,5 @@ export class LoginForm implements CanDeactivate {
     setError(value: boolean) {
         this._logService.logDebug('LoginForm.setError: Setting error state to: ' + value);
         this._hasError = value;
-    }
-
-    routerCanDeactivate(next: ComponentInstruction, prev: ComponentInstruction) {
-        return !this._hasError && this._loginService.isAuthenticated;
     }
 }
