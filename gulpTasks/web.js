@@ -16,7 +16,8 @@
             tsConfig = ts.createProject(config.ts.config),
             sourcemaps = require('gulp-sourcemaps'),
             inject = require('gulp-inject'),
-            uglify = require('gulp-uglify');
+            uglify = require('gulp-uglify'),
+            watch = require('gulp-watch');
 
         gulp.task('[private-web]:copy-template', function () {
             var sources = gulp.src(config.source.files.injectables);
@@ -124,9 +125,13 @@
                 }));
         });
     
-        gulp.task('watch-web', ['[private-web]:start-live-server'], function () {
-            gulp.watch(config.source.files.app.html, ['[private-web]:copy-app-html']);
-            gulp.watch(config.source.files.app.ts, ['[private-web]:build-app-scripts']);
+        gulp.task('watch-web', ['[private-web]:start-live-server'], function (done) {
+            watch(config.source.files.app.everything, function(){
+                console.log(arguments);
+
+                runSequence('[private-web]:copy-app-html', '[private-web]:build-app-scripts',done);
+            });
+
         });
     }
 
