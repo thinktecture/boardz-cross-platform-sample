@@ -29,7 +29,7 @@
             'build-web',
             [
                 'build-electron',
-                'build-cordova',
+                'build-cordova'
             ]
             , done
         );

@@ -20,7 +20,7 @@
                 path.join(config.targets.cordovaFolder, 'plugins'),
                 path.join(config.targets.cordovaFolder, 'resources'),
                 path.join(config.targets.cordovaFolder, 'www')
-            ], {force:true});
+            ], { force: true });
         });
 
         gulp.task('[private-cordova]:config-for-livereload', function () {
@@ -48,7 +48,6 @@
         });
 
         gulp.task('cordova:watch:ios', function () {
-            // gulp.start('dev:watch');
             runSequence('[private-cordova]:clean',
                 '[private-cordova]:copy-source',
                 '[private-cordova]:remove-fake-script',
@@ -123,13 +122,13 @@
             return del(path.join(config.targets.cordovaFolder, 'www', 'cordova.js'));
         });
 
-        gulp.task('[private-cordova]:build-only', function(done){
+        gulp.task('[private-cordova]:build-only', function (done) {
             sh.cd(config.targets.cordovaFolder);
             sh.exec('cordova build ios');
             sh.cd('..');
             done();
         });
-        gulp.task('rebuild-cordova', function(done){
+        gulp.task('rebuild-cordova', function (done) {
             runSequence('build-web', '[private-cordova]:copy-source', '[private-cordova]:remove-fake-script', '[private-cordova]:build-only', done);
         });
 
