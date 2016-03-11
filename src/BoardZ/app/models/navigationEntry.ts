@@ -1,5 +1,4 @@
 export class NavigationEntry {
-    links: string;
-    icon: string;
-    displayName: string
+    constructor(public links: Array<string>, public icon: string, public displayName: string) {
+    }
 }

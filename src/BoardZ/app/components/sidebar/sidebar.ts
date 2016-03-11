@@ -1,6 +1,6 @@
 import {Component} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
-import {LoginService} from '../../services/login.service';
+
 import {CloseSidebarOnClickDirective} from '../../directives/close.sidebar.on.click.directive';
 import {NavigationEntry} from "../../models/navigationEntry";
 
@@ -15,9 +15,9 @@ export class Sidebar {
     
     constructor() {
         this.navigationEntries = new Array<NavigationEntry>();
-        this.navigationEntries.push(new NavigationEntry({ links: "Dashboard", icon: "", displayName: ""}));
-        this.navigationEntries.push({ links: "Games", icon: "", displayName: ""});
-        this.navigationEntries.push({ links: "", icon: "", displayName: ""});
+        this.navigationEntries.push(new NavigationEntry(['Dashboard'], 'dashboard', 'Dashboard'));
+        this.navigationEntries.push(new NavigationEntry(['Games', 'GameList'], 'list', 'Games'));
+        this.navigationEntries.push(new NavigationEntry(['RadiusSearch'], 'location-arrow', 'Players search'));
     }
 
     toggleSidebar(): void {
