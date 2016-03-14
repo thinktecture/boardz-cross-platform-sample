@@ -65,6 +65,7 @@
 
         gulp.task('build-electron', function (done) {
             runSequence(
+                'build-web',
                 '[private-electron]:clean',
                 [
                     '[private-electron]:copy-electron-source',
@@ -77,6 +78,7 @@
 
         gulp.task('build-electron-windows', function (done) {
             runSequence(
+                'build-web',
                 '[private-electron]:clean',
                 [
                     '[private-electron]:copy-electron-source',
@@ -89,6 +91,7 @@
 
         gulp.task('build-electron-osx', function (done) {
             runSequence(
+                'build-web',
                 '[private-electron]:clean',
                 [
                     '[private-electron]:copy-electron-source',
@@ -101,6 +104,7 @@
 
         gulp.task('build-electron-linux', function (done) {
             runSequence(
+                'build-web',
                 '[private-electron-osx]:clean',
                 [
                     '[private-electron]:copy-electron-source',

@@ -78,8 +78,8 @@
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="SplashScreen" value="screen"/>
   <preference name="SplashScreenDelay" value="3000"/>
-  <preference name="android-minSdkVersion" value="19" />
-  <preference name="android-targetSdkVersion" value="22" />
+  <preference name="android-minSdkVersion" value="14" />
+  <preference name="android-targetSdkVersion" value="19" />
   <preference name="xwalkVersion" value="15+"/>
   <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect"/>
   <preference name="xwalkMode" value="embedded"/>
