@@ -32,6 +32,15 @@ The gulp task will build iOS, Windows UWP, Android phone apps as well as desktop
 * Mobile platforms (iOS, Android, Windows) by packaging the app using Cordova
 * Desktop platforms (Windows, Mac OS X, Linux) by packaging the app using GitHub's electron
 
+### Android Settings
+
+#### SDK version
+
+If you want to change [Android's SDK version](http://developer.android.com/guide/topics/manifest/uses-sdk-element.html), open [cordova/config.xml](cordova/config.xml) and search for `android-minSdkVersion` or `android-targetSdkVersion`:
+
+* `android-minSdkVersion`: An integer designating the minimum API Level required for the application to run. 
+* `android-targetSdkVersion`: An integer designating the API Level that the application targets. If not set, the default value equals that given to minSdkVersion.
+
 ## Third-Party Libraries
 ### JavaScript, CSS
 * [Angular2](https://angular.io/), JavaScript framework — HTML enhanced for web apps!
