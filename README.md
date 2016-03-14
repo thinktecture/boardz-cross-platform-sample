@@ -30,7 +30,7 @@ The gulp task will build iOS, Windows UWP, Android phone apps as well as desktop
 ## Supported platforms
 * Any modern web browser (Chrome, Firefox, Edge, Safari) by simply hosting it
 * Mobile platforms (iOS, Android, Windows) by packaging the app using Cordova
-* Desktop platforms (Windows, Mac OS X, Linux) by packaging the app using GitHub's electro
+* Desktop platforms (Windows, Mac OS X, Linux) by packaging the app using GitHub's electron
 
 ## Third-Party Libraries
 ### JavaScript, CSS
