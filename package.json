@@ -12,7 +12,8 @@
     "typings": "typings",
     "watch": "gulp watch-web",
     "postinstall": "typings install",
-    "build": "gulp"
+    "build": "gulp",
+    "watch-ios": "gulp [private-web]:watch:no-liveserver & gulp cordova:watch:ios"
   },
   "author": "Thinktecture AG <office@thinktecture.com>",
   "bugs": {
@@ -30,6 +31,7 @@
     "gulp": "^3.9.0",
     "gulp-atom-electron": "^1.4.0",
     "gulp-awesome-electron": "git+https://github.com/ThorstenHans/gulp-awesome-electron.git",
+    "gulp-batch": "1.0.5",
     "gulp-concat": "^2.6.0",
     "gulp-filelog": "^0.4.1",
     "gulp-inject": "^3.0.0",

@@ -9,6 +9,7 @@
             runSequence = require('run-sequence'),
             server = require('gulp-server-livereload'),
             watch = require('gulp-watch'),
+            batch = require('gulp-batch'),
             cssmin = require('gulp-minify-css'),
             filelog = require('gulp-filelog'),
             concat = require('gulp-concat'),
@@ -96,6 +97,10 @@
                 .pipe(gulp.dest(path.join(config.targets.buildFolder, config.targets.appFolder)));
         });
 
+        gulp.task('[private-web]:watch:no-liveserver', function () {
+            return deltaWatch();
+        });
+        
         gulp.task('build-web', function (done) {
             return runSequence(
                 'clean',
@@ -124,15 +129,18 @@
                     open: true
                 }));
         });
-    
-        gulp.task('watch-web', ['[private-web]:start-live-server'], function (done) {
-            watch(config.source.files.app.everything, function(){
+
+        gulp.task('watch-web', ['[private-web]:start-live-server'], function () {
+            deltaWatch();
+        });
+
+        function deltaWatch() {
+            return watch(config.source.files.app.everything, batch(function (events, done) {
                 console.log(arguments);
 
-                runSequence('[private-web]:copy-app-html', '[private-web]:build-app-scripts',done);
-            });
-
-        });
+                runSequence('[private-web]:copy-app-html', '[private-web]:build-app-scripts', done);
+            }));
+        }
     }
 
     module.exports = {
