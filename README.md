@@ -13,7 +13,6 @@
   * [Windows 10 SDK](https://dev.windows.com/en-us/downloads/windows-10-sdk)
 * Download and install [node.js](https://nodejs.org/)
 * Download and install [Atom](https://atom.io/) or another editor of your choice (free: `notepad`, [Visual Studio Code](https://code.visualstudio.com/); commercial: [Sublime Text](https://www.sublimetext.com/), [WebStorm](https://www.jetbrains.com/webstorm/))
- 
 
 ## Building
 The gulp task will build iOS, Windows UWP, Android phone apps as well as desktop apps for Mac OSX, Windows and Linux. To get it working, please do the following:
@@ -27,6 +26,25 @@ The gulp task will build iOS, Windows UWP, Android phone apps as well as desktop
     * Run `gulp build-cordova` to build all phone related apps
     * Run `gulp build-electron` to build all desktop related apps
 
+## Running
+
+### Web
+
+Use `gulp watch-web` as mentioned above to start the browser version of BoardZ.
+
+### Cordova
+
+To run the cordova project, open a terminal and point it to `dist/mobile`. Use one of the following commands to start:
+
+* `cordova run ios`: Runs the iOS version of BoardZ. Requires a Mac
+* `cordova run android`: Runs the Android version of BoardZ. Requires Android SDK to be installed and at least a simulator
+
+If a device is connected, the `run` command will automatically deploy the App to your device, so you can start it directly on your device.
+
+### Electron
+
+To start the electron packaged app, go to `dist/desktop/build` and open one of the directories suiting your current operating system. Then open the executable as used to. 
+
 ## Supported platforms
 * Any modern web browser (Chrome, Firefox, Edge, Safari) by simply hosting it
 * Mobile platforms (iOS, Android, Windows) by packaging the app using Cordova
@@ -38,7 +56,7 @@ The gulp task will build iOS, Windows UWP, Android phone apps as well as desktop
 
 If you want to change [Android's SDK version](http://developer.android.com/guide/topics/manifest/uses-sdk-element.html), open [cordova/config.xml](cordova/config.xml) and search for `android-minSdkVersion` or `android-targetSdkVersion`:
 
-* `android-minSdkVersion`: An integer designating the minimum API Level required for the application to run. 
+* `android-minSdkVersion`: An integer designating the minimum API Level required for the application to run.
 * `android-targetSdkVersion`: An integer designating the API Level that the application targets. If not set, the default value equals that given to minSdkVersion.
 
 ## Third-Party Libraries
