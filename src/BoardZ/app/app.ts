@@ -17,11 +17,11 @@ import {UiNotificationService} from './services/ui.notification.service';
 import {PlatformInformationService} from "./services/platform.information.service";
 import {NativeIntegrationService} from "./services/nativeIntegrationService";
 
-interface AdminLteFix extends Window {
-    initAdminLTE():void;
+interface BoardZAppWindow extends Window {
+    initAdminLTE(): void;
 }
 
-declare var window:AdminLteFix;
+declare var window: BoardZAppWindow;
 
 @Component({
     selector: 'boardz-app',
@@ -30,25 +30,30 @@ declare var window:AdminLteFix;
     templateUrl: 'app/app.html'
 })
 @RouteConfig([
-    {path: '/', component: Dashboard, name: 'Dashboard', useAsDefault: true, data: {displayName: 'Dashboard'}},
-    {path: '/login', component: LoginForm, name: 'Login', data: {displayName: 'Login'}},
-    {path: '/notifications', component: Notifications, name: 'Notifications', data: {displayName: 'Notifications'}},
-    {path: '/games/...', component: Games, name: 'Games', data: {displayName: 'Games'}},
-    {path: '/radiussearch', component: RadiusSearchComponent, name: 'RadiusSearch', data: {displayName: 'Radius Search'}}
+    { path: '/', component: Dashboard, name: 'Dashboard', useAsDefault: true, data: { displayName: 'Dashboard' } },
+    { path: '/login', component: LoginForm, name: 'Login', data: { displayName: 'Login' } },
+    { path: '/notifications', component: Notifications, name: 'Notifications', data: { displayName: 'Notifications' } },
+    { path: '/games/...', component: Games, name: 'Games', data: { displayName: 'Games' } },
+    {
+        path: '/radiussearch',
+        component: RadiusSearchComponent,
+        name: 'RadiusSearch',
+        data: { displayName: 'Radius Search' }
+    }
 ])
 export class BoardzApp implements AfterViewInit {
-    constructor(private _signalRService:SignalRService,
-                private _loginService:LoginService,
-                private _notificationService:NotificationService,
-                private _nativeIntegrationService:NativeIntegrationService,
-                private _uiNotificationService:UiNotificationService,
-                private _logService:LogService) {
+    constructor(private _signalRService: SignalRService,
+                private _loginService: LoginService,
+                private _notificationService: NotificationService,
+                private _nativeIntegrationService: NativeIntegrationService,
+                private _uiNotificationService: UiNotificationService,
+                private _logService: LogService) {
         _logService.maximumLogLevel = LogLevel.Verbose;
         _uiNotificationService.subscribeToNotifications();
         _nativeIntegrationService.init();
     }
 
-    ngAfterViewInit():any {
+    ngAfterViewInit(): any {
         if (window.initAdminLTE) {
             window.initAdminLTE();
         }
@@ -57,7 +62,6 @@ export class BoardzApp implements AfterViewInit {
             this._signalRService.start();
         }
 
-        // TODO: Maybe move this to another place?
         this._signalRService.someoneJoinedAGame.subscribe(message => {
             this._notificationService.notifyInformation(message);
         });

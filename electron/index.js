@@ -43,10 +43,11 @@ app.on('ready', function () {
             selector: 'terminate:'
         }
     ]);
+    
     trayApp = new Tray(trayIconPath);
     trayApp.setToolTip('BoardZ2');
     trayApp.setContextMenu(contextMenu);
-    
+
     globalShortcut.register('CmdOrCtrl+Shift+d', function () {
         mainWindow.webContents.toggleDevTools();
     });
@@ -62,29 +63,49 @@ app.on('ready', function () {
         var template = [{
             label: "Application",
             submenu: [
-                {label: "About Application", selector: "orderFrontStandardAboutPanel:"},
-                {type: "separator"},
                 {
-                    label: "Reload", accelerator: "CmdOrCtrl+R", click: function () {
-                    mainWindow.loadURL('file://' + __dirname + '/index.html');
-                }
+                    label: "About Application", selector: "orderFrontStandardAboutPanel:"
                 },
                 {
-                    label: "Quit", accelerator: "Command+Q", click: function () {
-                    app.quit();
-                }
+                    type: "separator"
+                },
+                {
+                    label: "Reload", accelerator: "CmdOrCtrl+R",
+                    click: function () {
+                        mainWindow.loadURL('file://' + __dirname + '/index.html');
+                    }
+                },
+                {
+                    label: "Quit", accelerator: "Command+Q",
+                    click: function () {
+                        app.quit();
+                    }
                 }
             ]
         }, {
             label: "Edit",
             submenu: [
-                {label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:"},
-                {label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", selector: "redo:"},
-                {type: "separator"},
-                {label: "Cut", accelerator: "CmdOrCtrl+X", selector: "cut:"},
-                {label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:"},
-                {label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:"},
-                {label: "Select All", accelerator: "CmdOrCtrl+A", selector: "selectAll:"}
+                {
+                    label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:"
+                },
+                {
+                    label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", selector: "redo:"
+                },
+                {
+                    type: "separator"
+                },
+                {
+                    label: "Cut", accelerator: "CmdOrCtrl+X", selector: "cut:"
+                },
+                {
+                    label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:"
+                },
+                {
+                    label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:"
+                },
+                {
+                    label: "Select All", accelerator: "CmdOrCtrl+A", selector: "selectAll:"
+                }
             ]
         }
         ];

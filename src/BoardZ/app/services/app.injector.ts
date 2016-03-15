@@ -6,5 +6,6 @@ export const appInjector = (injector?: Injector): Injector => {
     if (injector) {
         appInjectorRef = injector;
     }
+    
     return appInjectorRef;
 };

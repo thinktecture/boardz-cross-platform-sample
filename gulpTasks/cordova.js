@@ -1,4 +1,4 @@
-// Contains all cordova related tasks
+// Contains all Cordova-related tasks
 
 (function () {
     'use strict';
@@ -21,17 +21,17 @@
                 path.join(config.targets.cordovaFolder, 'plugins'),
                 path.join(config.targets.cordovaFolder, 'resources'),
                 path.join(config.targets.cordovaFolder, 'www')
-            ], { force: true });
+            ], {force: true});
         });
 
         gulp.task('[private-cordova]:config-for-livereload', function () {
-            gulp.src(path.join(config.source.files.cordovaFiles, 'config_livereload.xml'), { base: config.source.files.cordovaFiles })
+            gulp.src(path.join(config.source.files.cordovaFiles, 'config_livereload.xml'), {base: config.source.files.cordovaFiles})
                 .pipe(rename('config.xml'))
                 .pipe(gulp.dest(config.targets.cordovaFolder));
         });
 
         gulp.task('[private-cordova]:config-for-default', function () {
-            gulp.src(path.join(config.source.files.cordovaFiles, 'config.xml'), { base: config.source.files.cordovaFiles })
+            gulp.src(path.join(config.source.files.cordovaFiles, 'config.xml'), {base: config.source.files.cordovaFiles})
                 .pipe(gulp.dest(config.targets.cordovaFolder));
         });
 
@@ -56,7 +56,7 @@
                 '[private-cordova]:config-for-livereload',
                 '[private-cordova]:build:ios');
 
-            watch(path.join(config.targets.buildFolder, '**', '*'), { base: config.targets.buildFolder }, batch(function (events, done) {
+            watch(path.join(config.targets.buildFolder, '**', '*'), {base: config.targets.buildFolder}, batch(function (events, done) {
                 runSequence('[private-cordova]:copy-source', function () {
                     var currentDir = sh.pwd();
                     sh.cd(path.join(__dirname, '..', config.targets.cordovaFolder));

@@ -21,9 +21,8 @@ export class LoginForm {
                 private _signalRService: SignalRService) {
     }
 
-    public doLogin(evt): void {
-        this._logService.logDebug('LoginForm.doLogin called via event: ' + evt.toString());
-        evt.preventDefault();
+    public doLogin(): void {
+        this._logService.logDebug('LoginForm.doLogin called');
         
         this._loginService.login(this._userName, this._password)
             .subscribe(

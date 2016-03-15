@@ -12,9 +12,9 @@ import {NavigationEntry} from "../../models/navigationEntry";
 export class Sidebar {
     public expanded: boolean = true;
     public navigationEntries: Array<NavigationEntry>;
-    
+
     constructor() {
-        this.navigationEntries = new Array<NavigationEntry>();
+        this.navigationEntries = [];
         this.navigationEntries.push(new NavigationEntry(['Dashboard'], 'dashboard', 'Dashboard'));
         this.navigationEntries.push(new NavigationEntry(['Games', 'GameList'], 'list', 'Games'));
         this.navigationEntries.push(new NavigationEntry(['RadiusSearch'], 'location-arrow', 'Players search'));

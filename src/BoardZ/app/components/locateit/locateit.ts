@@ -18,7 +18,7 @@ export class LocateItComponent implements OnInit {
     private _onLocated: EventEmitter<GeoLocation> = new EventEmitter<GeoLocation>();
 
     public map;
-    
+
     constructor(private _geolocationService: GeolocationService) {
         L.Icon.Default.imagePath = 'app/images';
     }

@@ -2,7 +2,6 @@ import {Injectable} from 'angular2/core';
 import {Http, Headers, RequestOptions} from 'angular2/http';
 import {Router} from 'angular2/router';
 import {Observable} from 'rxjs/Observable';
-import {Subject} from 'rxjs/Subject';
 import {TokenService} from './token.service';
 import {Configuration} from '../app-config';
 import {LogService} from './log.service';
@@ -26,8 +25,7 @@ export class LoginService {
                 private _http: Http,
                 private _router: Router,
                 private _tokenService: TokenService,
-                private _signalRService: SignalRService
-    ) {
+                private _signalRService: SignalRService) {
         this._tokenService.check()
             .subscribe((value) => {
                 if (!value) this.logout();
@@ -59,11 +57,11 @@ export class LoginService {
         let body = 'grant_type=password&username=' + username + '&password=' + password,
             options = new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' }) });
 
-        return Observable.create((observer)=>{
+        return Observable.create((observer)=> {
             this._http.post(this._config.apiEndpoint + 'token', body, options)
                 .map(response => <TokenData>response.json())
                 .subscribe(
-                    (tokenData) =>{
+                    (tokenData) => {
                         this.saveToken(tokenData.access_token);
                         this._tokenService.username = username;
 

@@ -1,4 +1,4 @@
-// Contains everything to develop BoardZ! using a live reload server
+// Contains everything to develop BoardZ! using a live-reload server
 
 (function () {
     'use strict';

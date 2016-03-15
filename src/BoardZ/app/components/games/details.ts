@@ -123,34 +123,37 @@ export class GameDetails implements OnInit {
         }
     }
 
-    public useLocation(coordinates: GeoLocation){
+    public useLocation(coordinates: GeoLocation) {
         this._coordinates = coordinates;
     }
 
-    public usePicture(pictureUrl: string){
+    public usePicture(pictureUrl: string) {
         this._pictureUrl = pictureUrl;
     }
 
-    public canPlay(){
+    public canPlay() {
         return this._coordinates && this._pictureUrl;
     }
+
     public iAmPlaying(): void {
-        if(!this.canPlay()){
+        if (!this.canPlay()) {
             return;
         }
+
         this._sending = true;
         this._signalRService.sendIAmGaming(this.model.name);
+
         var player = new Player();
         player.name = this._loginService.username;
-        player.boardGameId  = this.model.id;
+        player.boardGameId = this.model.id;
         player.coordinate = this._coordinates;
         player.imageUrl = this._pictureUrl;
 
         this._playersService.add(player)
             .subscribe(()=> {
-                this._notificationService.notify(new Notification(`Thanks for sharing, ${player.name}`, NotificationType.Success));
+                    this._notificationService.notify(new Notification(`Thanks for sharing, ${player.name}`, NotificationType.Success));
 
-            },
+                },
                 ()=> console.log('error while uploading'),
                 ()=> this._sending = false
             );

@@ -13,7 +13,6 @@ export class PictureItComponent {
     public hasError: boolean;
 
     constructor(private _cameraService: CameraService) {
-
     }
 
     public takePicture() {

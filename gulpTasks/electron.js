@@ -1,4 +1,4 @@
-// Contains all electron related tasks
+// Contains all Electron-related tasks
 
 (function () {
     'use strict';
@@ -62,7 +62,7 @@
                 done
             )
         });
-        
+
         gulp.task('build-electron', function (done) {
             runSequence(
                 'build-web',

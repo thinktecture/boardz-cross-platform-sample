@@ -1,11 +1,13 @@
 import {Injectable} from 'angular2/core';
 import {Router} from 'angular2/router';
 
+declare var require;
+
 @Injectable()
 export class NativeIntegrationService {
     constructor(private _router: Router) {
     }
-    
+
     public init() {
         var that = this;
 
