@@ -15,6 +15,7 @@ import {LoginService} from './services/login.service';
 import {NotificationService} from './services/notification.service';
 import {UiNotificationService} from './services/ui.notification.service';
 import {PlatformInformationService} from "./services/platform.information.service";
+import {NativeIntegrationService} from "./services/nativeIntegrationService";
 
 interface AdminLteFix extends Window {
     initAdminLTE():void;
@@ -39,18 +40,12 @@ export class BoardzApp implements AfterViewInit {
     constructor(private _signalRService:SignalRService,
                 private _loginService:LoginService,
                 private _notificationService:NotificationService,
-                private _platformInformationService:PlatformInformationService,
+                private _nativeIntegrationService:NativeIntegrationService,
                 private _uiNotificationService:UiNotificationService,
                 private _logService:LogService) {
         _logService.maximumLogLevel = LogLevel.Verbose;
-
         _uiNotificationService.subscribeToNotifications();
-
-        if (_platformInformationService.isDesktop) {
-            require('electron').ipcRenderer.on('doRadiusSearch', function (event, message) {
-                console.log("Inside doRadiusSearch...");
-            });
-        }
+        _nativeIntegrationService.init();
     }
 
     ngAfterViewInit():any {

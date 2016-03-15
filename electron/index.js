@@ -34,7 +34,7 @@ app.on('ready', function () {
             label: 'Radius Search...',
             type: 'normal',
             click: function () {
-                mainWindow.webContents.send('doRadiusSearch');
+                mainWindow.webContents.send('navigateTo', 'RadiusSearch');
             }
         },
         {

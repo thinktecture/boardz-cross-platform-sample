@@ -13,12 +13,15 @@ import {DesktopCameraService} from './desktop.camera.service';
 import {MobileCameraService} from './mobile.camera.service';
 import {XHRBackend, ConnectionBackend} from 'angular2/http';
 import {PlatformInformationService} from './platform.information.service';
+import {NativeIntegrationService} from "./nativeIntegrationService";
 
 declare var window;
 
 export var APP_SERVICES = [
     provide(ConnectionBackend, { useClass: XHRBackend }),
     Configuration,
+    PlatformInformationService,
+    NativeIntegrationService,
     AuthenticatedHttp,
     LoginService,
     GamesService,
@@ -27,6 +30,5 @@ export var APP_SERVICES = [
     NotificationService,
     provide(CameraService, { useClass: window.cordova ? MobileCameraService : DesktopCameraService }),
     UiNotificationService,
-    SignalRService,
-    PlatformInformationService
+    SignalRService
 ];
