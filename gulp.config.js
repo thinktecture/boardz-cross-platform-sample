@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    
+    systemJsConfig: './system.config.js',
     source: {
         folder: './src/BoardZ/',
         files: {
@@ -9,6 +9,7 @@ module.exports = {
                 './dist/www/scripts/es6-shim.min.js',
                 './dist/www/scripts/shims_for_IE.js',
                 './dist/www/scripts/vendor.min.js',
+                './dist/www/scripts/angular2.min.js',
                 './dist/www/scripts/system.setup.js',
                 './dist/www/css/vendor.min.css',
                 './dist/www/css/app.css'
@@ -21,7 +22,7 @@ module.exports = {
             ],
             systemSetupScript: './src/BoardZ/system.setup.js',
             app: {
-                everything: './src/BoardZ/app/**/*',
+                everything: ['./src/BoardZ/app/**/*', './src/BoardZ/system.setup.js'],
                 ts: [
                     './src/BoardZ/app/**/*.ts'
                 ],
@@ -55,7 +56,7 @@ module.exports = {
                 './node_modules/es6-shim/es6-shim.min.js',
                 './node_modules/angular2/es6/dev/src/testing/shims_for_IE.js'
             ],
-            script_dependencies: [
+            vendorJs: [
                 './src/BoardZ/vendor/hammerjs/hammer.js',
                 './src/BoardZ/vendor/jquery/jquery-2.1.4.js',
                 './src/BoardZ/vendor/jquery/jquery.hammer.js',
@@ -65,7 +66,8 @@ module.exports = {
                 './src/BoardZ/vendor/bootstrap/js/bootstrap.js',
                 './src/BoardZ/vendor/fastclick/fastclick.js',
                 './src/BoardZ/vendor/admin-lte/js/app.js',
-                './src/BoardZ/vendor/leaflet-js/leaflet-src.js',
+                './src/BoardZ/vendor/leaflet-js/leaflet-src.js'],
+            angular2: [
                 './node_modules/systemjs/dist/system-polyfills.js',
                 './node_modules/angular2/bundles/angular2-polyfills.js',
                 './node_modules/systemjs/dist/system.src.js',
@@ -80,6 +82,7 @@ module.exports = {
         config: './tsconfig.json'
     },
     targets: {
+        angular2MinJs: 'angular2.min.js',
         vendorMinJs: 'vendor.min.js',
         vendorMinCss: 'vendor.min.css',
         buildFolder: './dist/www',

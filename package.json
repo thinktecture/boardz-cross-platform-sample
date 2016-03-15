@@ -56,6 +56,7 @@
     "shelljs": "^0.5.3",
     "stream-series": "^0.1.1",
     "systemjs": "0.19.20",
+    "systemjs-builder": "0.15.13",
     "tether": "^1.1.1",
     "typescript": "^1.8.0",
     "typings": "^0.6.8",

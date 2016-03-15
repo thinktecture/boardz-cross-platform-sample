@@ -26,7 +26,7 @@ app.on('ready', function () {
         title: "BoardZ2",
         width: 1024,
         height: 768,
-        nodeIntegration: false
+        nodeIntegration: true
     });
 
     var contextMenu = Menu.buildFromTemplate([

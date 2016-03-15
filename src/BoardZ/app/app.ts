@@ -46,13 +46,11 @@ export class BoardzApp implements AfterViewInit {
 
         _uiNotificationService.subscribeToNotifications();
 
-        /*
         if (_platformInformationService.isDesktop) {
             require('electron').ipcRenderer.on('doRadiusSearch', function (event, message) {
                 console.log("Inside doRadiusSearch...");
             });
         }
-        */
     }
 
     ngAfterViewInit():any {

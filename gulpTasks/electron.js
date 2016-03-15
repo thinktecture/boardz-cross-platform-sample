@@ -62,7 +62,7 @@
                 done
             )
         });
-
+        
         gulp.task('build-electron', function (done) {
             runSequence(
                 'build-web',

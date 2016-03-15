@@ -18,7 +18,8 @@
             sourcemaps = require('gulp-sourcemaps'),
             inject = require('gulp-inject'),
             uglify = require('gulp-uglify'),
-            watch = require('gulp-watch');
+            watch = require('gulp-watch'),
+            Builder = require('systemjs-builder');
 
         gulp.task('[private-web]:copy-template', function () {
             var sources = gulp.src(config.source.files.injectables);
@@ -28,9 +29,26 @@
                 .pipe(gulp.dest(path.join(config.targets.buildFolder)));
         });
 
-        gulp.task('[private-web]:copy-vendor-scripts', function () {
-            return gulp.src(config.source.files.script_dependencies)
-                .pipe(concat(config.targets.vendorMinJs))
+
+        gulp.task('[private-web]:bundle-vendor-scripts', function () {
+            var builder = new Builder();
+
+            return builder.loadConfig(config.systemJsConfig)
+                .then(function () {
+                    var promises = [];
+
+                    config.source.files.vendorJs.forEach(function (jsFile) {
+                        promises.push(builder.bundle(jsFile, path.join(config.targets.buildFolder, 'scripts/bundles/', path.basename(jsFile))));
+                    });
+
+
+                    return Promise.all(promises);
+                })
+        });
+
+        gulp.task('[private-web]:copy-angular2-scripts', function () {
+            return gulp.src(config.source.files.angular2)
+                .pipe(concat(config.targets.angular2MinJs))
                 //.pipe(uglify())
                 .pipe(gulp.dest(path.join(config.targets.buildFolder, 'scripts/')));
         });
@@ -105,7 +123,8 @@
             return runSequence(
                 'clean',
                 [
-                    '[private-web]:copy-vendor-scripts',
+                    '[private-web]:bundle-vendor-scripts',
+                    '[private-web]:copy-angular2-scripts',
                     '[private-web]:copy-system-setup-script',
                     '[private-web]:copy-cordova-script',
                     '[private-web]:copy-shim',
@@ -138,7 +157,7 @@
             return watch(config.source.files.app.everything, batch(function (events, done) {
                 console.log(arguments);
 
-                runSequence('[private-web]:copy-app-html', '[private-web]:build-app-scripts', done);
+                runSequence('[private-web]:copy-system-setup-script', '[private-web]:copy-app-html', '[private-web]:build-app-scripts', done);
             }));
         }
     }
