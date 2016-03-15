@@ -11,16 +11,16 @@ import {PlayersService} from '../../services/players.service';
 })
 @NeedsAuthentication()
 export class Dashboard implements OnInit {
-    public playerCount: number = 0;
-    public gameCount: number = 0;
+    public playerCount: string = '-';
+    public gameCount: string = '-';
 
     constructor(private _gamesService: GamesService, private _playersService: PlayersService) {
     }
 
     ngOnInit(): any {
         this._playersService.getPlayerCount()
-            .subscribe(result => this.playerCount = result);
+            .subscribe(result => this.playerCount = result.toString());
         this._gamesService.getGameCount()
-            .subscribe(result => this.gameCount = result);
+            .subscribe(result => this.gameCount = result.toString());
     }
 }
