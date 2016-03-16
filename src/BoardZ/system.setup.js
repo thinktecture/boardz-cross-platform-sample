@@ -19,9 +19,9 @@ System.config({
     }
 });
 
-System.import('jquery')
+System.import('hammer/hammer')
     .then(function () {
-        return System.import('hammer/hammer');
+        return System.import('jquery');
     })
     .then(function () {
         return System.import('jquery/jquery-hammer');
