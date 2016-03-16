@@ -25,7 +25,6 @@ import {NotificationType} from '../../models/notificationtype';
 @NeedsAuthentication()
 export class GameDetails implements OnInit {
     private _needsReset: boolean;
-    private _diagnosticEnabled: boolean;
     private _pictureUrl: string = "";
     private _coordinates: GeoLocation = null;
     private _sending: boolean;
@@ -43,7 +42,6 @@ export class GameDetails implements OnInit {
                 private _signalRService: SignalRService,
                 private _loginService: LoginService,
                 private _injector: Injector) {
-        this._diagnosticEnabled = _injector.get('inDiagnosticsMode');
     }
 
     ngOnInit(): void {
