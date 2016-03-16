@@ -32,6 +32,7 @@ export class LocateItComponent implements OnInit {
         }).addTo(this.map);
 
         this._isLocating = true;
+        
         this._geolocationService.locate()
             .then((coords: GeoLocation)=> {
                 this._hasError = false;

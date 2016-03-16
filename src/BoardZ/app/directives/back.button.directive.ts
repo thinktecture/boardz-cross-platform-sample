@@ -1,6 +1,7 @@
 import {Directive, HostListener} from 'angular2/core';
 import {PlatformInformationService} from '../services/platform.information.service';
 import {Location} from 'angular2/router';
+
 @Directive({
     selector: '[back-button]',
     host: {

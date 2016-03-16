@@ -17,12 +17,6 @@ import {UiNotificationService} from './services/ui.notification.service';
 import {PlatformInformationService} from "./services/platform.information.service";
 import {NativeIntegrationService} from "./services/nativeIntegrationService";
 
-interface BoardZAppWindow extends Window {
-    initAdminLTE(): void;
-}
-
-declare var window: BoardZAppWindow;
-
 @Component({
     selector: 'boardz-app',
     providers: APP_SERVICES,
@@ -30,16 +24,11 @@ declare var window: BoardZAppWindow;
     templateUrl: 'app/app.html'
 })
 @RouteConfig([
-    { path: '/', component: Dashboard, name: 'Dashboard', useAsDefault: true, data: { displayName: 'Dashboard' } },
-    { path: '/login', component: LoginForm, name: 'Login', data: { displayName: 'Login' } },
-    { path: '/notifications', component: Notifications, name: 'Notifications', data: { displayName: 'Notifications' } },
+    { path: '/', component: Dashboard, name: 'Dashboard', useAsDefault: true },
+    { path: '/login', component: LoginForm, name: 'Login' },
+    { path: '/notifications', component: Notifications, name: 'Notifications' },
     { path: '/games/...', component: Games, name: 'Games', data: { displayName: 'Games' } },
-    {
-        path: '/radiussearch',
-        component: RadiusSearchComponent,
-        name: 'RadiusSearch',
-        data: { displayName: 'Radius Search' }
-    }
+    { path: '/radiussearch', component: RadiusSearchComponent, name: 'RadiusSearch' }
 ])
 export class BoardzApp implements AfterViewInit {
     constructor(private _signalRService: SignalRService,
@@ -67,3 +56,9 @@ export class BoardzApp implements AfterViewInit {
         });
     }
 }
+
+interface BoardZAppWindow extends Window {
+    initAdminLTE(): void;
+}
+
+declare var window: BoardZAppWindow;

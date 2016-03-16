@@ -1,6 +1,5 @@
 import {Component, OnInit} from 'angular2/core';
 import {NgClass} from 'angular2/common';
-import {Router} from 'angular2/router';
 import {Notification} from '../../models/notification';
 import {LoginService} from '../../services/login.service';
 import {TokenService} from '../../services/token.service';
@@ -19,22 +18,8 @@ export class HeaderComponent implements OnInit {
     public loggedIn: boolean = false;
     public currentLocation: string = 'BoardZ!';
 
-    constructor(public loginService: LoginService, private _tokenService: TokenService, private _notificationService: NotificationService, private _router: Router, private _logService: LogService) {
-        while (this._router.parent) {
-            this._router = this._router.parent;
-        }
+    constructor(public loginService: LoginService, private _tokenService: TokenService, private _notificationService: NotificationService, private _logService: LogService) {
 
-        this._router.subscribe(routeUrl => {
-            this._logService.logVerbose('Headerbar detected routing to: ' + routeUrl);
-
-            this._router.recognize(routeUrl).then(instruction => {
-                while (instruction.child) {
-                    instruction = instruction.child;
-                }
-
-                this.currentLocation = instruction.component.routeData.get('displayName');
-            });
-        });
     }
 
     ngOnInit(): any {
@@ -50,6 +35,7 @@ export class HeaderComponent implements OnInit {
     public dismiss(notification: Notification): boolean {
         if (notification) {
             let index = this.notifications.indexOf(notification);
+
             if (index > -1) {
                 this.notifications.splice(index, 1);
             }
@@ -57,6 +43,7 @@ export class HeaderComponent implements OnInit {
         else {
             this.notifications = [];
         }
+
         return false;
     }
 
