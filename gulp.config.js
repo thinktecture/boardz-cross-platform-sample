@@ -61,6 +61,7 @@ module.exports = {
                 './src/BoardZ/vendor/jquery/jquery-2.1.4.js',
                 './src/BoardZ/vendor/jquery/jquery.hammer.js',
                 './src/BoardZ/vendor/jquery/jquery.slimscroll.js',
+                './src/BoardZ/vendor/pNotify/pnotify-adapter.js',
                 './src/BoardZ/vendor/pNotify/pnotify.custom.js',
                 './src/BoardZ/vendor/signalr/signalr.js',
                 './src/BoardZ/vendor/bootstrap/js/bootstrap.js',

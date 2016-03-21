@@ -9,6 +9,9 @@ System.config({
         },
         'hammerjs': {
             build: false
+        },
+        'pnotify': {
+            build: false
         }
     }
 });
