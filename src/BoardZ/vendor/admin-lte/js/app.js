@@ -245,6 +245,10 @@ window.initAdminLTE = function() {
                 $(window, ".wrapper").resize(function () {
                     _this.fix();
                     _this.fixSidebar();
+
+                    if ($.AdminLTE.options.sidebarPushMenu) {
+                        $.AdminLTE.pushMenu.activate($.AdminLTE.options.sidebarToggleSelector);
+                    }
                 });
             },
             fix: function () {
@@ -321,6 +325,7 @@ window.initAdminLTE = function() {
                     footer = $('.main-footer');
 
                 //Enable sidebar toggle
+                $(toggleBtn).off('click');
                 $(toggleBtn).on('click', function (e) {
                     e.preventDefault();
 
@@ -348,6 +353,11 @@ window.initAdminLTE = function() {
                     && $body.hasClass('sidebar-mini'))) {
                     this.expandOnHover();
                 }
+
+                contentWrapper.off('click');
+                $body.hammer().off('panstart');
+                $body.hammer().off('pan');
+                $body.hammer().off('panend');
 
                 if ($(window).width() < (screenSizes.sm)) {
                     var lastDeltaX;
