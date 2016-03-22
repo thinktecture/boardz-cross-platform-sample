@@ -9,6 +9,7 @@
             watch = require('gulp-watch'),
             electron = require('gulp-awesome-electron'),
             symdest = require('gulp-symdest'),
+            electronConnect = require('electron-connect'),
             path = require('path');
 
         gulp.task('[private-electron]:clean', function () {
@@ -61,6 +62,27 @@
                 '[private-electron]:build-linux',
                 done
             )
+        });
+
+        gulp.task('watch-electron', function () {
+            var electronServer = electronConnect.server.create({
+                path:  path.join(config.targets.electronFolder, 'www')
+            });
+
+
+
+            gulp.start('[private-web]:watch:no-liveserver');
+
+            runSequence('build-electron', function () {
+                electronServer.start();
+
+                watch(config.targets.buildFolder, { base: config.targets.buildFolder })
+                    .pipe(gulp.dest(path.join(config.targets.electronFolder, 'www')));
+
+                watch(path.join(config.targets.electronFolder, 'www', '**', '*'), function () {
+                    electronServer.reload();
+                });
+            });
         });
 
         gulp.task('build-electron', function (done) {

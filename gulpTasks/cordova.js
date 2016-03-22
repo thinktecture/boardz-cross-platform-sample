@@ -49,7 +49,7 @@
                 }));
         });
 
-        gulp.task('cordova:watch:ios', ['[private-cordova]:start-live-server:ios'], function () {
+        gulp.task('watch-cordova-ios', ['[private-cordova]:start-live-server:ios'], function () {
             runSequence('[private-cordova]:clean',
                 '[private-cordova]:copy-source',
                 '[private-cordova]:remove-fake-script',
