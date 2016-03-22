@@ -19,6 +19,8 @@ The gulp task will build iOS, Windows UWP, Android phone apps as well as desktop
 
 * After cloning the repo: `npm i --no-progress` within the root folder of this repository
 * Run `gulp watch-web` to start a live server, which is best when developing the app
+* Run `gulp watch-cordova-ios` to orchestrate the cordova ios app with live reloading. When this task runs, go to `dist/mobile` and use `cordova run ios` to open a simulator which will live reload.
+* Run `gulp watch-electron` to start a live reloading electron app
 * Run `gulp` to build the web app
 * Release Mode: Use the following gulp tasks to build the apps in release mode
     * Run `gulp build-all` to build all apps in debug mode

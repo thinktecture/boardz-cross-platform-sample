@@ -6,6 +6,7 @@ var electron = require('electron'),
     Menu = electron.Menu,
     Tray = require('tray'),
     globalShortcut = electron.globalShortcut,
+    client = require('electron-connect').client,
     path = require('path');
 
 var mainWindow = null;
@@ -58,6 +59,8 @@ app.on('ready', function () {
     mainWindow.on('closed', function () {
         mainWindow = null;
     });
+
+    client.create(mainWindow);
 
     if (process.platform == 'darwin') {
         var template = [{
