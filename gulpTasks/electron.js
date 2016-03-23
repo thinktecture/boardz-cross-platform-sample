@@ -74,7 +74,7 @@
             gulp.start('[private-web]:watch:no-liveserver');
 
             runSequence('build-electron', function () {
-                electronServer.start();
+                electronServer.start(['--livereload']);
 
                 watch(config.targets.buildFolder, { base: config.targets.buildFolder })
                     .pipe(gulp.dest(path.join(config.targets.electronFolder, 'www')));
