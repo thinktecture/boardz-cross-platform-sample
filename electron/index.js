@@ -1,13 +1,20 @@
 'use strict';
 
+var isLivereload = process.argv[2] === '--livereload';
+
 var electron = require('electron'),
     app = electron.app,
     BrowserWindow = electron.BrowserWindow,
     Menu = electron.Menu,
     Tray = require('tray'),
     globalShortcut = electron.globalShortcut,
-    client = require('electron-connect').client,
     path = require('path');
+
+var client;
+
+if (isLivereload) {
+    client = require('electron-connect').client;
+}
 
 var mainWindow = null;
 var trayIconPath = path.join(__dirname, 'icon.png');
@@ -60,7 +67,9 @@ app.on('ready', function () {
         mainWindow = null;
     });
 
-    client.create(mainWindow);
+    if (client) {
+        client.create(mainWindow);
+    }
 
     if (process.platform == 'darwin') {
         var template = [{
