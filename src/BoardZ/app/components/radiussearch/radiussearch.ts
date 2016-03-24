@@ -5,11 +5,13 @@ import {GeoLocation} from '../../models/geoLocation';
 import {GeolocationService} from '../../services/geolocationService';
 import {PlayersService} from '../../services/playersService';
 import {NearByPlayer} from '../../models/nearbyPlayer';
+import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 
 @Component({
     templateUrl: 'app/components/radiusSearch/radiusSearch.html',
     pipes: [DecimalPipe]
 })
+@NeedsAuthentication()
 export class RadiusSearchComponent implements OnInit {
     private _location: GeoLocation;
     private _radius: number = 10;
