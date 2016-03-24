@@ -1,14 +1,8 @@
 # Sample application for various “Cross-Platform HTML5 – in Action!” workshops
 
-## Requirements
-* [NodeJS](http://nodejs.org) NodeJS
-* Git-Client (GitHub for Desktop)
-* Postman https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop
-* WebStorm 
-
 ## Setup
 * Download and install the platform SDKs and/or emulators for the platform you want to develop for (this might take quite a while… so do this first!)
-  * [Xcode](https://developer.apple.com/xcode/download/)
+  * [XCode](https://developer.apple.com/xcode/download/)
   * [Android SDK](https://developer.android.com/sdk/index.html)
   * [Windows 10 SDK](https://dev.windows.com/en-us/downloads/windows-10-sdk)
 * Download and install [node.js](https://nodejs.org/)
@@ -16,7 +10,8 @@
 * MacOSX and Linux users need to install [Wine](https://wiki.winehq.org/) (for executing the Electron Windows build task)
 
 ## Building
-The gulp task will build iOS, Windows UWP, Android phone apps as well as desktop apps for Mac OSX, Windows and Linux. To get it working, please do the following:
+The gulp tasks will build iOS, Windows UWP, Android apps as well as desktop applications for Mac OSX, Windows and Linux.
+To get it working, please do the following:
 
 * After cloning the repo: `npm i --no-progress` within the root folder of this repository
 * Run `gulp watch-web` to start a live server, which is best when developing the app
@@ -79,12 +74,12 @@ If you want to change [Android's SDK version](http://developer.android.com/guide
 * [pNotify](http://sciactive.com/pnotify/) UI notification library
 
 ### Native Wrappers
-* [Cordova](https://cordova.apache.org/)
+* [Cordova](https://cordova.apache.org/) for mobile apps
   * [Camera Plugin](https://github.com/apache/cordova-plugin-camera), allows native camera access
   * [Geolocation Plugin](https://github.com/apache/cordova-plugin-geolocation), allows access to geolocation
   * [Statusbar Plugin](https://github.com/apache/cordova-plugin-statusbar), allows modifying the statusbar
-* [Ionic](http://ionicframework.com/)
-* [Electron](http://electron.atom.io/)
+* [Ionic](http://ionicframework.com/), just the tooling (for icons and splash screens)
+* [Electron](http://electron.atom.io/) for desktop applications
 
 ## Additional Resources
 * [Cross-platform 2D and 3D visualizations](https://github.com/thinktecture/basta-herbst-2015-2d-3d)
