@@ -32,7 +32,7 @@
         function buildAppFor(targetPlatform, target) {
             return gulp.src(path.join(config.targets.electronFolder, 'www', '**', '*'))
                 .pipe(electron({
-                    version: '0.36.11',
+                    version: '0.37.2',
                     platform: targetPlatform,
                     arch: 'x64',
                     companyName: 'Thinktecture AG',
@@ -68,9 +68,7 @@
             var electronServer = electronConnect.server.create({
                 path:  path.join(config.targets.electronFolder, 'www')
             });
-
-
-
+            
             gulp.start('[private-web]:watch:no-liveserver');
 
             runSequence('build-electron', function () {

@@ -1,5 +1,6 @@
 import {Component, OnInit} from 'angular2/core';
 import {NgClass} from 'angular2/common';
+
 import {Notification} from '../../models/notification';
 import {LoginService} from '../../services/login.service';
 import {TokenService} from '../../services/token.service';

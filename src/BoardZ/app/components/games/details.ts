@@ -1,7 +1,7 @@
 import {Component, OnInit, Injector} from 'angular2/core';
 import {RouteParams, Router} from 'angular2/router';
+
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
-import {DiagnosticComponent} from '../diagnostic/diagnostic';
 import {LocateItComponent} from '../locateit/locateit';
 import {PictureItComponent} from '../pictureit/pictureit';
 import {Game} from '../../models/game';
@@ -18,7 +18,7 @@ import {NotificationType} from '../../models/notificationtype';
 
 @Component({
     selector: 'gameDetail',
-    directives: [DiagnosticComponent, LocateItComponent, PictureItComponent],
+    directives: [LocateItComponent, PictureItComponent],
     templateUrl: 'app/components/games/details.html',
     inputs: ['game']
 })

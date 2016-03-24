@@ -2,6 +2,7 @@
 
 import {Component, Output, OnInit, EventEmitter} from 'angular2/core';
 import {JsonPipe} from 'angular2/common';
+
 import {GeoLocation} from '../../models/geolocation';
 import {GeolocationService} from '../../services/geolocation.service';
 

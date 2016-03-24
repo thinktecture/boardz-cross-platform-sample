@@ -1,8 +1,9 @@
 import {Component, OnInit} from 'angular2/core';
+import {DecimalPipe} from 'angular2/common';
+
 import {GeoLocation} from '../../models/geolocation';
 import {GeolocationService} from '../../services/geolocation.service';
 import {PlayersService} from '../../services/players.service';
-import {DecimalPipe} from 'angular2/common';
 import {NearByPlayer} from '../../models/nearbyplayer';
 
 @Component({

@@ -1,4 +1,5 @@
 import {Component, Output, EventEmitter} from 'angular2/core';
+
 import {CameraService} from '../../services/camera.service';
 
 @Component({

@@ -1,4 +1,5 @@
 import {Component} from 'angular2/core';
+
 import {NotificationService} from '../../services/notification.service';
 
 @Component({

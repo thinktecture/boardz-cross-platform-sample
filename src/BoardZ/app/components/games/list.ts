@@ -1,5 +1,6 @@
 import {Component, OnInit} from 'angular2/core';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
+
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 import {Game} from '../../models/game';
 import {GamesService} from '../../services/games.service';
