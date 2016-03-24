@@ -13,6 +13,7 @@
   * [Windows 10 SDK](https://dev.windows.com/en-us/downloads/windows-10-sdk)
 * Download and install [node.js](https://nodejs.org/)
 * Download and install [Atom](https://atom.io/) or another editor of your choice (free: `notepad`, [Visual Studio Code](https://code.visualstudio.com/); commercial: [Sublime Text](https://www.sublimetext.com/), [WebStorm](https://www.jetbrains.com/webstorm/))
+* MacOSX and Linux users need to install [Wine](https://wiki.winehq.org/) (for executing the Electron Windows build task)
 
 ## Building
 The gulp task will build iOS, Windows UWP, Android phone apps as well as desktop apps for Mac OSX, Windows and Linux. To get it working, please do the following:
