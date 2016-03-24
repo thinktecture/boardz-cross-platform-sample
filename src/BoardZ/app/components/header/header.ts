@@ -5,7 +5,6 @@ import {Notification} from '../../models/notification';
 import {LoginService} from '../../services/loginService';
 import {TokenService} from '../../services/tokenService';
 import {NotificationService} from '../../services/notificationService';
-import {LogService} from '../../services/logService';
 import {BackButtonDirective} from '../../directives/backButtonDirective';
 
 @Component({
@@ -19,8 +18,9 @@ export class HeaderComponent implements OnInit {
     public loggedIn: boolean = false;
     public currentLocation: string = 'BoardZ!';
 
-    constructor(public loginService: LoginService, private _tokenService: TokenService, private _notificationService: NotificationService, private _logService: LogService) {
-
+    constructor(public loginService: LoginService, 
+                private _tokenService: TokenService, 
+                private _notificationService: NotificationService) {
     }
 
     ngOnInit(): any {
@@ -28,7 +28,6 @@ export class HeaderComponent implements OnInit {
             (notification) => this.onNotification(notification)
         );
         this._tokenService.check().subscribe(result => {
-            this._logService.logDebug('Headerbar: Received notification about tokenstore status change. Result: ' + result);
             this.loggedIn = result
         });
     }

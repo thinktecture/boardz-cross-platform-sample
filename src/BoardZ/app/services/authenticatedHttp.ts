@@ -7,7 +7,9 @@ import {TokenService} from './tokenService';
 
 @Injectable()
 export class AuthenticatedHttp {
-    constructor(private _http: Http, private _config: AppConfiguration, private _tokenService: TokenService) {
+    constructor(private _http: Http,
+                private _config: AppConfiguration,
+                private _tokenService: TokenService) {
     }
 
     private buildUrl(appendix: string): string{

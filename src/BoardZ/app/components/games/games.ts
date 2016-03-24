@@ -11,7 +11,7 @@ import {GameListComponent} from './list';
 })
 @RouteConfig([
     { path: '/', component: GameListComponent, name: 'GameList', useAsDefault: true, data: { displayName: 'Game overview' } },
-    { path: '/create', component: GameDetailsComponent, name: 'CreateGame', data: { displayName: 'Create a new Game' } },
+    { path: '/create', component: GameDetailsComponent, name: 'CreateGame', data: { displayName: 'Create a new game' } },
     { path: '/details/:id', component: GameDetailsComponent, name: 'GameDetails', data: { displayName: 'Game details' } }
 ])
 export class GamesComponent {

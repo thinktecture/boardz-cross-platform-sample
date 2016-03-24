@@ -7,7 +7,7 @@ import {PlayersService} from '../../services/playersService';
 import {NearByPlayer} from '../../models/nearbyPlayer';
 
 @Component({
-    templateUrl: 'app/components/radiussearch/radiusSearch.html',
+    templateUrl: 'app/components/radiusSearch/radiusSearch.html',
     pipes: [DecimalPipe]
 })
 export class RadiusSearchComponent implements OnInit {
@@ -15,7 +15,8 @@ export class RadiusSearchComponent implements OnInit {
     private _radius: number = 10;
     private _players: NearByPlayer[];
 
-    constructor(private _geoLocationService: GeolocationService, private _playersService: PlayersService) {
+    constructor(private _geoLocationService: GeolocationService, 
+                private _playersService: PlayersService) {
     }
 
     public ngOnInit() {

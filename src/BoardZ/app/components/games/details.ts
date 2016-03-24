@@ -73,10 +73,10 @@ export class GameDetailsComponent implements OnInit {
 
     public reset(): void {
         this._needsReset = false;
-
+    
         // Based on: https://angular.io/docs/ts/latest/guide/forms.html
         this.model = this._gameService.deepClone(this.originalModel);
-
+    
         // workaround to re-initialize the actual form controls states
         this.active = false;
         setTimeout(() => this.active = true, 0);

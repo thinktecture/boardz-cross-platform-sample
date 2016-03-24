@@ -15,7 +15,9 @@ import {NotificationService} from '../../services/notificationService';
 export class GameListComponent implements OnInit {
     public games: Game[];
 
-    constructor(private _gamesService: GamesService, private _router: Router, private _notificationService: NotificationService) {
+    constructor(private _gamesService: GamesService, 
+                private _router: Router, 
+                private _notificationService: NotificationService) {
     }
 
     public openGameDetails(game: Game): void {

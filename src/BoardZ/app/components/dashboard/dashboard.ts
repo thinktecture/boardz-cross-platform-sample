@@ -15,7 +15,8 @@ export class DashboardComponent implements OnInit {
     public playerCount: string = '-';
     public gameCount: string = '-';
 
-    constructor(private _gamesService: GamesService, private _playersService: PlayersService) {
+    constructor(private _gamesService: GamesService, 
+                private _playersService: PlayersService) {
     }
 
     ngOnInit(): any {

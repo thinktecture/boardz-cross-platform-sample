@@ -4,7 +4,7 @@ import {CameraService} from '../../services/cameraService';
 
 @Component({
     selector: 'picture-it',
-    templateUrl: 'app/components/pictureit/pictureIt.html'
+    templateUrl: 'app/components/pictureIt/pictureIt.html'
 })
 export class PictureItComponent {
     @Output('onPictureTaken')
