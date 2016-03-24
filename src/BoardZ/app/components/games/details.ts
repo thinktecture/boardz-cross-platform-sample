@@ -3,18 +3,18 @@ import {RouteParams, Router} from 'angular2/router';
 
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 import {LocateItComponent} from '../locateit/locateit';
-import {PictureItComponent} from '../pictureit/pictureit';
+import {PictureItComponent} from '../pictureit/pictureIt';
 import {Game} from '../../models/game';
-import {LogService} from '../../services/log.service';
-import {GamesService} from '../../services/games.service';
-import {NotificationService} from '../../services/notification.service';
-import {SignalRService} from '../../services/signalr.service';
-import {PlayersService} from '../../services/players.service';
+import {LogService} from '../../services/logService';
+import {GamesService} from '../../services/gamesService';
+import {NotificationService} from '../../services/notificationService';
+import {SignalRService} from '../../services/signalrService';
+import {PlayersService} from '../../services/playersService';
 import {Player} from '../../models/player';
-import {GeoLocation} from '../../models/geolocation';
-import {LoginService} from '../../services/login.service';
+import {GeoLocation} from '../../models/geoLocation';
+import {LoginService} from '../../services/loginService';
 import {Notification} from '../../models/notification';
-import {NotificationType} from '../../models/notificationtype';
+import {NotificationType} from '../../models/notificationType';
 
 @Component({
     selector: 'gameDetail',
@@ -23,7 +23,7 @@ import {NotificationType} from '../../models/notificationtype';
     inputs: ['game']
 })
 @NeedsAuthentication()
-export class GameDetails implements OnInit {
+export class GameDetailsComponent implements OnInit {
     private _needsReset: boolean;
     private _pictureUrl: string = "";
     private _coordinates: GeoLocation = null;
@@ -40,8 +40,7 @@ export class GameDetails implements OnInit {
                 private _notificationService: NotificationService,
                 private _playersService: PlayersService,
                 private _signalRService: SignalRService,
-                private _loginService: LoginService,
-                private _injector: Injector) {
+                private _loginService: LoginService) {
     }
 
     ngOnInit(): void {

@@ -1,12 +1,13 @@
 import {Injectable} from 'angular2/core';
 import {Http, RequestOptionsArgs, Response, Headers} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
-import {Configuration} from '../app-config';
-import {TokenService} from './token.service';
+
+import {AppConfiguration} from '../appConfig';
+import {TokenService} from './tokenService';
 
 @Injectable()
 export class AuthenticatedHttp {
-    constructor(private _http: Http, private _config: Configuration, private _tokenService: TokenService) {
+    constructor(private _http: Http, private _config: AppConfiguration, private _tokenService: TokenService) {
     }
 
     private buildUrl(appendix: string): string{

@@ -1,5 +1,6 @@
 import {Injectable} from 'angular2/core';
-import {LogLevel} from '../models/loglevel';
+
+import {LogLevel} from '../models/logLevel';
 
 @Injectable()
 export class LogService {

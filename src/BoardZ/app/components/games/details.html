@@ -74,12 +74,3 @@
         <locate-it (onLocated)="useLocation($event)"></locate-it>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-6">
-        <diagnostic [is-diagnostic-enabled]="_diagnosticEnabled" [title]="'original'"
-                    [data]="originalModel"></diagnostic>
-    </div>
-    <div class="col-md-6">
-        <diagnostic [is-diagnostic-enabled]="_diagnosticEnabled" [title]="'current'" [data]="model"></diagnostic>
-    </div>
-</div>

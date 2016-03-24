@@ -1,13 +1,13 @@
 import {Component, OnInit} from 'angular2/core';
 import {DecimalPipe} from 'angular2/common';
 
-import {GeoLocation} from '../../models/geolocation';
-import {GeolocationService} from '../../services/geolocation.service';
-import {PlayersService} from '../../services/players.service';
-import {NearByPlayer} from '../../models/nearbyplayer';
+import {GeoLocation} from '../../models/geoLocation';
+import {GeolocationService} from '../../services/geolocationService';
+import {PlayersService} from '../../services/playersService';
+import {NearByPlayer} from '../../models/nearbyPlayer';
 
 @Component({
-    templateUrl: 'app/components/radiussearch/radiussearch.html',
+    templateUrl: 'app/components/radiussearch/radiusSearch.html',
     pipes: [DecimalPipe]
 })
 export class RadiusSearchComponent implements OnInit {

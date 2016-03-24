@@ -1,25 +1,26 @@
 import {provide} from 'angular2/core';
-import {Configuration} from '../app-config';
-import {AuthenticatedHttp} from './authenticated.http';
-import {LoginService} from './login.service';
-import {GamesService} from './games.service';
-import {GeolocationService} from './geolocation.service';
-import {PlayersService} from './players.service';
-import {NotificationService} from './notification.service';
-import {SignalRService} from './signalr.service';
-import {UiNotificationService} from './ui.notification.service';
-import {CameraService} from './camera.service';
-import {DesktopCameraService} from './desktop.camera.service';
-import {MobileCameraService} from './mobile.camera.service';
 import {XHRBackend, ConnectionBackend} from 'angular2/http';
-import {PlatformInformationService} from './platform.information.service';
+
+import {AppConfiguration} from '../appConfig';
+import {AuthenticatedHttp} from './authenticatedHttp';
+import {LoginService} from './loginService';
+import {GamesService} from './gamesService';
+import {GeolocationService} from './geolocationService';
+import {PlayersService} from './playersService';
+import {NotificationService} from './notificationService';
+import {SignalRService} from './signalrService';
+import {UiNotificationService} from './uiNotificationService';
+import {CameraService} from './cameraService';
+import {DesktopCameraService} from './desktopCameraService';
+import {MobileCameraService} from './mobileCameraService';
+import {PlatformInformationService} from './platformInformationService';
 import {NativeIntegrationService} from "./nativeIntegrationService";
 
 declare var window;
 
 export var APP_SERVICES = [
     provide(ConnectionBackend, { useClass: XHRBackend }),
-    Configuration,
+    AppConfiguration,
     PlatformInformationService,
     NativeIntegrationService,
     AuthenticatedHttp,

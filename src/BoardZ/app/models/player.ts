@@ -1,4 +1,4 @@
-import {GeoLocation} from './geolocation';
+import {GeoLocation} from './geoLocation';
 
 export class Player{
     public id: string;

@@ -1,8 +1,9 @@
 import {Injectable} from 'angular2/core';
 import {Subject} from 'rxjs/Subject';
-import {LogService} from './log.service';
+
+import {LogService} from './logService';
 import {Notification} from '../models/notification';
-import {NotificationType} from '../models/notificationtype';
+import {NotificationType} from '../models/notificationType';
 
 @Injectable()
 export class NotificationService {

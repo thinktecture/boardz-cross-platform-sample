@@ -1,4 +1,4 @@
-import {NotificationType} from './notificationtype';
+import {NotificationType} from './notificationType';
 
 export class Notification {
     constructor(public message: string,

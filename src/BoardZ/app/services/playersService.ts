@@ -1,10 +1,11 @@
 import {Injectable} from 'angular2/core';
-import {GeoLocation} from '../models/geolocation';
-import {AuthenticatedHttp} from './authenticated.http';
 import {Headers} from 'angular2/http';
-import {Player} from '../models/player';
 import {Observable} from 'rxjs/Observable';
-import {NearByPlayer} from '../models/nearbyplayer';
+
+import {GeoLocation} from '../models/geoLocation';
+import {AuthenticatedHttp} from './authenticatedHttp';
+import {Player} from '../models/player';
+import {NearByPlayer} from '../models/nearbyPlayer';
 
 @Injectable()
 export class PlayersService {

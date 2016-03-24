@@ -1,5 +1,6 @@
 import {Observable} from 'rxjs/Observable';
-import {ICameraService} from './camera.service.ts';
+
+import {ICameraService} from './cameraService';
 
 // Just to stop annoying TSC...
 declare var window;

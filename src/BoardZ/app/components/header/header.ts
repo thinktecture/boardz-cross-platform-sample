@@ -2,11 +2,11 @@ import {Component, OnInit} from 'angular2/core';
 import {NgClass} from 'angular2/common';
 
 import {Notification} from '../../models/notification';
-import {LoginService} from '../../services/login.service';
-import {TokenService} from '../../services/token.service';
-import {NotificationService} from '../../services/notification.service';
-import {LogService} from '../../services/log.service';
-import {BackButtonDirective} from '../../directives/back.button.directive';
+import {LoginService} from '../../services/loginService';
+import {TokenService} from '../../services/tokenService';
+import {NotificationService} from '../../services/notificationService';
+import {LogService} from '../../services/logService';
+import {BackButtonDirective} from '../../directives/backButtonDirective';
 
 @Component({
     selector: 'boardz-header',

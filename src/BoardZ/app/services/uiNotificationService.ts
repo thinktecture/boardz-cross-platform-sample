@@ -1,7 +1,8 @@
 import {Injectable} from 'angular2/core';
-import {NotificationService} from './notification.service';
+
+import {NotificationService} from './notificationService';
 import {Notification} from '../models/notification';
-import {NotificationType} from '../models/notificationtype';
+import {NotificationType} from '../models/notificationType';
 
 declare var PNotify;
 

@@ -1,5 +1,6 @@
 import {Injectable} from 'angular2/core';
-import {GeoLocation} from '../models/geolocation';
+
+import {GeoLocation} from '../models/geoLocation';
 
 @Injectable()
 export class GeolocationService {

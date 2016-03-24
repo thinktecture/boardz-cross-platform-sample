@@ -409,7 +409,7 @@ a:focus {
   }
 }
 /*
- * Component: Sidebar
+ * Component: SidebarComponent
  * ------------------
  */
 .main-sidebar,
@@ -577,7 +577,7 @@ a:focus {
   width: auto;
 }
 /*
- * Component: Sidebar Mini
+ * Component: SidebarComponent Mini
  */
 @media (min-width: 768px) {
   .sidebar-mini.sidebar-collapse .content-wrapper,

@@ -1,5 +1,8 @@
+import {Injectable} from 'angular2/core';
+
 declare var window;
 
+@Injectable()
 export class PlatformInformationService {
     private _isMobile: boolean;
     private _isDesktop: boolean;

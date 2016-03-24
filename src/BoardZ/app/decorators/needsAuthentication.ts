@@ -1,7 +1,8 @@
 import {CanActivate, ComponentInstruction, Router} from 'angular2/router';
 import {Injector} from 'angular2/core';
-import {appInjector} from '../services/app.injector';
-import {TokenService} from '../services/token.service';
+
+import {appInjector} from '../services/appInjector';
+import {TokenService} from '../services/tokenService';
 
 export const NeedsAuthentication = () => {
     return CanActivate((to: ComponentInstruction, from: ComponentInstruction, target = ['/']) => {

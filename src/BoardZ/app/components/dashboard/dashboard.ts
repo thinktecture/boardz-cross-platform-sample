@@ -3,15 +3,15 @@ import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 import {WidgetComponent} from '../widget/widget';
-import {GamesService} from '../../services/games.service';
-import {PlayersService} from '../../services/players.service';
+import {GamesService} from '../../services/gamesService';
+import {PlayersService} from '../../services/playersService';
 
 @Component({
     directives: [ROUTER_DIRECTIVES, WidgetComponent],
     templateUrl: 'app/components/dashboard/dashboard.html'
 })
 @NeedsAuthentication()
-export class Dashboard implements OnInit {
+export class DashboardComponent implements OnInit {
     public playerCount: string = '-';
     public gameCount: string = '-';
 

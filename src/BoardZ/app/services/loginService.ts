@@ -2,11 +2,12 @@ import {Injectable} from 'angular2/core';
 import {Http, Headers, RequestOptions} from 'angular2/http';
 import {Router} from 'angular2/router';
 import {Observable} from 'rxjs/Observable';
-import {TokenService} from './token.service';
-import {Configuration} from '../app-config';
-import {LogService} from './log.service';
-import {TokenData} from '../models/tokendata';
-import {SignalRService} from './signalr.service';
+
+import {TokenService} from './tokenService';
+import {AppConfiguration} from '../appConfig';
+import {LogService} from './logService';
+import {TokenData} from '../models/tokenData';
+import {SignalRService} from './signalrService';
 
 @Injectable()
 export class LoginService {
@@ -20,7 +21,7 @@ export class LoginService {
         return this._tokenService.username;
     }
 
-    constructor(private _config: Configuration,
+    constructor(private _config: AppConfiguration,
                 private _logService: LogService,
                 private _http: Http,
                 private _router: Router,

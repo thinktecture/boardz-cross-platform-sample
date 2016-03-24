@@ -3,8 +3,8 @@ import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 import {Game} from '../../models/game';
-import {GamesService} from '../../services/games.service';
-import {NotificationService} from '../../services/notification.service';
+import {GamesService} from '../../services/gamesService';
+import {NotificationService} from '../../services/notificationService';
 
 @Component({
     selector: 'gamelist',
@@ -12,7 +12,7 @@ import {NotificationService} from '../../services/notification.service';
     templateUrl: 'app/components/games/list.html'
 })
 @NeedsAuthentication()
-export class GameList implements OnInit {
+export class GameListComponent implements OnInit {
     public games: Game[];
 
     constructor(private _gamesService: GamesService, private _router: Router, private _notificationService: NotificationService) {

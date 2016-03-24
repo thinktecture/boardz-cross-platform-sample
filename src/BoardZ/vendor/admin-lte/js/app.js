@@ -43,7 +43,7 @@ window.initAdminLTE = function() {
         //sidebar treeview slide up/down. This options accepts an integer as milliseconds,
         //'fast', 'normal', or 'slow'
         animationSpeed: 500,
-        //Sidebar push menu toggle button selector
+        //SidebarComponent push menu toggle button selector
         sidebarToggleSelector: "[data-toggle='offcanvas']",
         //Activate sidebar push menu
         sidebarPushMenu: true,
@@ -63,7 +63,7 @@ window.initAdminLTE = function() {
         //choose to enable the plugin, make sure you load the script
         //before AdminLTE's app.js
         enableFastclick: true,
-        //Control Sidebar Options
+        //Control SidebarComponent Options
         enableControlSidebar: true,
         controlSidebarOptions: {
             //Which button should trigger the open/close event

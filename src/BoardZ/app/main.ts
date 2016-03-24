@@ -15,16 +15,17 @@ import 'fastclick/fastclick';
 import {bootstrap} from 'angular2/platform/browser';
 import {ComponentRef, provide, enableProdMode} from 'angular2/core';
 import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
-import {BoardzApp} from './app';
 import {HTTP_PROVIDERS} from 'angular2/http';
-import {TokenService} from './services/token.service';
-import {appInjector} from './services/app.injector';
-import {LogService} from './services/log.service';
+
+import {BoardzAppComponent} from './app';
+import {TokenService} from './services/tokenService';
+import {appInjector} from './services/appInjector';
+import {LogService} from './services/logService';
 import 'rxjs/Rx';
 
 enableProdMode();
 
-bootstrap(BoardzApp, [
+bootstrap(BoardzAppComponent, [
     HTTP_PROVIDERS,
     ROUTER_PROVIDERS,
     provide(LocationStrategy, { useClass: HashLocationStrategy }),

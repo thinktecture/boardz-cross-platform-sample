@@ -1,5 +1,6 @@
 import {Directive, HostListener} from 'angular2/core';
-import {PlatformInformationService} from '../services/platform.information.service';
+
+import {PlatformInformationService} from '../services/platformInformationService';
 
 // This is currently _not_ the correct Angular 2 way of doing this.
 // There is no Angular 2 way, yet :)

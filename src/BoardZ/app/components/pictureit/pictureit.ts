@@ -1,10 +1,10 @@
 import {Component, Output, EventEmitter} from 'angular2/core';
 
-import {CameraService} from '../../services/camera.service';
+import {CameraService} from '../../services/cameraService';
 
 @Component({
     selector: 'picture-it',
-    templateUrl: 'app/components/pictureit/pictureit.html'
+    templateUrl: 'app/components/pictureit/pictureIt.html'
 })
 export class PictureItComponent {
     @Output('onPictureTaken')
