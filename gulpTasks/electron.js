@@ -125,7 +125,7 @@
         gulp.task('build-electron-linux', function (done) {
             runSequence(
                 'build-web',
-                '[private-electron-osx]:clean',
+                '[private-electron]:clean',
                 [
                     '[private-electron]:copy-electron-source',
                     '[private-electron]:copy-source'
