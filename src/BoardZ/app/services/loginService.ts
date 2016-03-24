@@ -36,14 +36,16 @@ export class LoginService {
     /**
      * Logout the current user (remove token and navigate to unprotected route)
      */
-    public logout(): void {
+    public logout(routeToLogin: boolean = true): void {
         this._logService.logDebug('LoginService.logout called');
 
         this._signalRService.stop();
         this._lastLoginUnsuccessful = false;
         this._tokenService.token = null;
 
-        this._router.navigate(['Login']);
+        if (routeToLogin) {
+            this._router.navigate(['Login']);
+        }
     }
 
     /**
@@ -53,7 +55,7 @@ export class LoginService {
      * @returns {Subject<TokenData>}
      */
     public login(username: string, password: string): Observable<TokenData> {
-        this.logout();
+        this.logout(false);
 
         let body = 'grant_type=password&username=' + username + '&password=' + password,
             options = new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' }) });
