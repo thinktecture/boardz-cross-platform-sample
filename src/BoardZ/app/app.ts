@@ -28,7 +28,7 @@ import {NativeIntegrationService} from "./services/nativeIntegrationService";
     { path: '/login', component: LoginComponent, name: 'Login' },
     { path: '/notifications', component: NotificationsComponent, name: 'Notifications' },
     { path: '/games/...', component: GamesComponent, name: 'Games', data: { displayName: 'Games' } },
-    { path: '/rrss', component: RadiusSearchComponent, name: 'RadiusSearch' }
+    { path: '/radiusSearch', component: RadiusSearchComponent, name: 'RadiusSearch' }
 ])
 export class BoardzAppComponent implements AfterViewInit {
     constructor(private _signalRService: SignalRService,
