@@ -8,7 +8,7 @@ import {HeaderComponent} from './components/header/header';
 import {GamesComponent} from './components/games/games';
 import {NotificationsComponent} from './components/notifications/notifications';
 import {APP_SERVICES} from './services/all';
-import {RadiusSearchComponent} from './components/radiusSearch/radiusSearch';
+import {RadiusSearchComponent} from './components/radiusSearch/rs';
 import {LogService} from './services/logService';
 import {LogLevel} from './models/logLevel';
 import {SignalRService} from './services/signalrService';
