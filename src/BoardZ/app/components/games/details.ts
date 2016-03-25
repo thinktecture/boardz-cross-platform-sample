@@ -1,8 +1,8 @@
-import {Component, OnInit, Injector} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 import {RouteParams, Router} from 'angular2/router';
 
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
-import {LocateItComponent} from '../locateit/locateit';
+import {LocateItComponent} from '../locateIt/locateIt';
 import {PictureItComponent} from '../pictureIt/pictureIt';
 import {Game} from '../../models/game';
 import {LogService} from '../../services/logService';
