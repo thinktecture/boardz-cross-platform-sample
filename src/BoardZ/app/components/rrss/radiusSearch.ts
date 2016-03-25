@@ -8,7 +8,7 @@ import {NearByPlayer} from '../../models/nearbyPlayer';
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 
 @Component({
-    templateUrl: 'app/components/radiusSearch/radiusSearch.html',
+    templateUrl: 'app/components/rrss/rrss.html',
     pipes: [DecimalPipe]
 })
 @NeedsAuthentication()
