@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3>Find players around you</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-8">
+        <select class="form-control" [(ngModel)]="_radius">
+            <option label="5 km" value="5">5 km</option>
+            <option label="10 km" value="10" selected="selected">10 km</option>
+            <option label="25 km" value="25">25 km</option>
+            <option label="50 km" value="50">50 km</option>
+            <option label="100 km" value="100">100 km</option>
+            <option label="250 km" value="250">250 km</option>
+            <option label="1000 km" value="1000">1000 km</option>
+        </select>
+    </div>
+    <div class="col-xs-4">
+        <button class="btn btn-primary btn-block ng-scope" (click)="search()" [disabled]="!_location">Search</button>
+    </div>
+</div>
+
+<div class="row big-space">
+    <div class="col-xs-12 col-md-6" *ngFor="#p of _players">
+        <div class="box box-success box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">{{p.player.name}}</h3>
+            </div>
+            <div class="box-body">
+                <p>{{p.player.name}} is playing {{p.player.boardGameName}}</p>
+                <img class="img-responsive pad" [src]="p.player.imageUrl" alt="Photo">
+            </div>
+
+            <div class="box-footer">
+                <span *ngIf="p.distance">{{p.distance}} km away from here</span>
+            </div>
+        </div>
+    </div>
+</div>
