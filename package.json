@@ -21,13 +21,16 @@
   },
   "homepage": "https://github.com/thinktecture/boardz-cross-platform-sample#readme",
   "devDependencies": {
-    "angular2": "2.0.0-beta.12",
+    "angular2": "2.0.0-beta.15",
+    "es6-shim": "^0.35.0",
+    "reflect-metadata": "0.1.2",
+    "rxjs": "5.0.0-beta.2",
+    "zone.js": "0.6.10",
     "bootstrap": "^3.3.6",
     "del": "^2.0.2",
     "electron-connect": "^0.3.7",
     "electron-prebuilt": "^0.37.2",
     "es6-promise": "^3.0.2",
-    "es6-shim": "^0.35.0",
     "event-stream": "^3.3.1",
     "font-awesome": "^4.5.0",
     "gulp": "^3.9.0",
@@ -51,17 +54,14 @@
     "gulp-uglify": "^1.4.1",
     "gulp-watch": "^4.3.5",
     "merge2": "^0.3.6",
-    "reflect-metadata": "0.1.2",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.1.4",
-    "rxjs": "5.0.0-beta.2",
     "shelljs": "^0.5.3",
     "stream-series": "^0.1.1",
     "systemjs": "0.19.20",
     "systemjs-builder": "0.15.13",
     "tether": "^1.1.1",
     "typescript": "^1.8.9",
-    "typings": "^0.6.8",
-    "zone.js": "0.6.6"
+    "typings": "^0.6.8"
   }
 }

@@ -14,6 +14,7 @@
   <plugin name="cordova-plugin-geolocation" spec="2.1.0"/>
   <plugin name="cordova-plugin-camera" spec="2.1.0"/>
   <plugin name="cordova-plugin-crosswalk-webview" spec="1.5.0"/>
+  <plugin name="cordova-plugin-wkwebview" spec="0.6.9"/>
   <access origin="*"/>
   <allow-intent href="http://*/*"/>
   <allow-intent href="https://*/*"/>
