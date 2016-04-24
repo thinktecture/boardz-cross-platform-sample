@@ -73,6 +73,8 @@
             sh.cd(config.targets.cordovaFolder);
             sh.exec('cordova prepare ios');
             //sh.exec('ionic resources');
+            sh.exec('cordova-splash');
+            sh.exec('cordova-icon');
             sh.exec('cordova build ios');
             sh.cd(currentDir);
             done();
@@ -83,6 +85,8 @@
             sh.cd(config.targets.cordovaFolder);
             sh.exec('cordova prepare android');
             //sh.exec('ionic resources');
+            sh.exec('cordova-splash');
+            sh.exec('cordova-icon');
             sh.exec('cordova build android');
             sh.cd(currentDir);
             done();
@@ -92,6 +96,8 @@
             var currentDir = sh.pwd();
             sh.cd(config.targets.cordovaFolder);
             sh.exec('cordova prepare windows');
+            sh.exec('cordova-splash');
+            sh.exec('cordova-icon');
             sh.exec('cordova build windows');
             sh.cd(currentDir);
             done();
@@ -114,6 +120,11 @@
                 .pipe(gulp.dest(config.targets.cordovaFolder));
         });
 
+        gulp.task('[private-cordova]:copy:hooks', function () {
+            return gulp.src(path.join(config.targets.hooksFolder, '**/*'))
+                .pipe(gulp.dest(path.join(config.targets.cordovaFolder, 'hooks')));
+        });
+        
         gulp.task('[private-cordova]:default:ios', function (done) {
             runSequence(
                 '[private-cordova]:clean',
@@ -121,6 +132,7 @@
                 '[private-cordova]:remove-fake-script',
                 '[private-cordova]:config-for-default',
                 '[private-cordova]:copy:resources',
+                '[private-cordova]:copy:hooks',
                 '[private-cordova]:build:ios',
                 done
             );
@@ -150,6 +162,7 @@
                 '[private-cordova]:remove-fake-script',
                 '[private-cordova]:config-for-default',
                 '[private-cordova]:copy:resources',
+                '[private-cordova]:copy:hooks',
                 '[private-cordova]:build:all',
                 done
             );
@@ -163,6 +176,7 @@
                 '[private-cordova]:remove-fake-script',
                 '[private-cordova]:config-for-default',
                 '[private-cordova]:copy:resources',
+                '[private-cordova]:copy:hooks',
                 '[private-cordova]:build:ios',
                 done
             );
@@ -176,6 +190,7 @@
                 '[private-cordova]:remove-fake-script',
                 '[private-cordova]:config-for-default',
                 '[private-cordova]:copy:resources',
+                '[private-cordova]:copy:hooks',
                 '[private-cordova]:build:android',
                 done
             );
@@ -189,6 +204,7 @@
                 '[private-cordova]:remove-fake-script',
                 '[private-cordova]:config-for-default',
                 '[private-cordova]:copy:resources',
+                '[private-cordova]:copy:hooks',
                 '[private-cordova]:build:windows',
                 done
             );

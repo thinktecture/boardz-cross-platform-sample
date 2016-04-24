@@ -90,6 +90,7 @@ module.exports = {
         electronFolder: './dist/desktop',
         cordovaFolder: './dist/mobile',
         resourcesFolder: './resources/',
+        hooksFolder: './cordova/hooks/',
         appFolder: 'app',
         stylesFolder: 'css',
         minified: {

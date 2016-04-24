@@ -7,6 +7,7 @@
   <author email="office@thinktecture.com" href="http://www.thinktecture.com">
     Thinktecture AG
   </author>
+
   <content src="http://localhost:8000/index.html"/>
 
   <plugin name="cordova-plugin-whitelist" version="1.2.1"/>
@@ -14,10 +15,17 @@
   <plugin name="cordova-plugin-splashscreen" spec="3.2.0"/>
   <plugin name="cordova-plugin-geolocation" spec="2.1.0"/>
   <plugin name="cordova-plugin-camera" spec="2.1.0"/>
-  <plugin name="cordova-plugin-crosswalk-webview" spec="1.5.0"/>
-  <plugin name="cordova-plugin-wkwebview" spec="0.6.9"/>
+
+  <platform name="ios">
+    <hook type="after_platform_add" src="hooks/ios/after_platform_add_add_plugins.js" />
+  </platform>
+
+  <platform name="android">
+    <hook type="after_platform_add" src="hooks/android/after_platform_add_add_plugins.js" />
+  </platform>
 
   <access origin="*"/>
+
   <allow-intent href="http://*/*"/>
   <allow-intent href="https://*/*"/>
   <allow-intent href="tel:*"/>
@@ -49,7 +57,7 @@
     <preference name="Orientation" value="all" />
   </platform>
 
-  <engine name="ios" spec="~3.9.1"/>
+  <engine name="ios" spec="~4.1.1"/>
   <engine name="android" spec="~5.1.1"/>
   <engine name="windows" spec="~4.3.2"/>
 </widget>
