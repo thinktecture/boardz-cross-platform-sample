@@ -91,7 +91,6 @@
             var currentDir = sh.pwd();
             sh.cd(config.targets.cordovaFolder);
             sh.exec('cordova prepare windows');
-            sh.exec('ionic resources');
             sh.exec('cordova build windows');
             sh.cd(currentDir);
             done();
