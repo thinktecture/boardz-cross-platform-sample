@@ -6,6 +6,7 @@
   * [Android SDK](https://developer.android.com/sdk/index.html)
   * [Windows 10 SDK](https://dev.windows.com/en-us/downloads/windows-10-sdk)
 * Download and install [node.js](https://nodejs.org/)
+* Install Cordova: `npm install -g cordova`
 * Download and install [Atom](https://atom.io/) or another editor of your choice (free: `notepad`, [Visual Studio Code](https://code.visualstudio.com/); commercial: [Sublime Text](https://www.sublimetext.com/), [WebStorm](https://www.jetbrains.com/webstorm/))
 * MacOSX and Linux users need to install [Wine](https://wiki.winehq.org/) (for executing the Electron Windows build task)
 

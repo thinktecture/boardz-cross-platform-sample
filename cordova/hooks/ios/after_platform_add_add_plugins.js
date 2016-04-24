@@ -4,15 +4,13 @@ var pluginlist = [
     "https://github.com/apache/cordova-plugins.git#master:wkwebview-engine-localhost"
 ];
 
-var fs = require('fs');
-var path = require('path');
-var sys = require('sys')
+var util = require('util')
 var exec = require('child_process').exec;
  
 function puts(error, stdout, stderr) {
-    sys.puts(stdout)
+    util.puts(stdout)
 }
  
-pluginlist.forEach(function(plug) {
-    exec("cordova plugin add " + plug, puts);
+pluginlist.forEach(function(plugin) {
+    exec("cordova plugin add " + plugin, puts);
 });
