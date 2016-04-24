@@ -81,7 +81,7 @@
             var currentDir = sh.pwd();
             sh.cd(config.targets.cordovaFolder);
             sh.exec('cordova prepare android');
-            sh.exec('ionic resources');
+            //sh.exec('ionic resources');
             sh.exec('cordova build android');
             sh.cd(currentDir);
             done();
