@@ -37,6 +37,7 @@
 
         gulp.task('[private-cordova]:copy-source', function () {
             console.log('COPY-SOURCE', sh.pwd());
+
             return gulp.src(path.join(config.targets.buildFolder, '**', '*.*'))
                 .pipe(gulp.dest(path.join(config.targets.cordovaFolder, 'www')));
         });
@@ -71,7 +72,7 @@
             var currentDir = sh.pwd();
             sh.cd(config.targets.cordovaFolder);
             sh.exec('cordova prepare ios');
-            sh.exec('ionic resources');
+            //sh.exec('ionic resources');
             sh.exec('cordova build ios');
             sh.cd(currentDir);
             done();
@@ -100,15 +101,17 @@
             var currentDir = sh.pwd();
             sh.cd(config.targets.cordovaFolder);
             sh.exec('cordova prepare');
-            sh.exec('ionic resources');
+            //sh.exec('ionic resources');
+            sh.exec('cordova-splash');
+            sh.exec('cordova-icon');
             sh.exec('cordova build');
             sh.cd(currentDir);
             done();
         });
 
         gulp.task('[private-cordova]:copy:resources', function () {
-            return gulp.src(path.join(config.targets.resourcesFolder, '*.*'))
-                .pipe(gulp.dest(path.join(config.targets.cordovaFolder, 'resources')));
+            return gulp.src(path.join(config.targets.resourcesFolder, '*.png'))
+                .pipe(gulp.dest(config.targets.cordovaFolder));
         });
 
         gulp.task('[private-cordova]:default:ios', function (done) {

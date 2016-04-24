@@ -101,7 +101,6 @@
                 .pipe(gulp.dest(path.join(config.targets.buildFolder, config.targets.appFolder)));
         });
 
-
         gulp.task('[private-web]:copy-app-html', function () {
             return gulp.src(config.source.files.app.html)
                 .pipe(gulp.dest(path.join(config.targets.buildFolder, config.targets.appFolder)));
