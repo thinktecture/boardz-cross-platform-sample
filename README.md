@@ -6,9 +6,10 @@
   * [Android SDK](https://developer.android.com/sdk/index.html)
   * [Windows 10 SDK](https://dev.windows.com/en-us/downloads/windows-10-sdk)
 * Download and install [node.js](https://nodejs.org/)
+* Install and install [ImageMagick](http://www.imagemagick.org/script/binary-releases.php) (base toolkit for image processing, here used for splash screen and icon generation)
 * Install Cordova: `npm install -g cordova`
-* Download and install [Atom](https://atom.io/) or another editor of your choice (free: `notepad`, [Visual Studio Code](https://code.visualstudio.com/); commercial: [Sublime Text](https://www.sublimetext.com/), [WebStorm](https://www.jetbrains.com/webstorm/))
 * MacOSX and Linux users need to install [Wine](https://wiki.winehq.org/) (for executing the Electron Windows build task)
+* Download and install [Atom](https://atom.io/) or another editor of your choice (free: `notepad`, [Visual Studio Code](https://code.visualstudio.com/); commercial: [Sublime Text](https://www.sublimetext.com/), [WebStorm](https://www.jetbrains.com/webstorm/))
 
 ## Building
 The gulp tasks will build iOS, Windows UWP, Android apps as well as desktop applications for Mac OSX, Windows and Linux.
@@ -47,7 +48,7 @@ To start the electron packaged app, go to `dist/desktop/build` and open one of t
 ## Supported platforms
 * Any modern web browser (Chrome, Firefox, Edge, Safari) by simply hosting it
 * Mobile platforms (iOS, Android, Windows) by packaging the app using Cordova
-* Desktop platforms (Windows, Mac OS X, Linux) by packaging the app using GitHub's electron
+* Desktop platforms (Windows, Mac OS X, Linux) by packaging the app using Electron
 
 ### Android Settings
 
@@ -69,8 +70,6 @@ If you want to change [Android's SDK version](http://developer.android.com/guide
 * [FastClick](https://github.com/ftlabs/fastclick), eliminates the [infamous 300 ms lag on touch devices](http://developer.telerik.com/featured/300-ms-click-delay-ios-8/)
 * [HammerJS](http://hammerjs.github.io/), for touch interactions
 * [FontAwesome](http://fontawesome.io) Images powered by font awesome
-* [three.js](http://threejs.org/), JavaScript library for WebGL and 3D content
-  * [Touch Polyfill](https://github.com/CamHenlin/TouchPolyfill), adds touch event support to Internet Explorer 11/Windows (Phone) 8.1
 * [Leaflet](http://leafletjs.com/), an open-source JavaScript library for mobile-friendly interactive maps
 * [pNotify](http://sciactive.com/pnotify/) UI notification library
 
@@ -79,7 +78,6 @@ If you want to change [Android's SDK version](http://developer.android.com/guide
   * [Camera Plugin](https://github.com/apache/cordova-plugin-camera), allows native camera access
   * [Geolocation Plugin](https://github.com/apache/cordova-plugin-geolocation), allows access to geolocation
   * [Statusbar Plugin](https://github.com/apache/cordova-plugin-statusbar), allows modifying the statusbar
-* [Ionic](http://ionicframework.com/), just the tooling (for icons and splash screens)
 * [Electron](http://electron.atom.io/) for desktop applications
 
 ## Additional Resources
