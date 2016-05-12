@@ -6,7 +6,6 @@ var electron = require('electron'),
     app = electron.app,
     BrowserWindow = electron.BrowserWindow,
     Menu = electron.Menu,
-    Tray = require('tray'),
     globalShortcut = electron.globalShortcut,
     path = require('path');
 
@@ -53,7 +52,7 @@ app.on('ready', function () {
         }
     ]);
     
-    trayApp = new Tray(trayIconPath);
+    trayApp = new electron.Tray(trayIconPath);
     trayApp.setToolTip('BoardZ2');
     trayApp.setContextMenu(contextMenu);
 
