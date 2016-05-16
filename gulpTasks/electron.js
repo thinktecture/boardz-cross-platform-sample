@@ -32,7 +32,7 @@
         function buildAppFor(targetPlatform, target) {
             return gulp.src(path.join(config.targets.electronFolder, 'www', '**', '*'))
                 .pipe(electron({
-                    version: '1.0.0',
+                    version: '1.1.0',
                     platform: targetPlatform,
                     arch: 'x64',
                     companyName: 'Thinktecture AG',
