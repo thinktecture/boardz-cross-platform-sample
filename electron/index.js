@@ -32,9 +32,11 @@ app.on('ready', function () {
     mainWindow = new BrowserWindow({
         title: 'BoardZ2',
         width: 1024,
-        height: 768,
+        height: 700,
         titleBarStyle: 'hidden',
-        nodeIntegration: true
+        webPreferences: {
+            nodeIntegration: true
+        }
     });
 
     var contextMenu = Menu.buildFromTemplate([

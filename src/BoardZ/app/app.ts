@@ -57,6 +57,35 @@ export class BoardzAppComponent implements AfterViewInit {
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 interface BoardZAppWindow extends Window {
     initAdminLTE(): void;
 }

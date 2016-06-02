@@ -34,6 +34,7 @@ export class UiNotificationService {
             addclass: 'stack-bar-top',
             cornerclass: '',
             width: '100%',
+            delay:1500
         };
 
         new PNotify(settings);

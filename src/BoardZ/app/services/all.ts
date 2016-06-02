@@ -29,7 +29,9 @@ export var APP_SERVICES = [
     GeolocationService,
     PlayersService,
     NotificationService,
-    provide(CameraService, { useClass: window.cordova ? MobileCameraService : DesktopCameraService }),
+    provide(CameraService, { useClass: 
+        window.cordova ? MobileCameraService : DesktopCameraService 
+    }),
     UiNotificationService,
     SignalRService
 ];
