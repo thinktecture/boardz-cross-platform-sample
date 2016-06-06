@@ -1,5 +1,5 @@
-import {Component, OnInit} from 'angular2/core';
-import {ROUTER_DIRECTIVES} from 'angular2/router';
+import {Component, OnInit} from '@angular/core';
+import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 import {WidgetComponent} from '../widget/widget';
@@ -7,8 +7,10 @@ import {GamesService} from '../../services/gamesService';
 import {PlayersService} from '../../services/playersService';
 
 @Component({
-    directives: [ROUTER_DIRECTIVES, WidgetComponent],
-    templateUrl: 'app/components/dashboard/dashboard.html'
+    moduleId: module.id,
+    selector: 'dashboard',
+    directives: [WidgetComponent],
+    templateUrl: 'dashboard.html'
 })
 @NeedsAuthentication()
 export class DashboardComponent implements OnInit {

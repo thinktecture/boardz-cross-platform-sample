@@ -1,11 +1,12 @@
-import {Component, Input, ChangeDetectionStrategy} from 'angular2/core';
-import {ROUTER_DIRECTIVES} from 'angular2/router';
+import {Component, Input, ChangeDetectionStrategy} from '@angular/core';
+import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 
 @Component({
+    moduleId: module.id,
     selector: 'widget',
-    templateUrl: 'app/components/widget/widget.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    directives: [ROUTER_DIRECTIVES]
+    templateUrl: 'widget.html',
+    directives: [ROUTER_DIRECTIVES],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WidgetComponent {
     @Input('caption')

@@ -1,5 +1,5 @@
-import {Injectable} from 'angular2/core';
-import {Headers} from 'angular2/http';
+import {Injectable} from '@angular/core';
+import {Headers} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 
 import {GeoLocation} from '../models/geoLocation';

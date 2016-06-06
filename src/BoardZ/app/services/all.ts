@@ -1,5 +1,5 @@
-import {provide} from 'angular2/core';
-import {XHRBackend, ConnectionBackend} from 'angular2/http';
+import {provide} from '@angular/core';
+import {XHRBackend, ConnectionBackend} from '@angular/http';
 
 import {AppConfiguration} from '../appConfig';
 import {AuthenticatedHttp} from './authenticatedHttp';

@@ -1,5 +1,5 @@
-import {Component} from 'angular2/core';
-import {Router} from 'angular2/router';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router-deprecated';
 
 import {LoginService} from '../../services/loginService';
 import {LogService} from '../../services/logService';
@@ -7,7 +7,9 @@ import {NotificationService} from '../../services/notificationService';
 import {SignalRService} from '../../services/signalrService';
 
 @Component({
-    templateUrl: 'app/components/login/login.html'
+    moduleId: module.id,
+    selector: 'login',
+    templateUrl: 'login.html'
 })
 export class LoginComponent {
     private _userName: string;

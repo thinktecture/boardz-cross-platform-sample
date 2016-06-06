@@ -1,13 +1,14 @@
-import {Component} from 'angular2/core';
-import {ROUTER_DIRECTIVES} from 'angular2/router';
+import {Component} from '@angular/core';
+import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 
 import {CloseSidebarOnClickDirective} from '../../directives/closeSidebarOnClickDirective';
 import {NavigationEntry} from "../../models/navigationEntry";
 
 @Component({
+    moduleId: module.id,
     selector: 'sidebar',
     directives: [ROUTER_DIRECTIVES, CloseSidebarOnClickDirective],
-    templateUrl: 'app/components/sidebar/sidebar.html'
+    templateUrl: 'sidebar.html'
 })
 export class SidebarComponent {
     public expanded: boolean = true;
@@ -16,7 +17,7 @@ export class SidebarComponent {
     constructor() {
         this.navigationEntries = [];
         this.navigationEntries.push(new NavigationEntry(['Dashboard'], 'dashboard', 'Dashboard'));
-        this.navigationEntries.push(new NavigationEntry(['Games', 'GameList'], 'list', 'Games'));
+        this.navigationEntries.push(new NavigationEntry(['Games', 'GamesList'], 'list', 'Games'));
         this.navigationEntries.push(new NavigationEntry(['RadiusSearch'], 'location-arrow', 'Players search'));
     }
 

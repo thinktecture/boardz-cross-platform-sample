@@ -1,10 +1,11 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 
 import {NotificationService} from '../../services/notificationService';
 
 @Component({
+    moduleId: module.id,
     selector: 'notifications',
-    templateUrl: 'app/components/notifications/notifications.html'
+    templateUrl: 'notifications.html'
 })
 export class NotificationsComponent {
     constructor(public notificationService: NotificationService) {
