@@ -32,6 +32,7 @@ app.on('ready', function () {
     mainWindow = new BrowserWindow({
         title: 'BoardZ2',
         width: 1024,
+        minWidth: 768,
         height: 700,
         titleBarStyle: 'hidden',
         webPreferences: {
