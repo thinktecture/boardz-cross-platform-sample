@@ -10,7 +10,7 @@
             server = require('gulp-server-livereload'),
             watch = require('gulp-watch'),
             batch = require('gulp-batch'),
-            cssmin = require('gulp-minify-css'),
+            cleanCss = require('gulp-clean-css'),
             filelog = require('gulp-filelog'),
             concat = require('gulp-concat'),
             ts = require('gulp-typescript'),
@@ -91,19 +91,19 @@
         gulp.task('[private-web]:vendor-css', function () {
             return gulp.src(config.source.files.vendorStylesheets)
                 .pipe(concat(config.targets.vendorMinCss))
-                .pipe(cssmin())
+                .pipe(cleanCss())
                 .pipe(gulp.dest(path.join(config.targets.buildFolder, config.targets.stylesFolder)));
         });
 
         gulp.task('[private-web]:copy-app-styles', function () {
             return gulp.src(config.source.files.app.css)
-                .pipe(cssmin())
+                .pipe(cleanCss())
                 .pipe(gulp.dest(path.join(config.targets.buildFolder, config.targets.stylesFolder)));
         });
 
         gulp.task('[private-web]:copy-component-styles', function () {
             return gulp.src(config.source.files.app.componentCss)
-                .pipe(cssmin())
+                .pipe(cleanCss())
                 .pipe(gulp.dest(path.join(config.targets.buildFolder, config.targets.appFolder)));
         });
 
