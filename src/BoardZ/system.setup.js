@@ -43,15 +43,19 @@
 
 function backupModule() {
     return new Promise(function (resolve, reject) {
-        window.module = module;
-        module = undefined;
+        if(typeof module !== 'undefined' && module.hasOwnProperty('exports')) {
+            window.module = module;
+            module = undefined;
+        }
         resolve(true);
     });
 }
 
 function restoreModule() {
     return new Promise(function (resolve, reject) {
-        module = window.module;
+        if(window.hasOwnProperty('module')) {
+            module = window.module;
+        }
         resolve(true);
     });
 }
