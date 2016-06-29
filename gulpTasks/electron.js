@@ -14,9 +14,9 @@
 
         gulp.task('[private-electron]:clean', function () {
             return del([
-                path.join(config.targets.electronFolder, 'www'),
-                path.join(config.targets.electronFolder, 'build')
-            ]);
+                path.join(config.targets.electronFolder, 'www', '/**/*'),
+                path.join(config.targets.electronFolder, 'build', '/**/*')
+            ], {force:true});
         });
 
         gulp.task('[private-electron]:copy-source', function () {
