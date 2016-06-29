@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router-deprecated';
+import {Router, RouteSegment, RouteTree} from '@angular/router-deprecated';
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 import {LocateItComponent} from '../locateIt/locateIt';
 import {PictureItComponent} from '../pictureIt/pictureIt';
@@ -45,7 +45,7 @@ export class GameDetailsComponent implements OnInit{
     }
 
     public routerOnActivate(curr: RouteSegment, prev?: RouteSegment, currTree?: RouteTree, prevTree?: RouteTree): void {
-        let id = curr.getParam('id');
+        let id = curr.params['id'];
 
         if (!id) {
             this.originalModel = this._gameService.deepClone(this.model = new Game());

@@ -21,11 +21,11 @@ export class GameListComponent implements OnInit {
     }
 
     public openGameDetails(game: Game): void {
-        this._router.navigate(['/games/details/', { id: game.id }]);
+        this._router.navigate(['GameDetails', { id: game.id }]);
     }
 
     public openCreateGame():void{
-        this._router.navigate(['/games/create']);
+        this._router.navigate(['CreateGame']);
     }
 
     ngOnInit() {
