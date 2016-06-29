@@ -19,7 +19,7 @@
                             <th>Description</th>
 
                         </tr>
-                        <tr *ngFor="#game of games" (click)="openGameDetails(game)" class="respond-click">
+                        <tr *ngFor=" let game of games" (click)="openGameDetails(game)" class="respond-click">
                             <td>{{game.name}}</td>
                             <td>{{game.description}}</td>
                         </tr>

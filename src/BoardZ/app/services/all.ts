@@ -1,6 +1,4 @@
-import {provide} from 'angular2/core';
-import {XHRBackend, ConnectionBackend} from 'angular2/http';
-
+import {XHRBackend, ConnectionBackend} from '@angular/http';
 import {AppConfiguration} from '../appConfig';
 import {AuthenticatedHttp} from './authenticatedHttp';
 import {LoginService} from './loginService';
@@ -14,12 +12,12 @@ import {CameraService} from './cameraService';
 import {DesktopCameraService} from './desktopCameraService';
 import {MobileCameraService} from './mobileCameraService';
 import {PlatformInformationService} from './platformInformationService';
-import {NativeIntegrationService} from "./nativeIntegrationService";
+import {NativeIntegrationService} from './nativeIntegrationService';
 
 declare var window;
 
 export var APP_SERVICES = [
-    provide(ConnectionBackend, { useClass: XHRBackend }),
+    { provide: ConnectionBackend, useClass: XHRBackend },
     AppConfiguration,
     PlatformInformationService,
     NativeIntegrationService,
@@ -29,9 +27,7 @@ export var APP_SERVICES = [
     GeolocationService,
     PlayersService,
     NotificationService,
-    provide(CameraService, { useClass: 
-        window.cordova ? MobileCameraService : DesktopCameraService 
-    }),
+    { provide: CameraService, useClass: window.cordova ? MobileCameraService : DesktopCameraService },
     UiNotificationService,
     SignalRService
 ];

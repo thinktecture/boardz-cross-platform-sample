@@ -1,6 +1,5 @@
-import {Component, OnInit} from 'angular2/core';
-import {RouteParams, Router} from 'angular2/router';
-
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router-deprecated';
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 import {LocateItComponent} from '../locateIt/locateIt';
 import {PictureItComponent} from '../pictureIt/pictureIt';
@@ -17,34 +16,36 @@ import {Notification} from '../../models/notification';
 import {NotificationType} from '../../models/notificationType';
 
 @Component({
+    moduleId: module.id,
     selector: 'gameDetail',
     directives: [LocateItComponent, PictureItComponent],
-    templateUrl: 'app/components/games/details.html',
-    inputs: ['game']
+    templateUrl: 'details.html'
 })
 @NeedsAuthentication()
-export class GameDetailsComponent implements OnInit {
+export class GameDetailsComponent implements OnInit{
+    ngOnInit(): any {
+        return undefined;
+    }
     private _needsReset: boolean;
     private _pictureUrl: string = "";
     private _coordinates: GeoLocation = null;
     private _sending: boolean;
-
     public active = true;
+
     public model: Game = new Game();
     public originalModel: Game = new Game();
 
     constructor(private _logService: LogService,
                 private _gameService: GamesService,
                 private _router: Router,
-                private _routeParams: RouteParams,
                 private _notificationService: NotificationService,
                 private _playersService: PlayersService,
                 private _signalRService: SignalRService,
                 private _loginService: LoginService) {
     }
 
-    ngOnInit(): void {
-        let id = this._routeParams.get('id');
+    public routerOnActivate(curr: RouteSegment, prev?: RouteSegment, currTree?: RouteTree, prevTree?: RouteTree): void {
+        let id = curr.getParam('id');
 
         if (!id) {
             this.originalModel = this._gameService.deepClone(this.model = new Game());
@@ -68,15 +69,15 @@ export class GameDetailsComponent implements OnInit {
     }
 
     public abort(): void {
-        this._router.navigate(['GameList']);
+        this._router.navigate(['GamesList']);
     }
 
     public reset(): void {
         this._needsReset = false;
-    
+
         // Based on: https://angular.io/docs/ts/latest/guide/forms.html
         this.model = this._gameService.deepClone(this.originalModel);
-    
+
         // workaround to re-initialize the actual form controls states
         this.active = false;
         setTimeout(() => this.active = true, 0);

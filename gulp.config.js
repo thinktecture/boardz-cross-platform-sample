@@ -6,13 +6,14 @@ module.exports = {
         folder: './src/BoardZ/',
         files: {
             injectables: [
-                './dist/www/scripts/es6-shim.min.js',
-                './dist/www/scripts/shims_for_IE.js',
                 './dist/www/scripts/vendor.min.js',
-                './dist/www/scripts/angular2.min.js',
+                './dist/www/scripts/system.min.js',
                 './dist/www/scripts/system.setup.js',
                 './dist/www/css/vendor.min.css',
-                './dist/www/css/app.css'
+                './dist/www/css/app.css',
+                './dist/www/scripts/shim.min.js',
+                './dist/www/scripts/zone.js',
+                './dist/www/scripts/reflect.js'
             ],
             electronFiles: './electron/**/*.*',
             cordovaFiles: './cordova/',
@@ -67,23 +68,24 @@ module.exports = {
                 './src/BoardZ/vendor/bootstrap/js/bootstrap.js',
                 './src/BoardZ/vendor/fastclick/fastclick.js',
                 './src/BoardZ/vendor/admin-lte/js/app.js',
-                './src/BoardZ/vendor/leaflet-js/leaflet-src.js'],
-            angular2: [
-                './node_modules/systemjs/dist/system-polyfills.js',
-                './node_modules/angular2/bundles/angular2-polyfills.js',
-                './node_modules/systemjs/dist/system.src.js',
-                './node_modules/rxjs/bundles/Rx.js',
-                './node_modules/angular2/bundles/angular2.dev.js',
-                './node_modules/angular2/bundles/http.dev.js',
-                './node_modules/angular2/bundles/router.dev.js'
-            ]
+                './src/BoardZ/vendor/leaflet-js/leaflet-src.js'
+
+            ],
+            angular2rc1deps: [
+                './node_modules/core-js/client/shim.min.js',
+                './node_modules/zone.js/dist/zone.js',
+                './node_modules/reflect-metadata/reflect.js'
+            ],
+            angular2: './node_modules/@angular/**/*',
+            rxjs: './node_modules/rxjs/**/*',
+            systemJs: './node_modules/systemjs/dist/system.src.js'
         }
     },
     ts: {
         config: './tsconfig.json'
     },
     targets: {
-        angular2MinJs: 'angular2.min.js',
+        systemMinJs: 'system.min.js',
         vendorMinJs: 'vendor.min.js',
         vendorMinCss: 'vendor.min.css',
         buildFolder: './dist/www',

@@ -34,6 +34,7 @@ app.on('ready', function () {
         width: 1024,
         minWidth: 768,
         height: 700,
+        minWidth: 768,
         titleBarStyle: 'hidden',
         webPreferences: {
             nodeIntegration: true

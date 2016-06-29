@@ -1,4 +1,4 @@
-import {Directive, HostListener} from 'angular2/core';
+import {Directive, HostListener} from '@angular/core';
 
 import {PlatformInformationService} from '../services/platformInformationService';
 

@@ -1,6 +1,5 @@
-import {Component, OnInit} from 'angular2/core';
-import {DecimalPipe} from 'angular2/common';
-
+import {Component, OnInit} from '@angular/core';
+import {DecimalPipe} from '@angular/common';
 import {GeoLocation} from '../../models/geoLocation';
 import {GeolocationService} from '../../services/geolocationService';
 import {PlayersService} from '../../services/playersService';
@@ -8,7 +7,9 @@ import {NearByPlayer} from '../../models/nearbyPlayer';
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 
 @Component({
-    templateUrl: 'app/components/radiusSearch/radiusSearch.html',
+    moduleId: module.id,
+    selector: 'radius-search',
+    templateUrl: 'radiusSearch.html',
     pipes: [DecimalPipe]
 })
 @NeedsAuthentication()
@@ -17,7 +18,7 @@ export class RadiusSearchComponent implements OnInit {
     private _radius: number = 10;
     private _players: NearByPlayer[];
 
-    constructor(private _geoLocationService: GeolocationService, 
+    constructor(private _geoLocationService: GeolocationService,
                 private _playersService: PlayersService) {
     }
 

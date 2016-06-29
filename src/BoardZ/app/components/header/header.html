@@ -25,7 +25,7 @@
                             <div class="slimScrollDiv"
                                  style="position: relative; overflow: hidden; width: auto; height: 200px;">
                                 <ul class="menu" style="overflow: hidden; width: 100%; height: 200px;">
-                                    <li *ngFor="#notification of notifications">
+                                    <li *ngFor="let notification of notifications">
                                         <a class="respond-click" (click)="dismiss(notification)"><i
                                                 class="fa {{notification.iconCssClass}}"></i> {{notification.message}}</a>
                                     </li>

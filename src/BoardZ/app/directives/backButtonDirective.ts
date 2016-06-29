@@ -1,5 +1,5 @@
-import {Directive, HostListener} from 'angular2/core';
-import {Location} from 'angular2/router';
+import {Directive, HostListener} from '@angular/core';
+import {Location} from '@angular/common';
 
 import {PlatformInformationService} from '../services/platformInformationService';
 

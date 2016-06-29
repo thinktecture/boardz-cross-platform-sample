@@ -10,12 +10,13 @@
             server = require('gulp-server-livereload'),
             watch = require('gulp-watch'),
             batch = require('gulp-batch'),
-            cssmin = require('gulp-minify-css'),
+            cleanCss = require('gulp-clean-css'),
             filelog = require('gulp-filelog'),
             concat = require('gulp-concat'),
             ts = require('gulp-typescript'),
             tsConfig = ts.createProject(config.ts.config),
             sourcemaps = require('gulp-sourcemaps'),
+            rename = require('gulp-rename'),
             inject = require('gulp-inject'),
             uglify = require('gulp-uglify'),
             watch = require('gulp-watch'),
@@ -29,9 +30,10 @@
                 .pipe(gulp.dest(path.join(config.targets.buildFolder)));
         });
 
-
         gulp.task('[private-web]:bundle-vendor-scripts', function () {
             var builder = new Builder();
+            gulp.src(config.source.files.angular2rc1deps)
+                .pipe(gulp.dest(path.join(config.targets.buildFolder, 'scripts')));
 
             return builder.loadConfig(config.systemJsConfig)
                 .then(function () {
@@ -41,16 +43,18 @@
                         promises.push(builder.bundle(jsFile, path.join(config.targets.buildFolder, 'scripts/bundles/', path.basename(jsFile))));
                     });
 
-
                     return Promise.all(promises);
                 })
         });
 
         gulp.task('[private-web]:copy-angular2-scripts', function () {
             return gulp.src(config.source.files.angular2)
-                .pipe(concat(config.targets.angular2MinJs))
-                //.pipe(uglify())
-                .pipe(gulp.dest(path.join(config.targets.buildFolder, 'scripts/')));
+                .pipe(gulp.dest(path.join(config.targets.buildFolder, '@angular')));
+        });
+
+        gulp.task('[private-web]:copy-rxjs-scripts', function () {
+            return gulp.src(config.source.files.rxjs)
+                .pipe(gulp.dest(path.join(config.targets.buildFolder, 'rxjs')));
         });
 
         gulp.task('[private-web]:copy-system-setup-script', function () {
@@ -64,11 +68,10 @@
                 .pipe(gulp.dest(path.join(config.targets.buildFolder)));
         });
 
-
-        gulp.task('[private-web]:copy-shim', function () {
-            // es6shim cant be bundled with angular-polyfills see https://github.com/angular/angular/issues/6706
-            return gulp.src(config.source.files.shim)
+        gulp.task('[private-web]:copy-system', function () {
+            return gulp.src(config.source.files.systemJs)
                 .pipe(uglify())
+                .pipe(rename(config.targets.systemMinJs))
                 .pipe(gulp.dest(path.join(config.targets.buildFolder, 'scripts/')))
         });
 
@@ -85,19 +88,19 @@
         gulp.task('[private-web]:vendor-css', function () {
             return gulp.src(config.source.files.vendorStylesheets)
                 .pipe(concat(config.targets.vendorMinCss))
-                .pipe(cssmin())
+                .pipe(cleanCss())
                 .pipe(gulp.dest(path.join(config.targets.buildFolder, config.targets.stylesFolder)));
         });
 
         gulp.task('[private-web]:copy-app-styles', function () {
             return gulp.src(config.source.files.app.css)
-                .pipe(cssmin())
+                .pipe(cleanCss())
                 .pipe(gulp.dest(path.join(config.targets.buildFolder, config.targets.stylesFolder)));
         });
 
         gulp.task('[private-web]:copy-component-styles', function () {
             return gulp.src(config.source.files.app.componentCss)
-                .pipe(cssmin())
+                .pipe(cleanCss())
                 .pipe(gulp.dest(path.join(config.targets.buildFolder, config.targets.appFolder)));
         });
 
@@ -117,16 +120,17 @@
         gulp.task('[private-web]:watch:no-liveserver', function () {
             return deltaWatch();
         });
-        
+
         gulp.task('build-web', function (done) {
             return runSequence(
                 'clean',
                 [
                     '[private-web]:bundle-vendor-scripts',
                     '[private-web]:copy-angular2-scripts',
+                    '[private-web]:copy-rxjs-scripts',
                     '[private-web]:copy-system-setup-script',
                     '[private-web]:copy-cordova-script',
-                    '[private-web]:copy-shim',
+                    '[private-web]:copy-system',
                     '[private-web]:build-app-scripts',
                     '[private-web]:vendor-css',
                     '[private-web]:copy-fonts',

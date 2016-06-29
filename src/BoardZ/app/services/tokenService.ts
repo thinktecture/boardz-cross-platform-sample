@@ -1,6 +1,5 @@
-import {Injectable} from 'angular2/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-
 import {LogService} from './logService';
 
 const tokenKey: string = 'Authentication::Token';
@@ -13,7 +12,7 @@ export class TokenService {
 
     constructor(private _logService: LogService) {
         var token = this.token;
-        
+
         if ((typeof token !== 'undefined') && (token !== null))
             this._authenticated = true;
     }

@@ -1,6 +1,6 @@
-import {Injectable} from 'angular2/core';
-import {Http, Headers, RequestOptions} from 'angular2/http';
-import {Router} from 'angular2/router';
+import {Injectable} from '@angular/core';
+import {Http, Headers, RequestOptions} from '@angular/http';
+import {Router} from '@angular/router-deprecated';
 import {Observable} from 'rxjs/Observable';
 
 import {TokenService} from './tokenService';
