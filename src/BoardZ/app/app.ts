@@ -26,7 +26,6 @@ declare var window: IBoardZAppWindow;
     providers: APP_SERVICES,
     templateUrl: 'app.html'
 })
-//noinspection TypeScriptValidateTypes
 @RouteConfig([
     { path: '/', name: 'Dashboard', useAsDefault: true, component: DashboardComponent },
     { path: '/login', name: 'Login', component: LoginComponent },
