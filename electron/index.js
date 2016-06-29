@@ -3,9 +3,8 @@
 let isLiveReload = process.argv[2] === '--livereload';
 
 const electron = require('electron');
-const {app, globalShortcut, BrowserWindow, Menu} = electron;
+const { app, globalShortcut, BrowserWindow, Menu, shell } = electron;
 const path = require('path');
-
 
 let client;
 if (isLiveReload) {
@@ -14,9 +13,6 @@ if (isLiveReload) {
 
 let mainWindow;
 let trayApp;
-
-
-
 
 app.on('window-all-closed', () => {
     //https://github.com/atom/electron/issues/2312
@@ -41,8 +37,6 @@ app.on('ready', () => {
 
     buildTrayIcon();
 
-
-
     globalShortcut.register('CmdOrCtrl+Shift+d', function () {
         mainWindow.webContents.toggleDevTools();
     });
@@ -50,7 +44,7 @@ app.on('ready', () => {
     mainWindow.loadURL('file://' + __dirname + '/index.html');
     mainWindow.setTitle(app.getName());
 
-    mainWindow.on('closed', function () {
+    mainWindow.on('closed', () => {
         mainWindow = null;
     });
 
@@ -63,7 +57,7 @@ app.on('ready', () => {
     }
 });
 
-let buildNativeAppMenu = () =>{
+let buildNativeAppMenu = () => {
     var template = [{
         label: "Application",
         submenu: [
@@ -74,14 +68,23 @@ let buildNativeAppMenu = () =>{
                 type: "separator"
             },
             {
+                label: 'Browse Repository', accelerator: 'CmdOrCtrl+G',
+                click: () => {
+                    shell.openExternal('https://github.com/thinktecture/boardz-cross-platform-sample/')
+                }
+            },
+            {
+                type: "separator"
+            },
+            {
                 label: "Reload", accelerator: "CmdOrCtrl+R",
-                click: function () {
+                click: () => {
                     mainWindow.loadURL('file://' + __dirname + '/index.html');
                 }
             },
             {
                 label: "Quit", accelerator: "Command+Q",
-                click: function () {
+                click: () => {
                     app.quit();
                 }
             }
