@@ -33,6 +33,7 @@ app.on('ready', function () {
         title: 'BoardZ2',
         width: 1024,
         height: 700,
+        minWidth: 768,
         titleBarStyle: 'hidden',
         webPreferences: {
             nodeIntegration: true
