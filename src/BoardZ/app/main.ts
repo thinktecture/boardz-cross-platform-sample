@@ -10,7 +10,7 @@ import 'signalr/signalr';
 import 'leaflet/leaflet';
 import 'fastclick/fastclick';
 import {bootstrap} from '@angular/platform-browser-dynamic';
-import {ComponentRef, enableProdMode, provide} from '@angular/core';
+import {ComponentRef, enableProdMode} from '@angular/core';
 import {ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {HTTP_PROVIDERS} from '@angular/http';
 import {BoardzAppComponent} from './app';
@@ -26,7 +26,7 @@ enableProdMode();
 bootstrap(BoardzAppComponent, [
     HTTP_PROVIDERS,
     ROUTER_PROVIDERS,
-    provide(LocationStrategy, {useClass: HashLocationStrategy}),
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
     LogService,
     TokenService,
 ]).then((appRef: ComponentRef) => {
