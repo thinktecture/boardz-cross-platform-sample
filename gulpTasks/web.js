@@ -30,7 +30,6 @@
                 .pipe(gulp.dest(path.join(config.targets.buildFolder)));
         });
 
-
         gulp.task('[private-web]:bundle-vendor-scripts', function () {
             var builder = new Builder();
             gulp.src(config.source.files.angular2rc1deps)
@@ -43,7 +42,6 @@
                     config.source.files.vendorJs.forEach(function (jsFile) {
                         promises.push(builder.bundle(jsFile, path.join(config.targets.buildFolder, 'scripts/bundles/', path.basename(jsFile))));
                     });
-
 
                     return Promise.all(promises);
                 })
@@ -69,7 +67,6 @@
             return gulp.src(config.source.files.cordova)
                 .pipe(gulp.dest(path.join(config.targets.buildFolder)));
         });
-
 
         gulp.task('[private-web]:copy-system', function () {
             return gulp.src(config.source.files.systemJs)
@@ -123,7 +120,7 @@
         gulp.task('[private-web]:watch:no-liveserver', function () {
             return deltaWatch();
         });
-        
+
         gulp.task('build-web', function (done) {
             return runSequence(
                 'clean',
