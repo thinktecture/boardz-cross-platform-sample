@@ -1,8 +1,9 @@
 import {Injectable, ApplicationRef} from '@angular/core';
 import {Router} from '@angular/router-deprecated';
 import {PlatformInformationService} from './platformInformationService';
+import {IBoardZAppWindow} from '../interfaces/boardzAppWindow';
 
-declare var require;
+declare var window :  IBoardZAppWindow;
 
 @Injectable()
 export class NativeIntegrationService {
@@ -11,29 +12,34 @@ export class NativeIntegrationService {
                 private _applicationRef: ApplicationRef) {
     }
 
-    public init() {
-        var that = this;
+    public registerNavigationHook() {
 
-        /*if (that._platformInformationService.isDesktop) {
-            console.log('treated like a desktop')
-            require('electron').ipcRenderer.on('navigateTo', function (event, data) {
-                that._router.navigate([data]);
+        if (this._platformInformationService.isDesktop) {
+            /**
+             * Brave fighters, did you dare to the deepest depths and slain beasts.
+             * But the greatest evil you have to overcome yet, armed with the worst, poisonous
+             * weapons and disguised as well-known methods is SystemJS challenge you life and death.
+             *
+             * May the force be with you!
+             */
+
+            // systemJS is trying to require electron if you call it without explicitly calling it on window :facepalm:
+            window.require('electron').ipcRenderer.on('navigateTo', (event, data) => {
+                this._router.navigate([data]);
             });
-        }*/
-
-        // this should be obsolete because of the new router in rc1
-        //  this.applyBackWorkaround();
+        }
+        this.applyBackWorkaround();
     }
 
     // issues below were targeting the deprecated router...
     // https://github.com/angular/angular/issues/7722
     // https://github.com/angular/angular/issues/7873
-    /*private applyBackWorkaround() {
+    private applyBackWorkaround() {
         this._router.subscribe(() => {
             setTimeout(() => {
                 this._applicationRef.tick();
             });
         });
-    }*/
+    }
 
 }

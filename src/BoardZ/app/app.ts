@@ -43,10 +43,10 @@ export class BoardzAppComponent implements AfterViewInit {
                 private _logService: LogService) {
         _logService.maximumLogLevel = LogLevel.Verbose;
         _uiNotificationService.subscribeToNotifications();
-        _nativeIntegrationService.init();
+
     }
 
-    ngAfterViewInit(): any {
+    public ngAfterViewInit(): any {
         if (window.initAdminLTE) {
             window.initAdminLTE();
         }
@@ -58,6 +58,8 @@ export class BoardzAppComponent implements AfterViewInit {
         this._signalRService.someoneJoinedAGame.subscribe(message => {
             this._notificationService.notifyInformation(message);
         });
+        this._nativeIntegrationService.registerNavigationHook();
+
     }
 }
 
