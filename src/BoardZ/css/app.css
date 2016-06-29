@@ -16,6 +16,11 @@ body {
 
 .respond-click {
     cursor: pointer;
+    -webkit-app-region: no-drag;
+}
+
+button, a{
+    -webkit-app-region: no-drag;
 }
 
 .danger {
