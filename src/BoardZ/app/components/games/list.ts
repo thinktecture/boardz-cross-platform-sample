@@ -4,6 +4,7 @@ import {Game} from '../../models/game';
 import {GamesService} from '../../services/gamesService';
 import {NotificationService} from '../../services/notificationService';
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
+
 @NeedsAuthentication()
 @Component({
     moduleId: module.id,

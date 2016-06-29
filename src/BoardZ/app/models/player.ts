@@ -7,5 +7,4 @@ export class Player{
     public boardGameName: string;
     public coordinate: GeoLocation;
     public imageUrl: string;
-
 }

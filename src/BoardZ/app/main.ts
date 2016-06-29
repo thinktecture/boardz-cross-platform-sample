@@ -1,5 +1,4 @@
 // require all 3rd party libs
-
 import 'bootstrap/js/bootstrap';
 import 'admin-lte/js/app';
 import 'hammerjs/hammer';
@@ -9,6 +8,7 @@ import 'pNotify/pnotify-adapter';
 import 'signalr/signalr';
 import 'leaflet/leaflet';
 import 'fastclick/fastclick';
+
 import {bootstrap} from '@angular/platform-browser-dynamic';
 import {ComponentRef, enableProdMode} from '@angular/core';
 import {ROUTER_PROVIDERS} from '@angular/router-deprecated';

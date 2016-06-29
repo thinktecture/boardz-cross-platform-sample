@@ -47,7 +47,6 @@ export class LocateItComponent implements OnInit {
             .catch(()=> {
                 this._hasError = true;
                 this._isLocating = false;
-
             });
     }
 
