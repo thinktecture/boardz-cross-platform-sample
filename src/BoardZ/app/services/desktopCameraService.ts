@@ -1,5 +1,4 @@
 import {Observable} from 'rxjs/Observable';
-
 import {ICameraService} from './cameraService';
 
 // Just to stop annoying TSC...

@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-
 import {NotificationService} from './notificationService';
 import {Notification} from '../models/notification';
 import {NotificationType} from '../models/notificationType';

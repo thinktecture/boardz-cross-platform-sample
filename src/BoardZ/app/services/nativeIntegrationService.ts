@@ -1,4 +1,4 @@
-import {Injectable, ApplicationRef} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Router} from '@angular/router-deprecated';
 import {PlatformInformationService} from './platformInformationService';
 import {IBoardZAppWindow} from '../interfaces/boardzAppWindow';
@@ -8,8 +8,7 @@ declare var window: IBoardZAppWindow;
 @Injectable()
 export class NativeIntegrationService {
     constructor(private _router: Router,
-                private _platformInformationService: PlatformInformationService,
-                private _applicationRef: ApplicationRef) {
+                private _platformInformationService: PlatformInformationService) {
     }
 
     public registerNavigationHook() {
