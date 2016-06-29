@@ -1,5 +1,4 @@
 // require all 3rd party libs
-
 import 'bootstrap/js/bootstrap';
 import 'admin-lte/js/app';
 import 'hammerjs/hammer';
