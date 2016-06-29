@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http, RequestOptionsArgs, Response, Headers} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
-
 import {AppConfiguration} from '../appConfig';
 import {TokenService} from './tokenService';
 
@@ -12,7 +11,7 @@ export class AuthenticatedHttp {
                 private _tokenService: TokenService) {
     }
 
-    private buildUrl(appendix: string): string{
+    private buildUrl(appendix: string): string {
         return `${this._config.apiEndpoint}${appendix}`;
     }
 
@@ -62,7 +61,7 @@ export class AuthenticatedHttp {
         var token = this._tokenService.token;
 
         if (token) {
-            options = options ||{ };
+            options = options || {};
 
             if (!options.headers)
                 options.headers = new Headers();

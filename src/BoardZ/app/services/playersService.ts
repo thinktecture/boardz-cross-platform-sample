@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Headers} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
-
 import {GeoLocation} from '../models/geoLocation';
 import {AuthenticatedHttp} from './authenticatedHttp';
 import {Player} from '../models/player';

@@ -1,5 +1,4 @@
 import {Injectable, EventEmitter} from '@angular/core';
-
 import {AppConfiguration} from '../appConfig';
 import {LogService} from './logService';
 import {TokenService} from './tokenService';
