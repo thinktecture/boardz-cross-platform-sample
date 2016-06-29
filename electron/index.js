@@ -1,40 +1,39 @@
 'use strict';
 
-var isLivereload = process.argv[2] === '--livereload';
+let isLiveReload = process.argv[2] === '--livereload';
 
-var electron = require('electron'),
-    app = electron.app,
-    BrowserWindow = electron.BrowserWindow,
-    Menu = electron.Menu,
-    globalShortcut = electron.globalShortcut,
-    path = require('path');
+const electron = require('electron');
 
-var client;
+const {app, globalShortcut, BrowserWindow, Menu} = electron;
 
-if (isLivereload) {
+const path = require('path');
+
+
+let client;
+if (isLiveReload) {
     client = require('electron-connect').client;
 }
 
-var mainWindow = null;
-var trayIconPath = path.join(__dirname, 'icon.png');
-var trayApp = null;
+let mainWindow;
+let trayApp;
 
-app.on('window-all-closed', function () {
+const trayIconPath = path.join(__dirname, 'icon.png');
+
+app.on('window-all-closed', () => {
     //https://github.com/atom/electron/issues/2312
     app.quit();
 });
 
-app.on('will-quit', function () {
+app.on('will-quit', () => {
     globalShortcut.unregisterAll();
 });
 
-app.on('ready', function () {
+app.on('ready', () => {
     mainWindow = new BrowserWindow({
         title: 'BoardZ2',
         width: 1024,
         minWidth: 768,
         height: 700,
-        minWidth: 768,
         titleBarStyle: 'hidden',
         webPreferences: {
             nodeIntegration: true
