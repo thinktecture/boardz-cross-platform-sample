@@ -3,9 +3,7 @@
 let isLiveReload = process.argv[2] === '--livereload';
 
 const electron = require('electron');
-
 const {app, globalShortcut, BrowserWindow, Menu} = electron;
-
 const path = require('path');
 
 
@@ -17,7 +15,8 @@ if (isLiveReload) {
 let mainWindow;
 let trayApp;
 
-const trayIconPath = path.join(__dirname, 'icon.png');
+
+
 
 app.on('window-all-closed', () => {
     //https://github.com/atom/electron/issues/2312
@@ -40,24 +39,9 @@ app.on('ready', () => {
         }
     });
 
-    var contextMenu = Menu.buildFromTemplate([
-        {
-            label: 'Radius Search...',
-            type: 'normal',
-            click: function () {
-                mainWindow.webContents.send('navigateTo', 'RadiusSearch');
-            }
-        },
-        {
-            label: 'Quit',
-            accelerator: 'Command+Q',
-            selector: 'terminate:'
-        }
-    ]);
-    
-    trayApp = new electron.Tray(trayIconPath);
-    trayApp.setToolTip('BoardZ2');
-    trayApp.setContextMenu(contextMenu);
+    buildTrayIcon();
+
+
 
     globalShortcut.register('CmdOrCtrl+Shift+d', function () {
         mainWindow.webContents.toggleDevTools();
@@ -75,56 +59,81 @@ app.on('ready', () => {
     }
 
     if (process.platform == 'darwin') {
-        var template = [{
-            label: "Application",
-            submenu: [
-                {
-                    label: "About Application", selector: "orderFrontStandardAboutPanel:"
-                },
-                {
-                    type: "separator"
-                },
-                {
-                    label: "Reload", accelerator: "CmdOrCtrl+R",
-                    click: function () {
-                        mainWindow.loadURL('file://' + __dirname + '/index.html');
-                    }
-                },
-                {
-                    label: "Quit", accelerator: "Command+Q",
-                    click: function () {
-                        app.quit();
-                    }
-                }
-            ]
-        }, {
-            label: "Edit",
-            submenu: [
-                {
-                    label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:"
-                },
-                {
-                    label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", selector: "redo:"
-                },
-                {
-                    type: "separator"
-                },
-                {
-                    label: "Cut", accelerator: "CmdOrCtrl+X", selector: "cut:"
-                },
-                {
-                    label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:"
-                },
-                {
-                    label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:"
-                },
-                {
-                    label: "Select All", accelerator: "CmdOrCtrl+A", selector: "selectAll:"
-                }
-            ]
-        }
-        ];
-
-        Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+        buildNativeAppMenu();
     }
 });
+
+let buildNativeAppMenu = () =>{
+    var template = [{
+        label: "Application",
+        submenu: [
+            {
+                label: "About Application", selector: "orderFrontStandardAboutPanel:"
+            },
+            {
+                type: "separator"
+            },
+            {
+                label: "Reload", accelerator: "CmdOrCtrl+R",
+                click: function () {
+                    mainWindow.loadURL('file://' + __dirname + '/index.html');
+                }
+            },
+            {
+                label: "Quit", accelerator: "Command+Q",
+                click: function () {
+                    app.quit();
+                }
+            }
+        ]
+    }, {
+        label: "Edit",
+        submenu: [
+            {
+                label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:"
+            },
+            {
+                label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", selector: "redo:"
+            },
+            {
+                type: "separator"
+            },
+            {
+                label: "Cut", accelerator: "CmdOrCtrl+X", selector: "cut:"
+            },
+            {
+                label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:"
+            },
+            {
+                label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:"
+            },
+            {
+                label: "Select All", accelerator: "CmdOrCtrl+A", selector: "selectAll:"
+            }
+        ]
+    }
+    ];
+
+    Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+};
+let buildTrayIcon = () => {
+    let trayIconPath = path.join(__dirname, 'icon.png');
+    var contextMenu = Menu.buildFromTemplate([
+        {
+            label: 'Radius Search...',
+            type: 'normal',
+            click: function () {
+                mainWindow.webContents.send('navigateTo', 'RadiusSearch');
+            }
+        },
+        {
+            label: 'Quit',
+            accelerator: 'Command+Q',
+            selector: 'terminate:'
+        }
+    ]);
+
+    trayApp = new electron.Tray(trayIconPath);
+    trayApp.setToolTip('BoardZ2');
+    trayApp.setContextMenu(contextMenu);
+};
