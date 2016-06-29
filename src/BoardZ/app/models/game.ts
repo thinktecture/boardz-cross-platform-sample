@@ -1,6 +1,6 @@
 export class Game {
-    id: string = null;
-    name: string;
-    description: string;
-    userName: string;
+    public id: string = null;
+    public name: string;
+    public description: string;
+    public userName: string;
 }

@@ -1,6 +1,6 @@
 import {GeoLocation} from './geoLocation';
 
-export class Player{
+export class Player {
     public id: string;
     public name: string;
     public boardGameId: string;
