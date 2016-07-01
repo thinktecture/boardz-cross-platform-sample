@@ -20,12 +20,14 @@ import {LogService} from './services/logService';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+import {PlatformInformationService} from './services/platformInformationService';
 
 enableProdMode();
 
 bootstrap(BoardzAppComponent, [
     HTTP_PROVIDERS,
     ROUTER_PROVIDERS,
+    PlatformInformationService,
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     LogService,
     TokenService,
