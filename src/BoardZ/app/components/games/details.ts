@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router, RouteSegment, RouteTree} from '@angular/router-deprecated';
+import {Router} from '@angular/router-deprecated';
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 import {LocateItComponent} from '../locateIt/locateIt';
 import {PictureItComponent} from '../pictureIt/pictureIt';
@@ -15,6 +15,14 @@ import {LoginService} from '../../services/loginService';
 import {Notification} from '../../models/notification';
 import {NotificationType} from '../../models/notificationType';
 
+// fix WebStorm errors for deprecated router
+export interface RouteSegment {
+    params: Array<any>;
+}
+
+export  interface RouteTree {
+}
+
 @Component({
     moduleId: module.id,
     selector: 'gameDetail',
@@ -22,16 +30,14 @@ import {NotificationType} from '../../models/notificationType';
     templateUrl: 'details.html'
 })
 @NeedsAuthentication()
-export class GameDetailsComponent implements OnInit{
-    ngOnInit(): any {
-        return undefined;
-    }
+export class GameDetailsComponent implements OnInit {
+
     private _needsReset: boolean;
     private _pictureUrl: string = "";
     private _coordinates: GeoLocation = null;
     private _sending: boolean;
-    public active = true;
 
+    public active = true;
     public model: Game = new Game();
     public originalModel: Game = new Game();
 
@@ -42,6 +48,10 @@ export class GameDetailsComponent implements OnInit{
                 private _playersService: PlayersService,
                 private _signalRService: SignalRService,
                 private _loginService: LoginService) {
+    }
+
+    public ngOnInit(): any {
+        return undefined;
     }
 
     public routerOnActivate(curr: RouteSegment, prev?: RouteSegment, currTree?: RouteTree, prevTree?: RouteTree): void {
