@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 
-declare var window;
+declare let window;
 
 @Injectable()
 export class PlatformInformationService {

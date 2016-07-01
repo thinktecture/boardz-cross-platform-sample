@@ -1,11 +1,11 @@
-
 import {ICameraService} from './cameraService';
 import {Observable} from 'rxjs/Rx';
 
 // Just to stop annoying TSC...
-declare var window;
+declare let window;
 
 export class DesktopCameraService implements ICameraService {
+
     private getMediaDevices(): any {
         const mediaDevices = ((window.navigator.mozGetUserMedia || window.navigator.webkitGetUserMedia) ? {
                 getUserMedia: function (options) {
