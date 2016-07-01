@@ -14,12 +14,18 @@ import {MobileCameraService} from './mobileCameraService';
 import {PlatformInformationService} from './platformInformationService';
 import {NativeIntegrationService} from './nativeIntegrationService';
 
-declare var window;
+declare let window;
 
-export var APP_SERVICES = [
+let evaluateCameraService = ()=> {
+    return (platformInformationService: PlatformInformationService): CameraService => {
+        return platformInformationService.isMobile ? new MobileCameraService() : new DesktopCameraService();
+    };
+
+};
+
+export const APP_SERVICES = [
     { provide: ConnectionBackend, useClass: XHRBackend },
     AppConfiguration,
-    PlatformInformationService,
     NativeIntegrationService,
     AuthenticatedHttp,
     LoginService,
@@ -27,7 +33,7 @@ export var APP_SERVICES = [
     GeolocationService,
     PlayersService,
     NotificationService,
-    { provide: CameraService, useClass: window.cordova ? MobileCameraService : DesktopCameraService },
+    { provide: CameraService, useFactory: evaluateCameraService(), deps: [PlatformInformationService] },
     UiNotificationService,
     SignalRService
 ];
