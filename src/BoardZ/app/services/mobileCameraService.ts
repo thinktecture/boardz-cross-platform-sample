@@ -1,20 +1,20 @@
-import {Observable} from 'rxjs/Observable';
-import {Observer} from 'rxjs/Observer';
+import {Observable} from 'rxjs/Rx';
+import {Observer} from 'rxjs/Rx';
 import {ICameraService} from './cameraService';
 
-declare var window;
+declare let window;
 
 export class MobileCameraService implements ICameraService {
     public getPhoto(): Observable<string> {
         return Observable.create((observer: Observer<string>) => {
-            var removeDomListener = () => {
+            let removeDomListener = () => {
                 document.removeEventListener('deviceready', onCordovaDeviceReady);
             };
 
-            var onCordovaDeviceReady = () => {
+            let onCordovaDeviceReady = () => {
                 const camera = window.navigator.camera;
 
-                var options = {
+                let options = {
                     quality: 50,
                     destinationType: camera.DestinationType.DATA_URL,
                     sourceType: camera.PictureSourceType.CAMERA,
