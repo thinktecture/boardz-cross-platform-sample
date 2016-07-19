@@ -31,7 +31,7 @@
     "font-awesome": "^4.5.0",
     "gulp": "^3.9.0",
     "gulp-atom-electron": "^1.4.0",
-    "gulp-awesome-electron": "git+https://github.com/ThorstenHans/gulp-awesome-electron.git",
+    "gulp-awesome-electron": "^1.2.0",
     "gulp-batch": "1.0.5",
     "gulp-clean-css": "^2.0.10",
     "gulp-concat": "^2.6.0",
