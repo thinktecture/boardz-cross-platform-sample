@@ -136,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Models\Models.tst" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -145,6 +146,24 @@
     <Content Include="SwaggerUi\CustomAssets\lang\ru.js" />
     <Content Include="SwaggerUi\CustomAssets\lang\tr.js" />
     <Content Include="SwaggerUi\CustomAssets\lang\translator.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Models\BoardGame.ts">
+      <DependentUpon>Models.tst</DependentUpon>
+      <CustomToolNamespace>Models\BoardGame.cs</CustomToolNamespace>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Models\Coordinate.ts">
+      <DependentUpon>Models.tst</DependentUpon>
+      <CustomToolNamespace>Models\Coordinate.cs</CustomToolNamespace>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Models\Packshot.ts">
+      <DependentUpon>Models.tst</DependentUpon>
+      <CustomToolNamespace>Models\Packshot.cs</CustomToolNamespace>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Models\Player.ts">
+      <DependentUpon>Models.tst</DependentUpon>
+      <CustomToolNamespace>Models\Player.cs</CustomToolNamespace>
+    </TypeScriptCompile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
