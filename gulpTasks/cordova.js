@@ -101,6 +101,17 @@
             done();
         });
 
+        gulp.task('[private-cordova]:build:blackberry', function (done) {
+            var currentDir = sh.pwd();
+            sh.cd(config.targets.cordovaFolder);
+            sh.exec('cordova prepare blackberry10');
+//            sh.exec('../../node_modules/.bin/cordova-splash');
+//            sh.exec('../../node_modules/.bin/cordova-icon');
+            sh.exec('cordova build blackberry10');
+            sh.cd(currentDir);
+            done();
+        });
+
         gulp.task('[private-cordova]:build:all', function (done) {
             var currentDir = sh.pwd();
             sh.cd(config.targets.cordovaFolder);
@@ -189,6 +200,20 @@
                 '[private-cordova]:copy:resources',
                 '[private-cordova]:copy:hooks',
                 '[private-cordova]:build:android',
+                done
+            );
+        });
+
+        gulp.task('build-cordova-blackberry', function (done) {
+            runSequence(
+                'build-web',
+                '[private-cordova]:clean',
+                '[private-cordova]:copy-source',
+                '[private-cordova]:remove-fake-script',
+                '[private-cordova]:config-for-default',
+                '[private-cordova]:copy:resources',
+                '[private-cordova]:copy:hooks',
+                '[private-cordova]:build:blackberry',
                 done
             );
         });

@@ -6,12 +6,12 @@ module.exports = {
         folder: './src/BoardZ/',
         files: {
             injectables: [
+                './dist/www/scripts/shim.min.js',
                 './dist/www/scripts/vendor.min.js',
                 './dist/www/scripts/system.min.js',
                 './dist/www/scripts/system.setup.js',
                 './dist/www/css/vendor.min.css',
                 './dist/www/css/app.css',
-                './dist/www/scripts/shim.min.js',
                 './dist/www/scripts/zone.js',
                 './dist/www/scripts/reflect.js'
             ],
