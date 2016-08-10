@@ -3,21 +3,21 @@ import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {XHRBackend, ConnectionBackend} from '@angular/http';
 
 import {AppConfiguration} from '../appConfig';
-import {AuthenticatedHttp} from './authenticatedHttp';
-import {LoginService} from './loginService';
-import {GamesService} from './gamesService';
-import {GeolocationService} from './geolocationService';
-import {PlayersService} from './playersService';
-import {NotificationService} from './notificationService';
-import {SignalRService} from './signalrService';
-import {UiNotificationService} from './uiNotificationService';
-import {CameraService} from './cameraService';
-import {DesktopCameraService} from './desktopCameraService';
-import {MobileCameraService} from './mobileCameraService';
-import {PlatformInformationService} from './platformInformationService';
-import {NativeIntegrationService} from './nativeIntegrationService';
-import {TokenService} from './tokenService';
-import {LogService} from './logService';
+import {NativeIntegrationService} from '../services/nativeIntegrationService';
+import {AuthenticatedHttp} from '../services/authenticatedHttp';
+import {TokenService} from '../services/tokenService';
+import {LoginService} from '../services/loginService';
+import {LogService} from '../services/logService';
+import {GamesService} from '../services/gamesService';
+import {GeolocationService} from '../services/geolocationService';
+import {PlayersService} from '../services/playersService';
+import {NotificationService} from '../services/notificationService';
+import {PlatformInformationService} from '../services/platformInformationService';
+import {CameraService} from '../services/cameraService';
+import {UiNotificationService} from '../services/uiNotificationService';
+import {SignalRService} from '../services/signalrService';
+import {MobileCameraService} from '../services/mobileCameraService';
+import {DesktopCameraService} from '../services/desktopCameraService';
 
 declare let window;
 
@@ -25,10 +25,9 @@ let evaluateCameraService = ()=> {
     return (platformInformationService: PlatformInformationService): CameraService => {
         return platformInformationService.isMobile ? new MobileCameraService() : new DesktopCameraService();
     };
-
 };
 
-export const APP_SERVICES = [
+export const APP_PROVIDERS = [
     ROUTER_PROVIDERS,
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: ConnectionBackend, useClass: XHRBackend },
