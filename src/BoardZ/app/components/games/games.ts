@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {ROUTER_DIRECTIVES, RouteConfig} from '@angular/router-deprecated';
+import {RouteConfig} from '@angular/router-deprecated';
+
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 import {GameDetailsComponent} from './details';
 import {GameListComponent} from './list';
@@ -7,7 +8,6 @@ import {GameListComponent} from './list';
 @Component({
     moduleId: module.id,
     selector: 'games',
-    directives: [ROUTER_DIRECTIVES],
     templateUrl: 'games.html'
 })
 @RouteConfig([

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DecimalPipe} from '@angular/common';
+
 import {GeoLocation} from '../../models/geoLocation';
 import {GeolocationService} from '../../services/geolocationService';
 import {PlayersService} from '../../services/playersService';
@@ -9,8 +9,7 @@ import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 @Component({
     moduleId: module.id,
     selector: 'radius-search',
-    templateUrl: 'radiusSearch.html',
-    pipes: [DecimalPipe]
+    templateUrl: 'radiusSearch.html'
 })
 @NeedsAuthentication()
 export class RadiusSearchComponent implements OnInit {

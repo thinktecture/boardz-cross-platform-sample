@@ -1,15 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
-import {WidgetComponent} from '../widget/widget';
 import {GamesService} from '../../services/gamesService';
 import {PlayersService} from '../../services/playersService';
 
 @Component({
     moduleId: module.id,
     selector: 'dashboard',
-    directives: [WidgetComponent],
     templateUrl: 'dashboard.html'
 })
 @NeedsAuthentication()

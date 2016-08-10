@@ -1,14 +1,13 @@
 import {Component, OnInit} from '@angular/core';
+
 import {Notification} from '../../models/notification';
 import {LoginService} from '../../services/loginService';
 import {TokenService} from '../../services/tokenService';
 import {NotificationService} from '../../services/notificationService';
-import {BackButtonDirective} from '../../directives/backButtonDirective';
 
 @Component({
     moduleId: module.id,
     selector: 'boardz-header',
-    directives: [BackButtonDirective],
     templateUrl: 'header.html'
 })
 export class HeaderComponent implements OnInit {

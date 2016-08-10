@@ -7,8 +7,8 @@
                 <div class="form-group">
                     <label for="username" class="col-sm-2 control-label">User name</label>
                     <div class="col-sm-10">
-                        <input class="form-control" id="username" type="text" [(ngModel)]="_userName"
-                               ngControl="username" #username="ngForm" required
+                        <input class="form-control" id="username" name="username" type="text" [(ngModel)]="_userName"
+                               ngControl="username" #username="ngModel" required
                                placeholder="Your Username"/>
                         <div [hidden]="username.pristine || username.valid">
                             <span class="help-block">Username is required</span>
@@ -18,8 +18,8 @@
                 <div class="form-group">
                     <label for="password" class="col-sm-2 control-label">Password</label>
                     <div class="col-sm-10">
-                        <input class="form-control" id="password" type="password" [(ngModel)]="_password"
-                               ngControl="password" #password="ngForm" required
+                        <input class="form-control" id="password" name="password" type="password" [(ngModel)]="_password"
+                               ngControl="password" #password="ngModel" required
                                placeholder="Password"/>
 
                         <div [hidden]="password.pristine || password.valid">

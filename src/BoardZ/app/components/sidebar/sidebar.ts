@@ -1,13 +1,10 @@
 import {Component} from '@angular/core';
-import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 
-import {CloseSidebarOnClickDirective} from '../../directives/closeSidebarOnClickDirective';
 import {NavigationEntry} from "../../models/navigationEntry";
 
 @Component({
     moduleId: module.id,
     selector: 'sidebar',
-    directives: [ROUTER_DIRECTIVES, CloseSidebarOnClickDirective],
     templateUrl: 'sidebar.html'
 })
 export class SidebarComponent {

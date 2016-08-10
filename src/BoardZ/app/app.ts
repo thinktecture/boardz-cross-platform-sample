@@ -1,12 +1,10 @@
 import {Component, AfterViewInit} from '@angular/core';
-import {ROUTER_DIRECTIVES, RouteConfig} from '@angular/router-deprecated';
+import {RouteConfig} from '@angular/router-deprecated';
+
 import {LoginComponent} from './components/login/login';
 import {DashboardComponent} from './components/dashboard/dashboard';
-import {SidebarComponent} from './components/sidebar/sidebar';
-import {HeaderComponent} from './components/header/header';
 import {GamesComponent} from './components/games/games';
 import {NotificationsComponent} from './components/notifications/notifications';
-import {APP_SERVICES} from './services/all';
 import {RadiusSearchComponent} from './components/radiusSearch/radiusSearch';
 import {LogService} from './services/logService';
 import {LogLevel} from './models/logLevel';
@@ -22,8 +20,6 @@ declare var window: IBoardZAppWindow;
 @Component({
     moduleId: module.id,
     selector: 'boardz-app',
-    directives: [ROUTER_DIRECTIVES, HeaderComponent, SidebarComponent],
-    providers: APP_SERVICES,
     templateUrl: 'app.html'
 })
 @RouteConfig([

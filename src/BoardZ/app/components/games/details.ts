@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router-deprecated';
+
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
-import {LocateItComponent} from '../locateIt/locateIt';
-import {PictureItComponent} from '../pictureIt/pictureIt';
 import {Game} from '../../models/game';
 import {LogService} from '../../services/logService';
 import {GamesService} from '../../services/gamesService';
@@ -26,7 +25,6 @@ export  interface RouteTree {
 @Component({
     moduleId: module.id,
     selector: 'gameDetail',
-    directives: [LocateItComponent, PictureItComponent],
     templateUrl: 'details.html'
 })
 @NeedsAuthentication()

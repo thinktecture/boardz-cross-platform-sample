@@ -1,11 +1,9 @@
 import {Component, Input, ChangeDetectionStrategy} from '@angular/core';
-import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 
 @Component({
     moduleId: module.id,
     selector: 'widget',
     templateUrl: 'widget.html',
-    directives: [ROUTER_DIRECTIVES],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WidgetComponent {

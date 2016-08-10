@@ -1,7 +1,6 @@
 ///<reference path="../../../../../typings/main/ambient/leaflet/leaflet.d.ts" />
 
 import {Component, Output, OnInit, EventEmitter} from '@angular/core';
-import {JsonPipe} from '@angular/common';
 
 import {GeoLocation} from '../../models/geoLocation';
 import {GeolocationService} from '../../services/geolocationService';
@@ -9,7 +8,6 @@ import {GeolocationService} from '../../services/geolocationService';
 @Component({
     moduleId: module.id,
     selector: 'locate-it',
-    pipes: [JsonPipe],
     templateUrl: 'locateIt.html'
 })
 export class LocateItComponent implements OnInit {

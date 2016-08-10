@@ -10,8 +10,8 @@
                     <div class="form-group" [class.has-error]="!name.pristine && !name.valid">
                         <label for="name" class="col-sm-2 control-label">Name</label>
                         <div class="col-sm-10">
-                            <input type="text" id="name" class="form-control" placeholder="Game name" required
-                                   [(ngModel)]="model.name" ngControl="name" #name="ngForm"/>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Game name" required
+                                   [(ngModel)]="model.name" ngControl="name" #name="ngModel"/>
                             <div class="alert alert-danger" [hidden]="name.pristine || name.valid">
                                 Game name is required
                             </div>
@@ -20,9 +20,9 @@
                     <div class="form-group" [class.has-error]="!description.pristine && !description.valid">
                         <label for="description" class="col-sm-2 control-label">Description</label>
                         <div class="col-sm-10">
-                        <textarea id="description" class="form-control" rows="3" placeholder="Game description" required
+                        <textarea id="description" name="description" class="form-control" rows="3" placeholder="Game description" required
                                   [(ngModel)]="model.description" ngControl="description"
-                                  #description="ngForm"></textarea>
+                                  #description="ngModel"></textarea>
                             <div class="alert alert-danger" [hidden]="description.pristine || description.valid">
                                 Game description is required
                             </div>
