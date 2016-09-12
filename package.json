@@ -9,7 +9,9 @@
   },
   "scripts": {
     "postinstall": "typings install",
-    "build-web": "gulp build-web"
+    "build-web": "gulp build-web",
+    "watch-web": "gulp watch-web",
+    "start-web": "npm run build-web && npm run watch-web"
   },
   "author": "Thinktecture AG <office@thinktecture.com>",
   "bugs": {
@@ -18,6 +20,7 @@
   "homepage": "https://github.com/thinktecture/boardz-cross-platform-sample#readme",
   "devDependencies": {
     "bootstrap": "^3.3.6",
+    "browser-sync": "^2.15.0",
     "cordova-icon": "^0.7.0",
     "cordova-splash": "^0.7.1",
     "del": "^2.0.2",
