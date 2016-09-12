@@ -11,7 +11,10 @@
     "postinstall": "typings install",
     "build-web": "gulp build-web",
     "watch-web": "gulp watch-web",
-    "start-web": "npm run build-web && npm run watch-web"
+    "start-web": "npm run build-web && npm run watch-web",
+    "build-desktop-all": "gulp build-desktop-all",
+    "build-desktop-osx": "gulp build-desktop-osx",
+    "start-desktop": "gulp watch-desktop"
   },
   "author": "Thinktecture AG <office@thinktecture.com>",
   "bugs": {
@@ -24,7 +27,6 @@
     "cordova-icon": "^0.7.0",
     "cordova-splash": "^0.7.1",
     "del": "^2.0.2",
-    "electron-connect": "^0.3.7",
     "electron-prebuilt": "^0.37.2",
     "event-stream": "^3.3.1",
     "font-awesome": "^4.5.0",

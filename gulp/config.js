@@ -21,6 +21,7 @@ let config = {
             './node_modules/zone.js/dist/zone.js',
             './node_modules/reflect-metadata/reflect.js',
             './node_modules/systemjs/dist/system.src.js',
+            './src/BoardZ/foo.js',
             './src/BoardZ/vendor/hammerjs/hammer.js',
             './src/BoardZ/vendor/jquery/jquery-2.1.4.js',
             './src/BoardZ/vendor/jquery/jquery.hammer.js',
@@ -40,6 +41,10 @@ let config = {
         fonts: [
             './src/BoardZ/vendor/font-awesome/fonts/*.*',
             './src/BoardZ/vendor/bootstrap/fonts/*.*'
+        ],
+        resources: './resources/',
+        electronFiles: [
+            './electron/**/*'
         ]
     },
     targets: {
@@ -52,9 +57,11 @@ let config = {
             vendorJs: 'build/web/lib/vendor.js',
             injectables: [
                 'build/web/styles/**/*.css',
-                'build/web/lib/vendor.js',
                 'build/web/system.setup.js'
-            ]
+            ],
+            desktop: 'build/desktop',
+            desktopWeb: 'build/desktop/web',
+            desktopBuild: 'build/desktop/build'
         }
     },
     typeScript: {

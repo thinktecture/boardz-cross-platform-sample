@@ -1,1 +1,2 @@
-require('./gulp/web.js');
+require('./gulp/web');
+require('./gulp/desktop');
