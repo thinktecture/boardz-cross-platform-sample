@@ -20,7 +20,7 @@ export class LocateItComponent implements OnInit {
     public map;
 
     constructor(private _geolocationService: GeolocationService) {
-        L.Icon.Default.imagePath = 'app/images';
+        L.Icon.Default.imagePath = 'assets/images';
     }
 
     ngOnInit(): any {
