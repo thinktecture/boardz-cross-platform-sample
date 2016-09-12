@@ -16,7 +16,9 @@ const config = require('./config'),
     cleanCss = require('gulp-clean-css'),
     inject = require('gulp-inject'),
     concat = require('gulp-concat'),
-    uglify = require('gulp-uglify');
+    uglify = require('gulp-uglify'),
+    browserSync = require('browser-sync'),
+    browserSyncConfig = require('../configs/dev/browserSync');
 
 
 // public tasks
@@ -38,17 +40,23 @@ gulp.task('build-web', (done) => {
 });
 
 gulp.task('watch-web', (done) => {
-    run([
-        'web:watch:scripts',
-        'web:watch:scripts:js',
-        'web:watch:scripts:vendor',
-        'web:watch:templates',
-        'web:watch:styles',
-        'web:watch:index'
-        //todo: web:watch:assets, web:build:styles:vendor, web:build:scripts:vendor:bundles
-    ], done);
+    run('start-browser-sync',
+        [
+            'web:watch:scripts',
+            'web:watch:scripts:js',
+            'web:watch:scripts:vendor',
+            'web:watch:templates',
+            'web:watch:styles',
+            'web:watch:index'
+            //todo: web:watch:assets, web:build:styles:vendor, web:build:scripts:vendor:bundles
+        ],
+        done);
 });
 
+gulp.task('start-browser-sync', (done) => {
+    browserSync.init(browserSyncConfig);
+    done();
+});
 
 // private tasks
 
@@ -75,7 +83,8 @@ function transpileScripts(files, typeScriptConfig) {
             }
         }))
         .pipe(count('Transpiled ## files'))
-        .pipe(typeScript(typeScriptConfig.compilerOptions));
+        .pipe(typeScript(typeScriptConfig.compilerOptions))
+        .on('end', () => browserSync.reload());
 
     return merge([
         tsResult.dts.pipe(gulp.dest(config.targets.build.web)),
@@ -102,14 +111,16 @@ function getAssociatedTypeScriptFiles(files) {
 
 gulp.task('web:build:scripts:js', () => {
     return gulp.src(config.sources.javaScripts, { base: config.base })
-        .pipe(gulp.dest(config.targets.build.web));
+        .pipe(gulp.dest(config.targets.build.web))
+        .on('end', () => browserSync.reload());
 });
 
 gulp.task('web:build:scripts:vendor', () => {
     return gulp.src(config.sources.vendorScripts, { base: config.base })
         .pipe(uglify())
         .pipe(concat('vendor.js'))
-        .pipe(gulp.dest(config.targets.build.lib));
+        .pipe(gulp.dest(config.targets.build.lib))
+        .on('end', () => browserSync.reload());
 });
 
 gulp.task('web:build:scripts:vendor:bundles', () => {
@@ -119,10 +130,11 @@ gulp.task('web:build:scripts:vendor:bundles', () => {
 
 gulp.task('web:build:styles', () => {
     return gulp.src(config.sources.styles, { base: path.join(config.sources.base, 'css') })
-        .pipe(sourcemaps.init())
+        // .pipe(sourcemaps.init())
         .pipe(cleanCss())
-        .pipe(sourcemaps.write('.'))
+        // .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(config.targets.build.styles))
+        .pipe(browserSync.stream())
 });
 
 gulp.task('web:build:styles:vendor', () => {
@@ -132,16 +144,19 @@ gulp.task('web:build:styles:vendor', () => {
         .pipe(cleanCss())
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(config.targets.build.styles))
+        .pipe(browserSync.stream())
 });
 
 gulp.task('web:build:assets', () => {
     return gulp.src(config.sources.assets, { base: config.sources.base })
         .pipe(gulp.dest(config.targets.build.web))
+        .on('end', () => browserSync.reload());
 });
 
 gulp.task('web:build:assets:fonts', () => {
     return gulp.src(config.sources.fonts)
         .pipe(gulp.dest(config.targets.build.fonts))
+        .on('end', () => browserSync.reload());
 });
 
 gulp.task('web:build:process-index', () => {
@@ -154,10 +169,9 @@ gulp.task('web:build:process-index', () => {
 
     return gulp.src(config.sources.indexHtml)
         .pipe(inject(injectables, injectionConfiguration))
-        .pipe(gulp.dest(config.targets.build.web));
+        .pipe(gulp.dest(config.targets.build.web))
+        .on('end', () => browserSync.reload());
 });
-
-
 
 gulp.task('web:watch:scripts', () => {
     return watch(config.sources.scripts, { base: config.sources.base }, batch((files) => transpileScripts(files, config.typeScript.build.partial)));
@@ -172,7 +186,6 @@ gulp.task('web:watch:scripts:vendor', () => {
     return watch(config.sources.vendorScripts, { base: config.sources.base },
         batch((files, done) => run('web:build:scripts:vendor', done)));
 });
-
 
 gulp.task('web:watch:templates', () => {
     return watch(config.sources.templates, { base: config.sources.base }, batch((htmlFiles) => {
