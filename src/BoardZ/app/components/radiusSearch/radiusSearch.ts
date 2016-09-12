@@ -7,7 +7,7 @@ import {NearByPlayer} from '../../models/nearbyPlayer';
 import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 
 @Component({
-    moduleId: module.id,
+    moduleId: __moduleName,
     selector: 'radius-search',
     templateUrl: 'radiusSearch.html'
 })

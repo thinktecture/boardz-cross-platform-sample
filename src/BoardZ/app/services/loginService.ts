@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions} from '@angular/http';
 import {Router} from '@angular/router-deprecated';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {TokenService} from './tokenService';
 import {AppConfiguration} from '../appConfig';
 import {LogService} from './logService';

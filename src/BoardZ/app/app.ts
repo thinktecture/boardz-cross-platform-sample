@@ -18,7 +18,7 @@ import {IBoardZAppWindow} from './interfaces/boardzAppWindow';
 declare var window: IBoardZAppWindow;
 
 @Component({
-    moduleId: module.id,
+    moduleId: __moduleName,
     selector: 'boardz-app',
     templateUrl: 'app.html'
 })

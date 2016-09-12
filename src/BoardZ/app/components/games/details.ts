@@ -23,7 +23,7 @@ export  interface RouteTree {
 }
 
 @Component({
-    moduleId: module.id,
+    moduleId: __moduleName,
     selector: 'gameDetail',
     templateUrl: 'details.html'
 })

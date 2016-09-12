@@ -8,12 +8,8 @@
     "url": "git+https://github.com/thinktecture/boardz-cross-platform-sample.git"
   },
   "scripts": {
-    "gulp": "gulp",
-    "typings": "typings",
-    "watch": "gulp watch-web",
     "postinstall": "typings install",
-    "build": "gulp",
-    "watch-ios": "gulp [private-web]:watch:no-liveserver & gulp cordova:watch:ios"
+    "build-web": "gulp build-web"
   },
   "author": "Thinktecture AG <office@thinktecture.com>",
   "bugs": {
@@ -30,16 +26,19 @@
     "event-stream": "^3.3.1",
     "font-awesome": "^4.5.0",
     "gulp": "^3.9.0",
+    "gulp-angular-embed-templates": "^2.3.0",
     "gulp-atom-electron": "^1.4.0",
     "gulp-awesome-electron": "^1.2.0",
     "gulp-batch": "1.0.5",
     "gulp-clean-css": "^2.0.10",
     "gulp-concat": "^2.6.0",
+    "gulp-count": "^0.2.0",
     "gulp-filelog": "^0.4.1",
     "gulp-inject": "^3.0.0",
     "gulp-minify-html": "^1.0.4",
     "gulp-ng-annotate": "^1.1.0",
     "gulp-ng-template": "^0.2.1",
+    "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-rewrite-css": "0.0.7",
     "gulp-server-livereload": "^1.5.3",
@@ -50,6 +49,7 @@
     "gulp-uglify": "^1.4.1",
     "gulp-watch": "^4.3.5",
     "merge2": "^0.3.7",
+    "replace-ext": "^1.0.0",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.2.2",
     "shelljs": "^0.5.3",

@@ -6,7 +6,7 @@ import {GameDetailsComponent} from './details';
 import {GameListComponent} from './list';
 
 @Component({
-    moduleId: module.id,
+    moduleId: __moduleName,
     selector: 'games',
     templateUrl: 'games.html'
 })

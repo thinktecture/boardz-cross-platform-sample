@@ -8,7 +8,7 @@ import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 
 @NeedsAuthentication()
 @Component({
-    moduleId: module.id,
+    moduleId: __moduleName,
     selector: 'game-list',
     templateUrl: 'list.html'
 })

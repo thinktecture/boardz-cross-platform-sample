@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http, RequestOptionsArgs, Response, Headers} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {AppConfiguration} from '../appConfig';
 import {TokenService} from './tokenService';
 
