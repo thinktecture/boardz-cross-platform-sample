@@ -14,7 +14,9 @@
     "start-web": "npm run build-web && npm run watch-web",
     "build-desktop-all": "gulp build-desktop-all",
     "build-desktop-osx": "gulp build-desktop-osx",
-    "start-desktop": "gulp watch-desktop"
+    "start-desktop": "gulp start-desktop",
+    "start-mobile-ios": "gulp start-mobile-ios",
+    "start-demo": "gulp start-demo"
   },
   "author": "Thinktecture AG <office@thinktecture.com>",
   "bugs": {

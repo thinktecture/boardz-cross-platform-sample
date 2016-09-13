@@ -45,7 +45,10 @@ let config = {
         resources: './resources/',
         electronFiles: [
             './electron/**/*'
-        ]
+        ],
+        cordova: {
+            devConfig: './cordova/config_livereload.xml'
+        }
     },
     targets: {
         build: {
@@ -61,7 +64,9 @@ let config = {
             ],
             desktop: 'build/desktop',
             desktopWeb: 'build/desktop/web',
-            desktopBuild: 'build/desktop/build'
+            desktopBuild: 'build/desktop/build',
+            mobile: 'build/mobile',
+            mobileWeb: 'build/mobile/www'
         }
     },
     typeScript: {

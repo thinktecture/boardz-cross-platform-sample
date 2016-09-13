@@ -37,12 +37,9 @@ gulp.task('build-desktop-osx', (done) => {
 });
 
 
-gulp.task('watch-desktop', (done) => {
+gulp.task('start-desktop', (done) => {
     run(
-        'build-web',
-        ['watch-web',
-            'desktop:clean',
-        ],
+        'desktop:clean',
         [
             'desktop:build:copy-sources',
             'desktop:build:copy-electron-sources'

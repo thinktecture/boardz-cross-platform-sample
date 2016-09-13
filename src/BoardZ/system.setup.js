@@ -20,13 +20,13 @@ function restoreModule() {
 backupModule()
     .then(function () {
         return new Promise(function (resolve, reject){
-            let file = document.createElement('script');
-            file.setAttribute('type', 'text/javascript');
-            file.setAttribute('src', 'lib/vendor.js');
-            file.onload = function(){
-                setTimeout(() => resolve(true), 2000);
+            var fileElement = document.createElement('script');
+            fileElement.setAttribute('type', 'text/javascript');
+            fileElement.setAttribute('src', 'lib/vendor.js');
+            fileElement.onload = function(){
+                resolve(true);
             };
-            document.body.appendChild(file);
+            document.head.appendChild(fileElement);
         });
 
     })

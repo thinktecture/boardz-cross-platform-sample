@@ -17,7 +17,6 @@
   <plugin name="cordova-plugin-camera" spec="2.2.0"/>
 
   <platform name="ios">
-    <hook type="after_platform_add" src="hooks/ios/after_platform_add_add_plugins.js" />
   </platform>
 
   <platform name="android">
@@ -32,6 +31,7 @@
   <allow-intent href="sms:*"/>
   <allow-intent href="mailto:*"/>
   <allow-intent href="geo:*"/>
+  <allow-navigation href="http://localhost:8000/*" />
   <platform name="android">
     <allow-intent href="market:*"/>
   </platform>
