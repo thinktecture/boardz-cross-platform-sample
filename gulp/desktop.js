@@ -13,6 +13,7 @@ const config = require('./config'),
 
 gulp.task('build-desktop-all', (done) => {
     run(
+        'build-web',
         'desktop:clean',
         [
             'desktop:build:copy-sources',
@@ -26,6 +27,7 @@ gulp.task('build-desktop-all', (done) => {
 
 gulp.task('build-desktop-osx', (done) => {
     run(
+        'build-web',
         'desktop:clean',
         [
             'desktop:build:copy-sources',
@@ -36,7 +38,35 @@ gulp.task('build-desktop-osx', (done) => {
     )
 });
 
+gulp.task('build-desktop-win', (done) => {
+    run(
+        'build-web',
+        'desktop:clean',
+        [
+            'desktop:build:copy-sources',
+            'desktop:build:copy-electron-sources'
+        ],
+        'desktop:build:win',
+        done
+    )
+});
 
+gulp.task('build-desktop-linux', (done) => {
+    run(
+        'build-web',
+        'desktop:clean',
+        [
+            'desktop:build:copy-sources',
+            'desktop:build:copy-electron-sources'
+        ],
+        'desktop:build:linux',
+        done
+    )
+});
+
+/**
+ *  Start electron and load content from localhost (for development)
+ */
 gulp.task('start-desktop', (done) => {
     run(
         'desktop:clean',

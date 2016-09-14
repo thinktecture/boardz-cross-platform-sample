@@ -47,7 +47,9 @@ let config = {
             './electron/**/*'
         ],
         cordova: {
-            devConfig: './cordova/config_livereload.xml'
+            devConfig: './cordova/config_livereload.xml',
+            config: './cordova/config.xml',
+            hooks: './cordova/**/*'
         }
     },
     targets: {
@@ -66,7 +68,8 @@ let config = {
             desktopWeb: 'build/desktop/web',
             desktopBuild: 'build/desktop/build',
             mobile: 'build/mobile',
-            mobileWeb: 'build/mobile/www'
+            mobileWeb: 'build/mobile/www',
+            mobileHooks: 'build/mobile/hooks'
         }
     },
     typeScript: {

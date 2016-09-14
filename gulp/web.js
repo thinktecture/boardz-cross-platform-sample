@@ -48,6 +48,7 @@ gulp.task('watch-web', (done) => {
             'web:watch:scripts:vendor',
             'web:watch:templates',
             'web:watch:styles',
+            'web:watch:styles:vendor',
             'web:watch:index'
             //TODO: web:watch:assets, web:build:styles:vendor, web:build:scripts:vendor:bundles
         ],
@@ -197,6 +198,10 @@ gulp.task('web:watch:templates', () => {
 
 gulp.task('web:watch:styles', () => {
     watch(config.sources.styles, batch((files, done) => run('web:build:styles', done)));
+});
+
+gulp.task('web:watch:styles:vendor', () => {
+    watch(config.sources.vendorStyles, batch((files, done) => run('web:build:styles:vendor', done)));
 });
 
 gulp.task('web:watch:index', () => {
