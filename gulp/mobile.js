@@ -25,26 +25,30 @@ gulp.task('build-mobile-windows', (done) => {
     buildMobileApp('windows', done);
 });
 
-gulp.task('start-mobile-ios', ['build-mobile-ios'], (done) => {
+gulp.task('start-mobile-ios', (done) => {
     runMobileApp('ios', done);
 });
 
-gulp.task('start-mobile-android', ['build-mobile-android'], (done) => {
+gulp.task('start-mobile-android', (done) => {
     runMobileApp('android', done);
 });
 
-gulp.task('start-mobile-windows', ['build-mobile-windows'], (done) => {
+gulp.task('start-mobile-windows', (done) => {
     runMobileApp('windows', done);
 });
 
-
-gulp.task('dist-mobile-ios', () => {
-
+gulp.task('dist-mobile-ios', (done) => {
+    distributeMobileApp('ios', done)
 });
 
-gulp.task('dist-mobile-android', () => {
-
+gulp.task('dist-mobile-android', (done) => {
+    distributeMobileApp('android', done)
 });
+
+gulp.task('dist-mobile-windows', (done) => {
+    distributeMobileApp('windows', done);
+});
+
 
 // private tasks
 
@@ -54,6 +58,19 @@ function buildMobileApp(platform, done) {
         'mobile:build:copy-sources',
         'mobile:build:remove-fake-script',
         'mobile:build:copy-dev-config',
+        'mobile:build:resources',
+        'mobile:build:copy:hooks',
+        'mobile:build:' + platform,
+        done
+    )
+}
+
+function distributeMobileApp(platform, done) {
+    run(
+        'mobile:clean',
+        'mobile:build:copy-sources',
+        'mobile:build:remove-fake-script',
+        'mobile:build:copy-dist-config',
         'mobile:build:resources',
         'mobile:build:copy:hooks',
         'mobile:build:' + platform,
@@ -85,7 +102,7 @@ gulp.task('mobile:build:copy-dev-config', () => {
     let hostname = os.hostname();
     return gulp.src(config.sources.cordova.devConfig)
         .pipe(rename('config.xml'))
-        .pipe(replace('${hostname}',hostname))
+        .pipe(replace('${hostname}', hostname))
         .pipe(gulp.dest(config.targets.build.mobile));
 });
 
