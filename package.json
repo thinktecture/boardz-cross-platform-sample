@@ -56,8 +56,8 @@
     "stream-series": "^0.1.1",
     "systemjs-builder": "0.15.13",
     "tether": "^1.1.1",
-    "typescript": "^1.8.10",
-    "typings": "^1.3.1"
+    "typescript": "^2.0.2",
+    "typings":"^1.3.2"
   },
   "dependencies": {
     "@angular/common": "2.0.0",
