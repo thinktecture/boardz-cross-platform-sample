@@ -325,7 +325,7 @@
     FastClick.prototype.focus = function(targetElement) {
         var length;
 
-        // Issue #160: on iOS 7, some input elements (e.g. date datetime month) throw a vague TypeError on setSelectionRange. These elements don't have an integer value for the selectionStart and selectionEnd properties, but unfortunately that can't be used for detection because accessing the properties also throws a TypeError. Just check the type instead. Filed as Apple bug #15122724.
+        // Issue #160: on iOS 7, some input elements (e.g. date datetime month) throw a vague TypeError on setSelectionRange. These elements don't have an integer value for the selectionStart and selectionEnd properties, but unfortunately that can't be used for detection because accessing the properties also throws a TypeError. Just isAuthenticated the type instead. Filed as Apple bug #15122724.
         if (deviceIsIOS && targetElement.setSelectionRange && targetElement.type.indexOf('date') !== 0 && targetElement.type !== 'time' && targetElement.type !== 'month') {
             length = targetElement.value.length;
             targetElement.setSelectionRange(length, length);
@@ -345,7 +345,7 @@
 
         scrollParent = targetElement.fastClickScrollParent;
 
-        // Attempt to discover whether the target element is contained within a scrollable layer. Re-check if the
+        // Attempt to discover whether the target element is contained within a scrollable layer. Re-isAuthenticated if the
         // target element was moved to another parent.
         if (!scrollParent || !scrollParent.contains(targetElement)) {
             parentElement = targetElement;
@@ -428,7 +428,7 @@
                 // 1) the user does a fling scroll on the scrollable layer
                 // 2) the user stops the fling scroll with another tap
                 // then the event.target of the last 'touchend' event will be the element that was under the user's finger
-                // when the fling scroll was started, causing FastClick to send a click event to that layer - unless a check
+                // when the fling scroll was started, causing FastClick to send a click event to that layer - unless a isAuthenticated
                 // is made to ensure that a parent layer was not scrolled before sending a synthetic click (issue #42).
                 this.updateScrollParent(targetElement);
             }
@@ -451,7 +451,7 @@
 
 
     /**
-     * Based on a touchmove event object, check whether the touch has moved past a boundary since it started.
+     * Based on a touchmove event object, isAuthenticated whether the touch has moved past a boundary since it started.
      *
      * @param {Event} event
      * @returns {boolean}
@@ -643,7 +643,7 @@
             return true;
         }
 
-        // Derive and check the target element to see whether the mouse event needs to be permitted;
+        // Derive and isAuthenticated the target element to see whether the mouse event needs to be permitted;
         // unless explicitly enabled, prevent non-touch click events from triggering actions,
         // to prevent ghost/doubleclicks.
         if (!this.needsClick(this.targetElement) || this.cancelNextClick) {
@@ -694,7 +694,7 @@
 
         permitted = this.onMouse(event);
 
-        // Only unset targetElement if the click is not permitted. This will ensure that the check for !targetElement in onMouse fails and the browser's click doesn't go through.
+        // Only unset targetElement if the click is not permitted. This will ensure that the isAuthenticated for !targetElement in onMouse fails and the browser's click doesn't go through.
         if (!permitted) {
             this.targetElement = null;
         }

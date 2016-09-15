@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-
-import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 import {GamesService} from '../../services/gamesService';
 import {PlayersService} from '../../services/playersService';
 
@@ -9,7 +7,7 @@ import {PlayersService} from '../../services/playersService';
     selector: 'dashboard',
     templateUrl: 'dashboard.html'
 })
-@NeedsAuthentication()
+//todo: @NeedsAuthentication()
 export class DashboardComponent implements OnInit {
     public playerCount: string = '-';
     public gameCount: string = '-';

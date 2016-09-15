@@ -1379,7 +1379,7 @@
         },
 
         /**
-         * You should use `tryEmit` instead of `emit` directly to check
+         * You should use `tryEmit` instead of `emit` directly to isAuthenticated
          * that all the needed recognizers has failed before emitting.
          * @param {Object} input
          */
@@ -1560,7 +1560,7 @@
         },
 
         /**
-         * Used to check if it the recognizer receives valid input, like input.distance > 10.
+         * Used to isAuthenticated if it the recognizer receives valid input, like input.distance > 10.
          * @memberof AttrRecognizer
          * @param {Object} input
          * @returns {Boolean} recognized

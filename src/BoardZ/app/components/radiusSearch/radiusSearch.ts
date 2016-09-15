@@ -1,17 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-
 import {GeoLocation} from '../../models/geoLocation';
 import {GeolocationService} from '../../services/geolocationService';
 import {PlayersService} from '../../services/playersService';
 import {NearByPlayer} from '../../models/nearbyPlayer';
-import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 
 @Component({
     moduleId: module.id,
     selector: 'radius-search',
     templateUrl: 'radiusSearch.html'
 })
-@NeedsAuthentication()
 export class RadiusSearchComponent implements OnInit {
     private _location: GeoLocation;
     private _radius: number = 10;

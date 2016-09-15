@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
-
-import {NavigationEntry} from "../../models/navigationEntry";
+import {NavigationEntry} from '../../models/navigationEntry';
 
 @Component({
     moduleId: module.id,
@@ -13,12 +12,10 @@ export class SidebarComponent {
 
     constructor() {
         this.navigationEntries = [];
-        this.navigationEntries.push(new NavigationEntry(['Dashboard'], 'dashboard', 'Dashboard'));
-        this.navigationEntries.push(new NavigationEntry(['Games', 'GamesList'], 'list', 'Games'));
-        this.navigationEntries.push(new NavigationEntry(['RadiusSearch'], 'location-arrow', 'Players search'));
+        this.navigationEntries.push(new NavigationEntry([''], 'dashboard', 'Dashboard'));
+        this.navigationEntries.push(new NavigationEntry(['/games/all'], 'list', 'Games'));
+        this.navigationEntries.push(new NavigationEntry(['/radiussearch'], 'location-arrow', 'Players search'));
+        this.navigationEntries.push(new NavigationEntry(['/notifications'], 'bell', 'Test Notifcations'));
     }
 
-    toggleSidebar(): void {
-        this.expanded = !this.expanded;
-    }
 }

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions} from '@angular/http';
-import {Router} from '@angular/router-deprecated';
+import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {TokenService} from './tokenService';
 import {AppConfiguration} from '../appConfig';
@@ -26,7 +26,7 @@ export class LoginService {
                 private _router: Router,
                 private _tokenService: TokenService,
                 private _signalRService: SignalRService) {
-        this._tokenService.check()
+        this._tokenService.isAuthenticated()
             .subscribe((value) => {
                 if (!value) this.logout();
             });
@@ -43,7 +43,7 @@ export class LoginService {
         this._tokenService.token = null;
 
         if (routeToLogin) {
-            this._router.navigate(['Login']);
+            this._router.navigate(['/login']);
         }
     }
 

@@ -1,11 +1,4 @@
 import {Component, AfterViewInit} from '@angular/core';
-import {RouteConfig} from '@angular/router-deprecated';
-
-import {LoginComponent} from './components/login/login';
-import {DashboardComponent} from './components/dashboard/dashboard';
-import {GamesComponent} from './components/games/games';
-import {NotificationsComponent} from './components/notifications/notifications';
-import {RadiusSearchComponent} from './components/radiusSearch/radiusSearch';
 import {LogService} from './services/logService';
 import {LogLevel} from './models/logLevel';
 import {SignalRService} from './services/signalrService';
@@ -22,13 +15,7 @@ declare var window: IBoardZAppWindow;
     selector: 'boardz-app',
     templateUrl: 'app.html'
 })
-@RouteConfig([
-    { path: '/', name: 'Dashboard', useAsDefault: true, component: DashboardComponent },
-    { path: '/login', name: 'Login', component: LoginComponent },
-    { path: '/notifications', name: 'Notifications', component: NotificationsComponent },
-    { path: '/games/...', name: 'Games', component: GamesComponent, data: { displayName: 'Games' } },
-    { path: '/radiussearch', name: 'RadiusSearch', component: RadiusSearchComponent }
-])
+
 export class BoardzAppComponent implements AfterViewInit {
     constructor(private _signalRService: SignalRService,
                 private _loginService: LoginService,

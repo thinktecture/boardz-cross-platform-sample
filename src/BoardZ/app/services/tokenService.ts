@@ -72,7 +72,7 @@ export class TokenService {
         }
     }
 
-    check(): Observable<boolean> {
+    public isAuthenticated(): Observable<boolean> {
         return Observable.of(this._authenticated);
     }
 }

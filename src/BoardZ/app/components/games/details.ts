@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router-deprecated';
-
-import {NeedsAuthentication} from '../../decorators/needsAuthentication';
+import {Router, ActivatedRoute} from '@angular/router';
 import {Game} from '../../models/game';
 import {LogService} from '../../services/logService';
 import {GamesService} from '../../services/gamesService';
@@ -27,7 +25,7 @@ export  interface RouteTree {
     selector: 'gameDetail',
     templateUrl: 'details.html'
 })
-@NeedsAuthentication()
+//todo: @NeedsAuthentication()
 export class GameDetailsComponent implements OnInit {
 
     private _needsReset: boolean;
@@ -42,6 +40,7 @@ export class GameDetailsComponent implements OnInit {
     constructor(private _logService: LogService,
                 private _gameService: GamesService,
                 private _router: Router,
+                private route: ActivatedRoute,
                 private _notificationService: NotificationService,
                 private _playersService: PlayersService,
                 private _signalRService: SignalRService,
@@ -49,17 +48,10 @@ export class GameDetailsComponent implements OnInit {
     }
 
     public ngOnInit(): any {
-        return undefined;
-    }
-
-    public routerOnActivate(curr: RouteSegment, prev?: RouteSegment, currTree?: RouteTree, prevTree?: RouteTree): void {
-        let id = curr.params['id'];
-
-        if (!id) {
-            this.originalModel = this._gameService.deepClone(this.model = new Game());
-            return;
-        }
-        this.loadGame(id);
+        this.route.data.forEach((data: { game: Game }) => {
+            this.originalModel = this._gameService.deepClone(this.model = data.game || new Game());
+            if (this._needsReset) this.reset();
+        });
     }
 
     private loadGame(id: string): void {
@@ -77,7 +69,7 @@ export class GameDetailsComponent implements OnInit {
     }
 
     public abort(): void {
-        this._router.navigate(['GamesList']);
+        this._router.navigate(['/games/all']);
     }
 
     public reset(): void {

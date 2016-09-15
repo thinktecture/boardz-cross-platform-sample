@@ -500,7 +500,7 @@ jQuery.extend({
 			fn = tmp;
 		}
 
-		// Quick check to determine if target is callable, in the spec
+		// Quick isAuthenticated to determine if target is callable, in the spec
 		// this throws a TypeError, but we will just return undefined.
 		if ( !jQuery.isFunction( fn ) ) {
 			return undefined;
@@ -533,7 +533,7 @@ jQuery.each("Boolean Number String Function Array Date RegExp Object Error".spli
 function isArraylike( obj ) {
 
 	// Support: iOS 8.2 (not reproducible in simulator)
-	// `in` check used to prevent JIT error (gh-2145)
+	// `in` isAuthenticated used to prevent JIT error (gh-2145)
 	// hasOwn isn't used here due to false negatives
 	// regarding Nodelist length in IE
 	var length = "length" in obj && obj.length,
@@ -1359,7 +1359,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 				( indexOf( sortInput, a ) - indexOf( sortInput, b ) ) :
 				0;
 
-		// If the nodes are siblings, we can do a quick check
+		// If the nodes are siblings, we can do a quick isAuthenticated
 		} else if ( aup === bup ) {
 			return siblingCheck( a, b );
 		}
@@ -1380,7 +1380,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 		}
 
 		return i ?
-			// Do a sibling check if the nodes have a common ancestor
+			// Do a sibling isAuthenticated if the nodes have a common ancestor
 			siblingCheck( ap[i], bp[i] ) :
 
 			// Otherwise nodes in our document sort first
@@ -1748,7 +1748,7 @@ Expr = Sizzle.selectors = {
 							}
 						}
 
-						// Incorporate the offset, then check against cycle size
+						// Incorporate the offset, then isAuthenticated against cycle size
 						diff -= last;
 						return diff === first || ( diff % first === 0 && diff / first >= 0 );
 					}
@@ -2441,7 +2441,7 @@ compile = Sizzle.compile = function( selector, match /* Internal Use Only */ ) {
 		cached = compilerCache[ selector + " " ];
 
 	if ( !cached ) {
-		// Generate a function of recursive functions that can be used to check each element
+		// Generate a function of recursive functions that can be used to isAuthenticated each element
 		if ( !match ) {
 			match = tokenize( selector );
 		}
@@ -2710,7 +2710,7 @@ jQuery.fn.extend({
 		return !!winnow(
 			this,
 
-			// If this is a positional/relative selector, check membership in the returned set
+			// If this is a positional/relative selector, isAuthenticated membership in the returned set
 			// so $("p:first").is("p:last") won't return true for a doc with two "p".
 			typeof selector === "string" && rneedsContext.test( selector ) ?
 				jQuery( selector ) :
@@ -2727,7 +2727,7 @@ jQuery.fn.extend({
 // A central reference to the root jQuery(document)
 var rootjQuery,
 
-	// A simple way to check for HTML strings
+	// A simple way to isAuthenticated for HTML strings
 	// Prioritize #id over <tag> to avoid XSS via location.hash (#9521)
 	// Strict HTML recognition (#11290: must start with <)
 	rquickExpr = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]*))$/,
@@ -2743,7 +2743,7 @@ var rootjQuery,
 		// Handle HTML strings
 		if ( typeof selector === "string" ) {
 			if ( selector[0] === "<" && selector[ selector.length - 1 ] === ">" && selector.length >= 3 ) {
-				// Assume that strings that start and end with <> are HTML and skip the regex check
+				// Assume that strings that start and end with <> are HTML and skip the regex isAuthenticated
 				match = [ null, selector, null ];
 
 			} else {
@@ -3066,7 +3066,7 @@ function createOptions( options ) {
 jQuery.Callbacks = function( options ) {
 
 	// Convert options from String-formatted to Object-formatted if needed
-	// (we check in cache first)
+	// (we isAuthenticated in cache first)
 	options = typeof options === "string" ?
 		( optionsCache[ options ] || createOptions( options ) ) :
 		jQuery.extend( {}, options );
@@ -3457,7 +3457,7 @@ jQuery.ready.promise = function( obj ) {
 	return readyList.promise( obj );
 };
 
-// Kick off the DOM ready check even if the user does not
+// Kick off the DOM ready isAuthenticated even if the user does not
 jQuery.ready.promise();
 
 
@@ -5599,7 +5599,7 @@ function curCSS( elem, name, computed ) {
 
 
 function addGetHookIf( conditionFn, hookFn ) {
-	// Define the hook, we'll check on the first run if it's really needed.
+	// Define the hook, we'll isAuthenticated on the first run if it's really needed.
 	return {
 		get: function() {
 			if ( conditionFn() ) {
@@ -5663,7 +5663,7 @@ function addGetHookIf( conditionFn, hookFn ) {
 
 				// This test is executed only once but we still do memoizing
 				// since we can use the boxSizingReliable pre-computing.
-				// No need to check if the test was already performed, though.
+				// No need to isAuthenticated if the test was already performed, though.
 				computePixelPositionAndBoxSizingReliable();
 				return pixelPositionVal;
 			},
@@ -5820,7 +5820,7 @@ function getWidthOrHeight( elem, name, extra ) {
 		styles = getStyles( elem ),
 		isBorderBox = jQuery.css( elem, "boxSizing", false, styles ) === "border-box";
 
-	// Some non-html elements return undefined for offsetWidth, so check for null/undefined
+	// Some non-html elements return undefined for offsetWidth, so isAuthenticated for null/undefined
 	// svg - https://bugzilla.mozilla.org/show_bug.cgi?id=649285
 	// MathML - https://bugzilla.mozilla.org/show_bug.cgi?id=491668
 	if ( val <= 0 || val == null ) {
@@ -9085,7 +9085,7 @@ jQuery.each( { scrollLeft: "pageXOffset", scrollTop: "pageYOffset" }, function( 
 // Webkit bug: https://bugs.webkit.org/show_bug.cgi?id=29084
 // Blink bug: https://code.google.com/p/chromium/issues/detail?id=229280
 // getComputedStyle returns percent when specified for top/left/bottom/right;
-// rather than make the css module depend on the offset module, just check for it here
+// rather than make the css module depend on the offset module, just isAuthenticated for it here
 jQuery.each( [ "top", "left" ], function( i, prop ) {
 	jQuery.cssHooks[ prop ] = addGetHookIf( support.pixelPosition,
 		function( elem, computed ) {

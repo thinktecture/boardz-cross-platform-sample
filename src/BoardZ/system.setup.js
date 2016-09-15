@@ -5,7 +5,14 @@
     // map tells the System loader where to look for things
     var map = {
         'app': 'app', // 'dist',
-        '@angular': '@angular',
+        '@angular/core': 'ng:core/bundles/core.umd.js',
+        '@angular/common': 'ng:common/bundles/common.umd.js',
+        '@angular/compiler': 'ng:compiler/bundles/compiler.umd.js',
+        '@angular/platform-browser': 'ng:platform-browser/bundles/platform-browser.umd.js',
+        '@angular/platform-browser-dynamic': 'ng:platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
+        '@angular/http': 'ng:http/bundles/http.umd.js',
+        '@angular/router': 'ng:router/bundles/router.umd.js',
+        '@angular/forms': 'ng:forms/bundles/forms.umd.js',
         'rxjs': 'rxjs',
         'jquery': 'scripts/bundles/jquery-2.1.4.js',
         'bootstrap/js/bootstrap': 'scripts/bundles/bootstrap.js',
@@ -24,17 +31,13 @@
     var packages = {
         'app': { main: 'main.js', defaultExtension: 'js' },
         'rxjs': { defaultExtension: 'js' },
-        '@angular/common': { main: 'index.js', defaultExtension: 'js' },
-        '@angular/compiler': { main: 'index.js', defaultExtension: 'js' },
-        '@angular/core': { main: 'index.js', defaultExtension: 'js' },
-        '@angular/http': { main: 'index.js', defaultExtension: 'js' },
-        '@angular/platform-browser': { main: 'index.js', defaultExtension: 'js' },
-        '@angular/platform-browser-dynamic': { main: 'index.js', defaultExtension: 'js' },
-        '@angular/router-deprecated': { main: 'index.js', defaultExtension: 'js' },
-        '@angular/forms': { main: 'index.js', defaultExtension: 'js' }
+
     };
 
     var config = {
+        paths: {
+            'ng:' : '@angular/'
+        },
         map: map,
         packages: packages
     }
@@ -47,6 +50,7 @@ function backupModule() {
             window.module = module;
             module = undefined;
         }
+        console.log('mod backuped');
         resolve(true);
     });
 }
@@ -56,13 +60,14 @@ function restoreModule() {
         if(window.hasOwnProperty('module')) {
             module = window.module;
         }
+        console.log('mod restored');
         resolve(true);
     });
 }
 
 backupModule()
     .then(function () {
-        return System.import('jquery');
+      //  return System.import('jquery');
     })
     .then(function () {
         return restoreModule();

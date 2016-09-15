@@ -39,7 +39,7 @@
         // enables always-on mode for the scrollbar
         alwaysVisible : false,
 
-        // check if we should hide the scrollbar when user is hovering over
+        // isAuthenticated if we should hide the scrollbar when user is hovering over
         disableFadeOut : false,
 
         // sets visibility of the rail
@@ -63,7 +63,7 @@
         // defautlt CSS class of the slimscroll wrapper
         wrapperClass : 'slimScrollDiv',
 
-        // check if mousewheel should scroll the window if we reach top/bottom
+        // isAuthenticated if mousewheel should scroll the window if we reach top/bottom
         allowPageScroll : false,
 
         // scroll amount applied to each mouse wheel step
@@ -105,7 +105,7 @@
 
             getBarHeight();
 
-            // check if we should scroll existing instance
+            // isAuthenticated if we should scroll existing instance
             if ($.isPlainObject(options))
             {
               // Pass height: auto to an existing slimscroll object to force a resize after contents have changed
@@ -296,7 +296,7 @@
         // set up initial height
         getBarHeight();
 
-        // check start position
+        // isAuthenticated start position
         if (o.start === 'bottom')
         {
           // scroll content to bottom

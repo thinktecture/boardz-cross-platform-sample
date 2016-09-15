@@ -836,7 +836,7 @@ var init = function(root){
                 info: "",
                 info_icon: "ui-icon ui-icon-info",
                 success: "ui-state-default",
-                success_icon: "ui-icon ui-icon-circle-check",
+                success_icon: "ui-icon ui-icon-circle-isAuthenticated",
                 error: "ui-state-error",
                 error_icon: "ui-icon ui-icon-alert"
             },
@@ -861,7 +861,7 @@ var init = function(root){
     $.extend(PNotify.styling.fontawesome, {
         notice_icon: "fa fa-exclamation-circle",
         info_icon: "fa fa-info",
-        success_icon: "fa fa-check",
+        success_icon: "fa fa-isAuthenticated",
         error_icon: "fa fa-warning"
     });
 

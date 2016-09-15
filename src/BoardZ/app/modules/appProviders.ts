@@ -1,7 +1,5 @@
-import {ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {XHRBackend, ConnectionBackend} from '@angular/http';
-
 import {AppConfiguration} from '../appConfig';
 import {NativeIntegrationService} from '../services/nativeIntegrationService';
 import {AuthenticatedHttp} from '../services/authenticatedHttp';
@@ -18,17 +16,20 @@ import {UiNotificationService} from '../services/uiNotificationService';
 import {SignalRService} from '../services/signalrService';
 import {MobileCameraService} from '../services/mobileCameraService';
 import {DesktopCameraService} from '../services/desktopCameraService';
+import {appRoutingProviders} from './appRoutes';
 
-declare let window;
-
-let evaluateCameraService = ()=> {
-    return (platformInformationService: PlatformInformationService): CameraService => {
-        return platformInformationService.isMobile ? new MobileCameraService() : new DesktopCameraService();
-    };
-};
+export const CORE_PROVIDERS = [
+    {
+        provide: CameraService, useFactory: (()=> {
+        return (platformInformationService: PlatformInformationService): CameraService => {
+            return platformInformationService.isMobile ? new MobileCameraService() : new DesktopCameraService();
+        };
+    })(), deps: [PlatformInformationService]
+    },
+    GeolocationService
+];
 
 export const APP_PROVIDERS = [
-    ROUTER_PROVIDERS,
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: ConnectionBackend, useClass: XHRBackend },
     AppConfiguration,
@@ -38,11 +39,12 @@ export const APP_PROVIDERS = [
     LoginService,
     LogService,
     GamesService,
-    GeolocationService,
+    ,
     PlayersService,
     NotificationService,
     PlatformInformationService,
-    { provide: CameraService, useFactory: evaluateCameraService(), deps: [PlatformInformationService] },
+
     UiNotificationService,
-    SignalRService
+    SignalRService,
+    appRoutingProviders
 ];

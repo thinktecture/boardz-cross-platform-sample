@@ -1,12 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router-deprecated';
-
+import {Router, ActivatedRoute} from '@angular/router';
 import {Game} from '../../models/game';
 import {GamesService} from '../../services/gamesService';
 import {NotificationService} from '../../services/notificationService';
-import {NeedsAuthentication} from '../../decorators/needsAuthentication';
-
-@NeedsAuthentication()
 @Component({
     moduleId: module.id,
     selector: 'game-list',
@@ -16,20 +12,21 @@ import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 export class GameListComponent implements OnInit {
     public games: Game[];
 
-    constructor(private _gamesService: GamesService, 
-                private _router: Router, 
+    constructor(private _gamesService: GamesService,
+                private _router: Router,
+                private _route: ActivatedRoute,
                 private _notificationService: NotificationService) {
     }
 
     public openGameDetails(game: Game): void {
-        this._router.navigate(['GameDetails', { id: game.id }]);
+        this._router.navigate(['../details', game.id], { relativeTo: this._route});
     }
 
-    public openCreateGame():void{
-        this._router.navigate(['CreateGame']);
+    public openCreateGame(): void {
+        this._router.navigate(['../new'], {relativeTo: this._route });
     }
 
-    ngOnInit() {
+    public ngOnInit(): void {
         this._gamesService.getAll()
             .subscribe(
                 (games)=> this.games = games,

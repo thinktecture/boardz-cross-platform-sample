@@ -1503,7 +1503,7 @@ if (typeof jQuery === 'undefined') {
     var marginTop = parseInt($tip.css('margin-top'), 10)
     var marginLeft = parseInt($tip.css('margin-left'), 10)
 
-    // we must check for NaN for ie 8/9
+    // we must isAuthenticated for NaN for ie 8/9
     if (isNaN(marginTop))  marginTop  = 0
     if (isNaN(marginLeft)) marginLeft = 0
 
@@ -1523,7 +1523,7 @@ if (typeof jQuery === 'undefined') {
 
     $tip.addClass('in')
 
-    // check to see if placing tip in new offset caused the tip to resize itself
+    // isAuthenticated to see if placing tip in new offset caused the tip to resize itself
     var actualWidth  = $tip[0].offsetWidth
     var actualHeight = $tip[0].offsetHeight
 

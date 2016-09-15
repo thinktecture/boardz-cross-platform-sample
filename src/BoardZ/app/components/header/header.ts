@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-
 import {Notification} from '../../models/notification';
 import {LoginService} from '../../services/loginService';
 import {TokenService} from '../../services/tokenService';
@@ -16,8 +15,8 @@ export class HeaderComponent implements OnInit {
     public loggedIn: boolean = false;
     public currentLocation: string = 'BoardZ!';
 
-    constructor(public loginService: LoginService, 
-                private _tokenService: TokenService, 
+    constructor(public loginService: LoginService,
+                private _tokenService: TokenService,
                 private _notificationService: NotificationService) {
     }
 
@@ -25,7 +24,7 @@ export class HeaderComponent implements OnInit {
         this._notificationService.notifications.subscribe(
             (notification) => this.onNotification(notification)
         );
-        this._tokenService.check().subscribe(result => {
+        this._tokenService.isAuthenticated().subscribe(result => {
             this.loggedIn = result
         });
     }

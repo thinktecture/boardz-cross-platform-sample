@@ -1,5 +1,3 @@
-import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
-
 import {CloseSidebarOnClickDirective} from '../directives/closeSidebarOnClickDirective';
 import {BackButtonDirective} from '../directives/backButtonDirective';
 import {PictureItComponent} from '../components/pictureIt/pictureIt';
@@ -8,15 +6,20 @@ import {WidgetComponent} from '../components/widget/widget';
 import {SidebarComponent} from '../components/sidebar/sidebar';
 import {HeaderComponent} from '../components/header/header';
 import {BoardzAppComponent} from '../app';
+import {DashboardComponent} from '../components/dashboard/dashboard';
+import {LoginComponent} from '../components/login/login';
+import {RadiusSearchComponent} from '../components/radiusSearch/radiusSearch';
+import {NotificationsComponent} from '../components/notifications/notifications';
 
 export const APP_DECLARATIONS = [
     BoardzAppComponent,
-    ROUTER_DIRECTIVES,
+    DashboardComponent,
+    LoginComponent,
+    RadiusSearchComponent,
+    NotificationsComponent,
     HeaderComponent,
     SidebarComponent,
     WidgetComponent,
-    LocateItComponent,
-    PictureItComponent,
     BackButtonDirective,
     CloseSidebarOnClickDirective
 ];

@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
-import {Router} from '@angular/router-deprecated';
-
+import {Router} from '@angular/router';
 import {LoginService} from '../../services/loginService';
 import {LogService} from '../../services/logService';
 import {NotificationService} from '../../services/notificationService';
@@ -14,9 +13,8 @@ import {SignalRService} from '../../services/signalrService';
 export class LoginComponent {
     private _userName: string;
     private _password: string;
-
     public _hasError: boolean = false;
-    
+
     constructor(private _router: Router,
                 private _loginService: LoginService,
                 private _logService: LogService,
@@ -26,13 +24,13 @@ export class LoginComponent {
 
     public doLogin(): void {
         this._logService.logDebug('LoginComponent.doLogin called');
-        
+
         this._loginService.login(this._userName, this._password)
             .subscribe(
                 () => {
                     this._signalRService.start();
                     this.setError(false);
-                    this._router.navigate(['Dashboard'])
+                    this._router.navigate([''])
                 },
                 () => {
                     this.setError(true);
