@@ -1,30 +1,32 @@
-<div class="col-md-12">
-    <form class="form-horizontal" (ngSubmit)="doLogin()">
-        <div class="box box-solid box-primary">
-            <div class="box-header with-border"><i class="fa fa-lock"></i>
-                <h3 class="box-title ng-scope">Welcome</h3></div>
-            <div class="box-body">
+<div class="col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 col-sm-10 col-sm-offset-1">
+
+    <div class="box box-warning big-space">
+        <div class="box-header with-border"><i class="fa fa-lock"></i>
+            <h3 class="box-title ng-scope">Welcome to BoardZ!</h3></div>
+        <div class="box-body">
+            <form class="" role="form" (ngSubmit)="doLogin()">
+
+                <p class="text-muted">BoardZ! is a small board game management app. Give it a try</p>
                 <div class="form-group">
-                    <label for="username" class="col-sm-2 control-label">User name</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" id="username" name="username" type="text" [(ngModel)]="_userName"
-                               ngControl="username" #username="ngModel" required
-                               placeholder="Your Username"/>
-                        <div [hidden]="username.pristine || username.valid">
-                            <span class="help-block">Username is required</span>
-                        </div>
+                    <label for="username">User name</label>
+
+                    <input class="form-control" id="username" name="username" type="text" [(ngModel)]="_userName"
+                           ngControl="username" #username="ngModel" required
+                           placeholder="Your Username"/>
+                    <div [hidden]="username.pristine || username.valid">
+                        <span class="help-block">Username is required</span>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="password" class="col-sm-2 control-label">Password</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" id="password" name="password" type="password" [(ngModel)]="_password"
-                               ngControl="password" #password="ngModel" required
-                               placeholder="Password"/>
 
-                        <div [hidden]="password.pristine || password.valid">
-                            <p><span class="label label-danger">Required:</span> Password is required</p>
-                        </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+
+                    <input class="form-control" id="password" name="password" type="password" [(ngModel)]="_password"
+                           ngControl="password" #password="ngModel" required
+                           placeholder="Password"/>
+
+                    <div [hidden]="password.pristine || password.valid">
+                        <p><span class="label label-danger">Required:</span> Password is required</p>
                     </div>
                 </div>
                 <div class="form-group" [hidden]="!_hasError">
@@ -33,16 +35,16 @@
                         <strong>Login failed.</strong> Please check your credentials and try again.
                     </div>
                 </div>
-
-            </div>
-            <div class="box-footer">
-                <div class="pull-right">
-                    <button type="submit" class="btn btn-primary"
-                            [disabled]="!username.valid && !username.pristine && !password.valid && !password.pristine">
-                        Login
-                    </button>
-                </div>
+            </form>
+        </div>
+        <div class="box-footer">
+            <div class="pull-right">
+                <button type="submit" class="btn btn-warning"
+                        [disabled]="!username.valid && !username.pristine && !password.valid && !password.pristine">
+                    Login
+                </button>
             </div>
         </div>
-    </form>
+    </div>
+
 </div>

@@ -18,9 +18,9 @@ export class AuthGuard implements CanActivate {
                         isAuthenticated ? observer.next(isAuthenticated) : this.navigateToLogin() && observer.next(false);
                     },
                     (error) => {
-                        this.navigateToLogin()
+                        this.navigateToLogin();
                         observer.next(false);
-                    }, ()=> {
+                    }, () => {
                         observer.complete();
                     });
         });

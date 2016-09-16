@@ -7,19 +7,18 @@ import {PlayersService} from '../../services/playersService';
     selector: 'dashboard',
     templateUrl: 'dashboard.html'
 })
-//todo: @NeedsAuthentication()
 export class DashboardComponent implements OnInit {
     public playerCount: string = '-';
     public gameCount: string = '-';
 
-    constructor(private _gamesService: GamesService, 
+    constructor(private _gamesService: GamesService,
                 private _playersService: PlayersService) {
     }
 
-    ngOnInit(): any {
+    public ngOnInit(): any {
         this._playersService.getPlayerCount()
             .subscribe(result => this.playerCount = result.toString());
-        
+
         this._gamesService.getGameCount()
             .subscribe(result => this.gameCount = result.toString());
     }

@@ -13,20 +13,17 @@ export class HeaderComponent implements OnInit {
     private notifications: Notification[] = [];
 
     public loggedIn: boolean = false;
-    public currentLocation: string = 'BoardZ!';
 
     constructor(public loginService: LoginService,
                 private _tokenService: TokenService,
                 private _notificationService: NotificationService) {
     }
 
-    ngOnInit(): any {
+    public ngOnInit(): any {
         this._notificationService.notifications.subscribe(
             (notification) => this.onNotification(notification)
         );
-        this._tokenService.isAuthenticated().subscribe(result => {
-            this.loggedIn = result
-        });
+        this._tokenService.isAuthenticated().subscribe(result => this.loggedIn = result);
     }
 
     public dismiss(notification: Notification): boolean {
@@ -36,8 +33,7 @@ export class HeaderComponent implements OnInit {
             if (index > -1) {
                 this.notifications.splice(index, 1);
             }
-        }
-        else {
+        } else {
             this.notifications = [];
         }
 

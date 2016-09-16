@@ -3,7 +3,7 @@ import {Http, Headers, RequestOptions} from '@angular/http';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {TokenService} from './tokenService';
-import {AppConfiguration} from '../appConfig';
+import {ApiConfig} from '../apiConfig';
 import {LogService} from './logService';
 import {TokenData} from '../models/tokenData';
 import {SignalRService} from './signalrService';
@@ -20,7 +20,7 @@ export class LoginService {
         return this._tokenService.username;
     }
 
-    constructor(private _config: AppConfiguration,
+    constructor(private _config: ApiConfig,
                 private _logService: LogService,
                 private _http: Http,
                 private _router: Router,
@@ -28,7 +28,9 @@ export class LoginService {
                 private _signalRService: SignalRService) {
         this._tokenService.isAuthenticated()
             .subscribe((value) => {
-                if (!value) this.logout();
+                if (!value) {
+                    this.logout();
+                }
             });
     }
 
@@ -59,8 +61,8 @@ export class LoginService {
         let body = 'grant_type=password&username=' + username + '&password=' + password,
             options = new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' }) });
 
-        return Observable.create((observer)=> {
-            this._http.post(this._config.apiEndpoint + 'token', body, options)
+        return Observable.create((observer) => {
+            this._http.post(this._config.rootUrl + 'token', body, options)
                 .map(response => <TokenData>response.json())
                 .subscribe(
                     (tokenData) => {
@@ -89,4 +91,3 @@ export class LoginService {
         this._tokenService.token = token;
     }
 }
-

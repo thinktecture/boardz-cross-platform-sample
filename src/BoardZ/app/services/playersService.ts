@@ -30,7 +30,7 @@ export class PlayersService {
     }
 
     public getPlayerCount(): Observable<number> {
-        return this._http.get('api/players/playercount').map(r => <number>r.json())
+        return this._http.get('api/players/playercount').map(r => <number>r.json());
     }
 
     public findNearby(radius: number, coordinates: GeoLocation): Observable<NearByPlayer[]> {

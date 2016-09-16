@@ -4,11 +4,11 @@ import {GeoLocation} from '../models/geoLocation';
 @Injectable()
 export class GeolocationService {
     public locate() {
-        return new Promise((resolve, reject)=> {
+        return new Promise((resolve, reject) => {
             if (window.navigator && window.navigator.geolocation) {
-                window.navigator.geolocation.getCurrentPosition((pos)=> {
+                window.navigator.geolocation.getCurrentPosition((pos) => {
                     resolve(new GeoLocation(pos.coords.latitude, pos.coords.longitude, 16));
-                }, (err)=> {
+                }, (err) => {
                     reject(err);
                 }, {
                     enableHighAccuracy: false,
@@ -20,4 +20,4 @@ export class GeolocationService {
             }
         });
     }
-} 
+}

@@ -30,13 +30,12 @@
     // packages tells the System loader how to load when no filename and/or no extension
     var packages = {
         'app': { main: 'main.js', defaultExtension: 'js' },
-        'rxjs': { defaultExtension: 'js' },
-
+        'rxjs': { defaultExtension: 'js' }
     };
 
     var config = {
         paths: {
-            'ng:' : '@angular/'
+            'ng:': '@angular/'
         },
         map: map,
         packages: packages
@@ -46,7 +45,7 @@
 
 function backupModule() {
     return new Promise(function (resolve, reject) {
-        if(typeof module !== 'undefined' && module.hasOwnProperty('exports')) {
+        if (typeof module !== 'undefined' && module.hasOwnProperty('exports')) {
             window.module = module;
             module = undefined;
         }
@@ -57,7 +56,7 @@ function backupModule() {
 
 function restoreModule() {
     return new Promise(function (resolve, reject) {
-        if(window.hasOwnProperty('module')) {
+        if (window.hasOwnProperty('module')) {
             module = window.module;
         }
         console.log('mod restored');
@@ -67,7 +66,7 @@ function restoreModule() {
 
 backupModule()
     .then(function () {
-      //  return System.import('jquery');
+        //  return System.import('jquery');
     })
     .then(function () {
         return restoreModule();

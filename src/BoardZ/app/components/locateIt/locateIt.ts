@@ -1,7 +1,6 @@
 ///<reference path="../../../../../typings/main/ambient/leaflet/leaflet.d.ts" />
 
 import {Component, Output, OnInit, EventEmitter} from '@angular/core';
-
 import {GeoLocation} from '../../models/geoLocation';
 import {GeolocationService} from '../../services/geolocationService';
 
@@ -32,9 +31,8 @@ export class LocateItComponent implements OnInit {
         }).addTo(this.map);
 
         this._isLocating = true;
-        
         this._geolocationService.locate()
-            .then((coords: GeoLocation)=> {
+            .then((coords: GeoLocation) => {
                 this._hasError = false;
                 this._isLocating = false;
                 this._coords = coords;
@@ -42,7 +40,7 @@ export class LocateItComponent implements OnInit {
 
                 this.setMapMarkerAndView();
             })
-            .catch(()=> {
+            .catch(() => {
                 this._hasError = true;
                 this._isLocating = false;
             });

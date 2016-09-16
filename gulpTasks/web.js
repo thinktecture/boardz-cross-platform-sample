@@ -19,6 +19,7 @@
             rename = require('gulp-rename'),
             inject = require('gulp-inject'),
             uglify = require('gulp-uglify'),
+            tslint = require('gulp-tslint'),
             watch = require('gulp-watch'),
             Builder = require('systemjs-builder');
 
@@ -29,6 +30,14 @@
                 .pipe(inject(sources, { addRootSlash: false, ignorePath: 'dist/www' }))
                 .pipe(gulp.dest(path.join(config.targets.buildFolder)));
         });
+
+        gulp.task("[private-web]:lint-app-code", () =>
+            gulp.src(config.source.files.app.ts)
+                .pipe(tslint({
+                    formatter: 'verbose'
+                }))
+                .pipe(tslint.report())
+        );
 
         gulp.task('[private-web]:bundle-vendor-scripts', function () {
             var builder = new Builder();

@@ -1,9 +1,8 @@
 import {Injectable, EventEmitter} from '@angular/core';
-import {AppConfiguration} from '../appConfig';
+import {ApiConfig} from '../apiConfig';
 import {LogService} from './logService';
 import {TokenService} from './tokenService';
 
-// jQuery Ahoi
 declare var $;
 
 @Injectable()
@@ -14,7 +13,7 @@ export class SignalRService {
 
     public someoneJoinedAGame: EventEmitter<string> = new EventEmitter<string>();
 
-    constructor(private _configuration: AppConfiguration,
+    constructor(private _configuration: ApiConfig,
                 private _tokenService: TokenService,
                 private _logService: LogService) {
         this._hubConnection = $.hubConnection;
@@ -33,12 +32,12 @@ export class SignalRService {
             return;
         }
 
-        this._connection = this._hubConnection(`${this._configuration.apiEndpoint}signalr`);
+        this._connection = this._hubConnection(`${this._configuration.rootUrl}signalr`);
         this._connection.qs = { 'authorization': this._tokenService.token };
         this._playerProxy = this._connection.createHubProxy('playerHub');
 
         this._playerProxy.on('someoneStartedPlaying', (username, game) => {
-            var msg = `${username} started playing ${game}.`;
+            let msg = `${username} started playing ${game}.`;
             this._logService.logDebug(`Received SignalR message: ${msg}`);
             this.someoneJoinedAGame.emit(msg);
         });

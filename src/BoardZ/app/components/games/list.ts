@@ -19,17 +19,17 @@ export class GameListComponent implements OnInit {
     }
 
     public openGameDetails(game: Game): void {
-        this._router.navigate(['../details', game.id], { relativeTo: this._route});
+        this._router.navigate(['../details', game.id], { relativeTo: this._route });
     }
 
     public openCreateGame(): void {
-        this._router.navigate(['../new'], {relativeTo: this._route });
+        this._router.navigate(['../new'], { relativeTo: this._route });
     }
 
     public ngOnInit(): void {
         this._gamesService.getAll()
             .subscribe(
-                (games)=> this.games = games,
+                (games) => this.games = games,
                 (err) => this._notificationService.notifyError('Error while fetching game data')
             );
     }

@@ -25,23 +25,23 @@ export class DesktopCameraService implements ICameraService {
                 .then((stream: any) => {
                         return new Promise((resolve, reject) => {
                             try {
-                                var vendorURL = window.URL || window.webkitURL;
-                                var doc = document;
-                                var videoElement = doc.createElement('video');
+                                let vendorURL = window.URL || window.webkitURL;
+                                const doc = document;
+                                let videoElement = doc.createElement('video');
                                 videoElement.src = vendorURL.createObjectURL(stream);
                                 videoElement.play();
 
                                 videoElement.addEventListener('canplay', () => {
-                                    var canvasElement = doc.createElement('canvas');
+                                    let canvasElement = doc.createElement('canvas');
                                     canvasElement.setAttribute('width', videoElement.videoWidth.toString());
                                     canvasElement.setAttribute('height', videoElement.videoHeight.toString());
 
                                     // Wait a bit before taking a screenshot so the camera has time to adjust lights
                                     setTimeout(() => {
-                                        var context = canvasElement.getContext('2d');
+                                        let context = canvasElement.getContext('2d');
                                         context.drawImage(videoElement, 0, 0, videoElement.videoWidth, videoElement.videoHeight);
 
-                                        var url = canvasElement.toDataURL('image/png');
+                                        const url = canvasElement.toDataURL('image/png');
 
                                         videoElement.pause();
 

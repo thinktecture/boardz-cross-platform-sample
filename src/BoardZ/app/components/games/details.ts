@@ -12,24 +12,15 @@ import {LoginService} from '../../services/loginService';
 import {Notification} from '../../models/notification';
 import {NotificationType} from '../../models/notificationType';
 
-// fix WebStorm errors for deprecated router
-export interface RouteSegment {
-    params: Array<any>;
-}
-
-export  interface RouteTree {
-}
-
 @Component({
     moduleId: module.id,
     selector: 'gameDetail',
     templateUrl: 'details.html'
 })
-//todo: @NeedsAuthentication()
 export class GameDetailsComponent implements OnInit {
 
     private _needsReset: boolean;
-    private _pictureUrl: string = "";
+    private _pictureUrl: string = '';
     private _coordinates: GeoLocation = null;
     private _sending: boolean;
 
@@ -50,7 +41,9 @@ export class GameDetailsComponent implements OnInit {
     public ngOnInit(): any {
         this.route.data.forEach((data: { game: Game }) => {
             this.originalModel = this._gameService.deepClone(this.model = data.game || new Game());
-            if (this._needsReset) this.reset();
+            if (this._needsReset) {
+                this.reset();
+            }
         });
     }
 
@@ -59,7 +52,9 @@ export class GameDetailsComponent implements OnInit {
             .subscribe(
                 (game) => {
                     this.originalModel = this._gameService.deepClone(this.model = game);
-                    if (this._needsReset) this.reset();
+                    if (this._needsReset) {
+                        this.reset();
+                    }
                 },
                 (error) => {
                     this._logService.logError('Could not find game. Error was: ' + error);
@@ -88,21 +83,21 @@ export class GameDetailsComponent implements OnInit {
             this._gameService.addGame(this.model)
                 .subscribe(
                     (newId) => {
-                        this._notificationService.notifySuccess('New game was added.')
+                        this._notificationService.notifySuccess('New game was added.');
                         this._needsReset = true;
                         this.loadGame(newId);
                     },
-                    ()=> this._notificationService.notifyError('Could not save new game.')
+                    () => this._notificationService.notifyError('Could not save new game.')
                 );
         } else {
             this._gameService.updateGame(this.model)
                 .subscribe((oldId) => {
-                        this._notificationService.notifySuccess('Game data was updated.')
+                        this._notificationService.notifySuccess('Game data was updated.');
                         this._needsReset = true;
                         this.loadGame(oldId);
                     },
                     () => {
-                        this._notificationService.notifyError('Could not update game data.')
+                        this._notificationService.notifyError('Could not update game data.');
                     }
                 );
         }
@@ -141,19 +136,19 @@ export class GameDetailsComponent implements OnInit {
         this._sending = true;
         this._signalRService.sendIAmGaming(this.model.name);
 
-        var player = new Player();
+        let player = new Player();
         player.name = this._loginService.username;
         player.boardGameId = this.model.id;
         player.coordinate = this._coordinates;
         player.imageUrl = this._pictureUrl;
 
         this._playersService.add(player)
-            .subscribe(()=> {
+            .subscribe(() => {
                     this._notificationService.notify(new Notification(`Thanks for sharing, ${player.name}`, NotificationType.Success));
 
                 },
-                ()=> console.log('error while uploading'),
-                ()=> this._sending = false
+                () => console.log('error while uploading'),
+                () => this._sending = false
             );
     }
 }

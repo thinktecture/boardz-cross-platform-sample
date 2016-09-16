@@ -1,18 +1,18 @@
 import {Injectable} from '@angular/core';
 import {Http, RequestOptionsArgs, Response, Headers} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
-import {AppConfiguration} from '../appConfig';
+import {ApiConfig} from '../apiConfig';
 import {TokenService} from './tokenService';
 
 @Injectable()
 export class AuthenticatedHttp {
     constructor(private _http: Http,
-                private _config: AppConfiguration,
+                private _config: ApiConfig,
                 private _tokenService: TokenService) {
     }
 
     private buildUrl(appendix: string): string {
-        return `${this._config.apiEndpoint}${appendix}`;
+        return `${this._config.rootUrl}${appendix}`;
     }
 
     request(url: string, options?: RequestOptionsArgs): Observable<Response> {
@@ -58,14 +58,14 @@ export class AuthenticatedHttp {
     }
 
     protected prepareOptions(options: RequestOptionsArgs): RequestOptionsArgs {
-        var token = this._tokenService.token;
+        let token = this._tokenService.token;
 
         if (token) {
             options = options || {};
 
-            if (!options.headers)
+            if (!options.headers) {
                 options.headers = new Headers();
-
+            }
             options.headers.append('Authorization', 'Bearer ' + token);
         }
 

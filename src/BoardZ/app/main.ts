@@ -8,16 +8,12 @@ import 'pNotify/pnotify-adapter';
 import 'signalr/signalr';
 import 'leaflet/leaflet';
 import 'fastclick/fastclick';
-import {enableProdMode, NgModuleRef} from '@angular/core';
+import {enableProdMode} from '@angular/core';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
-import {appInjector} from './services/appInjector';
 import {AppModule} from './modules/appModule';
 
 enableProdMode();
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-    .then((moduleReference: NgModuleRef<AppModule>) => {
-        appInjector(moduleReference.injector);
-    });
+platformBrowserDynamic().bootstrapModule(AppModule);

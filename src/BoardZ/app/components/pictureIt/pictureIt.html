@@ -4,11 +4,11 @@
     </div>
     <div class="box-body text-center">
         <p>
-            <button type="button" class="btn btn-primary" (click)="takePicture()"><i
-                    class="fa fa-camera-retro fa-2x"></i></button>
+            <button type="button" class="btn btn-primary" (click)="takePicture()">
+                <i class="fa fa-camera-retro fa-2x"></i></button>
         </p>
         <p [hidden]="!hasError" class="text-danger ng-scope" style="">
             Sorry, but we can't access your camera to take a picture. :-(</p>
-        <img *ngIf="pictureUrl" class="img-responsive" [src]="pictureUrl">
+        <img *ngIf="!!pictureUrl" class="img-responsive" [src]="pictureUrl">
     </div>
 </div>

@@ -7,11 +7,13 @@ export class LogService {
     public maximumLogLevel: LogLevel = LogLevel.Warning;
 
     public log(message: string, logLevel?: LogLevel): void {
-        if (!logLevel)
+        if (!logLevel) {
             logLevel = this.defaultLogLevel;
+        }
 
-        if (logLevel > this.maximumLogLevel)
+        if (logLevel > this.maximumLogLevel) {
             return;
+        }
 
         this.doLog(this.formatMessage(logLevel, message));
     }

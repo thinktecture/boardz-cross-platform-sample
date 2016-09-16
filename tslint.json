@@ -1,0 +1,57 @@
+{
+  "rules": {
+    "no-require-imports": true,
+    "no-var-keyword": true,
+    "triple-equals": [
+      true,
+      "allow-undefined-check"
+    ],
+    "typedef-whitespace": [
+      true,
+      {
+        "call-signature": "nospace",
+        "index-signature": "nospace",
+        "parameter": "nospace",
+        "property-declaration": "nospace",
+        "variable-declaration": "nospace"
+      },
+      {
+        "call-signature": "onespace",
+        "index-signature": "onespace",
+        "parameter": "onespace",
+        "property-declaration": "onespace",
+        "variable-declaration": "onespace"
+      }
+    ],
+    "curly": true,
+    "eofline": true,
+    "indent": [
+      true,
+      "spaces"
+    ],
+    "no-trailing-whitespace": true,
+    "class-name": true,
+    "no-consecutive-blank-lines": true,
+    "one-line": [
+      true,
+      "check-else",
+      "check-open-brace"
+    ],
+    "quotemark": [
+      true,
+      "single"
+    ],
+    "semicolon": [
+      true,
+      "always"
+    ],
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-decl",
+      "check-separator",
+      "check-operator",
+      "check-type"
+    ]
+  }
+}

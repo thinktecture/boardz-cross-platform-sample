@@ -20,7 +20,7 @@ export class RadiusSearchComponent implements OnInit {
 
     public ngOnInit() {
         this._geoLocationService.locate()
-            .then((coordinates: GeoLocation)=> this._location = coordinates);
+            .then((coordinates: GeoLocation) => this._location = coordinates);
     }
 
     public search() {

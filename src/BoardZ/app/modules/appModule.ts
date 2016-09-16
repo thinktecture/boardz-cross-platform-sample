@@ -1,19 +1,15 @@
 import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {HttpModule} from '@angular/http';
-import {FormsModule} from '@angular/forms';
-import {BoardzAppComponent} from '../app';
-import {APP_PROVIDERS} from './appProviders';
-import {APP_DECLARATIONS} from './appDeclarations';
-import {APP_ROUTING} from './appRoutes';
-import {CoreModule} from './coreModule';
+import {ModuleConfiguration} from './config';
+import {SharedModule} from './sharedModule';
 import {GamesModule} from './gamesModule';
 
 @NgModule({
-    imports: [BrowserModule, HttpModule, FormsModule, CoreModule, GamesModule, APP_ROUTING],
-    declarations: [APP_DECLARATIONS],
-    providers: APP_PROVIDERS,
-    bootstrap: [BoardzAppComponent],
+    imports: [  ModuleConfiguration.App.imports, SharedModule, GamesModule],
+    exports: ModuleConfiguration.App.exports,
+    declarations: ModuleConfiguration.App.declarations,
+    providers: ModuleConfiguration.App.providers,
+    bootstrap: ModuleConfiguration.App.bootstraps
 })
 export class AppModule {
+
 }

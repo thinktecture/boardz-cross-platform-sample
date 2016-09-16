@@ -11,10 +11,11 @@ export class TokenService {
     private _authenticated: boolean;
 
     constructor(private _logService: LogService) {
-        var token = this.token;
+        let token = this.token;
 
-        if ((typeof token !== 'undefined') && (token !== null))
+        if ((typeof token !== 'undefined') && (token !== null)) {
             this._authenticated = true;
+        }
     }
 
     public get token(): string {
