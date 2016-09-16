@@ -35,6 +35,8 @@ import {DesktopCameraService} from '../services/desktopCameraService';
 import {PictureItComponent} from '../components/pictureIt/pictureIt';
 import {LocateItComponent} from '../components/locateIt/locateIt';
 import {GeolocationService} from '../services/geolocationService';
+import {OfflineConfig} from '../offlineConfig';
+import {OfflineDetectionService} from '../services/offlineDetectionService';
 
 export namespace ModuleConfiguration {
 
@@ -65,6 +67,8 @@ export namespace ModuleConfiguration {
         public static providers = [{ provide: LocationStrategy, useClass: HashLocationStrategy },
             { provide: ConnectionBackend, useClass: XHRBackend },
             ApiConfig,
+            OfflineConfig,
+            OfflineDetectionService,
             NativeIntegrationService,
             AuthenticatedHttp,
             TokenService,
