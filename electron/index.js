@@ -126,7 +126,7 @@ let buildTrayIcon = () => {
             label: 'Radius Search...',
             type: 'normal',
             click: function () {
-                mainWindow.webContents.send('navigateTo', 'RadiusSearch');
+                mainWindow.webContents.send('navigateTo', '/radiussearch');
             }
         },
         {
