@@ -102,6 +102,17 @@
             <param name="radius"></param>
             <returns></returns>
         </member>
+        <member name="T:BoardGame.Api.Controllers.StatusController">
+            <summary>
+            Status Controller is responsible for exposing the ping endpoint which will be used
+            to verify online/offline status from the client
+            </summary>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.StatusController.Ping">
+            <summary>
+            Ping endpoint - Just returning a HTTP StatusCode 200
+            </summary>
+        </member>
         <member name="M:BoardGame.Api.Helpers.DistanceCalculator.CalculateDistance(BoardGame.Api.Models.Coordinate,BoardGame.Api.Models.Coordinate)">
              Adapted from http://www.geodatasource.com/developers/c-sharp
             

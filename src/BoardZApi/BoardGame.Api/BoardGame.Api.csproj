@@ -117,6 +117,7 @@
   <ItemGroup>
     <Compile Include="Controllers\BoardGamesController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
+    <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Helpers\DistanceCalculator.cs" />
     <Compile Include="Helpers\IPrincipalExtensions.cs" />
     <Compile Include="Hubs\IPlayer.cs" />
