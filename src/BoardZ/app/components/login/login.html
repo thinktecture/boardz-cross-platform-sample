@@ -1,12 +1,11 @@
 <div class="col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 col-sm-10 col-sm-offset-1">
+    <form (ngSubmit)="doLogin()">
+        <div class="box box-warning big-space">
+            <div class="box-header with-border"><i class="fa fa-lock"></i>
+                <h3 class="box-title ng-scope">Welcome to BoardZ!</h3></div>
+            <div class="box-body">
 
-    <div class="box box-warning big-space">
-        <div class="box-header with-border"><i class="fa fa-lock"></i>
-            <h3 class="box-title ng-scope">Welcome to BoardZ!</h3></div>
-        <div class="box-body">
-            <form class="" role="form" (ngSubmit)="doLogin()">
-
-                <p class="text-muted">BoardZ! is a small board game management app. Give it a try</p>
+                <p class="text-muted">BoardZ! is a small board game management app. <br/>Give it a try.</p>
                 <div class="form-group">
                     <label for="username">User name</label>
 
@@ -35,16 +34,16 @@
                         <strong>Login failed.</strong> Please check your credentials and try again.
                     </div>
                 </div>
-            </form>
-        </div>
-        <div class="box-footer">
-            <div class="pull-right">
-                <button type="submit" class="btn btn-warning"
-                        [disabled]="!username.valid && !username.pristine && !password.valid && !password.pristine">
-                    Login
-                </button>
+
+            </div>
+            <div class="box-footer">
+                <div class="pull-right">
+                    <button type="submit" class="btn btn-warning"
+                            [disabled]="!username.valid && !username.pristine && !password.valid && !password.pristine">
+                        Login
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-
+    </form>
 </div>

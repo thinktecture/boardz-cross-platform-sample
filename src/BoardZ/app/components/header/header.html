@@ -14,7 +14,7 @@
                         <i class="fa fa-arrow-circle-left"></i>
                     </a>
                 </li>
-                <li class="dropdown notifications-menu">
+                <li class="dropdown notifications-menu"  *ngIf="loginService.isAuthenticated">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-bell-o"> </i>
                         <span class="label label-warning" *ngIf="notifications.length>0">{{notifications.length}}</span>

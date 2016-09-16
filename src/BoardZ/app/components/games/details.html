@@ -48,6 +48,13 @@
 </div>
 
 <div class="row" *ngIf="model.id">
+
+    <div class="col-md-4 col-xs-12">
+        <picture-it (onPictureTaken)="usePicture($event)"></picture-it>
+    </div>
+    <div class="col-md-4 col-xs-12">
+        <locate-it (onLocated)="useLocation($event)"></locate-it>
+    </div>
     <div class="col-md-4 col-xs-12">
         <div class="box box-success box-solid">
             <div class="box-header with-border">
@@ -58,7 +65,7 @@
                 </div>
             </div>
             <div class="box-body">
-                <p>The "I am gaming!" function uploads an image and your current position for other gamers to join you
+                <p>The "I am gaming!" function uploads an image and your current location for other gamers to join you
                     on your journey!</p>
             </div>
             <div class="box-footer">
@@ -67,11 +74,5 @@
                         class="fa fa-flag-checkered"></i></button>
             </div>
         </div>
-    </div>
-    <div class="col-md-4 col-xs-12">
-        <picture-it (onPictureTaken)="usePicture($event)"></picture-it>
-    </div>
-    <div class="col-md-4 col-xs-12">
-        <locate-it (onLocated)="useLocation($event)"></locate-it>
     </div>
 </div>
