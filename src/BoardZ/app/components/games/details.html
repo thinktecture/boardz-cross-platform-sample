@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">
-        <div class="box box-warning">
+        <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 *ngIf="model.id" class="box-title">New game</h3>
                 <h3 *ngIf="!model.id" class="box-title">Game details</h3>
@@ -35,7 +35,7 @@
                     <div class="pull-right">
                         <button type="button" class="btn btn-default" (click)="abort()">Abort</button>
                         <button type="button" class="btn btn-default" (click)="reset()">Reset</button>
-                        <button type="submit" class="btn btn-warning" [disabled]="!form.valid || !form.dirty">Save
+                        <button type="submit" class="btn btn-primary" [disabled]="!form.valid || !form.dirty">Save
                         </button>
                         <button type="button" class="btn btn-danger" *ngIf="model.id !== null" (click)="deleteGame()">
                             Delete
