@@ -3,7 +3,7 @@ import {GamesService} from '../../services/gamesService';
 import {PlayersService} from '../../services/playersService';
 
 @Component({
-    moduleId: __moduleName,
+    moduleId: module.id,
     selector: 'dashboard',
     templateUrl: 'dashboard.html'
 })

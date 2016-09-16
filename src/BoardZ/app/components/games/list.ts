@@ -4,7 +4,7 @@ import {Game} from '../../models/game';
 import {GamesService} from '../../services/gamesService';
 import {NotificationService} from '../../services/notificationService';
 @Component({
-    moduleId: __moduleName,
+    moduleId: module.id,
     selector: 'game-list',
     templateUrl: 'list.html'
 })

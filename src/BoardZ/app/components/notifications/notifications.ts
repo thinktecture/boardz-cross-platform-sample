@@ -3,7 +3,7 @@ import {Component} from '@angular/core';
 import {NotificationService} from '../../services/notificationService';
 
 @Component({
-    moduleId: __moduleName,
+    moduleId: module.id,
     selector: 'notifications',
     templateUrl: 'notifications.html'
 })

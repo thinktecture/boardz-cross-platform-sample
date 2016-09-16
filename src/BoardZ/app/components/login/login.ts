@@ -6,7 +6,7 @@ import {NotificationService} from '../../services/notificationService';
 import {SignalRService} from '../../services/signalrService';
 
 @Component({
-    moduleId: __moduleName,
+    moduleId: module.id,
     selector: 'login',
     templateUrl: 'login.html'
 })

@@ -13,7 +13,7 @@ import {Notification} from '../../models/notification';
 import {NotificationType} from '../../models/notificationType';
 
 @Component({
-    moduleId: __moduleName,
+    moduleId: module.id,
     selector: 'gameDetail',
     templateUrl: 'details.html'
 })

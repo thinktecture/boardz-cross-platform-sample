@@ -5,7 +5,7 @@ import {GeoLocation} from '../../models/geoLocation';
 import {GeolocationService} from '../../services/geolocationService';
 
 @Component({
-    moduleId: __moduleName,
+    moduleId: module.id,
     selector: 'locate-it',
     templateUrl: 'locateIt.html'
 })

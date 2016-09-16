@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 
 @Component({
-    moduleId: __moduleName,
+    moduleId: module.id,
     templateUrl: 'gamesRoot.html'
 })
 export class GamesRootComponent {

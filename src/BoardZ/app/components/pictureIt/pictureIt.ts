@@ -3,7 +3,7 @@ import {Component, Output, EventEmitter} from '@angular/core';
 import {CameraService} from '../../services/cameraService';
 
 @Component({
-    moduleId: __moduleName,
+    moduleId: module.id,
     selector: 'picture-it',
     templateUrl: 'pictureIt.html'
 })

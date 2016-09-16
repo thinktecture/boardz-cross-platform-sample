@@ -1,7 +1,7 @@
 import {Component, Input, ChangeDetectionStrategy} from '@angular/core';
 
 @Component({
-    moduleId: __moduleName,
+    moduleId: module.id,
     selector: 'widget',
     templateUrl: 'widget.html',
     changeDetection: ChangeDetectionStrategy.OnPush

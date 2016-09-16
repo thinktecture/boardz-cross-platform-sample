@@ -5,7 +5,7 @@ import {TokenService} from '../../services/tokenService';
 import {NotificationService} from '../../services/notificationService';
 
 @Component({
-    moduleId: __moduleName,
+    moduleId: module.id,
     selector: 'boardz-header',
     templateUrl: 'header.html'
 })
