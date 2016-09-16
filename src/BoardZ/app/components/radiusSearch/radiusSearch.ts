@@ -5,7 +5,7 @@ import {PlayersService} from '../../services/playersService';
 import {NearByPlayer} from '../../models/nearbyPlayer';
 
 @Component({
-    moduleId: module.id,
+    moduleId: __moduleName,
     selector: 'radius-search',
     templateUrl: 'radiusSearch.html'
 })
