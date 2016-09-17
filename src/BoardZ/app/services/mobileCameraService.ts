@@ -18,7 +18,7 @@ export class MobileCameraService implements ICameraService {
                     quality: 50,
                     destinationType: camera.DestinationType.DATA_URL,
                     sourceType: camera.PictureSourceType.CAMERA,
-                    encodingType: camera.EncodingType.PNG,
+                    encodingType: camera.EncodingType.JPEG,
                     saveToPhotoAlbum: false,
                     correctOrientation: true
                 };
