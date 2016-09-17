@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Linq;
-using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
 using BoardGame.Api.Helpers;
-using BoardGame.Api.Storages;
+using BoardGame.Api.Services;
+using BoardGame.Api.Models;
 
 namespace BoardGame.Api.Controllers
 {
@@ -12,25 +11,28 @@ namespace BoardGame.Api.Controllers
     /// Provides a CRUD api for board games
     /// </summary>
     [Authorize]
-    public class BoardGamesController : ApiController
+    public class GamesController : ApiController, IDisposable
     {
-        private readonly IStorage<Models.BoardGame> _storage;
+        private readonly GameService _gameService;
         
-        public BoardGamesController(IStorage<Models.BoardGame> storage)
+        /// <summary>
+        /// default CTOR
+        /// </summary>
+        public GamesController()
         {
-            _storage = storage;
+            _gameService = new GameService();
         }
         
         /// <summary>
-        /// Lists all players
+        /// Lists all games
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [ResponseType(typeof(Models.BoardGame[]))]
+        [ResponseType(typeof(Game[]))]
         public IHttpActionResult List()
         {
             var username = User.GetCurrentUsernameOrThrow();
-            return Ok(_storage.List().Where(g => g.UserName == username).ToList());
+            return Ok(_gameService.GetAll(username));
         }
 
         /// <summary>
@@ -41,7 +43,7 @@ namespace BoardGame.Api.Controllers
         [ResponseType(typeof(int))]
         public IHttpActionResult GameCount()
         {
-            return Ok(_storage.Count());
+            return Ok(_gameService.Count(User.GetCurrentUsernameOrThrow()));
         }
 
         /// <summary>
@@ -51,12 +53,10 @@ namespace BoardGame.Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [ResponseType(typeof(Guid))]
-        public IHttpActionResult Add(Models.BoardGame game)
+        public IHttpActionResult Add(Game game)
         {
-            game.UserName = User.GetCurrentUsernameOrThrow();
-            var result = _storage.Add(game);
-
-            return Ok(result);
+            var gameId = _gameService.AddGame(game, User.GetCurrentUsernameOrThrow());
+            return Ok(gameId);
         }
         
         /// <summary>
@@ -65,10 +65,15 @@ namespace BoardGame.Api.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        [ResponseType(typeof(Models.BoardGame))]
+        [ResponseType(typeof(Game))]
         public IHttpActionResult Single(Guid id)
         {
-            return Ok(_storage.Get(id));
+            var game = _gameService.GetById(id, User.GetCurrentUsernameOrThrow());
+            if (game == null)
+            {
+                return NotFound();
+            }
+            return Ok(game);
         }
         
         /// <summary>
@@ -79,7 +84,11 @@ namespace BoardGame.Api.Controllers
         [HttpDelete]
         public IHttpActionResult Remove(Guid id)
         {
-            _storage.Delete(id);
+            var successs = _gameService.DeleteGame(id);
+            if (!successs)
+            {
+                return NotFound();
+            }
             return Ok();
         }
         
@@ -89,11 +98,27 @@ namespace BoardGame.Api.Controllers
         /// <param name="game"></param>
         /// <returns></returns>
         [HttpPut]
-        public IHttpActionResult Update(Models.BoardGame game)
+        public IHttpActionResult Update(Game game)
         {
-            game.UserName = User.GetCurrentUsernameOrThrow();
-            _storage.Update(game);
+            var success =_gameService.Update(game, User.GetCurrentUsernameOrThrow());
+            if (!success)
+            {
+                return InternalServerError();
+            }
             return Ok();
+        }
+
+        /// <summary>
+        /// IDisposable
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            if (_gameService != null)
+            {
+                _gameService.Dispose();
+            }
         }
     }
 }
