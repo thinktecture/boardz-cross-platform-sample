@@ -4,6 +4,7 @@ import {LoginService} from '../../services/loginService';
 import {LogService} from '../../services/logService';
 import {NotificationService} from '../../services/notificationService';
 import {SignalRService} from '../../services/signalrService';
+import {AgeRatingsService} from '../../services/ageRatingsService';
 
 @Component({
     moduleId: module.id,
@@ -19,7 +20,9 @@ export class LoginComponent {
                 private _loginService: LoginService,
                 private _logService: LogService,
                 private _notificationService: NotificationService,
-                private _signalRService: SignalRService) {
+                private _signalRService: SignalRService,
+                private _ageRatingsService: AgeRatingsService
+    ) {
     }
 
     public doLogin(): void {
@@ -28,6 +31,8 @@ export class LoginComponent {
         this._loginService.login(this._userName, this._password)
             .subscribe(
                 () => {
+                    this._ageRatingsService.initialize();
+
                     this._signalRService.start();
                     this.setError(false);
                     this._router.navigate(['']);

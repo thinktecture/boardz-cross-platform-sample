@@ -27,10 +27,6 @@ export class GamesService {
         return <Game>JSON.parse(JSON.stringify(game));
     }
 
-    public getGameCount(): Observable<number> {
-        return this.getAll().map(games => games.length);
-    }
-
     public getById(id: string): Observable<Game> {
         return this._http.get(`api/games/single?id=${id}`)
             .map(response => <Game>response.json());
