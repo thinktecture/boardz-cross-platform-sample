@@ -1,0 +1,133 @@
+﻿using BoardGame.Api.Models;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+
+namespace BoardGame.Api.Services
+{
+    /// <summary>
+    /// Game Service
+    /// </summary>
+    public class GameService : IDisposable
+    {
+        private readonly BoardzContext _dbContext;
+
+        /// <summary>
+        /// Default CTOR
+        /// </summary>
+        public GameService()
+        {
+            _dbContext = new BoardzContext();
+        }
+
+        /// <summary>
+        /// Returns all games for a given user
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public IEnumerable<Game> GetAll(string userName)
+        {
+            return _dbContext.Games
+                .Include(game => game.AgeRating)
+                .Include(game => game.Categories)
+                .Where(game => game.UserName.Equals(userName, StringComparison.InvariantCultureIgnoreCase));
+        }
+
+        /// <summary>
+        /// Get a game by it's ID
+        /// </summary>
+        /// <param name="gameId"></param>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public Game GetById(Guid gameId, String userName)
+        {
+            return _dbContext.Games
+                .Include(game => game.AgeRating)
+                .Include(game => game.Categories)
+                .Where(game => game.UserName.Equals(userName, StringComparison.InvariantCultureIgnoreCase))
+                .FirstOrDefault(game => game.Id.Equals(gameId));
+        }
+
+        /// <summary>
+        /// Get Games Count
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        internal int Count(string username)
+        {
+            return this.GetAll(username).Count();
+        }
+
+        /// <summary>
+        /// Update an existing game
+        /// </summary>
+        /// <param name="game"></param>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public bool Update(Game game, String userName)
+        {
+            try
+            {
+                game.UserName = userName;
+                _dbContext.Games.Attach(game);
+                _dbContext.Entry(game).State = EntityState.Modified;
+                _dbContext.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Delete a game by it's Id
+        /// </summary>
+        /// <param name="gameId"></param>
+        /// <returns></returns>
+        public bool DeleteGame(Guid gameId)
+        {
+            var found = _dbContext.Games.FirstOrDefault(game => game.Id.Equals(gameId));
+            if(found == null)
+            {
+                return false;
+            }
+            try
+            {
+                _dbContext.Entry(found).State = EntityState.Deleted;
+                _dbContext.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        /// <summary>
+        /// Add a game
+        /// </summary>
+        /// <param name="game"></param>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public Guid AddGame(Game game, String userName)
+        {
+            game.Id = Guid.NewGuid();
+            game.UserName = userName;
+            _dbContext.Games.Add(game);
+            _dbContext.SaveChanges();
+            return game.Id;
+        }
+
+        /// <summary>
+        /// IDisposable
+        /// </summary>
+        public void Dispose()
+        {
+            if(_dbContext != null)
+            {
+                _dbContext.Dispose();
+            }
+        }
+    }
+}
