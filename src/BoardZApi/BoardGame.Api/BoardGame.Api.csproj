@@ -40,6 +40,14 @@
       <HintPath>..\packages\Autofac.WebApi2.4.0.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
       <Private>True</Private>
@@ -77,6 +85,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -115,25 +124,33 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\BoardGamesController.cs" />
+    <Compile Include="BoardzContext.cs" />
+    <Compile Include="BoardzDatabaseConfiguration.cs" />
+    <Compile Include="BoardzDatabaseInitializer.cs" />
+    <Compile Include="Controllers\AgeRatingsController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\GamesController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Helpers\DistanceCalculator.cs" />
     <Compile Include="Helpers\IPrincipalExtensions.cs" />
     <Compile Include="Hubs\IPlayer.cs" />
     <Compile Include="Hubs\PlayerHub.cs" />
-    <Compile Include="Models\BoardGame.cs" />
+    <Compile Include="Models\AgeRating.cs" />
+    <Compile Include="Models\Game.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Coordinate.cs" />
-    <Compile Include="Models\Packshot.cs" />
     <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\PlayerWithDistance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AuthorizationServerProvider.cs" />
     <Compile Include="Security\SecurityStartup.cs" />
     <Compile Include="Security\SignalRAuthorizationMiddleware.cs" />
+    <Compile Include="Services\AgeRatingService.cs" />
+    <Compile Include="Services\CategoriesService.cs" />
+    <Compile Include="Services\GameService.cs" />
+    <Compile Include="Services\PlayerService.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Storages\PlayersStorage.cs" />
-    <Compile Include="Storages\BoardGameStorage.cs" />
-    <Compile Include="Storages\IStorage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
