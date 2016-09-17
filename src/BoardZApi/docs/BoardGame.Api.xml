@@ -4,54 +4,193 @@
         <name>BoardGame.Api</name>
     </assembly>
     <members>
-        <member name="T:BoardGame.Api.Controllers.BoardGamesController">
+        <member name="T:BoardGame.Api.BoardzContext">
+            <summary>
+            BoardZ EF Context
+            </summary>
+        </member>
+        <member name="M:BoardGame.Api.BoardzContext.#ctor">
+            <summary>
+            default ctor
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.BoardzContext.Categories">
+            <summary>
+            Categories Set
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.BoardzContext.AgeRatings">
+            <summary>
+            Age Rating Set
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.BoardzContext.Games">
+            <summary>
+            All the Games :allthethings:
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.BoardzContext.Players">
+            <summary>
+            all players set
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.BoardzContext.Coordinates">
+            <summary>
+            all coordinates used by the I'm playing feature
+            </summary>
+        </member>
+        <member name="M:BoardGame.Api.BoardzContext.OnModelCreating(System.Data.Entity.DbModelBuilder)">
+            <summary>
+            override ModelCreating
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+        <member name="T:BoardGame.Api.BoardzDatabaseConfiguration">
+            <summary>
+            BoardZ SQL Azure Config
+            </summary>
+        </member>
+        <member name="M:BoardGame.Api.BoardzDatabaseConfiguration.#ctor">
+            <summary>
+            default CTOR
+            </summary>
+        </member>
+        <member name="M:BoardGame.Api.BoardzDatabaseInitializer.Seed(BoardGame.Api.BoardzContext)">
+            <summary>
+            Seed BoardZ Database with some static data
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:BoardGame.Api.Controllers.AgeRatingsController">
+            <summary>
+            AgeRatingController
+            </summary>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.AgeRatingsController.#ctor">
+            <summary>
+            Default CTOR
+            </summary>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.AgeRatingsController.Dispose(System.Boolean)">
+            <summary>
+            IDisposable
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:BoardGame.Api.Controllers.CategoriesController">
+            <summary>
+            Categories Controller
+            </summary>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.CategoriesController.#ctor">
+            <summary>
+            default CTOR
+            </summary>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.CategoriesController.GameCount">
+            <summary>
+            Returns the categories count.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.CategoriesController.Add(BoardGame.Api.Models.Category)">
+            <summary>
+            Adds a new board game category
+            </summary>
+            <param name="category"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.CategoriesController.Single(System.Guid)">
+            <summary>
+            Returns a single board game category
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.CategoriesController.Remove(System.Guid)">
+            <summary>
+            Removes a board game category
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.CategoriesController.Update(BoardGame.Api.Models.Category)">
+            <summary>
+            Updates a board game category
+            </summary>
+            <param name="category"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.CategoriesController.Dispose(System.Boolean)">
+            <summary>
+            IDisposable
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:BoardGame.Api.Controllers.GamesController">
             <summary>
             Provides a CRUD api for board games
             </summary>
         </member>
-        <member name="M:BoardGame.Api.Controllers.BoardGamesController.List">
+        <member name="M:BoardGame.Api.Controllers.GamesController.#ctor">
             <summary>
-            Lists all players
+            default CTOR
+            </summary>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.GamesController.List">
+            <summary>
+            Lists all games
             </summary>
             <returns></returns>
         </member>
-        <member name="M:BoardGame.Api.Controllers.BoardGamesController.GameCount">
+        <member name="M:BoardGame.Api.Controllers.GamesController.GameCount">
             <summary>
             Returns the games count.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:BoardGame.Api.Controllers.BoardGamesController.Add(BoardGame.Api.Models.BoardGame)">
+        <member name="M:BoardGame.Api.Controllers.GamesController.Add(BoardGame.Api.Models.Game)">
             <summary>
             Adds a new board game
             </summary>
             <param name="game"></param>
             <returns></returns>
         </member>
-        <member name="M:BoardGame.Api.Controllers.BoardGamesController.Single(System.Guid)">
+        <member name="M:BoardGame.Api.Controllers.GamesController.Single(System.Guid)">
             <summary>
             Returns a single board game
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:BoardGame.Api.Controllers.BoardGamesController.Remove(System.Guid)">
+        <member name="M:BoardGame.Api.Controllers.GamesController.Remove(System.Guid)">
             <summary>
             Removes a board game
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:BoardGame.Api.Controllers.BoardGamesController.Update(BoardGame.Api.Models.BoardGame)">
+        <member name="M:BoardGame.Api.Controllers.GamesController.Update(BoardGame.Api.Models.Game)">
             <summary>
             Updates a board game
             </summary>
             <param name="game"></param>
             <returns></returns>
         </member>
+        <member name="M:BoardGame.Api.Controllers.GamesController.Dispose(System.Boolean)">
+            <summary>
+            IDisposable
+            </summary>
+            <param name="disposing"></param>
+        </member>
         <member name="T:BoardGame.Api.Controllers.PlayersController">
             <summary>
             Provides an CRUD api for players
+            </summary>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.PlayersController.#ctor">
+            <summary>
+            default ctor
             </summary>
         </member>
         <member name="M:BoardGame.Api.Controllers.PlayersController.List">
@@ -102,6 +241,12 @@
             <param name="radius"></param>
             <returns></returns>
         </member>
+        <member name="M:BoardGame.Api.Controllers.PlayersController.Dispose(System.Boolean)">
+            <summary>
+            IDisposable
+            </summary>
+            <param name="disposing"></param>
+        </member>
         <member name="T:BoardGame.Api.Controllers.StatusController">
             <summary>
             Status Controller is responsible for exposing the ping endpoint which will be used
@@ -113,28 +258,132 @@
             Ping endpoint - Just returning a HTTP StatusCode 200
             </summary>
         </member>
-        <member name="M:BoardGame.Api.Helpers.DistanceCalculator.CalculateDistance(BoardGame.Api.Models.Coordinate,BoardGame.Api.Models.Coordinate)">
-             Adapted from http://www.geodatasource.com/developers/c-sharp
-            
+        <member name="T:BoardGame.Api.Helpers.DistanceCalculator">
+            <summary>
+            Distance Calculator Logic
+            </summary>
         </member>
-        <member name="P:BoardGame.Api.Models.BoardGame.Id">
+        <member name="M:BoardGame.Api.Helpers.DistanceCalculator.CalculateDistance(BoardGame.Api.Models.Coordinate,BoardGame.Api.Models.Coordinate)">
+            <summary>
+            Adapted from http://www.geodatasource.com/developers/c-sharp
+            </summary>
+            <param name="origin"></param>
+            <param name="destination"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BoardGame.Api.Models.AgeRating">
+            <summary>
+            AgeRating Model
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.AgeRating.Id">
+            <summary>
+            AgeRating Id
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.AgeRating.Name">
+            <summary>
+            Name of the AgeRating
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.AgeRating.ColorIndicator">
+            <summary>
+            Color indicator for the age rating
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.AgeRating.Games">
+            <summary>
+            Games applied to this age rating
+            </summary>
+        </member>
+        <member name="T:BoardGame.Api.Models.Game">
+            <summary>
+            The Game Model
+            </summary>
+        </member>
+        <member name="M:BoardGame.Api.Models.Game.#ctor">
+            <summary>
+            default ctor
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.Game.Id">
             <summary>
             Unique identifier
             </summary>
         </member>
-        <member name="P:BoardGame.Api.Models.BoardGame.Name">
+        <member name="P:BoardGame.Api.Models.Game.Name">
             <summary>
             Name of the board game
             </summary>
         </member>
-        <member name="P:BoardGame.Api.Models.BoardGame.Description">
+        <member name="P:BoardGame.Api.Models.Game.Edition">
+            <summary>
+            Edition of the Game
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.Game.Categories">
+            <summary>
+            List of categories applied to the game
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.Game.AgeRatingId">
+            <summary>
+            AgeRatingId
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.Game.AgeRating">
+            <summary>
+            Age Rating
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.Game.Description">
             <summary>
             Additional description
             </summary>
         </member>
-        <member name="P:BoardGame.Api.Models.BoardGame.Packshot">
+        <member name="P:BoardGame.Api.Models.Game.UserName">
             <summary>
-            Packshot URLs
+            Name of the user who created the game
+            </summary>
+        </member>
+        <member name="T:BoardGame.Api.Models.Category">
+            <summary>
+            Category model
+            </summary>
+        </member>
+        <member name="M:BoardGame.Api.Models.Category.#ctor">
+            <summary>
+            default ctor
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.Category.Id">
+            <summary>
+            Category Id
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.Category.Name">
+            <summary>
+            Name of the Category
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.Category.UserName">
+            <summary>
+            The name of the user who craeated that category
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.Category.Games">
+            <summary>
+            All games in this category
+            </summary>
+        </member>
+        <member name="T:BoardGame.Api.Models.Coordinate">
+            <summary>
+            Coordinate DataType
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.Coordinate.Id">
+            <summary>
+            PK
             </summary>
         </member>
         <member name="P:BoardGame.Api.Models.Coordinate.Latitude">
@@ -157,14 +406,24 @@
             Name of the player
             </summary>
         </member>
+        <member name="P:BoardGame.Api.Models.Player.CoordinateId">
+            <summary>
+            FK
+            </summary>
+        </member>
         <member name="P:BoardGame.Api.Models.Player.Coordinate">
             <summary>
             Optional coordinate of the player
             </summary>
         </member>
-        <member name="P:BoardGame.Api.Models.Player.BoardGameId">
+        <member name="P:BoardGame.Api.Models.Player.GameId">
             <summary>
             Current game the player is playing
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.Player.Game">
+            <summary>
+            Current Game instance
             </summary>
         </member>
         <member name="P:BoardGame.Api.Models.Player.ImageUrl">
@@ -172,9 +431,194 @@
             Base64 Image Url (if player did "i am gaming")
             </summary>
         </member>
+        <member name="P:BoardGame.Api.Models.Player.PlayingSince">
+            <summary>
+            Since when is the player playing that game
+            </summary>
+        </member>
         <member name="P:BoardGame.Api.Models.Player.BoardGameName">
             <summary>
             Will only be set when using <see cref="M:BoardGame.Api.Controllers.PlayersController.FindNearby(BoardGame.Api.Models.Coordinate,System.Int32)"/> API
+            </summary>
+        </member>
+        <member name="T:BoardGame.Api.Models.PlayerWithDistance">
+            <summary>
+            Model used to transfer nearby players
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.PlayerWithDistance.Player">
+            <summary>
+            The Player instance
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.PlayerWithDistance.Distance">
+            <summary>
+            Distance in KM
+            </summary>
+        </member>
+        <member name="M:BoardGame.Api.Services.CategoriesService.#ctor">
+            <summary>
+            /
+            </summary>
+        </member>
+        <member name="M:BoardGame.Api.Services.CategoriesService.Dispose">
+            <summary>
+            IDisposable
+            </summary>
+        </member>
+        <member name="M:BoardGame.Api.Services.CategoriesService.GetAll(System.String)">
+            <summary>
+            Return all Categories from a given user
+            </summary>
+            <param name="userName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Services.CategoriesService.GetById(System.Guid,System.String)">
+            <summary>
+            Get a category by it's id
+            </summary>
+            <param name="categoryId"></param>
+            <param name="userName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Services.CategoriesService.Count(System.String)">
+            <summary>
+            Get Category Count
+            </summary>
+            <param name="username"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Services.CategoriesService.Update(BoardGame.Api.Models.Category,System.String)">
+            <summary>
+            Update a category
+            </summary>
+            <param name="category"></param>
+            <param name="userName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Services.CategoriesService.DeleteCategory(System.Guid)">
+            <summary>
+            Delete a category by it's id
+            </summary>
+            <param name="categoryId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Services.CategoriesService.AddCategory(BoardGame.Api.Models.Category,System.String)">
+            <summary>
+            Create a new Category
+            </summary>
+            <param name="category"></param>
+            <param name="userName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BoardGame.Api.Services.GameService">
+            <summary>
+            Game Service
+            </summary>
+        </member>
+        <member name="M:BoardGame.Api.Services.GameService.#ctor">
+            <summary>
+            Default CTOR
+            </summary>
+        </member>
+        <member name="M:BoardGame.Api.Services.GameService.GetAll(System.String)">
+            <summary>
+            Returns all games for a given user
+            </summary>
+            <param name="userName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Services.GameService.GetById(System.Guid,System.String)">
+            <summary>
+            Get a game by it's ID
+            </summary>
+            <param name="gameId"></param>
+            <param name="userName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Services.GameService.Count(System.String)">
+            <summary>
+            Get Games Count
+            </summary>
+            <param name="username"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Services.GameService.Update(BoardGame.Api.Models.Game,System.String)">
+            <summary>
+            Update an existing game
+            </summary>
+            <param name="game"></param>
+            <param name="userName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Services.GameService.DeleteGame(System.Guid)">
+            <summary>
+            Delete a game by it's Id
+            </summary>
+            <param name="gameId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Services.GameService.AddGame(BoardGame.Api.Models.Game,System.String)">
+            <summary>
+            Add a game
+            </summary>
+            <param name="game"></param>
+            <param name="userName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Services.GameService.Dispose">
+            <summary>
+            IDisposable
+            </summary>
+        </member>
+        <member name="T:BoardGame.Api.Services.PlayerService">
+            <summary>
+            PlayerService
+            </summary>
+        </member>
+        <member name="M:BoardGame.Api.Services.PlayerService.#ctor">
+            <summary>
+            Default CTOR
+            </summary>
+        </member>
+        <member name="M:BoardGame.Api.Services.PlayerService.FindPlayersNearby(BoardGame.Api.Models.Coordinate,System.Int32)">
+            <summary>
+            Return a list of playeres (playing since 5 days :D) playing nearby a given coordiante
+            </summary>
+            <param name="queryCoordinates"></param>
+            <param name="radius"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Services.PlayerService.Count">
+            <summary>
+            Get the number of active players
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Services.PlayerService.AddPlayer(BoardGame.Api.Models.Player)">
+            <summary>
+            Checkin
+            </summary>
+            <param name="player"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Services.PlayerService.DeletePlayer(System.Guid)">
+            <summary>
+            Delete a player by his/her id
+            </summary>
+            <param name="playerId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Services.PlayerService.Update(BoardGame.Api.Models.Player)">
+            <summary>
+            update an existing player instance
+            </summary>
+            <param name="player"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Services.PlayerService.Dispose">
+            <summary>
+            IDisposable
             </summary>
         </member>
     </members>

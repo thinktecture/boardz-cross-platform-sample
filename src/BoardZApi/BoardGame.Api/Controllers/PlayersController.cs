@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
-using BoardGame.Api.Helpers;
 using BoardGame.Api.Models;
-using BoardGame.Api.Storages;
+using BoardGame.Api.Services;
 
 namespace BoardGame.Api.Controllers
 {
@@ -12,18 +10,16 @@ namespace BoardGame.Api.Controllers
     /// Provides an CRUD api for players
     /// </summary>
     [Authorize]
-    public class PlayersController : ApiController
+    public class PlayersController : ApiController, IDisposable
     {
-        private readonly IStorage<Models.Player> _playerStorage;
-        private readonly IStorage<Models.BoardGame> _boardGamesStorage;
-        private readonly DistanceCalculator _distanceCalculator;
+        private readonly PlayerService _playersService;
 
-        public PlayersController(IStorage<Models.Player> playerStorage, IStorage<Models.BoardGame> boardGamesStorage,
-            DistanceCalculator distanceCalculator)
+        /// <summary>
+        /// default ctor
+        /// </summary>
+        public PlayersController()
         {
-            _playerStorage = playerStorage;
-            _boardGamesStorage = boardGamesStorage;
-            _distanceCalculator = distanceCalculator;
+            _playersService = new PlayerService();
         }
 
         /// <summary>
@@ -34,7 +30,7 @@ namespace BoardGame.Api.Controllers
         [ResponseType(typeof(Player[]))]
         public IHttpActionResult List()
         {
-            return Ok(_playerStorage.List());
+            return Ok(_playersService.GetAll());
         }
 
         /// <summary>
@@ -45,7 +41,7 @@ namespace BoardGame.Api.Controllers
         [ResponseType(typeof(int))]
         public IHttpActionResult PlayerCount()
         {
-            return Ok(_playerStorage.Count());
+            return Ok(_playersService.Count());
         }
 
         /// <summary>
@@ -55,9 +51,9 @@ namespace BoardGame.Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [ResponseType(typeof(Guid))]
-        public IHttpActionResult Add(Models.Player player)
+        public IHttpActionResult Add(Player player)
         {
-            var result = _playerStorage.Add(player);
+            var result = _playersService.AddPlayer(player);
 
             return Ok(result);
         }
@@ -71,7 +67,12 @@ namespace BoardGame.Api.Controllers
         [ResponseType(typeof(Player))]
         public IHttpActionResult Single(Guid id)
         {
-            return Ok(_playerStorage.Get(id));
+            var player = _playersService.GetById(id);
+            if (player == null)
+            {
+                return NotFound();
+            }
+            return Ok(player);
         }
 
         /// <summary>
@@ -82,7 +83,11 @@ namespace BoardGame.Api.Controllers
         [HttpDelete]
         public IHttpActionResult Remove(Guid id)
         {
-            _playerStorage.Delete(id);
+            var success = _playersService.DeletePlayer(id);
+            if (!success)
+            {
+                return InternalServerError();
+            }
             return Ok();
         }
 
@@ -92,9 +97,14 @@ namespace BoardGame.Api.Controllers
         /// <param name="player"></param>
         /// <returns></returns>
         [HttpPut]
-        public IHttpActionResult Update(Models.Player player)
+        public IHttpActionResult Update(Player player)
         {
-            _playerStorage.Update(player);
+
+            var success = _playersService.Update(player);
+            if (!success)
+            {
+                return InternalServerError();
+            }
             return Ok();
         }
 
@@ -108,37 +118,20 @@ namespace BoardGame.Api.Controllers
         [ResponseType(typeof(PlayerWithDistance[]))]
         public IHttpActionResult FindNearby([FromUri] Coordinate coordinate, int radius)
         {
-            var result = _playerStorage.List()
-                .Where(i => i.Coordinate != null)
-                .Select(p =>
-                {
-                    try
-                    {
-                        p.BoardGameName = _boardGamesStorage.Get(p.BoardGameId).Name;
-                    }
-                    catch
-                    {
-                        // Silently fail, we didn't get the game. Can occur in dev 
-                    }
-
-                    return p;
-                })
-                .Select(c => new PlayerWithDistance()
-                {
-                    Player = c,
-                    Distance = _distanceCalculator.CalculateDistance(coordinate, c.Coordinate)
-                })
-                .Where(c => c.Distance <= radius)
-                .OrderBy(c => c.Distance)
-                .ToList();
-
-            return Ok(result);
+            return Ok(_playersService.FindPlayersNearby(coordinate, radius));
         }
 
-        private class PlayerWithDistance
+        /// <summary>
+        /// IDisposable
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected override void Dispose(bool disposing)
         {
-            public Player Player { get; set; }
-            public double Distance { get; set; }
+            base.Dispose(disposing);
+            if (_playersService != null)
+            {
+                _playersService.Dispose();
+            }
         }
     }
 }

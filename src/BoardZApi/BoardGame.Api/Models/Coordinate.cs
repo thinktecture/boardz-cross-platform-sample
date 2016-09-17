@@ -1,7 +1,16 @@
-﻿namespace BoardGame.Api.Models
+﻿using System;
+
+namespace BoardGame.Api.Models
 {
+    /// <summary>
+    /// Coordinate DataType
+    /// </summary>
     public class Coordinate
     {
+        /// <summary>
+        /// PK
+        /// </summary>
+        public Guid Id { get; set; }
         /// <summary>
         /// Latitude value
         /// </summary>

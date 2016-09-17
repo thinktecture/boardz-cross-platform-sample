@@ -3,12 +3,17 @@ using BoardGame.Api.Models;
 
 namespace BoardGame.Api.Helpers
 {
+    /// <summary>
+    /// Distance Calculator Logic
+    /// </summary>
     public class DistanceCalculator
     {
-        /**
-		 * Adapted from http://www.geodatasource.com/developers/c-sharp
-		 **/
-
+        /// <summary>
+        /// Adapted from http://www.geodatasource.com/developers/c-sharp
+        /// </summary>
+        /// <param name="origin"></param>
+        /// <param name="destination"></param>
+        /// <returns></returns>
         public double CalculateDistance(Coordinate origin, Coordinate destination)
         {
             var theta = origin.Longitude - destination.Longitude;
