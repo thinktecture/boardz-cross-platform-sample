@@ -23,7 +23,7 @@ export class OfflineConfig {
      * @returns {number}
      */
     public get maxDurationForNormal(): number {
-        return 100;
+        return 190;
     }
 
     /**
@@ -31,7 +31,7 @@ export class OfflineConfig {
      * @returns {number}
      */
     public get maxDurationForToSlow(): number {
-        return 200;
+        return 240;
     }
 
     /**
@@ -39,6 +39,6 @@ export class OfflineConfig {
      * @returns {number}
      */
     public get absoluteTimeoutAt(): number {
-        return 300;
+        return 320;
     }
 }

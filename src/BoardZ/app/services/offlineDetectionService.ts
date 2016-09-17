@@ -3,7 +3,10 @@ import {Http} from '@angular/http';
 import {ApiConfig} from '../apiConfig';
 import {ConnectionState} from '../models/connectionState';
 import {OfflineConfig} from '../offlineConfig';
-
+import {Observable} from '/rxjs/Observable';
+import 'rxjs/add/operator/timeout';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 @Injectable()
 export class OfflineDetectionService {
 
@@ -11,12 +14,7 @@ export class OfflineDetectionService {
     private _monitoringHandle: number;
 
     constructor(private _http: Http, private _apiConfig: ApiConfig, private _offlineConfig: OfflineConfig) {
-        setTimeout(()=> {
-            this._recentConnectionState = ConnectionState.Normal;
-            setTimeout(()=> {
-                this._recentConnectionState = ConnectionState.ToSlow;
-            }, 3000);
-        }, 5000);
+        this._recentConnectionState = ConnectionState.Unknown;
     }
 
     private get pingUrl(): string {
@@ -31,9 +29,34 @@ export class OfflineDetectionService {
         return this._recentConnectionState > ConnectionState.ToSlow;
     }
 
-    public startConnectionMonitoring(): void {
-        this._monitoringHandle = setInterval(()=> {
+    private checkConnection(): Observable<ConnectionState> {
+        let start = (new Date()).getTime();
+        return this._http.get(this.pingUrl)
+            .timeout(this._offlineConfig.absoluteTimeoutAt, Observable.of(this._offlineConfig.absoluteTimeoutAt + 1))
+            .map(response => (new Date()).getTime() - start)
+            .map(duration => this.getConnectionStateByDuration(duration))
+            .catch(() => Observable.of(ConnectionState.Offline));
+    }
 
+    private getConnectionStateByDuration(duration: number): ConnectionState {
+        console.info(`evaluating connection state for ${duration}`);
+        if (duration <= this._offlineConfig.maxDurationForGood) {
+            return ConnectionState.Good;
+        }
+        if (duration <= this._offlineConfig.maxDurationForNormal) {
+            return ConnectionState.Normal;
+        }
+        if (duration <= this._offlineConfig.maxDurationForToSlow) {
+            return ConnectionState.ToSlow;
+        }
+        // duration is longer than this._offlineConfig.maxDurationForToSlow
+        return ConnectionState.Offline;
+
+    }
+
+    public startConnectionMonitoring(): void {
+        this._monitoringHandle = setInterval(() => {
+            this.checkConnection().subscribe(state => this._recentConnectionState = state)
         }, this._offlineConfig.checkInterval);
     }
 

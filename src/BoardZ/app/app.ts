@@ -1,4 +1,4 @@
-import {Component, AfterViewInit} from '@angular/core';
+import {Component, AfterViewInit, OnInit, OnDestroy} from '@angular/core';
 import {LogService} from './services/logService';
 import {LogLevel} from './models/logLevel';
 import {SignalRService} from './services/signalrService';
@@ -7,6 +7,7 @@ import {NotificationService} from './services/notificationService';
 import {UiNotificationService} from './services/uiNotificationService';
 import {NativeIntegrationService} from './services/nativeIntegrationService';
 import {IBoardZAppWindow} from './interfaces/boardzAppWindow';
+import {OfflineDetectionService} from './services/offlineDetectionService';
 
 declare var window: IBoardZAppWindow;
 
@@ -16,15 +17,20 @@ declare var window: IBoardZAppWindow;
     templateUrl: 'app.html'
 })
 
-export class BoardzAppComponent implements AfterViewInit {
+export class BoardzAppComponent implements OnInit, AfterViewInit, OnDestroy {
     constructor(private _signalRService: SignalRService,
                 private _loginService: LoginService,
                 private _notificationService: NotificationService,
+                private _offlineDetectionService: OfflineDetectionService,
                 private _nativeIntegrationService: NativeIntegrationService,
                 private _uiNotificationService: UiNotificationService,
                 private _logService: LogService) {
         _logService.maximumLogLevel = LogLevel.Verbose;
         _uiNotificationService.subscribeToNotifications();
+    }
+
+    public ngOnInit(): void {
+        this._offlineDetectionService.startConnectionMonitoring();
     }
 
     public ngAfterViewInit(): any {
@@ -41,5 +47,9 @@ export class BoardzAppComponent implements AfterViewInit {
         });
 
         this._nativeIntegrationService.registerNavigationHook();
+    }
+
+    public ngOnDestroy(): void {
+        this._offlineDetectionService.stopConnectionMonitoring();
     }
 }
