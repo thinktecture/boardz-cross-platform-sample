@@ -29,10 +29,6 @@ export class PlayersService {
         return this._http.get(`api/players/single?id=${id}`).map(response => <Player>response.json());
     }
 
-    public getPlayerCount(): Observable<number> {
-        return this._http.get('api/players/playercount').map(r => <number>r.json());
-    }
-
     public findNearby(radius: number, coordinates: GeoLocation): Observable<NearByPlayer[]> {
         return this._http.get(`api/players/FindNearby?radius=${radius}&coordinate.latitude=${coordinates.latitude}&coordinate.longitude=${coordinates.longitude}`)
             .map(r => {

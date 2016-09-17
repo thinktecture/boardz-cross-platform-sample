@@ -37,6 +37,9 @@ import {LocateItComponent} from '../components/locateIt/locateIt';
 import {GeolocationService} from '../services/geolocationService';
 import {OfflineConfig} from '../offlineConfig';
 import {OfflineDetectionService} from '../services/offlineDetectionService';
+import {DashboardService} from '../services/dashboardService';
+import {AgeRatingsService} from '../services/ageRatingsService';
+import {CategoriesService} from '../services/categoriesService';
 
 export namespace ModuleConfiguration {
 
@@ -74,6 +77,9 @@ export namespace ModuleConfiguration {
             TokenService,
             LoginService,
             LogService,
+            DashboardService,
+            AgeRatingsService,
+            CategoriesService,
             GamesService,
             PlayersService,
             NotificationService,
