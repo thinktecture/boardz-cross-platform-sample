@@ -3,6 +3,8 @@ import {Notification} from '../../models/notification';
 import {LoginService} from '../../services/loginService';
 import {TokenService} from '../../services/tokenService';
 import {NotificationService} from '../../services/notificationService';
+import {OfflineDetectionService} from '../../services/offlineDetectionService';
+import {ConnectionState} from '../../models/connectionState';
 
 @Component({
     moduleId: module.id,
@@ -16,7 +18,16 @@ export class HeaderComponent implements OnInit {
 
     constructor(public loginService: LoginService,
                 private _tokenService: TokenService,
+                private _offlineDetectionService: OfflineDetectionService,
                 private _notificationService: NotificationService) {
+    }
+
+    public get isConnectionUnknown(): boolean{
+        return this._offlineDetectionService.currentConnectionState === ConnectionState.Unknown;
+    }
+
+    public get isOnline(): boolean{
+        return this._offlineDetectionService.isOnline;
     }
 
     public ngOnInit(): any {
