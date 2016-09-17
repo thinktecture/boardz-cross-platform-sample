@@ -127,6 +127,7 @@
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\boardgameapi - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\boardgameapi - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\offline-boardz.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Web.config" />

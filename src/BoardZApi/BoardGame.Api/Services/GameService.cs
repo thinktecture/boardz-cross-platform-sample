@@ -27,11 +27,11 @@ namespace BoardGame.Api.Services
         /// <param name="userName"></param>
         /// <returns></returns>
         public IEnumerable<Game> GetAll(string userName)
-        {
-            return _dbContext.Games
-                .Include(game => game.AgeRating)
-                .Include(game => game.Categories)
-                .Where(game => game.UserName.Equals(userName, StringComparison.InvariantCultureIgnoreCase));
+        { 
+                return _dbContext.Games
+                    .Include(game => game.AgeRating)
+                    .Include(game => game.Categories)
+                    .Where(game => game.UserName.Equals(userName, StringComparison.InvariantCultureIgnoreCase)).ToList();
         }
 
         /// <summary>
@@ -43,10 +43,9 @@ namespace BoardGame.Api.Services
         public Game GetById(Guid gameId, String userName)
         {
             return _dbContext.Games
-                .Include(game => game.AgeRating)
-                .Include(game => game.Categories)
-                .Where(game => game.UserName.Equals(userName, StringComparison.InvariantCultureIgnoreCase))
-                .FirstOrDefault(game => game.Id.Equals(gameId));
+                    .Include(game => game.AgeRating)
+                    .Include(game => game.Categories)
+                    .FirstOrDefault(game => game.UserName.Equals(userName, StringComparison.InvariantCultureIgnoreCase) && game.Id.Equals(gameId));
         }
 
         /// <summary>
@@ -70,8 +69,18 @@ namespace BoardGame.Api.Services
             try
             {
                 game.UserName = userName;
-                _dbContext.Games.Attach(game);
-                _dbContext.Entry(game).State = EntityState.Modified;
+                var dbEntity = this.GetById(game.Id, userName);
+                if(dbEntity == null)
+                {
+                    return false;
+                }
+                _dbContext.Entry(dbEntity).CurrentValues.SetValues(game);
+                dbEntity.Categories.Clear();
+                foreach (var category in game.Categories)
+                {
+                    var dbCategory = _dbContext.Categories.Find(category.Id);
+                    dbEntity.Categories.Add(dbCategory);
+                }
                 _dbContext.SaveChanges();
                 return true;
             }

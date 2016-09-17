@@ -2,6 +2,7 @@
 using BoardGame.Api.Models;
 using BoardGame.Api.Services;
 using System;
+using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Description;
 
@@ -29,10 +30,9 @@ namespace BoardGame.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [ResponseType(typeof(Category[]))]
-        public IHttpActionResult List()
+        public IEnumerable<Category> List()
         {
-            return Ok(_categoriesService.GetAll(User.GetCurrentUsernameOrThrow()));
+            return _categoriesService.GetAll(User.GetCurrentUsernameOrThrow());
         }
 
         /// <summary>

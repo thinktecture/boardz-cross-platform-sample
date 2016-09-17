@@ -1,6 +1,8 @@
 ﻿using BoardGame.Api.Models;
 using System;
+using System.Linq;
 using System.Collections.Generic;
+using System.Data.Entity;
 
 namespace BoardGame.Api.Services
 {
@@ -14,7 +16,7 @@ namespace BoardGame.Api.Services
         }
 
 
-        public IEnumerable<AgeRating> GetAll()
+        public IEnumerable<AgeRating> GetAll(string userName)
         {
             return _dbContext.AgeRatings;
         }

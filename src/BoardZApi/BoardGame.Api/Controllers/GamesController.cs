@@ -4,6 +4,7 @@ using System.Web.Http.Description;
 using BoardGame.Api.Helpers;
 using BoardGame.Api.Services;
 using BoardGame.Api.Models;
+using System.Collections.Generic;
 
 namespace BoardGame.Api.Controllers
 {
@@ -11,7 +12,7 @@ namespace BoardGame.Api.Controllers
     /// Provides a CRUD api for board games
     /// </summary>
     [Authorize]
-    public class GamesController : ApiController, IDisposable
+    public class GamesController : ApiController
     {
         private readonly GameService _gameService;
         
@@ -28,11 +29,12 @@ namespace BoardGame.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [ResponseType(typeof(Game[]))]
-        public IHttpActionResult List()
+        public IEnumerable<Game> List()
         {
             var username = User.GetCurrentUsernameOrThrow();
-            return Ok(_gameService.GetAll(username));
+            var games =  _gameService.GetAll(username);
+
+            return games;
         }
 
         /// <summary>
@@ -100,6 +102,7 @@ namespace BoardGame.Api.Controllers
         [HttpPut]
         public IHttpActionResult Update(Game game)
         {
+            
             var success =_gameService.Update(game, User.GetCurrentUsernameOrThrow());
             if (!success)
             {
@@ -120,5 +123,6 @@ namespace BoardGame.Api.Controllers
                 _gameService.Dispose();
             }
         }
+
     }
 }

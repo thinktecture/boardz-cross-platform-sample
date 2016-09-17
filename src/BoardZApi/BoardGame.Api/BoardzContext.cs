@@ -18,6 +18,8 @@ namespace BoardGame.Api
             base("name=BoardZDatabase")
         {
             Database.SetInitializer(new BoardzDatabaseInitializer());
+            Configuration.LazyLoadingEnabled = false;
+            Configuration.ProxyCreationEnabled = false;
         }
         /// <summary>
         /// Categories Set
@@ -42,7 +44,7 @@ namespace BoardGame.Api
         /// <summary>
         /// all coordinates used by the I'm playing feature
         /// </summary>
-        public DbSet<Coordinate> Coordinates { get; set; } 
+        public DbSet<Coordinate> Coordinates { get; set; }
 
         /// <summary>
         /// override ModelCreating
@@ -56,15 +58,15 @@ namespace BoardGame.Api
                 .ToTable("Games")
                 .HasKey(game => game.Id)
                 .HasOptional(game => game.AgeRating)
-                .WithMany(ageRating => ageRating.Games)
-                .HasForeignKey(game=> game.AgeRatingId);
+                    .WithMany(ageRating => ageRating.Games)
+                    .HasForeignKey(game => game.AgeRatingId);
 
             modelBuilder.Entity<Game>()
                 .Property(game => game.UserName)
                 .HasColumnAnnotation("GameUserNameIndex", new IndexAnnotation(new IndexAttribute()));
 
             modelBuilder.Entity<Game>()
-                .HasMany<Category>(game => game.Categories)
+                .HasMany(game => game.Categories)
                 .WithMany(category => category.Games)
                 .Map(gameCategories =>
                 {
@@ -80,6 +82,8 @@ namespace BoardGame.Api
             modelBuilder.Entity<Category>()
                .ToTable("Categories")
                 .HasKey(category => category.Id)
+                .Ignore(category => category.GameNames)
+                .Ignore(category => category.NumberOfGames)
                 .Property(category => category.UserName)
                 .HasColumnAnnotation("CategoryUserNameIndex", new IndexAnnotation(new IndexAttribute()));
 

@@ -388,6 +388,16 @@
             All games in this category
             </summary>
         </member>
+        <member name="P:BoardGame.Api.Models.Category.GameNames">
+            <summary>
+            List with Games in that category
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.Category.NumberOfGames">
+            <summary>
+            NumberOfGames
+            </summary>
+        </member>
         <member name="T:BoardGame.Api.Models.Coordinate">
             <summary>
             Coordinate DataType

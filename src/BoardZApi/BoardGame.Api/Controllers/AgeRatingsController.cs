@@ -1,4 +1,5 @@
-﻿using BoardGame.Api.Models;
+﻿using BoardGame.Api.Helpers;
+using BoardGame.Api.Models;
 using BoardGame.Api.Services;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,7 @@ namespace BoardGame.Api.Controllers
         [ResponseType(typeof(AgeRating[]))]
         public IHttpActionResult List()
         {
-            return Ok(_ageRatingService.GetAll());
+            return Ok(_ageRatingService.GetAll(User.GetCurrentUsernameOrThrow()));
         }
 
         /// <summary>

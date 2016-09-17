@@ -16,10 +16,12 @@
                     <tbody>
                         <tr>
                             <th>Name</th>
+                            <th>Games in this Category</th>
 
                         </tr>
                         <tr *ngFor=" let cat of categories" (click)="openDetails(cat)" class="respond-click">
                             <td>{{cat.name}}</td>
+                            <td>{{cat.numberOfGames}}</td>
                         </tr>
                     </tbody>
                 </table>

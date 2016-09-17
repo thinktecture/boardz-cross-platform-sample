@@ -14,7 +14,7 @@ namespace BoardGame.Api.Models
         /// </summary>
         public Game()
         {
-            this.Categories = new HashSet<Category>();
+    
         }
         /// <summary>
         /// Unique identifier
@@ -40,6 +40,7 @@ namespace BoardGame.Api.Models
         /// AgeRatingId
         /// </summary>
         public Guid? AgeRatingId { get; set; }
+
         /// <summary>
         /// Age Rating
         /// </summary>

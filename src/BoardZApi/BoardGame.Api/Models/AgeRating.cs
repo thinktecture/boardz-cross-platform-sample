@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace BoardGame.Api.Models
@@ -27,6 +28,8 @@ namespace BoardGame.Api.Models
         /// <summary>
         /// Games applied to this age rating
         /// </summary>
+        [JsonIgnore]
         public virtual ICollection<Game> Games { get; set; }
+        
     }
 }

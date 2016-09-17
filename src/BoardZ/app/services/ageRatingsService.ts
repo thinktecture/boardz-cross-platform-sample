@@ -33,7 +33,7 @@ export class AgeRatingsService {
         localStorage.setItem(this._storageKey, JSON.stringify(ageRatings));
     }
 
-    public getAll(): void {
-        return JSON.parse(localStorage.getItem(this._storageKey) || '[]');
+    public getAll(): Array<AgeRating>{
+        return JSON.parse(localStorage.getItem(this._storageKey) || '[]').map(rawRating=>AgeRating.fromRawJson(rawRating));
     }
 }

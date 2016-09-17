@@ -11,6 +11,10 @@ import {GeoLocation} from '../../models/geoLocation';
 import {LoginService} from '../../services/loginService';
 import {Notification} from '../../models/notification';
 import {NotificationType} from '../../models/notificationType';
+import {AgeRating} from '../../models/ageRating';
+import {AgeRatingsService} from '../../services/ageRatingsService';
+import {Category} from '../../models/category';
+import {CategoriesService} from '../../services/categoriesService';
 
 @Component({
     moduleId: module.id,
@@ -23,24 +27,31 @@ export class GameDetailsComponent implements OnInit {
     private _pictureUrl: string = '';
     private _coordinates: GeoLocation = null;
     private _sending: boolean;
-
+    public ageRatings: Array<AgeRating>;
+    public categories: Array<Category>;
     public active = true;
     public model: Game = new Game();
     public originalModel: Game = new Game();
+    public selectedCategories: Array<String> = [];
 
     constructor(private _logService: LogService,
                 private _gameService: GamesService,
                 private _router: Router,
                 private route: ActivatedRoute,
                 private _notificationService: NotificationService,
+                private _categoriesService: CategoriesService,
+                private _ageRatingsService: AgeRatingsService,
                 private _playersService: PlayersService,
                 private _signalRService: SignalRService,
                 private _loginService: LoginService) {
     }
 
     public ngOnInit(): any {
+        this._categoriesService.getAll().subscribe(cats=>this.categories = cats);
+        this.ageRatings = this._ageRatingsService.getAll();
         this.route.data.forEach((data: { game: Game }) => {
             this.originalModel = this._gameService.deepClone(this.model = data.game || new Game());
+            this.selectedCategories = this.originalModel.categories.map(c=>c.id);
             if (this._needsReset) {
                 this.reset();
             }
@@ -78,7 +89,18 @@ export class GameDetailsComponent implements OnInit {
         setTimeout(() => this.active = true, 0);
     }
 
+
     public saveChanges(): void {
+
+        this.model.categories = this.categories.filter(cat => this.selectedCategories.indexOf(cat.id) >-1);
+
+        if (this.model.ageRatingId) {
+            let found = this.ageRatings.filter(ar=>ar.id === this.model.ageRatingId);
+            if (found && found.length > 0) {
+                this.model.ageRating = found[0];
+            }
+
+        }
         if (this.model.id === null) {
             this._gameService.addGame(this.model)
                 .subscribe(

@@ -35,7 +35,8 @@ namespace BoardGame.Api.Services
         /// <returns></returns>
         public IEnumerable<Category> GetAll(String userName)
         {
-            return _dbContext.Categories.Where(category => category.UserName.Equals(userName, StringComparison.InvariantCultureIgnoreCase)).OrderBy(category => category.Name);
+            return _dbContext.Categories.Include(category=>category.Games)
+                .Where(category => category.UserName.Equals(userName, StringComparison.InvariantCultureIgnoreCase)).OrderBy(category => category.Name);
         }
 
         /// <summary>
@@ -47,7 +48,7 @@ namespace BoardGame.Api.Services
         public Category GetById(Guid categoryId, String userName)
         {
             return _dbContext.Categories
-                .Include(category => category.Games)
+                .Include(category => category.Games.Where(game=>game.UserName.Equals(userName,StringComparison.InvariantCultureIgnoreCase)))
                 .Where(category => category.UserName.Equals(userName, StringComparison.InvariantCultureIgnoreCase))
                 .FirstOrDefault(category => category.Id.Equals(categoryId));
         }

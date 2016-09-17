@@ -41,6 +41,23 @@ namespace BoardGame.Api.Models
         /// <summary>
         /// All games in this category
         /// </summary>
-        public virtual ICollection<Game> Games { get;set; }
+        [JsonIgnore]
+        public virtual ICollection<Game> Games { get; set; }
+
+        /// <summary>
+        /// List with Games in that category
+        /// </summary>
+        public IList<String> GameNames
+        {
+            get
+            {
+                return this.Games.Where(game => game.UserName.Equals(this.UserName,StringComparison.InvariantCultureIgnoreCase)).Select(game => game.Name).ToList();
+            }
+        }
+
+        /// <summary>
+        /// NumberOfGames
+        /// </summary>
+        public int NumberOfGames  => this.GameNames.Count; 
     }
 }
