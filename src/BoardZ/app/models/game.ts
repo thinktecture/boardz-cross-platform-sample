@@ -1,15 +1,15 @@
-import {EntityState} from './entityState';
+import {ModelState} from './entityState';
 export class Game {
 
     constructor() {
-        this.entityState = EntityState.Clean;
+        this.state = ModelState.Clean;
     }
 
     public id: string = null;
     public name: string;
     public description: string;
     public userName: string;
-    public entityState: EntityState;
+    public state: ModelState;
     public rowVersion: number;
 
     public static fromRawJson(rawJson: any): Game {
