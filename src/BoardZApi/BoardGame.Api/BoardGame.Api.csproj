@@ -136,6 +136,15 @@
     <Compile Include="Helpers\IPrincipalExtensions.cs" />
     <Compile Include="Hubs\IPlayer.cs" />
     <Compile Include="Hubs\PlayerHub.cs" />
+    <Compile Include="Migrations\201609171250159_InitialCreate.cs" />
+    <Compile Include="Migrations\201609171250159_InitialCreate.Designer.cs">
+      <DependentUpon>201609171250159_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609172056012_AddRowVersion.cs" />
+    <Compile Include="Migrations\201609172056012_AddRowVersion.Designer.cs">
+      <DependentUpon>201609172056012_AddRowVersion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AgeRating.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Category.cs" />
@@ -174,6 +183,14 @@
       <DependentUpon>Models.tst</DependentUpon>
       <CustomToolNamespace>Models\Player.cs</CustomToolNamespace>
     </TypeScriptCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201609171250159_InitialCreate.resx">
+      <DependentUpon>201609171250159_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609172056012_AddRowVersion.resx">
+      <DependentUpon>201609172056012_AddRowVersion.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -358,6 +358,11 @@
             Name of the user who created the game
             </summary>
         </member>
+        <member name="P:BoardGame.Api.Models.Game.RowVersion">
+            <summary>
+            RowVersion -> required for Offline Support
+            </summary>
+        </member>
         <member name="T:BoardGame.Api.Models.Category">
             <summary>
             Category model
@@ -396,6 +401,11 @@
         <member name="P:BoardGame.Api.Models.Category.NumberOfGames">
             <summary>
             NumberOfGames
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.Category.RowVersion">
+            <summary>
+            RowVersion -> required for Offline Support
             </summary>
         </member>
         <member name="T:BoardGame.Api.Models.Coordinate">

@@ -58,6 +58,11 @@ namespace BoardGame.Api.Models
         /// <summary>
         /// NumberOfGames
         /// </summary>
-        public int NumberOfGames  => this.GameNames.Count; 
+        public int NumberOfGames  => this.GameNames.Count;
+
+        /// <summary>
+        /// RowVersion -> required for Offline Support
+        /// </summary>
+        public byte[] RowVersion { get; set; }
     }
 }

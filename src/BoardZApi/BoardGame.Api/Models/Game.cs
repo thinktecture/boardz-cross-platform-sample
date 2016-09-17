@@ -55,5 +55,10 @@ namespace BoardGame.Api.Models
         /// </summary>
         [JsonIgnore]
         public string UserName { get; set; }
+
+        /// <summary>
+        /// RowVersion -> required for Offline Support
+        /// </summary>
+        public byte[] RowVersion { get; set; }
     }
 }

@@ -101,6 +101,10 @@ namespace BoardGame.Api
             modelBuilder.Entity<Player>()
                 .HasRequired(player => player.Game);
 
+
+            modelBuilder.Entity<Game>().Property(game => game.RowVersion).IsRowVersion();
+            modelBuilder.Entity<Category>().Property(category => category.RowVersion).IsRowVersion();
+
         }
     }
 }
