@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Reflection;
 using System.Web.Http;
@@ -9,8 +8,6 @@ using Autofac;
 using Autofac.Integration.WebApi;
 using BoardGame.Api.Helpers;
 using BoardGame.Api.Security;
-using BoardGame.Api.Storages;
-using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Owin;
@@ -34,14 +31,6 @@ namespace BoardGame.Api
         {
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterApiControllers(typeof (Startup).Assembly);
-
-            containerBuilder.RegisterType<BoardGameStorage>()
-                .As<IStorage<Models.BoardGame>>()
-                .SingleInstance();
-
-            containerBuilder.RegisterType<PlayerStorage>()
-                .As<IStorage<Models.Player>>()
-                .SingleInstance();
 
             containerBuilder.RegisterType<DistanceCalculator>();
 
