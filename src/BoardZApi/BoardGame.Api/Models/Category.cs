@@ -64,5 +64,10 @@ namespace BoardGame.Api.Models
         /// RowVersion -> required for Offline Support
         /// </summary>
         public byte[] RowVersion { get; set; }
+
+        /// <summary>
+        /// the version that goes to the client
+        /// </summary>
+        public ulong RowVersionAsInt => BitConverter.ToUInt64(RowVersion.Reverse().ToArray(), 0);
     }
 }

@@ -12,7 +12,7 @@ namespace BoardGame.Api.Controllers
     /// Categories Controller
     /// </summary>
     [Authorize]
-    public class CategoriesController: ApiController, IDisposable
+    public class CategoriesController: BaseApiController, IDisposable
     {
 
         private readonly CategoriesService _categoriesService;

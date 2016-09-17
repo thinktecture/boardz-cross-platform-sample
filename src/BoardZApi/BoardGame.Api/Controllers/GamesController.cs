@@ -12,7 +12,7 @@ namespace BoardGame.Api.Controllers
     /// Provides a CRUD api for board games
     /// </summary>
     [Authorize]
-    public class GamesController : ApiController
+    public class GamesController : BaseApiController
     {
         private readonly GameService _gameService;
         
@@ -24,6 +24,20 @@ namespace BoardGame.Api.Controllers
             _gameService = new GameService();
         }
         
+        /// <summary>
+        /// Method for loading games since a given row version
+        /// </summary>
+        /// <param name="rowVersion"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IEnumerable<Game> Since(string rowVersion = null)
+        {
+            var rv = this.GetRowVersion(rowVersion);
+            var username = User.GetCurrentUsernameOrThrow();
+            var games = _gameService.GetAll(username, rv);
+
+            return games;
+        }
         /// <summary>
         /// Lists all games
         /// </summary>

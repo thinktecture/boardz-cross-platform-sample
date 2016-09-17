@@ -128,10 +128,13 @@
     <Compile Include="BoardzDatabaseConfiguration.cs" />
     <Compile Include="BoardzDatabaseInitializer.cs" />
     <Compile Include="Controllers\AgeRatingsController.cs" />
+    <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\GamesController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
+    <Compile Include="Controllers\SyncController.cs" />
+    <Compile Include="EntityFrameworkExtensions\Extensions.cs" />
     <Compile Include="Helpers\DistanceCalculator.cs" />
     <Compile Include="Helpers\IPrincipalExtensions.cs" />
     <Compile Include="Hubs\IPlayer.cs" />

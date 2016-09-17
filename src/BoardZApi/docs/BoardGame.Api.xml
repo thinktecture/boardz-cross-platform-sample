@@ -83,6 +83,18 @@
             </summary>
             <param name="disposing"></param>
         </member>
+        <member name="T:BoardGame.Api.Controllers.BaseApiController">
+            <summary>
+            Base ApiController class
+            </summary>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.BaseApiController.GetRowVersion(System.String)">
+            <summary>
+            Converts a string or null to a valid RowVersion
+            </summary>
+            <param name="rowVersion"></param>
+            <returns></returns>
+        </member>
         <member name="T:BoardGame.Api.Controllers.CategoriesController">
             <summary>
             Categories Controller
@@ -148,6 +160,13 @@
             <summary>
             default CTOR
             </summary>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.GamesController.Since(System.String)">
+            <summary>
+            Method for loading games since a given row version
+            </summary>
+            <param name="rowVersion"></param>
+            <returns></returns>
         </member>
         <member name="M:BoardGame.Api.Controllers.GamesController.List">
             <summary>
@@ -269,6 +288,20 @@
             <summary>
             Ping endpoint - Just returning a HTTP StatusCode 200
             </summary>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.SyncController.SyncGames(System.Collections.Generic.IEnumerable{BoardGame.Api.Models.Game})">
+            <summary>
+            Sync games
+            </summary>
+            <param name="games"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.SyncController.SyncCategories(System.Collections.Generic.IEnumerable{BoardGame.Api.Models.Category})">
+            <summary>
+            sync all categories
+            </summary>
+            <param name="categories"></param>
+            <returns></returns>
         </member>
         <member name="T:BoardGame.Api.Helpers.DistanceCalculator">
             <summary>
@@ -553,11 +586,12 @@
             Default CTOR
             </summary>
         </member>
-        <member name="M:BoardGame.Api.Services.GameService.GetAll(System.String)">
+        <member name="M:BoardGame.Api.Services.GameService.GetAll(System.String,System.Byte[])">
             <summary>
             Returns all games for a given user
             </summary>
             <param name="userName"></param>
+            <param name="rowVersion"></param>
             <returns></returns>
         </member>
         <member name="M:BoardGame.Api.Services.GameService.GetById(System.Guid,System.String)">
