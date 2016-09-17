@@ -20,7 +20,9 @@ export class GamesService {
     }
 
     public getAll(): Observable<Game[]> {
-        return this._http.get('api/games/list').map(response => (<Game[]>response.json()));
+        return this._http.get('api/games/list')
+            .map(response => response.json())
+            .map(rawGames => rawGames.map(game => Game.fromRawJson(game)));
     }
 
     public deepClone(game: Game): Game {
