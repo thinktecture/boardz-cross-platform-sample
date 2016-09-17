@@ -11,7 +11,7 @@ import {BackButtonDirective} from '../directives/backButtonDirective';
 import {CloseSidebarOnClickDirective} from '../directives/closeSidebarOnClickDirective';
 import {BrowserModule} from '@angular/platform-browser';
 import {HttpModule, XHRBackend, ConnectionBackend} from '@angular/http';
-import {APP_ROUTING, appRoutingProviders, GAMES_ROUTING} from '../routes/index';
+import {APP_ROUTING, appRoutingProviders, GAMES_ROUTING, CATEGORIES_ROUTING} from '../routes/index';
 import {ApiConfig} from '../apiConfig';
 import {HashLocationStrategy, LocationStrategy, CommonModule} from '@angular/common';
 import {NativeIntegrationService} from '../services/nativeIntegrationService';
@@ -26,7 +26,6 @@ import {PlatformInformationService} from '../services/platformInformationService
 import {UiNotificationService} from '../services/uiNotificationService';
 import {SignalRService} from '../services/signalrService';
 import {GameListComponent} from '../components/games/list';
-import {GameDetailsComponent} from '../components/games/details';
 import {GamesRootComponent} from '../components/games/gamesRoot';
 import {GameDetailsResolver} from '../resolvers/gameDetailsResolver';
 import {CameraService} from '../services/cameraService';
@@ -40,6 +39,11 @@ import {OfflineDetectionService} from '../services/offlineDetectionService';
 import {DashboardService} from '../services/dashboardService';
 import {AgeRatingsService} from '../services/ageRatingsService';
 import {CategoriesService} from '../services/categoriesService';
+import {CategoryRootComponent} from '../components/categories/categoryRoot';
+import {CategoryListComponent} from '../components/categories/list';
+import {GameDetailsComponent} from '../components/games/details';
+import {CategoryDetailsComponent} from '../components/categories/details';
+import {CategoryDetailsResolver} from '../resolvers/categoryDetailsResolver';
 
 export namespace ModuleConfiguration {
 
@@ -100,6 +104,17 @@ export namespace ModuleConfiguration {
         public static exports = [];
 
         public static providers = [GameDetailsResolver];
+    }
+
+    export class Categories {
+
+        public static declarations = [CategoryRootComponent, CategoryDetailsComponent, CategoryListComponent];
+
+        public static imports = [CommonModule, FormsModule, CATEGORIES_ROUTING];
+
+        public static exports = [];
+
+        public static providers = [CategoryDetailsResolver];
     }
 
     export class Shared {

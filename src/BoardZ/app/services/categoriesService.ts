@@ -20,7 +20,9 @@ export class CategoriesService {
     }
 
     public getAll(): Observable<Category[]> {
-        return this._http.get('api/categories/list').map(response => (<Category[]>response.json()));
+        return this._http.get('api/categories/list')
+            .map(response => (response.json()))
+            .map(rawCategories => rawCategories.map(rawCategory => Category.fromRawJson(rawCategory)));
     }
 
     public deepClone(category: Category): Category {
