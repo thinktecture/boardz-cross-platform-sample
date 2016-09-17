@@ -14,6 +14,7 @@ export class SidebarComponent {
         this.navigationEntries = [];
         this.navigationEntries.push(new NavigationEntry([''], 'dashboard', 'Dashboard'));
         this.navigationEntries.push(new NavigationEntry(['/games/all'], 'list', 'Games'));
+        this.navigationEntries.push(new NavigationEntry(['/categories/all'], 'tags', 'Categories'));
         this.navigationEntries.push(new NavigationEntry(['/radiussearch'], 'location-arrow', 'Players search'));
 
         //this.navigationEntries.push(new NavigationEntry(['/notifications'], 'bell', 'Test Notifcations'));

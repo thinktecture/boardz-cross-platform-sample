@@ -1,4 +1,4 @@
 export class Category{
-    public id: string;
+    public id: string = null;
     public name: string;
 }

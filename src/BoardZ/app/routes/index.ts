@@ -9,6 +9,10 @@ import {GameDetailsResolver} from '../resolvers/gameDetailsResolver';
 import {GameDetailsComponent} from '../components/games/details';
 import {GameListComponent} from '../components/games/list';
 import {GamesRootComponent} from '../components/games/gamesRoot';
+import {CategoryRootComponent} from '../components/categories/categoryRoot';
+import {CategoryListComponent} from '../components/categories/list';
+import {CategoryDetailsComponent} from '../components/categories/details';
+import {CategoryDetailsResolver} from '../resolvers/categoryDetailsResolver';
 
 const appRootRoutes: Routes = [
 
@@ -29,15 +33,38 @@ const gameRoutes: Routes = [
             {
                 path: 'new',
                 component: GameDetailsComponent,
-                name: 'CreateGame',
                 data: { displayName: 'Create a new game' }
             },
             {
                 path: 'details/:id',
                 component: GameDetailsComponent,
-                name: 'GameDetails',
+
                 resolve: { game: GameDetailsResolver },
                 data: { displayName: 'Game details' }
+            }
+        ]
+    }
+
+];
+
+const categoryRoutes: Routes = [
+
+    {
+        path: 'categories',
+        component: CategoryRootComponent,
+        canActivate: [AuthGuard],
+        children: [
+            { path: 'all', component: CategoryListComponent, data: { displayName: 'Category overview' } },
+            {
+                path: 'new',
+                component: CategoryDetailsComponent,
+                data: { displayName: 'Create a new category' }
+            },
+            {
+                path: 'details/:id',
+                component: CategoryDetailsComponent,
+                resolve: { category: CategoryDetailsResolver },
+                data: { displayName: 'Category details' }
             }
         ]
     }
@@ -47,3 +74,4 @@ export const appRoutingProviders: any[] = [AuthGuard];
 
 export const APP_ROUTING: ModuleWithProviders = RouterModule.forRoot(appRootRoutes);
 export const GAMES_ROUTING: ModuleWithProviders = RouterModule.forChild(gameRoutes);
+export const CATEGORIES_ROUTING: ModuleWithProviders = RouterModule.forChild(categoryRoutes);
