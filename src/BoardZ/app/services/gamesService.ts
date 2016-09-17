@@ -3,10 +3,12 @@ import {Headers} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {AuthenticatedHttp} from './authenticatedHttp';
 import {Game} from '../models/game';
+import {OfflineDetectionService} from './offlineDetectionService';
 
 @Injectable()
 export class GamesService {
-    constructor(private _http: AuthenticatedHttp) {
+    constructor(private _http: AuthenticatedHttp,
+                private _offlineDetectionService: OfflineDetectionService) {
     }
 
     private getRequestOptions() {
@@ -19,10 +21,12 @@ export class GamesService {
         return { headers: headers };
     }
 
-    public getAll(): Observable<Game[]> {
-        return this._http.get('api/games/list')
+    public getAll(): Observable<Array<Game>> {
+
+        return Observable.if(()=>{ return this._offlineDetectionService.isOnline }, this._http.get('api/games/list')
             .map(response => response.json())
-            .map(rawGames => rawGames.map(game => Game.fromRawJson(game)));
+            .map(rawGames => rawGames.map(game => Game.fromRawJson(game))),Observable.of([]));
+
     }
 
     public deepClone(game: Game): Game {
