@@ -1,14 +1,14 @@
-import {EntityState} from './entityState';
+import {ModelState} from './entityState';
 
 export class Category {
 
     constructor() {
-        this.entityState = EntityState.Clean;
+        this.state = ModelState.Clean;
     }
 
     public id: string = null;
     public name: string;
-    public entityState: EntityState;
+    public state: ModelState;
     public rowVersion: number;
 
     public static fromRawJson(rawJson: any): Category {
