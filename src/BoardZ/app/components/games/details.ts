@@ -138,7 +138,7 @@ export class GameDetailsComponent implements OnInit {
 
         let player = new Player();
         player.name = this._loginService.username;
-        player.boardGameId = this.model.id;
+        player.gameId = this.model.id;
         player.coordinate = this._coordinates;
         player.imageUrl = this._pictureUrl;
 

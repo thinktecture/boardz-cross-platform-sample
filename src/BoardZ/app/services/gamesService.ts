@@ -20,7 +20,7 @@ export class GamesService {
     }
 
     public getAll(): Observable<Game[]> {
-        return this._http.get('api/boardgames/list').map(response => (<Game[]>response.json()));
+        return this._http.get('api/games/list').map(response => (<Game[]>response.json()));
     }
 
     public deepClone(game: Game): Game {
@@ -32,22 +32,22 @@ export class GamesService {
     }
 
     public getById(id: string): Observable<Game> {
-        return this._http.get(`api/boardgames/single?id=${id}`)
+        return this._http.get(`api/games/single?id=${id}`)
             .map(response => <Game>response.json());
     }
 
     public addGame(game: Game): Observable<string> {
-        return this._http.post(`api/boardgames/add`, JSON.stringify(game), this.getRequestOptions())
+        return this._http.post(`api/games/add`, JSON.stringify(game), this.getRequestOptions())
             .map(response => <string>response.json());
     }
 
     public updateGame(game: Game): Observable<string> {
-        return this._http.put(`api/boardgames/update`, JSON.stringify(game), this.getRequestOptions())
+        return this._http.put(`api/games/update`, JSON.stringify(game), this.getRequestOptions())
             .map(response => game.id);
     }
 
     public deleteGame(id: string): Observable<string> {
-        return this._http.delete(`api/boardgames/remove?id=${id}`)
+        return this._http.delete(`api/games/remove?id=${id}`)
             .map(response => <string>response.text());
     }
 }
