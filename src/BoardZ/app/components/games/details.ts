@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
+
 import {Game} from '../../models/game';
 import {LogService} from '../../services/logService';
 import {GamesService} from '../../services/gamesService';

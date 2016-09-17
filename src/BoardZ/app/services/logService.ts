@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+
 import {LogLevel} from '../models/logLevel';
 
 @Injectable()

@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+
 import {NavigationEntry} from '../../models/navigationEntry';
 
 @Component({
@@ -18,5 +19,4 @@ export class SidebarComponent {
 
         //this.navigationEntries.push(new NavigationEntry(['/notifications'], 'bell', 'Test Notifcations'));
     }
-
 }

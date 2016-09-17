@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+
 import {GeoLocation} from '../../models/geoLocation';
 import {GeolocationService} from '../../services/geolocationService';
 import {PlayersService} from '../../services/playersService';

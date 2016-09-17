@@ -1,6 +1,7 @@
-///<reference path="../../../../../typings/main/ambient/leaflet/leaflet.d.ts" />
+///<reference path="../../../../../typings/globals/leaflet/index.d.ts" />
 
 import {Component, Output, OnInit, EventEmitter} from '@angular/core';
+
 import {GeoLocation} from '../../models/geoLocation';
 import {GeolocationService} from '../../services/geolocationService';
 

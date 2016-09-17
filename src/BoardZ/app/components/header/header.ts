@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+
 import {Notification} from '../../models/notification';
 import {LoginService} from '../../services/loginService';
 import {TokenService} from '../../services/tokenService';

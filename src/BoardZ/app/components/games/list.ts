@@ -1,14 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
+
 import {Game} from '../../models/game';
 import {GamesService} from '../../services/gamesService';
 import {NotificationService} from '../../services/notificationService';
+
 @Component({
     moduleId: module.id,
     selector: 'game-list',
     templateUrl: 'list.html'
 })
-
 export class GameListComponent implements OnInit {
     public games: Game[];
 

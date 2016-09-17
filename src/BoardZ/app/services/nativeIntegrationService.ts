@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
+
 import {PlatformInformationService} from './platformInformationService';
 import {IBoardZAppWindow} from '../interfaces/boardzAppWindow';
 

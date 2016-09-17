@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
+
 import {LogService} from './logService';
 import {Notification} from '../models/notification';
 import {NotificationType} from '../models/notificationType';

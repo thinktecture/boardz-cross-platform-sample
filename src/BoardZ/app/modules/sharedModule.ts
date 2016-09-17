@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {ModuleConfiguration} from './config';
+import {ModuleConfiguration} from './modulesConfig';
 
 @NgModule({
     declarations: ModuleConfiguration.Shared.declarations,

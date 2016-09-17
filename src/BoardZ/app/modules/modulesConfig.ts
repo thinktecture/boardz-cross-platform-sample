@@ -11,7 +11,7 @@ import {BackButtonDirective} from '../directives/backButtonDirective';
 import {CloseSidebarOnClickDirective} from '../directives/closeSidebarOnClickDirective';
 import {BrowserModule} from '@angular/platform-browser';
 import {HttpModule, XHRBackend, ConnectionBackend} from '@angular/http';
-import {APP_ROUTING, appRoutingProviders, GAMES_ROUTING} from '../routes/index';
+import {APP_ROUTING, appRoutingProviders, GAMES_ROUTING} from '../routing/routingConfig';
 import {ApiConfig} from '../apiConfig';
 import {HashLocationStrategy, LocationStrategy, CommonModule} from '@angular/common';
 import {NativeIntegrationService} from '../services/nativeIntegrationService';

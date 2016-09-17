@@ -1,7 +1,7 @@
-import {ICameraService} from './cameraService';
 import {Observable} from 'rxjs/Rx';
 
-// Just to stop annoying TSC...
+import {ICameraService} from './cameraService';
+
 declare let window;
 
 export class DesktopCameraService implements ICameraService {

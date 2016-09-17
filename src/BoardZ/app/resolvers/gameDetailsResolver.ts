@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Resolve, ActivatedRouteSnapshot} from '@angular/router';
+
 import {Game} from '../models/game';
 import {GamesService} from '../services/gamesService';
 
@@ -10,6 +11,7 @@ export class GameDetailsResolver implements Resolve<Game> {
 
     resolve(route: ActivatedRouteSnapshot): Promise<Game> {
         let id = route.params['id'];
+
         return new Promise((resolve) => {
             this._gamesService.getById(id).subscribe(game => {
                 if (game) {

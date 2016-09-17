@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
+
 import {LogService} from './logService';
 
 const tokenKey: string = 'Authentication::Token';

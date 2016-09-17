@@ -4,18 +4,18 @@ import {DashboardComponent} from '../components/dashboard/dashboard';
 import {LoginComponent} from '../components/login/login';
 import {NotificationsComponent} from '../components/notifications/notifications';
 import {RadiusSearchComponent} from '../components/radiusSearch/radiusSearch';
-import {AuthGuard} from '../guards/authGuard';
 import {GameDetailsResolver} from '../resolvers/gameDetailsResolver';
 import {GameDetailsComponent} from '../components/games/details';
 import {GameListComponent} from '../components/games/list';
 import {GamesRootComponent} from '../components/games/gamesRoot';
+import {AuthenticationGuard} from '../guards/authenticationGuard';
 
 const appRootRoutes: Routes = [
 
-    { path: '', name: 'Dashboard', canActivate: [AuthGuard], component: DashboardComponent },
+    { path: '', name: 'Dashboard', canActivate: [AuthenticationGuard], component: DashboardComponent },
     { path: 'login', name: 'Login', component: LoginComponent },
-    { path: 'notifications', name: 'Notifications', canActivate: [AuthGuard], component: NotificationsComponent },
-    { path: 'radiussearch', name: 'RadiusSearch', canActivate: [AuthGuard], component: RadiusSearchComponent }
+    { path: 'notifications', name: 'Notifications', canActivate: [AuthenticationGuard], component: NotificationsComponent },
+    { path: 'radiussearch', name: 'RadiusSearch', canActivate: [AuthenticationGuard], component: RadiusSearchComponent }
 ];
 
 const gameRoutes: Routes = [
@@ -23,7 +23,7 @@ const gameRoutes: Routes = [
     {
         path: 'games',
         component: GamesRootComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthenticationGuard],
         children: [
             { path: 'all', component: GameListComponent, data: { displayName: 'Game overview' } },
             {
@@ -43,7 +43,7 @@ const gameRoutes: Routes = [
     }
 
 ];
-export const appRoutingProviders: any[] = [AuthGuard];
+export const appRoutingProviders: any[] = [AuthenticationGuard];
 
 export const APP_ROUTING: ModuleWithProviders = RouterModule.forRoot(appRootRoutes);
 export const GAMES_ROUTING: ModuleWithProviders = RouterModule.forChild(gameRoutes);
