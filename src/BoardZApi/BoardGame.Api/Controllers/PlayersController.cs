@@ -39,7 +39,7 @@ namespace BoardGame.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ResponseType(typeof(int))]
-        public IHttpActionResult PlayerCount()
+        public IHttpActionResult Count()
         {
             return Ok(_playersService.Count());
         }

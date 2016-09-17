@@ -71,6 +71,12 @@
             Default CTOR
             </summary>
         </member>
+        <member name="M:BoardGame.Api.Controllers.AgeRatingsController.List">
+            <summary>
+            Lists all ageRatings
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:BoardGame.Api.Controllers.AgeRatingsController.Dispose(System.Boolean)">
             <summary>
             IDisposable
@@ -87,7 +93,13 @@
             default CTOR
             </summary>
         </member>
-        <member name="M:BoardGame.Api.Controllers.CategoriesController.GameCount">
+        <member name="M:BoardGame.Api.Controllers.CategoriesController.List">
+            <summary>
+            Lists all categories
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BoardGame.Api.Controllers.CategoriesController.Count">
             <summary>
             Returns the categories count.
             </summary>
@@ -143,7 +155,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:BoardGame.Api.Controllers.GamesController.GameCount">
+        <member name="M:BoardGame.Api.Controllers.GamesController.Count">
             <summary>
             Returns the games count.
             </summary>
@@ -199,7 +211,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:BoardGame.Api.Controllers.PlayersController.PlayerCount">
+        <member name="M:BoardGame.Api.Controllers.PlayersController.Count">
             <summary>
             Returns the playing players count.
             </summary>

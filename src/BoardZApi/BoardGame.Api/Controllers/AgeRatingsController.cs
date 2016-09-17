@@ -26,6 +26,17 @@ namespace BoardGame.Api.Controllers
         }
 
         /// <summary>
+        /// Lists all ageRatings
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [ResponseType(typeof(AgeRating[]))]
+        public IHttpActionResult List()
+        {
+            return Ok(_ageRatingService.GetAll());
+        }
+
+        /// <summary>
         /// IDisposable
         /// </summary>
         /// <param name="disposing"></param>

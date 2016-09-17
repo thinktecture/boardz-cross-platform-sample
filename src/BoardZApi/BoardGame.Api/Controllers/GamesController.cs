@@ -41,7 +41,7 @@ namespace BoardGame.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ResponseType(typeof(int))]
-        public IHttpActionResult GameCount()
+        public IHttpActionResult Count()
         {
             return Ok(_gameService.Count(User.GetCurrentUsernameOrThrow()));
         }

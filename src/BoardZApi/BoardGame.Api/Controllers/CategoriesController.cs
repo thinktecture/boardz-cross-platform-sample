@@ -24,6 +24,16 @@ namespace BoardGame.Api.Controllers
             _categoriesService = new CategoriesService();
         }
 
+        /// <summary>
+        /// Lists all categories
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [ResponseType(typeof(Category[]))]
+        public IHttpActionResult List()
+        {
+            return Ok(_categoriesService.GetAll(User.GetCurrentUsernameOrThrow()));
+        }
 
         /// <summary>
         /// Returns the categories count.
@@ -31,7 +41,7 @@ namespace BoardGame.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ResponseType(typeof(int))]
-        public IHttpActionResult GameCount()
+        public IHttpActionResult Count()
         {
             return Ok(_categoriesService.Count(User.GetCurrentUsernameOrThrow()));
         }
