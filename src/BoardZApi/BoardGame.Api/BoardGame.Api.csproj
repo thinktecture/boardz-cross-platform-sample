@@ -159,10 +159,10 @@
     <Compile Include="Security\AuthorizationServerProvider.cs" />
     <Compile Include="Security\SecurityStartup.cs" />
     <Compile Include="Security\SignalRAuthorizationMiddleware.cs" />
-    <Compile Include="Services\AgeRatingService.cs" />
+    <Compile Include="Services\AgeRatingsService.cs" />
     <Compile Include="Services\CategoriesService.cs" />
-    <Compile Include="Services\GameService.cs" />
-    <Compile Include="Services\PlayerService.cs" />
+    <Compile Include="Services\GamesService.cs" />
+    <Compile Include="Services\PlayersService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

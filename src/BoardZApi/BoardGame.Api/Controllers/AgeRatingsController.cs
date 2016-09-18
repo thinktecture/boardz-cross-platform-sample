@@ -17,13 +17,13 @@ namespace BoardGame.Api.Controllers
     [Authorize]
     public class AgeRatingsController : ApiController, IDisposable
     {
-        private readonly AgeRatingService _ageRatingService;
+        private readonly AgeRatingsService _ageRatingService;
         /// <summary>
         /// Default CTOR
         /// </summary>
         public AgeRatingsController()
         {
-            _ageRatingService = new AgeRatingService();
+            _ageRatingService = new AgeRatingsService();
         }
 
         /// <summary>

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
+using BoardGame.Api.EntityFrameworkExtensions;
 
 namespace BoardGame.Api.Services
 {
@@ -22,7 +23,7 @@ namespace BoardGame.Api.Services
         /// </summary>
         public void Dispose()
         {
-            if(_dbContext != null)
+            if (_dbContext != null)
             {
                 _dbContext.Dispose();
             }
@@ -32,10 +33,19 @@ namespace BoardGame.Api.Services
         /// Return all Categories from a given user
         /// </summary>
         /// <param name="userName"></param>
+        /// <param name="rowVersion"></param>
         /// <returns></returns>
-        public IEnumerable<Category> GetAll(String userName)
+        public IEnumerable<Category> GetAll(String userName, byte[] rowVersion = null)
         {
-            return _dbContext.Categories.Include(category=>category.Games)
+            if (rowVersion != null)
+            {
+                return _dbContext.Categories
+                    .Include(category => category.Games)
+                    .Where(category => category.UserName.Equals(userName, StringComparison.InvariantCultureIgnoreCase)).OrderBy(category => category.Name)
+                    .Where(category => category.RowVersion.Compare(rowVersion) > 0).ToList();
+            }
+            return _dbContext.Categories
+                .Include(category => category.Games)
                 .Where(category => category.UserName.Equals(userName, StringComparison.InvariantCultureIgnoreCase)).OrderBy(category => category.Name);
         }
 
@@ -48,7 +58,7 @@ namespace BoardGame.Api.Services
         public Category GetById(Guid categoryId, String userName)
         {
             return _dbContext.Categories
-                .Include(category => category.Games.Where(game=>game.UserName.Equals(userName,StringComparison.InvariantCultureIgnoreCase)))
+                .Include(category => category.Games.Where(game => game.UserName.Equals(userName, StringComparison.InvariantCultureIgnoreCase)))
                 .Where(category => category.UserName.Equals(userName, StringComparison.InvariantCultureIgnoreCase))
                 .FirstOrDefault(category => category.Id.Equals(categoryId));
         }
@@ -85,7 +95,7 @@ namespace BoardGame.Api.Services
             }
         }
 
-        
+
         /// <summary>
         /// Delete a category by it's id
         /// </summary>
@@ -113,6 +123,11 @@ namespace BoardGame.Api.Services
             {
                 return false;
             }
+        }
+
+        internal DbContextTransaction NewTransaction()
+        {
+            return _dbContext.Database.BeginTransaction();
         }
 
         /// <summary>

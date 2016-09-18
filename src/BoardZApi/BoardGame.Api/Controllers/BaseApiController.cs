@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace BoardGame.Api.Controllers
@@ -17,9 +13,9 @@ namespace BoardGame.Api.Controllers
         /// </summary>
         /// <param name="rowVersion"></param>
         /// <returns></returns>
-        protected byte[] GetRowVersion(string rowVersion = null)
+        protected byte[] GetRowVersion(int? rowVersion)
         {
-            return rowVersion != null ? Convert.FromBase64String(rowVersion) : null;
+            return rowVersion.HasValue ? Convert.FromBase64String(rowVersion.Value.ToString()) : null;
         }
     }
 }

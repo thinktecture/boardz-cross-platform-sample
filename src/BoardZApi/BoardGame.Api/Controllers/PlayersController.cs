@@ -12,14 +12,14 @@ namespace BoardGame.Api.Controllers
     [Authorize]
     public class PlayersController : ApiController, IDisposable
     {
-        private readonly PlayerService _playersService;
+        private readonly PlayersService _playersService;
 
         /// <summary>
         /// default ctor
         /// </summary>
         public PlayersController()
         {
-            _playersService = new PlayerService();
+            _playersService = new PlayersService();
         }
 
         /// <summary>

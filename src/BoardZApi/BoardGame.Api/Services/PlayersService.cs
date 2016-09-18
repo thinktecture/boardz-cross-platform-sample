@@ -11,14 +11,14 @@ namespace BoardGame.Api.Services
     /// <summary>
     /// PlayerService
     /// </summary>
-    public class PlayerService : IDisposable
+    public class PlayersService : IDisposable
     {
         private readonly BoardzContext _dbContext;
         private readonly DistanceCalculator _distanceCalculator;
         /// <summary>
         /// Default CTOR
         /// </summary>
-        public PlayerService()
+        public PlayersService()
         {
             _dbContext = new BoardzContext();
             _distanceCalculator = new DistanceCalculator();

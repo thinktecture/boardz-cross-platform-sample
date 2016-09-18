@@ -14,14 +14,14 @@ namespace BoardGame.Api.Controllers
     [Authorize]
     public class GamesController : BaseApiController
     {
-        private readonly GameService _gameService;
+        private readonly GamesService _gameService;
         
         /// <summary>
         /// default CTOR
         /// </summary>
         public GamesController()
         {
-            _gameService = new GameService();
+            _gameService = new GamesService();
         }
         
         /// <summary>
@@ -30,7 +30,7 @@ namespace BoardGame.Api.Controllers
         /// <param name="rowVersion"></param>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<Game> Since(string rowVersion = null)
+        public IEnumerable<Game> Since(int? rowVersion)
         {
             var rv = this.GetRowVersion(rowVersion);
             var username = User.GetCurrentUsernameOrThrow();

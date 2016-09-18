@@ -10,14 +10,14 @@ namespace BoardGame.Api.Services
     /// <summary>
     /// Game Service
     /// </summary>
-    public class GameService : IDisposable
+    public class GamesService : IDisposable
     {
         private readonly BoardzContext _dbContext;
 
         /// <summary>
         /// Default CTOR
         /// </summary>
-        public GameService()
+        public GamesService()
         {
             _dbContext = new BoardzContext();
         }
@@ -35,7 +35,8 @@ namespace BoardGame.Api.Services
                 return _dbContext.Games
                     .Include(game => game.AgeRating)
                     .Include(game => game.Categories)
-                    .Where(c => c.RowVersion.Compare(rowVersion) > 0).ToList();
+                    .Where(game => game.UserName.Equals(userName, StringComparison.InvariantCultureIgnoreCase))
+                    .Where(game => game.RowVersion.Compare(rowVersion) > 0).ToList();
             }
             return _dbContext.Games
                     .Include(game => game.AgeRating)
@@ -135,6 +136,11 @@ namespace BoardGame.Api.Services
             _dbContext.Games.Add(game);
             _dbContext.SaveChanges();
             return game.Id;
+        }
+
+        internal DbContextTransaction NewTransaction()
+        { 
+            return _dbContext.Database.BeginTransaction();
         }
 
         /// <summary>

@@ -26,6 +26,21 @@ namespace BoardGame.Api.Controllers
         }
 
         /// <summary>
+        /// Method for loading categories since a given row version
+        /// </summary>
+        /// <param name="rowVersion"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IEnumerable<Category> Since(int? rowVersion)
+        {
+            var rv = this.GetRowVersion(rowVersion);
+            var username = User.GetCurrentUsernameOrThrow();
+            var games = _categoriesService.GetAll(username, rv);
+
+            return games;
+        }
+
+        /// <summary>
         /// Lists all categories
         /// </summary>
         /// <returns></returns>
