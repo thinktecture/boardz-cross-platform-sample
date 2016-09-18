@@ -61,8 +61,24 @@ namespace BoardGame.Api.Models
         public int NumberOfGames  => this.GameNames.Count;
 
         /// <summary>
-        /// RowVersion -> required for Offline Support
+        /// Category Row Version
         /// </summary>
+        [JsonIgnore]
         public byte[] RowVersion { get; set; }
+
+        /// <summary>
+        /// the version that goes to the client
+        /// </summary>
+        public ulong RowVersionAsInt
+        {
+            get
+            {
+                if (RowVersion != null)
+                {
+                    return BitConverter.ToUInt64(RowVersion.Reverse().ToArray(), 0);
+                }
+                return 0;
+            }
+        }
     }
 }
