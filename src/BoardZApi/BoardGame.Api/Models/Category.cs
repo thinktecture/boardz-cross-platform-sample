@@ -1,4 +1,4 @@
-﻿using BoardGame.Api.Models;
+using BoardGame.Api.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -51,14 +51,14 @@ namespace BoardGame.Api.Models
         {
             get
             {
-                return this.Games.Where(game => game.UserName.Equals(this.UserName,StringComparison.InvariantCultureIgnoreCase)).Select(game => game.Name).ToList();
+                return this.Games.Where(game => game.UserName.Equals(this.UserName, StringComparison.InvariantCultureIgnoreCase)).Select(game => game.Name).ToList();
             }
         }
 
         /// <summary>
         /// NumberOfGames
         /// </summary>
-        public int NumberOfGames  => this.GameNames.Count;
+        public int NumberOfGames => this.GameNames.Count;
 
         /// <summary>
         /// Category Row Version
@@ -80,5 +80,11 @@ namespace BoardGame.Api.Models
                 return 0;
             }
         }
+
+        /// <summary>
+        /// ModelState -> will be provided by the client when syncinc after connection was lost
+        /// </summary>
+        [JsonIgnore]
+        public ModelState ModelState { get; set; }
     }
 }

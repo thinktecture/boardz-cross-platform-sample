@@ -1,4 +1,4 @@
-﻿using BoardGame.Api.Models;
+using BoardGame.Api.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure.Annotations;
@@ -103,8 +103,14 @@ namespace BoardGame.Api
 
 
             modelBuilder.Entity<Game>().Property(game => game.RowVersion).IsRowVersion();
-            modelBuilder.Entity<Category>().Property(category => category.RowVersion).IsRowVersion();
+            modelBuilder.Entity<Game>()
+                .Ignore(game => game.ModelState)
+                .Ignore(game => game.RowVersionAsInt);
 
+            modelBuilder.Entity<Category>().Property(category => category.RowVersion).IsRowVersion();
+            modelBuilder.Entity<Category>()
+                .Ignore(category => category.ModelState)
+                .Ignore(category => category.RowVersionAsInt);
         }
     }
 }

@@ -1,16 +1,14 @@
 ﻿using BoardGame.Api.Models;
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using System.Data.Entity;
 
 namespace BoardGame.Api.Services
 {
-    internal class AgeRatingService : IDisposable
+    internal class AgeRatingsService : IDisposable
     {
         private readonly BoardzContext _dbContext;
 
-        public AgeRatingService()
+        public AgeRatingsService()
         {
             _dbContext = new BoardzContext();
         }

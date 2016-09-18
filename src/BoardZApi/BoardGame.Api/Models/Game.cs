@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
+
 namespace BoardGame.Api.Models
 {
     /// <summary>
@@ -76,5 +77,11 @@ namespace BoardGame.Api.Models
                 return 0;
             }
         }
+
+        /// <summary>
+        /// ModelState -> will be provided by the client when syncinc after connection was lost
+        /// </summary>
+        [JsonIgnore]
+        public ModelState ModelState { get; set; }
     }
 }

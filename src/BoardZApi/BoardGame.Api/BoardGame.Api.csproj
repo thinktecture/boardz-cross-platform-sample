@@ -128,10 +128,13 @@
     <Compile Include="BoardzDatabaseConfiguration.cs" />
     <Compile Include="BoardzDatabaseInitializer.cs" />
     <Compile Include="Controllers\AgeRatingsController.cs" />
+    <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\GamesController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
+    <Compile Include="Controllers\SyncController.cs" />
+    <Compile Include="EntityFrameworkExtensions\Extensions.cs" />
     <Compile Include="Helpers\DistanceCalculator.cs" />
     <Compile Include="Helpers\IPrincipalExtensions.cs" />
     <Compile Include="Hubs\IPlayer.cs" />
@@ -149,16 +152,17 @@
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Coordinate.cs" />
+    <Compile Include="Models\ModelState.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\PlayerWithDistance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AuthorizationServerProvider.cs" />
     <Compile Include="Security\SecurityStartup.cs" />
     <Compile Include="Security\SignalRAuthorizationMiddleware.cs" />
-    <Compile Include="Services\AgeRatingService.cs" />
+    <Compile Include="Services\AgeRatingsService.cs" />
     <Compile Include="Services\CategoriesService.cs" />
-    <Compile Include="Services\GameService.cs" />
-    <Compile Include="Services\PlayerService.cs" />
+    <Compile Include="Services\GamesService.cs" />
+    <Compile Include="Services\PlayersService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

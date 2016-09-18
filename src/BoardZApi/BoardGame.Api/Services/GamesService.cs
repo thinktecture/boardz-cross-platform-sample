@@ -1,4 +1,5 @@
-﻿using BoardGame.Api.Models;
+﻿using BoardGame.Api.EntityFrameworkExtensions;
+using BoardGame.Api.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,14 +10,14 @@ namespace BoardGame.Api.Services
     /// <summary>
     /// Game Service
     /// </summary>
-    public class GameService : IDisposable
+    public class GamesService : IDisposable
     {
         private readonly BoardzContext _dbContext;
 
         /// <summary>
         /// Default CTOR
         /// </summary>
-        public GameService()
+        public GamesService()
         {
             _dbContext = new BoardzContext();
         }
@@ -25,10 +26,19 @@ namespace BoardGame.Api.Services
         /// Returns all games for a given user
         /// </summary>
         /// <param name="userName"></param>
+        /// <param name="rowVersion"></param>
         /// <returns></returns>
-        public IEnumerable<Game> GetAll(string userName)
-        { 
+        public IEnumerable<Game> GetAll(string userName, byte[] rowVersion = null)
+        {
+            if (rowVersion != null)
+            {
                 return _dbContext.Games
+                    .Include(game => game.AgeRating)
+                    .Include(game => game.Categories)
+                    .Where(game => game.UserName.Equals(userName, StringComparison.InvariantCultureIgnoreCase))
+                    .Where(game => game.RowVersion.Compare(rowVersion) > 0).ToList();
+            }
+            return _dbContext.Games
                     .Include(game => game.AgeRating)
                     .Include(game => game.Categories)
                     .Where(game => game.UserName.Equals(userName, StringComparison.InvariantCultureIgnoreCase)).ToList();
@@ -55,7 +65,7 @@ namespace BoardGame.Api.Services
         /// <returns></returns>
         internal int Count(string username)
         {
-            return this.GetAll(username).Count();
+            return this.GetAll(username, null).Count();
         }
 
         /// <summary>
@@ -70,7 +80,7 @@ namespace BoardGame.Api.Services
             {
                 game.UserName = userName;
                 var dbEntity = this.GetById(game.Id, userName);
-                if(dbEntity == null)
+                if (dbEntity == null)
                 {
                     return false;
                 }
@@ -98,7 +108,7 @@ namespace BoardGame.Api.Services
         public bool DeleteGame(Guid gameId)
         {
             var found = _dbContext.Games.FirstOrDefault(game => game.Id.Equals(gameId));
-            if(found == null)
+            if (found == null)
             {
                 return false;
             }
@@ -136,12 +146,17 @@ namespace BoardGame.Api.Services
             return game.Id;
         }
 
+        internal DbContextTransaction NewTransaction()
+        { 
+            return _dbContext.Database.BeginTransaction();
+        }
+
         /// <summary>
         /// IDisposable
         /// </summary>
         public void Dispose()
         {
-            if(_dbContext != null)
+            if (_dbContext != null)
             {
                 _dbContext.Dispose();
             }

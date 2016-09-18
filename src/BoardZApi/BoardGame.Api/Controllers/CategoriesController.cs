@@ -12,7 +12,7 @@ namespace BoardGame.Api.Controllers
     /// Categories Controller
     /// </summary>
     [Authorize]
-    public class CategoriesController: ApiController, IDisposable
+    public class CategoriesController: BaseApiController, IDisposable
     {
 
         private readonly CategoriesService _categoriesService;
@@ -23,6 +23,21 @@ namespace BoardGame.Api.Controllers
         public CategoriesController()
         {
             _categoriesService = new CategoriesService();
+        }
+
+        /// <summary>
+        /// Method for loading categories since a given row version
+        /// </summary>
+        /// <param name="rowVersion"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IEnumerable<Category> Since(int? rowVersion)
+        {
+            var rv = this.GetRowVersion(rowVersion);
+            var username = User.GetCurrentUsernameOrThrow();
+            var games = _categoriesService.GetAll(username, rv);
+
+            return games;
         }
 
         /// <summary>

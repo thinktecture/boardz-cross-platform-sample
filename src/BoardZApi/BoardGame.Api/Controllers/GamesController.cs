@@ -12,18 +12,32 @@ namespace BoardGame.Api.Controllers
     /// Provides a CRUD api for board games
     /// </summary>
     [Authorize]
-    public class GamesController : ApiController
+    public class GamesController : BaseApiController
     {
-        private readonly GameService _gameService;
+        private readonly GamesService _gameService;
         
         /// <summary>
         /// default CTOR
         /// </summary>
         public GamesController()
         {
-            _gameService = new GameService();
+            _gameService = new GamesService();
         }
         
+        /// <summary>
+        /// Method for loading games since a given row version
+        /// </summary>
+        /// <param name="rowVersion"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IEnumerable<Game> Since(int? rowVersion)
+        {
+            var rv = this.GetRowVersion(rowVersion);
+            var username = User.GetCurrentUsernameOrThrow();
+            var games = _gameService.GetAll(username, rv);
+
+            return games;
+        }
         /// <summary>
         /// Lists all games
         /// </summary>
