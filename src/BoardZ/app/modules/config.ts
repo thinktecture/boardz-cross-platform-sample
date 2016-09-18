@@ -44,6 +44,9 @@ import {CategoryListComponent} from '../components/categories/list';
 import {GameDetailsComponent} from '../components/games/details';
 import {CategoryDetailsComponent} from '../components/categories/details';
 import {CategoryDetailsResolver} from '../resolvers/categoryDetailsResolver';
+import {OfflineStorageService} from '../services/offlineStorageService';
+import {Game} from '../models/game';
+import {Category} from '../models/category';
 
 export namespace ModuleConfiguration {
 
@@ -76,6 +79,7 @@ export namespace ModuleConfiguration {
             ApiConfig,
             OfflineConfig,
             OfflineDetectionService,
+            OfflineStorageService,
             NativeIntegrationService,
             AuthenticatedHttp,
             TokenService,

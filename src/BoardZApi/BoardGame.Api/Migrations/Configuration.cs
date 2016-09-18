@@ -5,7 +5,7 @@ namespace BoardGame.Api.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<BoardGame.Api.BoardzContext>
+    public sealed class Configuration : DbMigrationsConfiguration<BoardGame.Api.BoardzContext>
     {
         public Configuration()
         {

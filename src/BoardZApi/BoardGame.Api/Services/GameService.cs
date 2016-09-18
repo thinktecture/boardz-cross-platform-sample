@@ -124,6 +124,14 @@ namespace BoardGame.Api.Services
             game.Id = Guid.NewGuid();
             game.UserName = userName;
             _dbContext.Games.Add(game);
+            foreach (var item in game.Categories)
+            {
+                _dbContext.Entry<Category>(item).State = EntityState.Unchanged;
+            }
+            if(game.AgeRating != null)
+            {
+                _dbContext.Entry<AgeRating>(game.AgeRating).State = EntityState.Unchanged;
+            }
             _dbContext.SaveChanges();
             return game.Id;
         }

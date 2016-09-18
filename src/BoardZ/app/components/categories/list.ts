@@ -28,7 +28,7 @@ export class CategoryListComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this._categoriesService.getAll()
+        this._categoriesService.getAllCategories()
             .subscribe(
                 (categories) => this.categories = categories,
                 (err) => this._notificationService.notifyError('Error while fetching category data')

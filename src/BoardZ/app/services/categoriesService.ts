@@ -1,51 +1,39 @@
 import {Injectable} from '@angular/core';
-import {Headers} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {AuthenticatedHttp} from './authenticatedHttp';
 import {Category} from '../models/category';
+import {BaseApiService} from './baseApiService';
+import {OfflineStorageService} from './offlineStorageService';
+import {OfflineDetectionService} from './offlineDetectionService';
 
 @Injectable()
-export class CategoriesService {
-    constructor(private _http: AuthenticatedHttp) {
+export class CategoriesService extends BaseApiService<Category> {
+    constructor(http: AuthenticatedHttp, offlineStorageService: OfflineStorageService<Category>, offlineDetectionService: OfflineDetectionService) {
+        super(http, offlineStorageService, offlineDetectionService);
+        super.initializeEntity(Category);
     }
 
-    private getRequestOptions() {
-        let headers = new Headers();
-        headers.append('Accept', 'application/json');
-        headers.append('Accept', 'text/plain');
-        headers.append('Accept', '*/*');
-        headers.append('Content-Type', 'application/json;charset=UTF-8');
-
-        return { headers: headers };
-    }
-
-    public getAll(): Observable<Category[]> {
-        return this._http.get('api/categories/list')
-            .map(response => (response.json()))
-            .map(rawCategories => rawCategories.map(rawCategory => Category.fromRawJson(rawCategory)));
+    public getAllCategories(): Observable<Array<Category>> {
+        return this.getAll('api/categories/list');
     }
 
     public deepClone(category: Category): Category {
         return <Category>JSON.parse(JSON.stringify(category));
     }
 
-    public getById(id: string): Observable<Category> {
-        return this._http.get(`api/categories/single?id=${id}`)
-            .map(response => <Category>response.json());
+    public getCategoryById(id: string): Observable<Category> {
+        return this.getSingle(id, `api/categories/single?id=${id}`);
     }
 
     public addCategory(category: Category): Observable<string> {
-        return this._http.post(`api/categories/add`, JSON.stringify(category), this.getRequestOptions())
-            .map(response => <string>response.json());
+        return this.add(category, `api/categories/add`);
     }
 
-    public updateCategory(category: Category): Observable<string> {
-        return this._http.put(`api/categories/update`, JSON.stringify(category), this.getRequestOptions())
-            .map(response => category.id);
+    public updateCategory(category: Category): Observable<boolean> {
+        return this.update(category, `api/categories/update`)
     }
 
-    public deleteCategory(id: string): Observable<string> {
-        return this._http.delete(`api/categories/remove?id=${id}`)
-            .map(response => <string>response.text());
+    public deleteCategory(category: Category): Observable<boolean> {
+        return this.deleteItem(category, `api/categories/remove?id=${category.id}`);
     }
 }

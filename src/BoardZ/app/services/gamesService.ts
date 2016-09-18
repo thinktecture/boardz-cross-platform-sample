@@ -1,51 +1,39 @@
 import {Injectable} from '@angular/core';
-import {Headers} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {AuthenticatedHttp} from './authenticatedHttp';
 import {Game} from '../models/game';
+import {BaseApiService} from './baseApiService';
+import {OfflineStorageService} from './offlineStorageService';
+import {OfflineDetectionService} from './offlineDetectionService';
 
 @Injectable()
-export class GamesService {
-    constructor(private _http: AuthenticatedHttp) {
+export class GamesService extends BaseApiService<Game> {
+    constructor(http: AuthenticatedHttp, offlineStorageService: OfflineStorageService<Game>, offlineDetectionService: OfflineDetectionService) {
+        super(http, offlineStorageService, offlineDetectionService);
+        super.initializeEntity(Game);
     }
 
-    private getRequestOptions() {
-        let headers = new Headers();
-        headers.append('Accept', 'application/json');
-        headers.append('Accept', 'text/plain');
-        headers.append('Accept', '*/*');
-        headers.append('Content-Type', 'application/json;charset=UTF-8');
-
-        return { headers: headers };
-    }
-
-    public getAll(): Observable<Game[]> {
-        return this._http.get('api/games/list')
-            .map(response => response.json())
-            .map(rawGames => rawGames.map(game => Game.fromRawJson(game)));
+    public getAllGames(): Observable<Game[]> {
+        return this.getAll('api/games/list');
     }
 
     public deepClone(game: Game): Game {
         return <Game>JSON.parse(JSON.stringify(game));
     }
 
-    public getById(id: string): Observable<Game> {
-        return this._http.get(`api/games/single?id=${id}`)
-            .map(response => <Game>response.json());
+    public getGameById(id: string): Observable<Game> {
+        return this.getSingle(id, `api/games/single?id=${id}`);
     }
 
     public addGame(game: Game): Observable<string> {
-        return this._http.post(`api/games/add`, JSON.stringify(game), this.getRequestOptions())
-            .map(response => <string>response.json());
+        return this.add(game, `api/games/add`);
     }
 
-    public updateGame(game: Game): Observable<string> {
-        return this._http.put(`api/games/update`, JSON.stringify(game), this.getRequestOptions())
-            .map(response => game.id);
+    public updateGame(game: Game): Observable<boolean> {
+        return this.update(game, `api/games/update`);
     }
 
-    public deleteGame(id: string): Observable<string> {
-        return this._http.delete(`api/games/remove?id=${id}`)
-            .map(response => <string>response.text());
+    public deleteGame(game: Game): Observable<boolean> {
+        return this.deleteItem(game, `api/games/remove?id=${game.id}`);
     }
 }

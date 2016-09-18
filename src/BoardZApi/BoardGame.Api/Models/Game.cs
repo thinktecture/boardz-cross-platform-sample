@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-
+using System.Linq;
 namespace BoardGame.Api.Models
 {
     /// <summary>
@@ -14,7 +14,7 @@ namespace BoardGame.Api.Models
         /// </summary>
         public Game()
         {
-    
+
         }
         /// <summary>
         /// Unique identifier
@@ -24,7 +24,7 @@ namespace BoardGame.Api.Models
         /// <summary>
         /// Name of the board game
         /// </summary>
-        public string Name { get; set; } 
+        public string Name { get; set; }
 
         /// <summary>
         /// Edition of the Game
@@ -59,6 +59,22 @@ namespace BoardGame.Api.Models
         /// <summary>
         /// RowVersion -> required for Offline Support
         /// </summary>
+        [JsonIgnore]
         public byte[] RowVersion { get; set; }
+    
+        /// <summary>
+        /// the version that goes to the client
+        /// </summary>
+        public ulong RowVersionAsInt
+        {
+            get
+            {
+                if (RowVersion != null)
+                {
+                    return BitConverter.ToUInt64(RowVersion.Reverse().ToArray(), 0);
+                }
+                return 0;
+            }
+        }
     }
 }

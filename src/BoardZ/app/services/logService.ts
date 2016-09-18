@@ -43,7 +43,7 @@ export class LogService {
     }
 
     protected doLog(formattedMessage: string): void {
-        // here to be overriden
+
     }
 
     protected getIsoDate(): string {

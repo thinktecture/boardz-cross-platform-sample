@@ -47,8 +47,9 @@ export class GameDetailsComponent implements OnInit {
     }
 
     public ngOnInit(): any {
-        this._categoriesService.getAll().subscribe(cats=>this.categories = cats);
-        this.ageRatings = this._ageRatingsService.getAll();
+        this._categoriesService.getAllCategories().subscribe(cats=>this.categories = cats);
+        this._ageRatingsService.getAllAgeRatings().subscribe(ars=>this.ageRatings = ars);
+
         this.route.data.forEach((data: { game: Game }) => {
             this.originalModel = this._gameService.deepClone(this.model = data.game || new Game());
             this.selectedCategories = this.originalModel.categories.map(c=>c.id);
@@ -56,22 +57,6 @@ export class GameDetailsComponent implements OnInit {
                 this.reset();
             }
         });
-    }
-
-    private loadGame(id: string): void {
-        this._gameService.getById(id)
-            .subscribe(
-                (game) => {
-                    this.originalModel = this._gameService.deepClone(this.model = game);
-                    if (this._needsReset) {
-                        this.reset();
-                    }
-                },
-                (error) => {
-                    this._logService.logError('Could not find game. Error was: ' + error);
-                    this._notificationService.notifyError('Could not load game data.');
-                }
-            );
     }
 
     public abort(): void {
@@ -89,10 +74,9 @@ export class GameDetailsComponent implements OnInit {
         setTimeout(() => this.active = true, 0);
     }
 
-
     public saveChanges(): void {
 
-        this.model.categories = this.categories.filter(cat => this.selectedCategories.indexOf(cat.id) >-1);
+        this.model.categories = this.categories.filter(cat => this.selectedCategories.indexOf(cat.id) > -1);
 
         if (this.model.ageRatingId) {
             let found = this.ageRatings.filter(ar=>ar.id === this.model.ageRatingId);
@@ -107,16 +91,15 @@ export class GameDetailsComponent implements OnInit {
                     (newId) => {
                         this._notificationService.notifySuccess('New game was added.');
                         this._needsReset = true;
-                        this.loadGame(newId);
+                        this.model.id = this.originalModel.id = newId;
                     },
                     () => this._notificationService.notifyError('Could not save new game.')
                 );
         } else {
             this._gameService.updateGame(this.model)
-                .subscribe((oldId) => {
+                .subscribe(() => {
                         this._notificationService.notifySuccess('Game data was updated.');
                         this._needsReset = true;
-                        this.loadGame(oldId);
                     },
                     () => {
                         this._notificationService.notifyError('Could not update game data.');
@@ -127,7 +110,7 @@ export class GameDetailsComponent implements OnInit {
 
     public deleteGame(): void {
         if (window.confirm('Really delete the game "' + this.originalModel.name + '" ?')) {
-            this._gameService.deleteGame(this.originalModel.id)
+            this._gameService.deleteGame(this.originalModel)
                 .subscribe(
                     () => {
                         this._notificationService.notifySuccess('Game data was deleted.');

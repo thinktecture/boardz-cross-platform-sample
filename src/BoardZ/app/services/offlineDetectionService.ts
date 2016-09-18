@@ -7,15 +7,19 @@ import {Observable} from '/rxjs/Observable';
 import 'rxjs/add/operator/timeout';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import {Subject} from 'rxjs/Rx';
+
 @Injectable()
 export class OfflineDetectionService {
 
-    private _recentConnectionState: ConnectionState = ConnectionState.Unknown;
+    private _recentConnectionState: ConnectionState = ConnectionState.Initializing;
     private _monitoringHandle: number;
 
     constructor(private _http: Http, private _apiConfig: ApiConfig, private _offlineConfig: OfflineConfig) {
-        this._recentConnectionState = ConnectionState.Unknown;
+        this._recentConnectionState = ConnectionState.Initializing;
     }
+
+    public connectionRestoring: Subject<ConnectionState> = new Subject<ConnectionState>();
 
     private get pingUrl(): string {
         return `${this._apiConfig.rootUrl}api/status/ping`;
@@ -26,7 +30,7 @@ export class OfflineDetectionService {
     }
 
     public get isOnline(): boolean {
-        return this._recentConnectionState > ConnectionState.ToSlow;
+        return this._recentConnectionState > ConnectionState.ToSlow || this._recentConnectionState === ConnectionState.Initializing;
     }
 
     private checkConnection(): Observable<ConnectionState> {
@@ -56,7 +60,12 @@ export class OfflineDetectionService {
 
     public startConnectionMonitoring(): void {
         this._monitoringHandle = setInterval(() => {
-            this.checkConnection().subscribe(state => this._recentConnectionState = state)
+            this.checkConnection().subscribe(state => {
+                if (this._recentConnectionState < ConnectionState.Normal && state > ConnectionState.ToSlow) {
+                    this.connectionRestoring.next(state);
+                }
+                this._recentConnectionState = state;
+            });
         }, this._offlineConfig.checkInterval);
     }
 
