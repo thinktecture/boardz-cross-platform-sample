@@ -152,6 +152,7 @@
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Coordinate.cs" />
+    <Compile Include="Models\ModelState.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\PlayerWithDistance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -396,6 +396,16 @@
             RowVersion -> required for Offline Support
             </summary>
         </member>
+        <member name="P:BoardGame.Api.Models.Game.RowVersionAsInt">
+            <summary>
+            the version that goes to the client
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.Game.ModelState">
+            <summary>
+            ModelState -> will be provided by the client when syncinc after connection was lost
+            </summary>
+        </member>
         <member name="T:BoardGame.Api.Models.Category">
             <summary>
             Category model
@@ -438,7 +448,17 @@
         </member>
         <member name="P:BoardGame.Api.Models.Category.RowVersion">
             <summary>
-            RowVersion -> required for Offline Support
+            Category Row Version
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.Category.RowVersionAsInt">
+            <summary>
+            the version that goes to the client
+            </summary>
+        </member>
+        <member name="P:BoardGame.Api.Models.Category.ModelState">
+            <summary>
+            ModelState -> will be provided by the client when syncinc after connection was lost
             </summary>
         </member>
         <member name="T:BoardGame.Api.Models.Coordinate">
@@ -459,6 +479,31 @@
         <member name="P:BoardGame.Api.Models.Coordinate.Longitude">
             <summary>
             Longitude value
+            </summary>
+        </member>
+        <member name="T:BoardGame.Api.Models.ModelState">
+            <summary>
+            Model State enum
+            </summary>
+        </member>
+        <member name="F:BoardGame.Api.Models.ModelState.Clean">
+            <summary>
+            No Changes
+            </summary>
+        </member>
+        <member name="F:BoardGame.Api.Models.ModelState.New">
+            <summary>
+            New Entity
+            </summary>
+        </member>
+        <member name="F:BoardGame.Api.Models.ModelState.Modified">
+            <summary>
+            Modified Entity
+            </summary>
+        </member>
+        <member name="F:BoardGame.Api.Models.ModelState.Deleted">
+            <summary>
+            Entity has been deleted on the client
             </summary>
         </member>
         <member name="P:BoardGame.Api.Models.Player.Id">
