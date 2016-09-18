@@ -27,7 +27,7 @@ export class GameListComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this._gamesService.getAll()
+        this._gamesService.getAllGames()
             .subscribe(
                 (games) => this.games = games,
                 (err) => this._notificationService.notifyError('Error while fetching game data')

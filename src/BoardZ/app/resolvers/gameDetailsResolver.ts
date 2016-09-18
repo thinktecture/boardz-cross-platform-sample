@@ -11,7 +11,7 @@ export class GameDetailsResolver implements Resolve<Game> {
     resolve(route: ActivatedRouteSnapshot): Promise<Game> {
         let id = route.params['id'];
         return new Promise((resolve) => {
-            this._gamesService.getById(id).subscribe(game => {
+            this._gamesService.getGameById(id).subscribe(game => {
                 if (game) {
                     resolve(game);
                 } else {

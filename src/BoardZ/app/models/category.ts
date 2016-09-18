@@ -1,6 +1,7 @@
 import {ModelState} from './modelState';
+import {ISupportsOfflineStorage} from '../interfaces/supportsOfflineStorage';
 
-export class Category {
+export class Category implements ISupportsOfflineStorage {
 
     constructor() {
         this.state = ModelState.Clean;
@@ -12,17 +13,15 @@ export class Category {
     public numberOfGames: number;
     public rowVersion: number;
 
-
-
-    public static fromRawJson(rawJson: any): Category {
+    public fromRawJson(rawJson: any): Category {
         if (!rawJson) {
-            return new Category();
+            return this;
         }
-        let instance: Category = new Category();
-        instance.id = rawJson.id || null;
-        instance.name = rawJson.name || null;
-        instance.rowVersion = rawJson.rowVersion || -1;
-        instance.numberOfGames = rawJson.numberOfGames || 0;
-        return instance;
+
+        this.id = rawJson.id || null;
+        this.name = rawJson.name || null;
+        this.rowVersion = rawJson.rowVersion || -1;
+        this.numberOfGames = rawJson.numberOfGames || 0;
+        return this;
     }
 }

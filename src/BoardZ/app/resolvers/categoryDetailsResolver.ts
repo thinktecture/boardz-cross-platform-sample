@@ -11,7 +11,7 @@ export class CategoryDetailsResolver implements Resolve<Category> {
     resolve(route: ActivatedRouteSnapshot): Promise<Category> {
         let id = route.params['id'];
         return new Promise((resolve) => {
-            this._categoriesService.getById(id).subscribe(category => {
+            this._categoriesService.getCategoryById(id).subscribe(category => {
                 if (category) {
                     resolve(category);
                 } else {

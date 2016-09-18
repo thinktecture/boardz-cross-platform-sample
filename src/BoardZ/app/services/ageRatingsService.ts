@@ -1,39 +1,26 @@
 import {Injectable} from '@angular/core';
-import {Headers} from '@angular/http';
 import {AuthenticatedHttp} from './authenticatedHttp';
 import {AgeRating} from '../models/ageRating';
+import {OfflineStorageService} from './offlineStorageService';
+import {OfflineDetectionService} from './offlineDetectionService';
+import {BaseApiService} from './baseApiService';
+import {Observable} from 'rxjs/Rx';
 
 @Injectable()
-export class AgeRatingsService {
+export class AgeRatingsService extends BaseApiService<AgeRating> {
 
-    constructor(private _http: AuthenticatedHttp) {
-    }
-
-    private get _storageKey(): string {
-        return '_AGE_RATINGS';
-    }
-
-    private getRequestOptions() {
-        let headers = new Headers();
-        headers.append('Accept', 'application/json');
-        headers.append('Accept', 'text/plain');
-        headers.append('Accept', '*/*');
-        headers.append('Content-Type', 'application/json;charset=UTF-8');
-
-        return { headers: headers };
+    constructor(http: AuthenticatedHttp, offlineStorageService: OfflineStorageService<AgeRating>, offlineDetectionService: OfflineDetectionService) {
+        super(http, offlineStorageService, offlineDetectionService);
+        super.initializeEntity(AgeRating);
     }
 
     public initialize(): void {
-        this._http.get('api/ageratings/list')
-            .map(response => (<AgeRating[]>response.json()))
-            .subscribe((ratings) => this.store(ratings));
+        this.getAllAgeRatings()
+            .subscribe(() => {
+            });
     }
 
-    private store(ageRatings: Array<AgeRating>) {
-        localStorage.setItem(this._storageKey, JSON.stringify(ageRatings));
-    }
-
-    public getAll(): Array<AgeRating>{
-        return JSON.parse(localStorage.getItem(this._storageKey) || '[]').map(rawRating=>AgeRating.fromRawJson(rawRating));
+    public getAllAgeRatings(): Observable<Array<AgeRating>> {
+        return this.getAll('api/ageratings/list');
     }
 }
