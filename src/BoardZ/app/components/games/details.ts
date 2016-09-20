@@ -14,6 +14,7 @@ import {AgeRating} from '../../models/ageRating';
 import {AgeRatingsService} from '../../services/ageRatingsService';
 import {Category} from '../../models/category';
 import {CategoriesService} from '../../services/categoriesService';
+import {OfflineDetectionService} from '../../services/offlineDetectionService';
 
 @Component({
     moduleId: module.id,
@@ -41,6 +42,7 @@ export class GameDetailsComponent implements OnInit {
                 private _ageRatingsService: AgeRatingsService,
                 private _playersService: PlayersService,
                 private _signalRService: SignalRService,
+                private _offlineDetectionService: OfflineDetectionService,
                 private _loginService: LoginService) {
     }
 
@@ -125,6 +127,10 @@ export class GameDetailsComponent implements OnInit {
 
     public usePicture(pictureUrl: string) {
         this._pictureUrl = pictureUrl;
+    }
+
+    public get isOnline(): boolean{
+        return this._offlineDetectionService.isOnline;
     }
 
     public canPlay() {
