@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {Game} from '../../models/game';
-import {LogService} from '../../services/logService';
 import {GamesService} from '../../services/gamesService';
 import {NotificationService} from '../../services/notificationService';
 import {SignalRService} from '../../services/signalrService';
@@ -34,10 +33,9 @@ export class GameDetailsComponent implements OnInit {
     public originalModel: Game = new Game();
     public selectedCategories: Array<String> = [];
 
-    constructor(private _logService: LogService,
-                private _gameService: GamesService,
-                private _router: Router,
+    constructor(private _router: Router,
                 private route: ActivatedRoute,
+                private _gameService: GamesService,
                 private _notificationService: NotificationService,
                 private _categoriesService: CategoriesService,
                 private _ageRatingsService: AgeRatingsService,
