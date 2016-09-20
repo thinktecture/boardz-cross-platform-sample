@@ -39,21 +39,28 @@ export class OfflineDetectionService {
             .timeout(this._offlineConfig.absoluteTimeoutAt, Observable.of(this._offlineConfig.absoluteTimeoutAt + 1))
             .map(response => (new Date()).getTime() - start)
             .map(duration => this.getConnectionStateByDuration(duration))
-            .catch(() => Observable.of(ConnectionState.Offline));
+            .catch(() => {
+                console.info('=> ConnectionState.Offline (TIMEOUT)');
+                return Observable.of(ConnectionState.Offline);
+            });
     }
 
     private getConnectionStateByDuration(duration: number): ConnectionState {
         console.info(`evaluating connection state for ${duration}`);
         if (duration <= this._offlineConfig.maxDurationForGood) {
+            console.info('=> ConnectionState.Good');
             return ConnectionState.Good;
         }
         if (duration <= this._offlineConfig.maxDurationForNormal) {
+            console.info('=> ConnectionState.Normal');
             return ConnectionState.Normal;
         }
         if (duration <= this._offlineConfig.maxDurationForToSlow) {
+            console.info('=> ConnectionState.ToSlow --> handled like offline');
             return ConnectionState.ToSlow;
         }
         // duration is longer than this._offlineConfig.maxDurationForToSlow
+        console.info('=> ConnectionState.Offline');
         return ConnectionState.Offline;
 
     }
