@@ -3,7 +3,7 @@ import {AuthenticatedHttp} from './authenticatedHttp';
 import {Observable} from 'rxjs/Rx';
 import {OfflineDetectionService} from './offlineDetectionService';
 import {ISupportsOfflineStorage} from '../interfaces/supportsOfflineStorage';
-import {DatabaseService} from './databaseService';
+import {Dexie} from 'dexie/dist/dexie';
 
 @Injectable()
 export abstract class BaseApiService<T extends ISupportsOfflineStorage> {
@@ -11,7 +11,6 @@ export abstract class BaseApiService<T extends ISupportsOfflineStorage> {
     private _entityType: Type;
 
     constructor(private _authenticatedHttp: AuthenticatedHttp,
-                private _databaseService: DatabaseService,
                 private _offlineDetectionService: OfflineDetectionService) {
     }
 
@@ -22,12 +21,12 @@ export abstract class BaseApiService<T extends ISupportsOfflineStorage> {
     /**
      * return all items of the generic type
      */
-    protected getAll(url: string, offlineFallback: Observable<Array<T>>): Observable<Array<T>> {
+    protected getAll(url: string, table: Dexie.Table<ISupportsOfflineStorage,string>, offlineFallback: Observable<Array<T>>): Observable<Array<T>> {
 
         let httpObservable: Observable<Array<T>> = this._authenticatedHttp.get(url)
             .map(response => response.json())
             .map(rawJsonResults => rawJsonResults.map(rawJsonResult => (new this._entityType()).fromRawJson(rawJsonResult)))
-            .do((results) => this._databaseService.categories.bulkAdd(results).then(()=>results));
+            .do((results) => table.bulkPut(results).then(()=>results));
 
         return Observable.if(()=> {
             return this._offlineDetectionService.isOnline;

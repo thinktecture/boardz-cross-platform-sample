@@ -13,7 +13,7 @@ export class CategoriesService extends BaseApiService<Category> {
     constructor(private _databaseService: DatabaseService,
                 http: AuthenticatedHttp,
                 offlineDetectionService: OfflineDetectionService) {
-        super(http, _databaseService, offlineDetectionService);
+        super(http, offlineDetectionService);
         super.initializeEntity(Category);
 
     }
@@ -23,8 +23,7 @@ export class CategoriesService extends BaseApiService<Category> {
     }
 
     public getAllCategories(): Observable<Array<Category>> {
-        let offlineFallback = Observable.fromPromise(this._databaseService.categories.filter(c=>c.state !== ModelState.Deleted).toArray());
-        return this.getAll('api/categories/list', offlineFallback);
+        return this.getAll('api/categories/list', this._databaseService.categories, Observable.fromPromise(this._databaseService.categories.filter(c=>c.state !== ModelState.Deleted).toArray()));
     }
 
     public getCategoryById(id: string): Observable<Category> {
@@ -68,7 +67,7 @@ export class CategoriesService extends BaseApiService<Category> {
 
     private getDeleteOfflineFallback(category: Category): Observable<boolean> {
         let copy = this.deepClone(category);
-        return Observable.fromPromise(this._databaseService.categories.update(copy.id, {state: ModelState.Deleted}).then(()=> {
+        return Observable.fromPromise(this._databaseService.categories.update(copy.id, { state: ModelState.Deleted }).then(()=> {
             return true;
         }, ()=> {
             return false
