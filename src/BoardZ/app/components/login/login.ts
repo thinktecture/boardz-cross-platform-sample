@@ -21,8 +21,7 @@ export class LoginComponent {
                 private _logService: LogService,
                 private _notificationService: NotificationService,
                 private _signalRService: SignalRService,
-                private _ageRatingsService: AgeRatingsService
-    ) {
+                private _ageRatingsService: AgeRatingsService) {
     }
 
     public doLogin(): void {
@@ -31,8 +30,7 @@ export class LoginComponent {
         this._loginService.login(this._userName, this._password)
             .subscribe(
                 () => {
-                    this._ageRatingsService.initialize();
-
+                    this._ageRatingsService.getAllAgeRatings();
                     this._signalRService.start();
                     this.setError(false);
                     this._router.navigate(['']);
