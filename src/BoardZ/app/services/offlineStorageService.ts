@@ -1,9 +1,15 @@
 import {Injectable} from '@angular/core';
 import {ISupportsOfflineStorage} from '../interfaces/supportsOfflineStorage';
 import {ModelState} from '../models/modelState';
+import {DatabaseService} from './databaseService';
 
 @Injectable()
 export class OfflineStorageService<T extends ISupportsOfflineStorage> {
+
+    constructor(private _databaseService: DatabaseService){
+
+    }
+
 
     public getAll(): Promise<Array<T>> {
         return new Promise((resolve, reject) => {

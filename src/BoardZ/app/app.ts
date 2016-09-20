@@ -8,12 +8,13 @@ import {UiNotificationService} from './services/uiNotificationService';
 import {NativeIntegrationService} from './services/nativeIntegrationService';
 import {IBoardZAppWindow} from './interfaces/boardzAppWindow';
 import {OfflineDetectionService} from './services/offlineDetectionService';
+import {ConnectionState} from './models/connectionState';
 
 declare var window: IBoardZAppWindow;
 
 @Component({
     moduleId: module.id,
-    selector: 'boardz-app',
+    selector: 'body',
     templateUrl: 'app.html'
 })
 
@@ -32,6 +33,7 @@ export class BoardzAppComponent implements OnInit, AfterViewInit, OnDestroy {
     public ngOnInit(): void {
         this._offlineDetectionService.startConnectionMonitoring();
     }
+
 
     public ngAfterViewInit(): any {
         if (window.initAdminLTE) {

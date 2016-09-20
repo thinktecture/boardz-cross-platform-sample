@@ -62,3 +62,7 @@ body,
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
 }
+
+.ui-pnotify{
+    marign-top:100px;
+}

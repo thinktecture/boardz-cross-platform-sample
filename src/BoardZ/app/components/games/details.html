@@ -63,7 +63,7 @@
     </div>
 </div>
 
-<div class="row" *ngIf="model.id">
+<div class="row" *ngIf="model.id && !!isOnline">
 
     <div class="col-md-4 col-xs-12">
         <picture-it (onPictureTaken)="usePicture($event)"></picture-it>

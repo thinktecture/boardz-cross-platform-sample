@@ -47,6 +47,8 @@ import {CategoryDetailsResolver} from '../resolvers/categoryDetailsResolver';
 import {OfflineStorageService} from '../services/offlineStorageService';
 import {Game} from '../models/game';
 import {Category} from '../models/category';
+import {DatabaseService} from '../services/databaseService';
+import {OfflineIndicatorDirective} from '../directives/offlineIndicatorDirective';
 
 export namespace ModuleConfiguration {
 
@@ -62,7 +64,8 @@ export namespace ModuleConfiguration {
             SidebarComponent,
             WidgetComponent,
             BackButtonDirective,
-            CloseSidebarOnClickDirective
+            CloseSidebarOnClickDirective,
+            OfflineIndicatorDirective
         ];
 
         public static imports = [
@@ -80,6 +83,7 @@ export namespace ModuleConfiguration {
             OfflineConfig,
             OfflineDetectionService,
             OfflineStorageService,
+            DatabaseService,
             NativeIntegrationService,
             AuthenticatedHttp,
             TokenService,

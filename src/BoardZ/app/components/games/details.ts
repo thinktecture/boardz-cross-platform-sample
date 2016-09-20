@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {Game} from '../../models/game';
-import {LogService} from '../../services/logService';
 import {GamesService} from '../../services/gamesService';
 import {NotificationService} from '../../services/notificationService';
 import {SignalRService} from '../../services/signalrService';
@@ -15,6 +14,7 @@ import {AgeRating} from '../../models/ageRating';
 import {AgeRatingsService} from '../../services/ageRatingsService';
 import {Category} from '../../models/category';
 import {CategoriesService} from '../../services/categoriesService';
+import {OfflineDetectionService} from '../../services/offlineDetectionService';
 
 @Component({
     moduleId: module.id,
@@ -34,15 +34,15 @@ export class GameDetailsComponent implements OnInit {
     public originalModel: Game = new Game();
     public selectedCategories: Array<String> = [];
 
-    constructor(private _logService: LogService,
-                private _gameService: GamesService,
-                private _router: Router,
+    constructor(private _router: Router,
                 private route: ActivatedRoute,
+                private _gameService: GamesService,
                 private _notificationService: NotificationService,
                 private _categoriesService: CategoriesService,
                 private _ageRatingsService: AgeRatingsService,
                 private _playersService: PlayersService,
                 private _signalRService: SignalRService,
+                private _offlineDetectionService: OfflineDetectionService,
                 private _loginService: LoginService) {
     }
 
@@ -127,6 +127,10 @@ export class GameDetailsComponent implements OnInit {
 
     public usePicture(pictureUrl: string) {
         this._pictureUrl = pictureUrl;
+    }
+
+    public get isOnline(): boolean{
+        return this._offlineDetectionService.isOnline;
     }
 
     public canPlay() {
