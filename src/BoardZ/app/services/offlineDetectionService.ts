@@ -20,6 +20,7 @@ export class OfflineDetectionService {
     }
 
     public connectionRestoring: Subject<ConnectionState> = new Subject<ConnectionState>();
+    public connectionChanged: Subject<ConnectionState> = new Subject<ConnectionState>();
 
     private get pingUrl(): string {
         return `${this._apiConfig.rootUrl}api/status/ping`;
@@ -72,6 +73,7 @@ export class OfflineDetectionService {
                     this.connectionRestoring.next(state);
                 }
                 this._recentConnectionState = state;
+                this.connectionChanged.next(state);
             });
         }, this._offlineConfig.checkInterval);
     }
