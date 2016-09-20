@@ -21,7 +21,7 @@
                         </tr>
                         <tr *ngFor=" let cat of categories" (click)="openDetails(cat)" class="respond-click">
                             <td>{{cat.name}}</td>
-                            <td>{{cat.numberOfGames}}</td>
+                            <td>{{cat.numberOfGames || '0'}}</td>
                         </tr>
                     </tbody>
                 </table>
