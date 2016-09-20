@@ -1,7 +1,7 @@
 import {ISupportsOfflineStorage} from '../interfaces/supportsOfflineStorage';
 import {ModelState} from './modelState';
 
-export class AgeRating implements ISupportsOfflineStorage {
+export class AgeRating implements ISupportsOfflineStorage<AgeRating> {
 
     constructor() {
         this.state = ModelState.Clean;

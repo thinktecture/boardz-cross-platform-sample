@@ -25,12 +25,14 @@
         'pNotify/pnotify-adapter': 'scripts/bundles/pnotify-adapter.js',
         'signalr/signalr': 'scripts/bundles/signalr.js',
         'leaflet/leaflet': 'scripts/bundles/leaflet-src.js',
-        'fastclick/fastclick': 'scripts/bundles/fastclick.js'
+        'fastclick/fastclick': 'scripts/bundles/fastclick.js',
+        'dexie': 'dexie/dexie.js'
     };
     // packages tells the System loader how to load when no filename and/or no extension
     var packages = {
         'app': { main: 'main.js', defaultExtension: 'js' },
-        'rxjs': { defaultExtension: 'js' }
+        'rxjs': { defaultExtension: 'js' },
+        'dexie': { format: 'amd' }
     };
 
     var config = {
@@ -49,7 +51,6 @@ function backupModule() {
             window.module = module;
             module = undefined;
         }
-        console.log('mod backuped');
         resolve(true);
     });
 }
@@ -59,7 +60,6 @@ function restoreModule() {
         if (window.hasOwnProperty('module')) {
             module = window.module;
         }
-        console.log('mod restored');
         resolve(true);
     });
 }

@@ -47,6 +47,7 @@ import {CategoryDetailsResolver} from '../resolvers/categoryDetailsResolver';
 import {OfflineStorageService} from '../services/offlineStorageService';
 import {Game} from '../models/game';
 import {Category} from '../models/category';
+import {DatabaseService} from '../services/databaseService';
 
 export namespace ModuleConfiguration {
 
@@ -80,6 +81,7 @@ export namespace ModuleConfiguration {
             OfflineConfig,
             OfflineDetectionService,
             OfflineStorageService,
+            DatabaseService,
             NativeIntegrationService,
             AuthenticatedHttp,
             TokenService,

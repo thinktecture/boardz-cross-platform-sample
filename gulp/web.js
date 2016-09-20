@@ -65,6 +65,10 @@
             return gulp.src(config.source.files.rxjs)
                 .pipe(gulp.dest(path.join(config.targets.buildFolder, 'rxjs')));
         });
+        gulp.task('[private-web]:copy-dexies-scripts', function () {
+            return gulp.src(config.source.files.dexie)
+                .pipe(gulp.dest(path.join(config.targets.buildFolder, 'dexie')));
+        });
 
         gulp.task('[private-web]:copy-system-setup-script', function () {
             return gulp.src(config.source.files.systemSetupScript)
@@ -137,6 +141,7 @@
                     '[private-web]:bundle-vendor-scripts',
                     '[private-web]:copy-angular2-scripts',
                     '[private-web]:copy-rxjs-scripts',
+                    '[private-web]:copy-dexies-scripts',
                     '[private-web]:copy-system-setup-script',
                     '[private-web]:copy-cordova-script',
                     '[private-web]:copy-system',

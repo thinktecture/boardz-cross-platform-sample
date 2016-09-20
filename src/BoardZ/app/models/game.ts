@@ -2,7 +2,7 @@ import {ModelState} from './modelState';
 import {AgeRating} from './ageRating';
 import {Category} from './category';
 import {ISupportsOfflineStorage} from '../interfaces/supportsOfflineStorage';
-export class Game implements ISupportsOfflineStorage {
+export class Game implements ISupportsOfflineStorage<Game> {
 
     constructor() {
         this.state = ModelState.Clean;
@@ -27,6 +27,7 @@ export class Game implements ISupportsOfflineStorage {
 
         this.id = rawJson.id || null;
         this.name = rawJson.name || null;
+        //noinspection TypeScriptUnresolvedFunction
         this.ageRating = (new AgeRating()).fromRawJson(rawJson.ageRating);
         this.ageRatingId = this.ageRating.id || rawJson.ageRatingId;
         if(rawJson.categories){

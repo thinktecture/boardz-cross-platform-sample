@@ -75,7 +75,7 @@ export class CategoryDetailsComponent implements OnInit {
 
     public deleteCategory(): void {
         if (window.confirm('Really delete the category "' + this.originalModel.name + '" ?')) {
-            this._categoriesService.deleteCategory(this.originalModel.id)
+            this._categoriesService.deleteCategory(this.originalModel)
                 .subscribe(
                     () => {
                         this._notificationService.notifySuccess('Category data was deleted.');

@@ -75,9 +75,11 @@ module.exports = {
                 './node_modules/core-js/client/shim.min.js',
                 './node_modules/zone.js/dist/zone.js',
                 './node_modules/reflect-metadata/reflect.js'
+
             ],
             angular2: './node_modules/@angular/**/*',
             rxjs: './node_modules/rxjs/**/*',
+            dexie: './node_modules/dexie/dist/dexie.js',
             systemJs: './node_modules/systemjs/dist/system.src.js'
         }
     },
