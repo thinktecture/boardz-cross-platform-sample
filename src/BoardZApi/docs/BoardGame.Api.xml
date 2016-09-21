@@ -168,7 +168,7 @@
             default CTOR
             </summary>
         </member>
-        <member name="M:BoardGame.Api.Controllers.GamesController.Since(System.Nullable{System.Int32})">
+        <member name="M:BoardGame.Api.Controllers.GamesController.Since(System.Nullable{System.UInt64})">
             <summary>
             Method for loading games since a given row version
             </summary>
@@ -418,7 +418,7 @@
             the version that goes to the client
             </summary>
         </member>
-        <member name="P:BoardGame.Api.Models.Game.ModelState">
+        <member name="P:BoardGame.Api.Models.Game.State">
             <summary>
             ModelState -> will be provided by the client when syncinc after connection was lost
             </summary>
@@ -473,7 +473,7 @@
             the version that goes to the client
             </summary>
         </member>
-        <member name="P:BoardGame.Api.Models.Category.ModelState">
+        <member name="P:BoardGame.Api.Models.Category.State">
             <summary>
             ModelState -> will be provided by the client when syncinc after connection was lost
             </summary>
@@ -649,7 +649,7 @@
             Default CTOR
             </summary>
         </member>
-        <member name="M:BoardGame.Api.Services.GamesService.GetAll(System.String,System.Byte[])">
+        <member name="M:BoardGame.Api.Services.GamesService.GetAll(System.String,System.Nullable{System.UInt64})">
             <summary>
             Returns all games for a given user
             </summary>

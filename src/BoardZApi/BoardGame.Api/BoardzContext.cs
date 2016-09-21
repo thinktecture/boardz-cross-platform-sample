@@ -104,12 +104,12 @@ namespace BoardGame.Api
 
             modelBuilder.Entity<Game>().Property(game => game.RowVersion).IsRowVersion();
             modelBuilder.Entity<Game>()
-                .Ignore(game => game.ModelState)
+                .Ignore(game => game.State)
                 .Ignore(game => game.RowVersionAsInt);
 
             modelBuilder.Entity<Category>().Property(category => category.RowVersion).IsRowVersion();
             modelBuilder.Entity<Category>()
-                .Ignore(category => category.ModelState)
+                .Ignore(category => category.State)
                 .Ignore(category => category.RowVersionAsInt);
         }
     }

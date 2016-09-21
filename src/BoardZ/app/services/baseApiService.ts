@@ -21,15 +21,15 @@ export abstract class BaseApiService<T extends ISupportsOfflineStorage> {
     /**
      * return all items of the generic type
      */
-    protected getAll(url: string, table: Dexie.Table<ISupportsOfflineStorage,string>, offlineFallback: Observable<Array<T>>): Observable<Array<T>> {
+    protected getAll(url: string, table: Dexie.Table<ISupportsOfflineStorage,string>, offlineFallback: Observable<Array<T>>,force:boolean = false): Observable<Array<T>> {
 
         let httpObservable: Observable<Array<T>> = this._authenticatedHttp.get(url)
             .map(response => response.json())
             .map(rawJsonResults => rawJsonResults.map(rawJsonResult => (new this._entityType()).fromRawJson(rawJsonResult)))
-            .do((results) => table.bulkPut(results).then(()=>results));
+            .do((results) => table.bulkPut(results).then(()=>results, (err)=>console.log(err)));
 
         return Observable.if(()=> {
-            return this._offlineDetectionService.isOnline;
+            return force || this._offlineDetectionService.isOnline;
         }, httpObservable, offlineFallback);
     }
 

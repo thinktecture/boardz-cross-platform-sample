@@ -81,7 +81,10 @@ namespace BoardGame.Api.Models
         /// <summary>
         /// ModelState -> will be provided by the client when syncinc after connection was lost
         /// </summary>
+        
+        public int State { get; set; }
+
         [JsonIgnore]
-        public ModelState ModelState { get; set; }
+        public ModelState ModelState => (ModelState)this.State;
     }
 }

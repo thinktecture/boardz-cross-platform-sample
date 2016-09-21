@@ -44,11 +44,9 @@ import {CategoryListComponent} from '../components/categories/list';
 import {GameDetailsComponent} from '../components/games/details';
 import {CategoryDetailsComponent} from '../components/categories/details';
 import {CategoryDetailsResolver} from '../resolvers/categoryDetailsResolver';
-import {OfflineStorageService} from '../services/offlineStorageService';
-import {Game} from '../models/game';
-import {Category} from '../models/category';
 import {DatabaseService} from '../services/databaseService';
 import {OfflineIndicatorDirective} from '../directives/offlineIndicatorDirective';
+import {SyncService} from '../services/syncService';
 
 export namespace ModuleConfiguration {
 
@@ -65,7 +63,7 @@ export namespace ModuleConfiguration {
             WidgetComponent,
             BackButtonDirective,
             CloseSidebarOnClickDirective,
-            OfflineIndicatorDirective
+          //  OfflineIndicatorDirective
         ];
 
         public static imports = [
@@ -82,7 +80,7 @@ export namespace ModuleConfiguration {
             ApiConfig,
             OfflineConfig,
             OfflineDetectionService,
-            OfflineStorageService,
+            SyncService,
             DatabaseService,
             NativeIntegrationService,
             AuthenticatedHttp,

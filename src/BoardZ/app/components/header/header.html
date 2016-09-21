@@ -17,11 +17,7 @@
                 <li *ngIf="loginService.isAuthenticated">
                     <a>
 
-                        <i class="fa" [class.fa-spinner]="isConnectionUnknown"
-                           [class.fa-pulse]="isConnectionUnknown"
-                           [class.fa-fw]="isConnectionUnknown"
-                           [class.fa-wifi]="!isConnectionUnknown &&isOnline"
-                           [class.fa-plane]="!isConnectionUnknown && !isOnline"></i>
+                        <i class="fa" [class]="getConnectionStateIndicator()"></i>
                     </a>
                 </li>
                 <li class="dropdown notifications-menu" *ngIf="loginService.isAuthenticated">

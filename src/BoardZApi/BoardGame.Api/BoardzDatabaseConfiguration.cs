@@ -19,7 +19,7 @@ namespace BoardGame.Api
         /// </summary>
         public BoardzDatabaseConfiguration()
         {
-            SetExecutionStrategy("System.Data.SqlClient", () => new SqlAzureExecutionStrategy());
+            //SetExecutionStrategy("System.Data.SqlClient");
             SetDefaultConnectionFactory(new LocalDbConnectionFactory("v11.0"));
         }
     }

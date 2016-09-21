@@ -30,11 +30,11 @@ namespace BoardGame.Api.Controllers
         /// <param name="rowVersion"></param>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<Game> Since(int? rowVersion)
+        public IEnumerable<Game> Since(ulong? rowVersion)
         {
-            var rv = this.GetRowVersion(rowVersion);
+            
             var username = User.GetCurrentUsernameOrThrow();
-            var games = _gameService.GetAll(username, rv);
+            var games = _gameService.GetAll(username, rowVersion);
 
             return games;
         }

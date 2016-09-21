@@ -30,7 +30,7 @@ export class LoginComponent {
         this._loginService.login(this._userName, this._password)
             .subscribe(
                 () => {
-                    this._ageRatingsService.getAllAgeRatings();
+                    this._ageRatingsService.getAllAgeRatings().subscribe();
                     this._signalRService.start();
                     this.setError(false);
                     this._router.navigate(['']);

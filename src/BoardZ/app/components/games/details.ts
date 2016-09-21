@@ -48,7 +48,9 @@ export class GameDetailsComponent implements OnInit {
 
     public ngOnInit(): any {
         this._categoriesService.getAllCategories().subscribe(cats=>this.categories = cats);
-        this._ageRatingsService.getAllAgeRatings().subscribe(ars=>this.ageRatings = ars);
+        this._ageRatingsService.getOfflineAgeRatings().subscribe((ars)=>{
+            this.ageRatings = ars;
+        });
 
         this.route.data.forEach((data: { game: Game }) => {
             this.originalModel = this._gameService.deepClone(this.model = data.game || new Game());

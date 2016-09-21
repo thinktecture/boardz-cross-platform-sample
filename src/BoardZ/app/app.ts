@@ -9,6 +9,7 @@ import {NativeIntegrationService} from './services/nativeIntegrationService';
 import {IBoardZAppWindow} from './interfaces/boardzAppWindow';
 import {OfflineDetectionService} from './services/offlineDetectionService';
 import {ConnectionState} from './models/connectionState';
+import {SyncService} from './services/syncService';
 
 declare var window: IBoardZAppWindow;
 
@@ -23,6 +24,7 @@ export class BoardzAppComponent implements OnInit, AfterViewInit, OnDestroy {
                 private _loginService: LoginService,
                 private _notificationService: NotificationService,
                 private _offlineDetectionService: OfflineDetectionService,
+                private _syncService: SyncService,
                 private _nativeIntegrationService: NativeIntegrationService,
                 private _uiNotificationService: UiNotificationService,
                 private _logService: LogService) {

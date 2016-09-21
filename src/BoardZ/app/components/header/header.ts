@@ -22,11 +22,31 @@ export class HeaderComponent implements OnInit {
                 private _notificationService: NotificationService) {
     }
 
-    public get isConnectionUnknown(): boolean{
-        return this._offlineDetectionService.currentConnectionState === ConnectionState.Unknown;
+    public get isInitializing(): boolean {
+        console.log(this._offlineDetectionService.currentConnectionState);
+        return this._offlineDetectionService.currentConnectionState === ConnectionState.Initializing;
     }
 
-    public get isOnline(): boolean{
+    public getConnectionStateIndicator(): string {
+        let classes = "fa ";
+        switch (this._offlineDetectionService.currentConnectionState) {
+            case ConnectionState.Initializing:
+                classes += "fa-spinner fa-pulse fa-fw";
+                break;
+            case ConnectionState.Offline:
+                classes += "fa-plane";
+                break;
+            case ConnectionState.ToSlow:
+                classes += "fa-plane";
+                break;
+            default:
+                classes += "fa-wifi";
+                break;
+        }
+        return classes;
+    }
+
+    public get isOnline(): boolean {
         return this._offlineDetectionService.isOnline;
     }
 

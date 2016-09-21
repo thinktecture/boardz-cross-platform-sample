@@ -45,7 +45,7 @@ export class GamesService extends BaseApiService<Game> {
     private getUpdateOfflineFallback(game: Game): Observable<boolean> {
         let copy = this.deepClone(game);
         copy.state = ModelState.Modified;
-        return Observable.fromPromise(this._databaseService.games.put(game).then(()=> {
+        return Observable.fromPromise(this._databaseService.games.put(copy).then(()=> {
             return true;
         }, ()=> {
             return false

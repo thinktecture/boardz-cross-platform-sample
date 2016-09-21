@@ -28,15 +28,16 @@ namespace BoardGame.Api.Services
         /// <param name="userName"></param>
         /// <param name="rowVersion"></param>
         /// <returns></returns>
-        public IEnumerable<Game> GetAll(string userName, byte[] rowVersion = null)
+        public IEnumerable<Game> GetAll(string userName, ulong? rowVersion = null)
         {
-            if (rowVersion != null)
+            if (rowVersion.HasValue)
             {
                 return _dbContext.Games
                     .Include(game => game.AgeRating)
                     .Include(game => game.Categories)
                     .Where(game => game.UserName.Equals(userName, StringComparison.InvariantCultureIgnoreCase))
-                    .Where(game => game.RowVersion.Compare(rowVersion) > 0).ToList();
+                    .ToList()
+                    .Where(game => game.RowVersionAsInt > rowVersion);
             }
             return _dbContext.Games
                     .Include(game => game.AgeRating)

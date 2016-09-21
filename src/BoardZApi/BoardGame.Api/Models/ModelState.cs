@@ -14,6 +14,7 @@ namespace BoardGame.Api.Models
         /// <summary>
         /// No Changes
         /// </summary>
+        
         Clean = 0,
         /// <summary>
         /// New Entity
