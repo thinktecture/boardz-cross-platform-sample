@@ -1,1 +1,3 @@
-// TODO
+export class GameListComponent {
+    //TODO
+}
