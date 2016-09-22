@@ -11,7 +11,7 @@
     "gulp": "gulp",
     "typings": "typings",
     "watch": "gulp watch-web",
-    "postinstall": "typings install",
+    "postinstall": "npm run typings install",
     "build": "gulp",
     "watch-ios": "gulp [private-web]:watch:no-liveserver & gulp cordova:watch:ios"
   },
