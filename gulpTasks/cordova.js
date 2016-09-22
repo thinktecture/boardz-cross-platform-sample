@@ -74,8 +74,6 @@
             var currentDir = sh.pwd();
             sh.cd(config.targets.cordovaFolder);
             sh.exec('cordova prepare ios');
-            sh.exec('../../node_modules/.bin/cordova-splash');
-            sh.exec('../../node_modules/.bin/cordova-icon');
             sh.exec('cordova build ios');
             sh.cd(currentDir);
             done();
@@ -85,8 +83,6 @@
             var currentDir = sh.pwd();
             sh.cd(config.targets.cordovaFolder);
             sh.exec('cordova prepare android');
-            sh.exec('../../node_modules/.bin/cordova-splash');
-            sh.exec('../../node_modules/.bin/cordova-icon');
             sh.exec('cordova build android');
             sh.cd(currentDir);
             done();
@@ -96,8 +92,6 @@
             var currentDir = sh.pwd();
             sh.cd(config.targets.cordovaFolder);
             sh.exec('cordova prepare windows');
-            sh.exec('../../node_modules/.bin/cordova-splash');
-            sh.exec('../../node_modules/.bin/cordova-icon');
             sh.exec('cordova build windows');
             sh.cd(currentDir);
             done();
@@ -107,8 +101,6 @@
             var currentDir = sh.pwd();
             sh.cd(config.targets.cordovaFolder);
             sh.exec('cordova prepare');
-            sh.exec('../../node_modules/.bin/cordova-splash');
-            sh.exec('../../node_modules/.bin/cordova-icon');
             sh.exec('cordova build');
             sh.cd(currentDir);
             done();
