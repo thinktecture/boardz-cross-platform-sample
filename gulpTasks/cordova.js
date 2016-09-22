@@ -55,6 +55,8 @@
                 '[private-cordova]:copy-source',
                 '[private-cordova]:remove-fake-script',
                 '[private-cordova]:config-for-livereload',
+                '[private-cordova]:copy:resources',
+                '[private-cordova]:copy:hooks',
                 '[private-cordova]:build:ios');
 
             watch(path.join(config.targets.buildFolder, '**', '*'), {base: config.targets.buildFolder}, batch(function (events, done) {
