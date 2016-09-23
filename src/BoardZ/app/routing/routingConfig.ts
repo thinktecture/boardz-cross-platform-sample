@@ -6,7 +6,6 @@ import {NotificationsComponent} from '../components/notifications/notifications'
 import {RadiusSearchComponent} from '../components/radiusSearch/radiusSearch';
 import {GameDetailsResolver} from '../resolvers/gameDetailsResolver';
 import {GameDetailsComponent} from '../components/games/details';
-import {GameListComponent} from '../components/games/list';
 import {GamesRootComponent} from '../components/games/gamesRoot';
 import {AuthenticationGuard} from '../guards/authenticationGuard';
 
@@ -25,7 +24,6 @@ const gameRoutes: Routes = [
         component: GamesRootComponent,
         canActivate: [AuthenticationGuard],
         children: [
-            { path: 'all', component: GameListComponent, data: { displayName: 'Game overview' } },
             {
                 path: 'new',
                 component: GameDetailsComponent,
