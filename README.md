@@ -1,32 +1,43 @@
-# Sample application for various “Cross-Platform HTML5 – in Action!” workshops
+# AngularDays 2016 - Sample Application
 
-## Setup
+## Notes
+*This sample application uses a Microsoft Azure hosted Web API [https://boardzapi.azurewebsites.net/swagger](https://boardzapi.azurewebsites.net/swagger).*
+
+**BTW: For logging into the application, please use same value for username and password ;-)**
+
+## General Setup
+* Download and install [node.js](https://nodejs.org/) - at least version 6.x
+* Make sure you have the [git command line tools](https://git-scm.com/downloads) installed
+* Download and install an editor of your choice (free: `notepad`, [Visual Studio Code](https://code.visualstudio.com/), [Atom](https://atom.io/); commercial: [Sublime Text](https://www.sublimetext.com/), [WebStorm](https://www.jetbrains.com/webstorm/))
+
+---
+The steps mentioned in the *Setup for native applications* section are required if you want to run the app either on any mobile or desktop operating system as native applications.
+
+If you're just interested in running the SPA within the browser, go ahead and follow the *Building* section and focus on the web related tasks.
+
+---
+
+## Setup for Native Applications
 * Download and install the platform SDKs and/or emulators for the platform you want to develop for (this might take quite a while… so do this first!)
   * [XCode](https://developer.apple.com/xcode/download/)
   * [Android SDK](https://developer.android.com/sdk/index.html)
   * [Windows 10 SDK](https://dev.windows.com/en-us/downloads/windows-10-sdk)
-* Download and install [node.js](https://nodejs.org/)
-* Make sure you have the [git command line tools](https://git-scm.com/downloads) installed
 * Install and install [ImageMagick](http://www.imagemagick.org/script/binary-releases.php) (base toolkit for image processing, here used for splash screen and icon generation)
 * Install Cordova: `npm install -g cordova`
 * Install gulp: `npm install -g gulp`
 * MacOSX and Linux users need to install [Wine](https://wiki.winehq.org/) (for executing the Electron Windows build task)
-* Download and install [Atom](https://atom.io/) or another editor of your choice (free: `notepad`, [Visual Studio Code](https://code.visualstudio.com/); commercial: [Sublime Text](https://www.sublimetext.com/), [WebStorm](https://www.jetbrains.com/webstorm/))
 
 ## Building
 The gulp tasks will build iOS, Windows UWP, Android apps as well as desktop applications for Mac OSX, Windows and Linux.
 To get it working, please do the following:
 
 * After cloning the repo: `npm i --no-progress` within the root folder of this repository
-* Run `gulp watch-web` to start a live server, which is best when developing the app
-* Run `gulp watch-cordova-ios` to orchestrate the cordova ios app with live reloading. When this task runs, go to `dist/mobile` and use `cordova run ios` to open a simulator which will live reload.
-* Run `gulp watch-electron` to start a live reloading electron app
-* Run `gulp` to build the web app
-* Release Mode: Use the following gulp tasks to build the apps in release mode
-    * Run `gulp build-all` to build all apps in debug mode
-    * Run `gulp build-web` to build the web app
-    * Run `gulp build-cordova` to build all phone related apps
-    * Run `gulp build-electron` to build all desktop related apps
+* Run `gulp` or `gulp build-web` to build the web app
+* Run `gulp watch-web` to start a live server, which is best when developing the web app
+* Requires setup for native applications (see above)
+  * Run `gulp build-cordova` to build all phone-related apps
+  * Run `gulp build-electron` to build all desktop-related apps
+  * Run `gulp build-all` to build all apps (web and native) in debug mode
 
 ## Running
 
@@ -38,8 +49,8 @@ Use `gulp watch-web` as mentioned above to start the browser version of BoardZ.
 
 To run the cordova project, open a terminal and point it to `dist/mobile`. Use one of the following commands to start:
 
-* `cordova run ios`: Runs the iOS version of BoardZ. Requires a Mac
-* `cordova run android`: Runs the Android version of BoardZ. Requires Android SDK to be installed and at least a simulator
+* `cordova run ios`: Runs the iOS version of BoardZ. Requires a Mac and the iOS SDK installed.
+* `cordova run android`: Runs the Android version of BoardZ. Requires Android SDK to be installed and at least a simulator.
 
 If a device is connected, the `run` command will automatically deploy the App to your device, so you can start it directly on your device.
 
