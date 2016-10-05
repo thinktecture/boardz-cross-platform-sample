@@ -122,9 +122,7 @@
             return gulp.src(config.source.files.app.ts)
                 .pipe(sourcemaps.init())
                 .pipe(ts(tsConfig))
-                .pipe(sourcemaps.write('.', {
-                    sourceRoot: '../src'
-                }))
+                .pipe(sourcemaps.write('.'))
                 .pipe(gulp.dest(path.join(config.targets.buildFolder, config.targets.appFolder)));
         });
 
