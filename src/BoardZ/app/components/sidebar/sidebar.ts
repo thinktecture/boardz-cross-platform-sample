@@ -3,7 +3,7 @@ import {Component} from '@angular/core';
 import {NavigationEntry} from '../../models/navigationEntry';
 
 @Component({
-    moduleId: module.id,
+    moduleId: __moduleName,
     selector: 'sidebar',
     templateUrl: 'sidebar.html'
 })

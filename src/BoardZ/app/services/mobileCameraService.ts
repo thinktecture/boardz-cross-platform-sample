@@ -1,4 +1,4 @@
-import {Observable} from 'rxjs/Rx';
+import {Observer, Observable} from 'rxjs';
 import {Observer} from 'rxjs/Rx';
 
 import {ICameraService} from './cameraService';

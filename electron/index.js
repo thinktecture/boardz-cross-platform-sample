@@ -1,15 +1,10 @@
 'use strict';
 
-let isLiveReload = process.argv[2] === '--livereload';
+let isBrowserSync = process.argv[2] === '--browsersync';
 
 const electron = require('electron');
 const { app, globalShortcut, BrowserWindow, Menu, shell } = electron;
 const path = require('path');
-
-let client;
-if (isLiveReload) {
-    client = require('electron-connect').client;
-}
 
 let mainWindow;
 let trayApp;
@@ -41,16 +36,18 @@ app.on('ready', () => {
         mainWindow.webContents.toggleDevTools();
     });
 
-    mainWindow.loadURL('file://' + __dirname + '/index.html');
+    if (isBrowserSync) {
+        mainWindow.loadURL('http://localhost:8000/index.html');
+    } else {
+        mainWindow.loadURL('file://' + __dirname + '/index.html');
+    }
+
     mainWindow.setTitle(app.getName());
 
     mainWindow.on('closed', () => {
         mainWindow = null;
     });
 
-    if (client) {
-        client.create(mainWindow);
-    }
 
     if (process.platform == 'darwin') {
         buildNativeAppMenu();
