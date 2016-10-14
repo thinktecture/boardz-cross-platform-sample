@@ -21,12 +21,8 @@ export class GamesService {
         return { headers: headers };
     }
 
-    private buildUrl(appendix: string): string {
-        return `${this._config.rootUrl}${appendix}`;
-    }
-
     public getAll(): Observable<Game[]> {
-        return this._http.get(this.buildUrl('api/boardgames/list')).map(response => (<Game[]>response.json()));
+        return this._http.get('api/boardgames/list').map(response => (<Game[]>response.json()));
     }
 
     public getGameCount(): Observable<number> {
@@ -34,22 +30,22 @@ export class GamesService {
     }
 
     public getById(id: string): Observable<Game> {
-        return this._http.get(this.buildUrl(`api/boardgames/single?id=${id}`))
+        return this._http.get(`api/boardgames/single?id=${id}`)
             .map(response => <Game>response.json());
     }
 
     public addGame(game: Game): Observable<string> {
-        return this._http.post(this.buildUrl(`api/boardgames/add`), JSON.stringify(game), this.getRequestOptions())
+        return this._http.post(`api/boardgames/add`, JSON.stringify(game), this.getRequestOptions())
             .map(response => <string>response.json());
     }
 
     public updateGame(game: Game): Observable<string> {
-        return this._http.put(this.buildUrl(`api/boardgames/update`), JSON.stringify(game), this.getRequestOptions())
+        return this._http.put(`api/boardgames/update`, JSON.stringify(game), this.getRequestOptions())
             .map(response => game.id);
     }
 
     public deleteGame(id: string): Observable<string> {
-        return this._http.delete(this.buildUrl(`api/boardgames/remove?id=${id}`))
+        return this._http.delete(`api/boardgames/remove?id=${id}`)
             .map(response => <string>response.text());
     }
 

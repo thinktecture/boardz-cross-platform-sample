@@ -17,7 +17,7 @@ export class DesktopCameraService implements ICameraService {
         return mediaDevices;
     }
 
-    public getPhoto(): Observable<string> {
+    public getPhoto(): Observable<any> {
         return Observable.fromPromise(
             this.getMediaDevices().getUserMedia({ video: true, audio: false })
                 .then((stream: any) => {

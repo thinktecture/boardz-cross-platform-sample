@@ -91,7 +91,7 @@ function transpileScripts(files, typeScriptConfig) {
     return merge([
         tsResult.dts.pipe(gulp.dest(config.targets.build.web)),
         tsResult.js
-            .pipe(uglify())
+           // .pipe(uglify())
             .pipe(sourcemaps.write('.'))
             .pipe(gulp.dest(config.targets.build.web))
     ]);

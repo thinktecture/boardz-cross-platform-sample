@@ -36,7 +36,7 @@ let config = {
         ],
         bundles: [
             './node_modules/@angular/**/*.umd.min.js',
-            './node_modules/rxjs/**/*.umd.min.js'
+            './node_modules/rxjs/**/*.js'
         ],
         fonts: [
             './src/BoardZ/vendor/font-awesome/fonts/*.*',

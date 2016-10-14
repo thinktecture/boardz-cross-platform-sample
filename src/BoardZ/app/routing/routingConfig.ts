@@ -12,10 +12,10 @@ import {AuthenticationGuard} from '../guards/authenticationGuard';
 
 const appRootRoutes: Routes = [
 
-    { path: '', name: 'Dashboard', canActivate: [AuthenticationGuard], component: DashboardComponent },
-    { path: 'login', name: 'Login', component: LoginComponent },
-    { path: 'notifications', name: 'Notifications', canActivate: [AuthenticationGuard], component: NotificationsComponent },
-    { path: 'radiussearch', name: 'RadiusSearch', canActivate: [AuthenticationGuard], component: RadiusSearchComponent }
+    { path: '',  canActivate: [AuthenticationGuard], component: DashboardComponent },
+    { path: 'login',  component: LoginComponent },
+    { path: 'notifications', canActivate: [AuthenticationGuard], component: NotificationsComponent },
+    { path: 'radiussearch',  canActivate: [AuthenticationGuard], component: RadiusSearchComponent }
 ];
 
 const gameRoutes: Routes = [
@@ -29,13 +29,11 @@ const gameRoutes: Routes = [
             {
                 path: 'new',
                 component: GameDetailsComponent,
-                name: 'CreateGame',
                 data: { displayName: 'Create a new game' }
             },
             {
                 path: 'details/:id',
                 component: GameDetailsComponent,
-                name: 'GameDetails',
                 resolve: { game: GameDetailsResolver },
                 data: { displayName: 'Game details' }
             }
