@@ -136,7 +136,7 @@ gulp.task('desktop:build:copy-electron-sources', () => {
 function buildAppFor(targetPlatform, target) {
     return gulp.src(path.join(config.targets.build.desktopWeb, '**', '*'))
         .pipe(electron({
-            version: '1.3.2',
+            version: '1.4.3',
             platform: targetPlatform,
             arch: 'x64',
             companyName: 'Thinktecture AG',
