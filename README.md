@@ -13,39 +13,36 @@
 * MacOSX and Linux users need to install [Wine](https://wiki.winehq.org/) (for executing the Electron Windows build task)
 * Download and install [Atom](https://atom.io/) or another editor of your choice (free: `notepad`, [Visual Studio Code](https://code.visualstudio.com/); commercial: [Sublime Text](https://www.sublimetext.com/), [WebStorm](https://www.jetbrains.com/webstorm/))
 
+
 ## Building
-The gulp tasks will build iOS, Windows UWP, Android apps as well as desktop applications for Mac OSX, Windows and Linux.
+The npm scripts will build iOS, Windows UWP, Android apps as well as desktop applications for Mac OSX, Windows and Linux.
 To get it working, please do the following:
 
 * After cloning the repo: `npm i --no-progress` within the root folder of this repository
-* Run `gulp watch-web` to start a live server, which is best when developing the app
-* Run `gulp watch-cordova-ios` to orchestrate the cordova ios app with live reloading. When this task runs, go to `dist/mobile` and use `cordova run ios` to open a simulator which will live reload.
-* Run `gulp watch-electron` to start a live reloading electron app
-* Run `gulp` to build the web app
-* Release Mode: Use the following gulp tasks to build the apps in release mode
-    * Run `gulp build-all` to build all apps in debug mode
-    * Run `gulp build-web` to build the web app
-    * Run `gulp build-cordova` to build all phone related apps
-    * Run `gulp build-electron` to build all desktop related apps
+* Run `npm run watch-web` to start a live server, which is best when developing the app
+* Run `npm run watch-all` to orchestrate the cordova ios app, the electron app and the webapp with live reloading.
+* Run `npm run start-web` to start the webapp without injecting upcoming changes
+* Release Mode: Use the following npm scripts to build the apps in release mode
+    * Run `npm run dist-web` to build the web app
+    * Run `npm run dist-mobile-all` to build all phone related apps
+    * Run `npm run dist-desktop-all` to build all desktop related apps
 
 ## Running
 
 ### Web
 
-Use `gulp watch-web` as mentioned above to start the browser version of BoardZ.
+Use `npm run start-web` as mentioned above to start the browser version of BoardZ.
 
 ### Cordova
 
 To run the cordova project, open a terminal and point it to `dist/mobile`. Use one of the following commands to start:
 
-* `cordova run ios`: Runs the iOS version of BoardZ. Requires a Mac
-* `cordova run android`: Runs the Android version of BoardZ. Requires Android SDK to be installed and at least a simulator
-
-If a device is connected, the `run` command will automatically deploy the App to your device, so you can start it directly on your device.
+* `npm run start-mobile-ios`: Runs the iOS version of BoardZ. Requires a Mac
+* `npm run start-mobile-ios`: Runs the Android version of BoardZ. Requires Android SDK to be installed and at least a simulator
 
 ### Electron
 
-To start the electron packaged app, go to `dist/desktop/build` and open one of the directories suiting your current operating system. Then open the executable as used to. 
+To start the electron packaged app, go to `build/desktop/build` and open one of the directories suiting your current operating system. Then open the executable as used to.
 
 ## Supported platforms
 * Any modern web browser (Chrome, Firefox, Edge, Safari) by simply hosting it

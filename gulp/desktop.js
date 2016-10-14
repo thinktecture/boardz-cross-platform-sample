@@ -11,6 +11,19 @@ const config = require('./config'),
 
 // public tasks
 
+gulp.task('dist-desktop-all', function(){
+    run(
+        'dist-web',
+        'desktop:clean',
+        [
+            'desktop:build:copy-sources',
+            'desktop:build:copy-electron-sources'
+        ],
+        'desktop:build:all',
+        done
+    )
+});
+
 gulp.task('build-desktop-all', (done) => {
     run(
         'build-web',
@@ -23,7 +36,6 @@ gulp.task('build-desktop-all', (done) => {
         done
     )
 });
-
 
 gulp.task('build-desktop-osx', (done) => {
     run(
@@ -87,7 +99,6 @@ gulp.task('start-electron-with-browser-sync', (done) => {
 
 gulp.task('desktop:clean', () => del(path.join(config.targets.build.desktop, '**/*')));
 
-
 gulp.task('desktop:build:all', (done) => {
     run(
         [
@@ -98,6 +109,29 @@ gulp.task('desktop:build:all', (done) => {
         done
     )
 });
+
+gulp.task('desktop:build:osx', () => {
+    return buildAppFor('darwin', 'osx');
+});
+
+gulp.task('desktop:build:win', () => {
+    return buildAppFor('win32', 'windows');
+});
+
+gulp.task('desktop:build:linux', () => {
+    return buildAppFor('linux', 'linux');
+});
+
+gulp.task('desktop:build:copy-sources', () => {
+    return gulp.src(path.join(config.targets.build.web, '**/*'))
+        .pipe(gulp.dest(config.targets.build.desktopWeb));
+});
+
+gulp.task('desktop:build:copy-electron-sources', () => {
+    return gulp.src(config.sources.electronFiles)
+        .pipe(gulp.dest(config.targets.build.desktopWeb));
+});
+
 
 function buildAppFor(targetPlatform, target) {
     return gulp.src(path.join(config.targets.build.desktopWeb, '**', '*'))
@@ -112,27 +146,3 @@ function buildAppFor(targetPlatform, target) {
         }))
         .pipe(symdest(path.join(config.targets.build.desktopBuild, target)));
 }
-
-gulp.task('desktop:build:osx', () => {
-    return buildAppFor('darwin', 'osx');
-});
-
-gulp.task('desktop:build:win', () => {
-    return buildAppFor('win32', 'windows');
-});
-
-gulp.task('desktop:build:linux', () => {
-    return buildAppFor('linux', 'linux');
-});
-
-
-gulp.task('desktop:build:copy-sources', () => {
-    return gulp.src(path.join(config.targets.build.web, '**/*'))
-        .pipe(gulp.dest(config.targets.build.desktopWeb));
-});
-
-gulp.task('desktop:build:copy-electron-sources', () => {
-    return gulp.src(config.sources.electronFiles)
-        .pipe(gulp.dest(config.targets.build.desktopWeb));
-});
-

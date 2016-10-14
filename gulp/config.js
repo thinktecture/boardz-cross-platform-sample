@@ -47,9 +47,9 @@ let config = {
             './electron/**/*'
         ],
         cordova: {
-            devConfig: './cordova/config_livereload.xml',
+            devConfig: './cordova/dev.config.xml',
             config: './cordova/config.xml',
-            hooks: './cordova/**/*'
+            hooks: './cordova/hooks/**/*'
         }
     },
     targets: {
