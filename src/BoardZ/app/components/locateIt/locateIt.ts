@@ -6,7 +6,7 @@ import {GeoLocation} from '../../models/geoLocation';
 import {GeolocationService} from '../../services/geolocationService';
 
 @Component({
-    moduleId: module.id,
+    moduleId: __moduleName,
     selector: 'locate-it',
     templateUrl: 'locateIt.html'
 })
@@ -20,7 +20,7 @@ export class LocateItComponent implements OnInit {
     public map;
 
     constructor(private _geolocationService: GeolocationService) {
-        L.Icon.Default.imagePath = 'app/images';
+        L.Icon.Default.imagePath = 'assets/images';
     }
 
     ngOnInit(): any {

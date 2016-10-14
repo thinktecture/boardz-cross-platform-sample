@@ -1,7 +1,5 @@
 import {Observable} from 'rxjs/Rx';
-
 import {ICameraService} from './cameraService';
-
 declare let window;
 
 export class DesktopCameraService implements ICameraService {
