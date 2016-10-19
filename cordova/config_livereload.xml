@@ -14,7 +14,9 @@
   <plugin name="cordova-plugin-statusbar" spec="2.2.0"/>
   <plugin name="cordova-plugin-splashscreen" spec="3.2.2"/>
   <plugin name="cordova-plugin-geolocation" spec="2.3.0"/>
-  <plugin name="cordova-plugin-camera" spec="2.3.0"/>
+  <plugin name="cordova-plugin-camera" spec="2.3.0">
+    <variable name="CAMERA_USAGE_DESCRIPTION" value="Game" />
+  </plugin>
 
   <platform name="ios">
     <hook type="after_platform_add" src="hooks/ios/after_platform_add_add_plugins.js" />
