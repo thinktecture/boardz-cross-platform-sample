@@ -1,0 +1,11 @@
+<div [class]="'small-box bg-'+color ">
+    <div class="inner">
+        <h3>{{count}}</h3>
+
+        <p>{{caption}}</p>
+    </div>
+    <div class="icon">
+        <i [class]="'fa fa-' + icon"></i>
+    </div>
+    <a [routerLink]="[target]" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+</div>

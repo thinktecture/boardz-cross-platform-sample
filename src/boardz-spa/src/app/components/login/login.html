@@ -1,0 +1,47 @@
+<div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
+    <form [formGroup]="login" (ngSubmit)="doLogin()">
+        <div class="box box-primary big-space">
+            <div class="box-header with-border"><i class="fa fa-lock"></i>
+                <h3 class="box-title ng-scope">Welcome to BoardZ!</h3></div>
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="username">User name</label>
+
+                    <input class="form-control" id="username" name="username" type="text" formControlName="username"
+                           required
+                           placeholder="Your Username"/>
+                    <div [hidden]="!username.touched || username.valid">
+                        <span class="help-block">Username is required</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+
+                    <input class="form-control" id="password" name="password" type="password" formControlName="password"
+                           required
+                           placeholder="Password"/>
+
+                    <div [hidden]="!password.touched || password.valid">
+                        <p><span class="label label-danger">Required:</span> Password is required</p>
+                    </div>
+                </div>
+                <div class="form-group" [hidden]="!hasError">
+                    <div class="col-sm-2">&nbsp;</div>
+                    <div class="alert alert-warning col-sm-10 pull-right">
+                        <strong>Login failed.</strong> Please check your credentials and try again.
+                    </div>
+                </div>
+
+            </div>
+            <div class="box-footer">
+                <div class="pull-right">
+                    <button type="submit" class="btn btn-primary"
+                            [disabled]="!login.valid">
+                        Login
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

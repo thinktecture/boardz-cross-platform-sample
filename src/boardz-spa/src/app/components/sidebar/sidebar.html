@@ -1,0 +1,9 @@
+<aside class="main-sidebar">
+    <section class="sidebar">
+        <ul class="sidebar-menu">
+            <li *ngFor="let ni of navigationEntries" ui-sref-active="active" appCloseSidebarOnClick>
+                <a [routerLink]="ni.links"><i class="fa fa-{{ni.icon}}"></i><span>{{ ni.displayName }}</span></a>
+            </li>
+        </ul>
+    </section>
+</aside>

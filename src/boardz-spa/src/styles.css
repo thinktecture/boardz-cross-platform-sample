@@ -1,0 +1,69 @@
+body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+.ng-valid[required] {
+    border-right: 3px solid #42A948;
+}
+
+input.ng-invalid,
+select.ng-invalid,
+textarea.ng-invalid {
+    border-right: 3px solid indianred;
+}
+
+.respond-click {
+    cursor: pointer;
+    -webkit-app-region: no-drag;
+}
+
+button, a {
+    -webkit-app-region: no-drag;
+}
+
+.danger {
+    color: indianred;
+}
+
+.alert.alert-danger {
+    padding-top: 15px !important;
+    margin-top: 3px !important;
+}
+
+.stack-bar-top {
+    top: 0;
+    right: 0;
+}
+
+.big-space {
+    margin-top: 30px;
+}
+
+.content-wrapper {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Navigation */
+body .navbar-custom-menu [hidden="true"], .hidden {
+    display: none;
+}
+
+body,
+.wrapper {
+    overflow-x: hidden;
+    position: relative;
+}
+
+.wrapper {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+.ui-pnotify{
+    marign-top:100px;
+}

@@ -1,0 +1,93 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 *ngIf="id.value" class="box-title">New game</h3>
+                <h3 *ngIf="!id.value" class="box-title">Game details</h3>
+            </div>
+            <form class="form-horizontal" [formGroup]="details" (ngSubmit)="saveChanges()">
+                <div class="panel-body" *ngIf="true">
+                    <div class="form-group" [class.has-error]="!name.pristine && !name.valid">
+                        <label for="name" class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Game name"
+                                   required
+                                   formControlName="name"/>
+                            <div class="alert alert-danger" [hidden]="name.pristine || name.valid">
+                                Game name is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Age Rating</label>
+                        <div class="col-sm-10">
+                            <select name="ageRating" [(ngModel)]="model.ageRatingId" class="form-control">
+                                <option *ngFor="let rating of ageRatings" [value]="rating.id">{{rating.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Categories</label>
+                        <div class="col-sm-10">
+                            <select multiple name="categories" [(ngModel)]="selectedCategories" class="form-control">
+                                <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" [class.has-error]="!description.pristine && !description.valid">
+                        <label for="description" class="col-sm-2 control-label">Description</label>
+                        <div class="col-sm-10">
+                        <textarea id="description" name="description" class="form-control" rows="3"
+                                  placeholder="Game description" required
+                                  formControlName="description"></textarea>
+                            <div class="alert alert-danger" [hidden]="description.pristine || description.valid">
+                                Game description is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-default" (click)="abort()">Abort</button>
+                        <button type="button" class="btn btn-default" (click)="reset()">Reset</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="!details.valid || !details.dirty">Save
+                        </button>
+                        <button type="button" class="btn btn-danger" *ngIf="id.value" (click)="deleteGame()">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="id.value && !!isOnline">
+
+    <div class="col-md-4 col-xs-12">
+        <app-picture-it (onPictureTaken)="usePicture($event)"></app-picture-it>
+    </div>
+    <div class="col-md-4 col-xs-12">
+        <app-locate-it (onLocated)="useLocation($event)"></app-locate-it>
+    </div>
+    <div class="col-md-4 col-xs-12">
+        <div class="box box-success box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">I'm playing this game</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <p>The "I am gaming!" function uploads an image and your current location for other gamers to join you
+                    on your journey!</p>
+            </div>
+            <div class="box-footer">
+                <button (click)="iAmPlaying()" [disabled]="!canPlay() || isSending" type="button"
+                        class="btn btn-flat btn-block btn-success">opt in <i
+                    class="fa fa-flag-checkered"></i></button>
+            </div>
+        </div>
+    </div>
+</div>

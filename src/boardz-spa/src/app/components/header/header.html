@@ -1,0 +1,58 @@
+<header class="main-header" style="-webkit-app-region: drag">
+    <a ui-sref="dashboard" class="logo">
+        <span class="logo-mini">BZ!</span>
+        <span class="logo-lg">BoardZ!</span>
+    </a>
+    <nav class="navbar navbar-static-top" role="navigation">
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle</span>
+        </a>
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <li appBackButton>
+                    <a>
+                        <i class="fa fa-arrow-circle-left"></i>
+                    </a>
+                </li>
+                <li *ngIf="loginService.isAuthenticated">
+                    <a>
+
+                        <i class="fa" [class]="getConnectionStateIndicator()"></i>
+                    </a>
+                </li>
+                <li class="dropdown notifications-menu" *ngIf="loginService.isAuthenticated">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-bell-o"> </i>
+                        <span class="label label-warning" *ngIf="notifications.length>0">{{notifications.length}}</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="header">You have {{notifications.length}} notifications</li>
+                        <li>
+                            <div class="slimScrollDiv"
+                                 style="position: relative; overflow: hidden; width: auto; height: 200px;">
+                                <ul class="menu" style="overflow: hidden; width: 100%; height: 200px;">
+                                    <li *ngFor="let notification of notifications">
+                                        <a class="respond-click" (click)="dismiss(notification)"><i
+                                            class="fa {{notification.iconCssClass}}"></i>
+                                            {{notification.message}}</a>
+                                    </li>
+                                </ul>
+                                <div class="slimScrollBar"
+                                     style="width: 3px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 195.122px; background: rgb(0, 0, 0);"></div>
+                                <div class="slimScrollRail"
+                                     style="width: 3px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div>
+                            </div>
+                        </li>
+                        <li class="footer"><a href="" class="respond-click" (click)="dismiss()">Dismiss all</a></li>
+                    </ul>
+                </li>
+                <li *ngIf="loginService.isAuthenticated">
+                    <a href (click)="logout($event)"><i class="fa fa-sign-out"></i></a>
+                </li>
+                <!--<li>
+                    <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                </li>-->
+            </ul>
+        </div>
+    </nav>
+</header>
