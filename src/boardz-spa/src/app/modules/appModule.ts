@@ -5,7 +5,6 @@ import {HttpModule} from '@angular/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
-import {ROOT_ROUTES} from '../routes/index';
 import {ApiConfig} from '../apiConfig';
 import {OfflineConfig} from '../offlineConfig';
 import {OfflineDetectionService} from '../services/offlineDetectionService';
@@ -31,6 +30,20 @@ import {LoginComponent} from '../components/login/login';
 import {DashboardComponent} from '../components/dashboard/dashboard';
 import {BoardzAppComponent} from '../app';
 import {AuthGuard} from '../guards/authGuard';
+import {CategoriesModule} from './categoriesModule';
+import {SyncService} from '../services/syncService';
+import {DatabaseService} from '../services/databaseService';
+import {AgeRatingsService} from '../services/ageRatingsService';
+import {CategoriesService} from '../services/categoriesService';
+import {DashboardService} from '../services/dashboardService';
+
+const ROOT_ROUTES = [
+
+    {path: '', name: 'Dashboard', canActivate: [AuthGuard], component: DashboardComponent},
+    {path: 'login', name: 'Login', component: LoginComponent},
+    {path: 'notifications', name: 'Notifications', canActivate: [AuthGuard], component: NotificationsComponent},
+    {path: 'radiussearch', name: 'RadiusSearch', canActivate: [AuthGuard], component: RadiusSearchComponent}
+];
 
 @NgModule({
     imports: [
@@ -39,7 +52,8 @@ import {AuthGuard} from '../guards/authGuard';
         ReactiveFormsModule,
         RouterModule.forRoot(ROOT_ROUTES, {useHash: true}),
         SharedModule,
-        GamesModule
+        GamesModule,
+        CategoriesModule
     ],
     exports: [],
     declarations: [
@@ -62,12 +76,17 @@ import {AuthGuard} from '../guards/authGuard';
         AuthenticatedHttp,
         TokenService,
         LoginService,
+        DashboardService,
         LogService,
         GamesService,
         PlayersService,
         NotificationService,
         PlatformInformationService,
         UiNotificationService,
+        SyncService,
+        DatabaseService,
+        AgeRatingsService,
+        CategoriesService,
         SignalRService,
         AuthGuard
     ],

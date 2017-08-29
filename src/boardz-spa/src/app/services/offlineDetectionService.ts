@@ -3,7 +3,7 @@ import {Http} from '@angular/http';
 import {ApiConfig} from '../apiConfig';
 import {ConnectionState} from '../models/connectionState';
 import {OfflineConfig} from '../offlineConfig';
-import {Observable} from 'rxjs/Observable'
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/timeout';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -12,9 +12,7 @@ import {Subject} from 'rxjs/Rx';
 @Injectable()
 export class OfflineDetectionService {
     private _monitoringHandle: number;
-
     private _recentConnectionState: ConnectionState = ConnectionState.Initializing;
-    private _monitoringHandle: number;
 
     constructor(private _http: Http, private _apiConfig: ApiConfig, private _offlineConfig: OfflineConfig) {
         this._recentConnectionState = ConnectionState.Initializing;
@@ -96,7 +94,7 @@ export class OfflineDetectionService {
      * start connection monitoring
      */
     public startConnectionMonitoring(): void {
-        this._monitoringHandle = setInterval(() => {
+        this._monitoringHandle = window.setInterval(() => {
             this.checkConnection().subscribe(state => {
                 // emit the state only! if the state was offline and will be treated as online
                 if (this._recentConnectionState < ConnectionState.Normal && state > ConnectionState.ToSlow) {

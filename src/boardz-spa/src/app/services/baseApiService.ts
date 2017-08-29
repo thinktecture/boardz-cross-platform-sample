@@ -3,32 +3,35 @@ import {AuthenticatedHttp} from './authenticatedHttp';
 import {Observable} from 'rxjs/Rx';
 import {OfflineDetectionService} from './offlineDetectionService';
 import {ISupportsOfflineStorage} from '../interfaces/supportsOfflineStorage';
-import {Dexie} from 'dexie/dist/dexie';
+import {Dexie} from 'dexie';
 
 @Injectable()
-export abstract class BaseApiService<T extends ISupportsOfflineStorage> {
+export abstract class BaseApiService<T extends ISupportsOfflineStorage<T>> {
 
-    private _entityType: Type;
+    private _entityType: Type<any>;
 
     constructor(private _authenticatedHttp: AuthenticatedHttp,
                 private _offlineDetectionService: OfflineDetectionService) {
     }
 
-    public initializeEntity(type: Type) {
+    public initializeEntity(type: Type<any>) {
         this._entityType = type;
     }
 
     /**
      * return all items of the generic type
      */
-    protected getAll(url: string, table: Dexie.Table<ISupportsOfflineStorage,string>, offlineFallback: Observable<Array<T>>,force:boolean = false): Observable<Array<T>> {
+    protected getAll(url: string,
+                     table: Dexie.Table<ISupportsOfflineStorage<T>, string>,
+                     offlineFallback: Observable<Array<T>>,
+                     force: boolean = false): Observable<Array<T>> {
 
-        let httpObservable: Observable<Array<T>> = this._authenticatedHttp.get(url)
+        const httpObservable: Observable<Array<T>> = this._authenticatedHttp.get(url)
             .map(response => response.json())
             .map(rawJsonResults => rawJsonResults.map(rawJsonResult => (new this._entityType()).fromRawJson(rawJsonResult)))
-            .do((results) => table.bulkPut(results).then(()=>results, (err)=>console.log(err)));
+            .do((results) => table.bulkPut(results).then(() => results, (err) => console.log(err)));
 
-        return Observable.if(()=> {
+        return Observable.if(() => {
             return force || this._offlineDetectionService.isOnline;
         }, httpObservable, offlineFallback);
     }
@@ -38,11 +41,11 @@ export abstract class BaseApiService<T extends ISupportsOfflineStorage> {
      * @param id
      */
     protected getSingle(id: string, url: string, offlineFallback: Observable<T>): Observable<T> {
-        let httpObservable = this._authenticatedHttp.get(url)
+        const httpObservable = this._authenticatedHttp.get(url)
             .map(response => response.json())
             .map(rawJsonResult => (new this._entityType()).fromRawJson(rawJsonResult));
 
-        return <Observable<T>>Observable.if(()=> {
+        return <Observable<T>>Observable.if(() => {
             return this._offlineDetectionService.isOnline;
         }, httpObservable, offlineFallback);
 
@@ -53,10 +56,10 @@ export abstract class BaseApiService<T extends ISupportsOfflineStorage> {
      * @param item
      */
     public add(item: T, url: string, offlineFallback: Observable<string>): Observable<string> {
-        let httpObservable = this._authenticatedHttp.post(url, JSON.stringify(item))
+        const httpObservable = this._authenticatedHttp.post(url, JSON.stringify(item))
             .map(response => response.text());
 
-        return Observable.if(()=> {
+        return Observable.if(() => {
             return this._offlineDetectionService.isOnline;
         }, httpObservable, offlineFallback);
     }
@@ -66,10 +69,10 @@ export abstract class BaseApiService<T extends ISupportsOfflineStorage> {
      * @param item
      */
     public update(item: T, url: string, offlineFallback: Observable<boolean>): Observable<boolean> {
-        let httpObservable = this._authenticatedHttp.put(url, JSON.stringify(item))
+        const httpObservable = this._authenticatedHttp.put(url, JSON.stringify(item))
             .map(response => response.ok);
 
-        return Observable.if(()=> {
+        return Observable.if(() => {
             return this._offlineDetectionService.isOnline;
         }, httpObservable, offlineFallback);
     }
@@ -80,10 +83,10 @@ export abstract class BaseApiService<T extends ISupportsOfflineStorage> {
      * @returns {any}
      */
     public deleteItem(item: T, url: string, offlineFallback: Observable<boolean>): Observable<boolean> {
-        let httpObservable = this._authenticatedHttp.delete(url)
+        const httpObservable = this._authenticatedHttp.delete(url)
             .map(response => response.status);
 
-        return Observable.if(()=> {
+        return Observable.if(() => {
             return this._offlineDetectionService.isOnline;
         }, httpObservable, offlineFallback);
     }

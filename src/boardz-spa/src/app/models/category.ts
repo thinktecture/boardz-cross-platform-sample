@@ -1,7 +1,7 @@
 import {ModelState} from './modelState';
 import {ISupportsOfflineStorage} from '../interfaces/supportsOfflineStorage';
 
-export class Category implements ISupportsOfflineStorage {
+export class Category implements ISupportsOfflineStorage<Category> {
 
     constructor() {
         this.state = ModelState.Clean;

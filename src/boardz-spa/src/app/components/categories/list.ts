@@ -5,8 +5,6 @@ import {NotificationService} from '../../services/notificationService';
 import {CategoriesService} from '../../services/categoriesService';
 import {Category} from '../../models/category';
 @Component({
-    moduleId: module.id,
-    selector: 'ist',
     templateUrl: 'list.html'
 })
 

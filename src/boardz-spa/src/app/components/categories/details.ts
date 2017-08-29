@@ -6,8 +6,6 @@ import {Category} from '../../models/category';
 import {CategoriesService} from '../../services/categoriesService';
 
 @Component({
-    moduleId: module.id,
-    selector: 'categoryDetail',
     templateUrl: 'details.html'
 })
 export class CategoryDetailsComponent implements OnInit {

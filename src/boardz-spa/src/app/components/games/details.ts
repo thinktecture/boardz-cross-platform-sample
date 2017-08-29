@@ -16,6 +16,7 @@ import {AgeRatingsService} from '../../services/ageRatingsService';
 import {Category} from '../../models/category';
 import {CategoriesService} from '../../services/categoriesService';
 import {OfflineDetectionService} from '../../services/offlineDetectionService';
+import {LogService} from '../../services/logService';
 
 @Component({
     selector: 'app-games-details',
@@ -33,7 +34,10 @@ export class GameDetailsComponent implements OnInit {
     public details = this._formBuilder.group({
         id: [null],
         name: ['', Validators.required],
-        description: ['', Validators.required]
+        description: ['', Validators.required],
+        categories: [[]],
+        ageRatingId: [''],
+        ageRating: [{}]
     });
 
     public get id(): AbstractControl {
@@ -45,6 +49,7 @@ export class GameDetailsComponent implements OnInit {
     }
 
     public selectedCategories: Array<String> = [];
+
     public get description(): AbstractControl {
         return this.details.get('description');
     }
@@ -59,12 +64,13 @@ export class GameDetailsComponent implements OnInit {
                 private _signalRService: SignalRService,
                 private _offlineDetectionService: OfflineDetectionService,
                 private _loginService: LoginService,
+                private _logService: LogService,
                 private _formBuilder: FormBuilder) {
     }
 
     public ngOnInit(): any {
-        this._categoriesService.getAllCategories().subscribe(cats=>this.categories = cats);
-        this._ageRatingsService.getOfflineAgeRatings().subscribe((ars)=>{
+        this._categoriesService.getAllCategories().subscribe(cats => this.categories = cats);
+        this._ageRatingsService.getOfflineAgeRatings().subscribe((ars) => {
             this.ageRatings = ars;
         });
 
@@ -73,20 +79,26 @@ export class GameDetailsComponent implements OnInit {
                 this.details.setValue({
                     id: data.game.id,
                     name: data.game.name,
-                    description: data.game.description
+                    description: data.game.description,
+                    ageRatingId: data.game.ageRatingId,
+                    ageRating: data.game.ageRating,
+                    categories: data.game.categories
                 });
             }
         });
     }
 
     private loadGame(id: string): void {
-        this._gameService.getById(id)
+        this._gameService.getGameById(id)
             .subscribe(
                 (game) => {
                     this.details.setValue({
                         id: game.id,
                         name: game.name,
-                        description: game.description
+                        description: game.description,
+                        categories: game.categories,
+                        ageRatingId: game.ageRatingId,
+                        ageRating: game.ageRating
                     });
                 },
                 (error) => {
@@ -107,12 +119,14 @@ export class GameDetailsComponent implements OnInit {
 
     public saveChanges(): void {
 
-        this.model.categories = this.categories.filter(cat => this.selectedCategories.indexOf(cat.id) > -1);
+        this.details.value.categories = this.categories.filter(cat => this.selectedCategories.indexOf(cat.id) > -1);
 
-        if (this.model.ageRatingId) {
-            let found = this.ageRatings.filter(ar=>ar.id === this.model.ageRatingId);
+        if (this.details.value.ageRatingId) {
+            const found = this.ageRatings.filter(ar => ar.id === this.details.value.ageRatingId);
             if (found && found.length > 0) {
-                this.model.ageRating = found[0];
+                this.details.setValue({
+                    ageRating: found[0]
+                });
             }
 
         }
@@ -122,15 +136,13 @@ export class GameDetailsComponent implements OnInit {
                     (newId) => {
                         this._notificationService.notifySuccess('New game was added.');
                         this.loadGame(newId);
-                        this.model.id = this.originalModel.id = newId;
                     },
                     () => this._notificationService.notifyError('Could not save new game.')
                 );
         } else {
             this._gameService.updateGame(this.details.value)
-                .subscribe((oldId) => {
+                .subscribe(() => {
                         this._notificationService.notifySuccess('Game data was updated.');
-                        this.loadGame(oldId);
                     },
                     () => {
                         this._notificationService.notifyError('Could not update game data.');
@@ -160,7 +172,7 @@ export class GameDetailsComponent implements OnInit {
         this._pictureUrl = pictureUrl;
     }
 
-    public get isOnline(): boolean{
+    public get isOnline(): boolean {
         return this._offlineDetectionService.isOnline;
     }
 
