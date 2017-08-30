@@ -19,8 +19,8 @@ export class SyncService {
 
         this._offlineDetectionService.connectionRestoring
             .asObservable()
-            .subscribe(()=> {
-                this.onConnectionRestored()
+            .subscribe(() => {
+                this.onConnectionRestored();
             });
 
     }
@@ -29,20 +29,21 @@ export class SyncService {
      * Will be triggered once the client transitions from offline to any valid online state
      */
     private onConnectionRestored() {
-        let categories = this._databaseService
+        const categories = this._databaseService
             .categories
-            .filter(cat => cat.state !== ModelState.Clean)
+            .filter(category => category.state !== ModelState.Clean)
             .toArray()
-            .then(categories => this.syncCategories(categories));
+            .then(dirtyCategories => this.syncCategories(dirtyCategories));
 
-        let games = this._databaseService
+        const games = this._databaseService
             .games
-            .filter(games => games.state !== ModelState.Clean)
+            .filter(game => game.state !== ModelState.Clean)
             .toArray()
-            .then(games => this.syncGames(games));
+            .then(dirtyGames => this.syncGames(dirtyGames));
 
         Promise.all([categories, games]).then(results => {
-            this._notificationService.notify(new Notification("Device is back online and data has been synced", NotificationType.Success));
+            this._notificationService.notify(
+                new Notification('Device is back online and data has been synced', NotificationType.Success));
         });
 
     }
@@ -55,7 +56,7 @@ export class SyncService {
     private syncCategories(categories: Array<Category>): Promise<number> {
         return this._authenticatedHttp.post('api/sync/synccategories', JSON.stringify(categories))
             .map(response => response.status)
-            .toPromise()
+            .toPromise();
     }
 
     /**
@@ -66,7 +67,7 @@ export class SyncService {
     private syncGames(games: Array<Game>): Promise<number> {
         return this._authenticatedHttp.post('api/sync/syncgames', JSON.stringify(games))
             .map(response => response.status)
-            .toPromise()
+            .toPromise();
 
     }
 }

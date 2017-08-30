@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Resolve, ActivatedRouteSnapshot} from '@angular/router';
+import {ActivatedRouteSnapshot, Resolve} from '@angular/router';
 import {Category} from '../models/category';
 import {CategoriesService} from '../services/categoriesService';
 
@@ -9,7 +9,7 @@ export class CategoryDetailsResolver implements Resolve<Category> {
     }
 
     resolve(route: ActivatedRouteSnapshot): Promise<Category> {
-        let id = route.params['id'];
+        const id = route.params['id'];
         return new Promise((resolve) => {
             this._categoriesService.getCategoryById(id).subscribe(category => {
                 if (category) {

@@ -13,27 +13,28 @@ export class DashboardService {
     }
 
     public getGameCount(): Observable<string> {
-        return Observable.if(()=> {
-                return this._offlineDetectionService.isOnline
+        return Observable.if(() => {
+                return this._offlineDetectionService.isOnline;
             },
-            this._http.get('api/games/count').map(response => (response.text())).catch(()=>Observable.of('-')),
-            Observable.fromPromise(this._databaseService.games.filter(g=>g.state !== ModelState.Deleted).count()));
+            this._http.get('api/games/count').map(response => (response.text())).catch(() => Observable.of('-')),
+            Observable.fromPromise(this._databaseService.games.filter(g => g.state !== ModelState.Deleted).count()));
     }
 
     public getPlayerCount(): Observable<string> {
-        return Observable.if(()=> {
-                return this._offlineDetectionService.isOnline
+        return Observable.if(() => {
+                return this._offlineDetectionService.isOnline;
             },
-            this._http.get('api/players/count').map(response => (response.text())).catch(()=>Observable.of('-')),
+            this._http.get('api/players/count').map(response => (response.text())).catch(() => Observable.of('-')),
             Observable.of(0));
     }
 
     public getCategoryCount(): Observable<string> {
-        return Observable.if(()=> {
-                return this._offlineDetectionService.isOnline
+        return Observable.if(() => {
+                return this._offlineDetectionService.isOnline;
             },
-            this._http.get('api/categories/count').map(response => (response.text())).catch(()=>Observable.of('-')),
-            Observable.fromPromise(this._databaseService.categories.filter(c=>c.state !== ModelState.Deleted).count()));
+            this._http.get('api/categories/count').map(response => (response.text())).catch(() => Observable.of('-')),
+            Observable
+                .fromPromise(this._databaseService.categories.filter(c => c.state !== ModelState.Deleted).count()));
     }
 
 }

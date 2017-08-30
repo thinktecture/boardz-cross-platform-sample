@@ -1,25 +1,24 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
-import {ApiConfig} from '../apiConfig';
 import {ConnectionState} from '../models/connectionState';
-import {OfflineConfig} from '../offlineConfig';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/timeout';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {Subject} from 'rxjs/Rx';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class OfflineDetectionService {
     private _monitoringHandle: number;
     private _recentConnectionState: ConnectionState = ConnectionState.Initializing;
 
-    constructor(private _http: Http, private _apiConfig: ApiConfig, private _offlineConfig: OfflineConfig) {
+    constructor(private _http: Http) {
         this._recentConnectionState = ConnectionState.Initializing;
     }
 
     /**
-     * Subject that emmits the recent state, but only if the device comes back from an
+     * Subject that emits the recent state, but only if the device comes back from an
      * offline state and the upcoming one will be online
      * @type {Subject<ConnectionState>}
      */
@@ -36,7 +35,7 @@ export class OfflineDetectionService {
      * @returns {string}
      */
     private get pingUrl(): string {
-        return `${this._apiConfig.rootUrl}api/status/ping`;
+        return `${environment.apiRootUrl}api/status/ping`;
     }
 
     /**
@@ -61,7 +60,7 @@ export class OfflineDetectionService {
     private checkConnection(): Observable<ConnectionState> {
         const start = (new Date()).getTime();
         return this._http.get(this.pingUrl)
-            .timeout(this._offlineConfig.absoluteTimeoutAt)
+            .timeout(environment.offlineConfig.absoluteTimeoutAt)
             .map(response => (new Date()).getTime() - start)
             .map(duration => this.getConnectionStateByDuration(duration))
             .catch(() => {
@@ -72,15 +71,15 @@ export class OfflineDetectionService {
 
     private getConnectionStateByDuration(duration: number): ConnectionState {
         // console.info(`evaluating connection state for ${duration}`);
-        if (duration <= this._offlineConfig.maxDurationForGood) {
+        if (duration <= environment.offlineConfig.maxDurationForGood) {
             console.info('=> ConnectionState.Good');
             return ConnectionState.Good;
         }
-        if (duration <= this._offlineConfig.maxDurationForNormal) {
+        if (duration <= environment.offlineConfig.maxDurationForNormal) {
             console.info('=> ConnectionState.Normal');
             return ConnectionState.Normal;
         }
-        if (duration <= this._offlineConfig.maxDurationForToSlow) {
+        if (duration <= environment.offlineConfig.maxDurationForToSlow) {
             console.info('=> ConnectionState.ToSlow --> handled like offline');
             return ConnectionState.ToSlow;
         }
@@ -105,7 +104,7 @@ export class OfflineDetectionService {
                 // emit the new state
                 this.connectionChanged.next(state);
             });
-        }, this._offlineConfig.checkInterval);
+        }, environment.offlineConfig.checkInterval);
     }
 
     /**

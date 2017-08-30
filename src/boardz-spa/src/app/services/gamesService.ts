@@ -18,7 +18,9 @@ export class GamesService extends BaseApiService<Game> {
     }
 
     public getAllGames(): Observable<Game[]> {
-        return this.getAll('api/games/list', this._databaseService.games, Observable.fromPromise(this._databaseService.games.filter(g => g.state !== ModelState.Deleted).toArray()))
+        return this.getAll('api/games/list',
+            this._databaseService.games,
+            Observable.fromPromise(this._databaseService.games.filter(g => g.state !== ModelState.Deleted).toArray()));
     }
 
     public deepClone(game: Game): Game {
@@ -26,7 +28,8 @@ export class GamesService extends BaseApiService<Game> {
     }
 
     public getGameById(id: string): Observable<Game> {
-        return this.getSingle(id, `api/games/single?id=${id}`, Observable.fromPromise(this._databaseService.games.get(id)));
+        return this.getSingle(id, `api/games/single?id=${id}`,
+            Observable.fromPromise(this._databaseService.games.get(id)));
     }
 
     public addGame(game: Game): Observable<string> {
@@ -42,34 +45,35 @@ export class GamesService extends BaseApiService<Game> {
     }
 
     private getUpdateOfflineFallback(game: Game): Observable<boolean> {
-        let copy = this.deepClone(game);
+        const copy = this.deepClone(game);
         copy.state = ModelState.Modified;
-        return Observable.fromPromise(this._databaseService.games.put(copy).then(()=> {
+        return Observable.fromPromise(this._databaseService.games.put(copy).then(() => {
             return true;
-        }, ()=> {
-            return false
+        }, () => {
+            return false;
         }));
     }
 
     private getAddOfflineFallback(game: Game): Observable<string> {
-        let copy = this.deepClone(game);
+        const copy = this.deepClone(game);
         copy.state = ModelState.New;
         copy.id = `-${(new Date()).getTime()}`;
-        return Observable.fromPromise(this._databaseService.games.add(copy).then(()=> {
+        return Observable.fromPromise(this._databaseService.games.add(copy).then(() => {
             return copy.id;
-        }, ()=> {
-            return null
+        }, () => {
+            return null;
         }));
 
     }
 
     private getDeleteOfflineFallback(game: Game): Observable<boolean> {
-        let copy = this.deepClone(game);
-        return Observable.fromPromise(this._databaseService.games.update(copy.id, {state: ModelState.Deleted}).then(()=> {
-            return true;
-        }, ()=> {
-            return false
-        }));
+        const copy = this.deepClone(game);
+        return Observable.fromPromise(this._databaseService.games.update(copy.id, {state: ModelState.Deleted})
+            .then(() => {
+                return true;
+            }, () => {
+                return false;
+            }));
     }
 
 }

@@ -1,8 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {ApiConfig} from '../apiConfig';
 import {LogService} from './logService';
 import {TokenService} from './tokenService';
-
+import {environment} from '../../environments/environment';
 declare const $;
 
 @Injectable()
@@ -13,8 +12,7 @@ export class SignalRService {
 
     public someoneJoinedAGame: EventEmitter<string> = new EventEmitter<string>();
 
-    constructor(private _configuration: ApiConfig,
-                private _tokenService: TokenService,
+    constructor(private _tokenService: TokenService,
                 private _logService: LogService) {
         this._hubConnection = $.hubConnection;
     }
@@ -32,7 +30,7 @@ export class SignalRService {
             return;
         }
 
-        this._connection = this._hubConnection(`${this._configuration.rootUrl}signalr`);
+        this._connection = this._hubConnection(`${environment.apiRootUrl}signalr`);
         this._connection.qs = {'authorization': this._tokenService.token};
         this._playerProxy = this._connection.createHubProxy('playerHub');
 

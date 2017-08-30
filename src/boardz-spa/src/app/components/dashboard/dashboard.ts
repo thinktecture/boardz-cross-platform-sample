@@ -10,7 +10,7 @@ import {TokenService} from '../../services/tokenService';
 export class DashboardComponent implements OnInit {
     public playerCount = '-';
     public gameCount = '-';
-    public categoryCount: string = '-';
+    public categoryCount = '-';
 
     constructor(private _dashboardService: DashboardService,
                 private _offlineDetectionService: OfflineDetectionService,
@@ -19,8 +19,8 @@ export class DashboardComponent implements OnInit {
 
     public ngOnInit(): any {
         this.getDashboardData();
-        this._offlineDetectionService.connectionRestoring.asObservable().subscribe(()=> {
-            if(this._tokenService.isAuthenticated()) {
+        this._offlineDetectionService.connectionRestoring.asObservable().subscribe(() => {
+            if (this._tokenService.isAuthenticated()) {
                 this.getDashboardData();
             }
         });

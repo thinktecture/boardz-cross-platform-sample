@@ -3,11 +3,10 @@ import {Headers, Http, RequestOptions} from '@angular/http';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {TokenService} from './tokenService';
-import {ApiConfig} from '../apiConfig';
 import {LogService} from './logService';
 import {TokenData} from '../models/tokenData';
 import {SignalRService} from './signalrService';
-
+import {environment} from '../../environments/environment';
 @Injectable()
 export class LoginService {
     private _lastLoginUnsuccessful: boolean;
@@ -20,8 +19,7 @@ export class LoginService {
         return this._tokenService.username;
     }
 
-    constructor(private _config: ApiConfig,
-                private _logService: LogService,
+    constructor(private _logService: LogService,
                 private _http: Http,
                 private _router: Router,
                 private _tokenService: TokenService,
@@ -62,7 +60,7 @@ export class LoginService {
             options = new RequestOptions({headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'})});
 
         return Observable.create((observer) => {
-            this._http.post(this._config.rootUrl + 'token', body, options)
+            this._http.post(environment.apiRootUrl + 'token', body, options)
                 .map(response => <TokenData>response.json())
                 .subscribe(
                     (tokenData) => {

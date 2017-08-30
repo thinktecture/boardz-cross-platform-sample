@@ -4,5 +4,14 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+    production: false,
+    apiRootUrl: 'https://boardzapi.azurewebsites.net/',
+    offlineConfig: {
+        checkInterval: 10000,
+        maxDurationForGood: 50,
+        maxDurationForNormal: 190,
+        maxDurationForToSlow: 240,
+        absoluteTimeoutAt: 320
+    }
+
 };

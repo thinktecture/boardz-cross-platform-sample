@@ -23,12 +23,15 @@ export class CategoriesService extends BaseApiService<Category> {
     }
 
     public getAllCategories(): Observable<Array<Category>> {
-        return this.getAll('api/categories/list', this._databaseService.categories, Observable.fromPromise(this._databaseService.categories.filter(c=>c.state !== ModelState.Deleted).toArray()));
+        return this.getAll('api/categories/list', this._databaseService.categories,
+            Observable.fromPromise(
+                this._databaseService.categories.filter(c => c.state !== ModelState.Deleted).toArray()));
     }
 
     public getCategoryById(id: string): Observable<Category> {
 
-        return this.getSingle(id, `api/categories/single?id=${id}`, Observable.fromPromise(this._databaseService.categories.get(id)));
+        return this.getSingle(id, `api/categories/single?id=${id}`,
+            Observable.fromPromise(this._databaseService.categories.get(id)));
     }
 
     public addCategory(category: Category): Observable<string> {
@@ -36,42 +39,44 @@ export class CategoriesService extends BaseApiService<Category> {
     }
 
     public updateCategory(category: Category): Observable<boolean> {
-        return this.update(category, `api/categories/update`, this.getUpdateOfflineFallback(category))
+        return this.update(category, `api/categories/update`, this.getUpdateOfflineFallback(category));
     }
 
     public deleteCategory(category: Category): Observable<boolean> {
-        return this.deleteItem(category, `api/categories/remove?id=${category.id}`, this.getDeleteOfflineFallback(category));
+        return this.deleteItem(category, `api/categories/remove?id=${category.id}`,
+            this.getDeleteOfflineFallback(category));
     }
 
     private getUpdateOfflineFallback(category: Category): Observable<boolean> {
-        let copy = this.deepClone(category);
+        const copy = this.deepClone(category);
         copy.state = ModelState.Modified;
-        return Observable.fromPromise(this._databaseService.categories.put(category).then(()=> {
+        return Observable.fromPromise(this._databaseService.categories.put(category).then(() => {
             return true;
-        }, ()=> {
-            return false
+        }, () => {
+            return false;
         }));
     }
 
     private getAddOfflineFallback(category: Category): Observable<string> {
-        let copy = this.deepClone(category);
+        const copy = this.deepClone(category);
         copy.state = ModelState.New;
         copy.id = `-${(new Date()).getTime()}`;
-        return Observable.fromPromise(this._databaseService.categories.add(copy).then(()=> {
+        return Observable.fromPromise(this._databaseService.categories.add(copy).then(() => {
             return copy.id;
-        }, ()=> {
-            return null
+        }, () => {
+            return null;
         }));
 
     }
 
     private getDeleteOfflineFallback(category: Category): Observable<boolean> {
-        let copy = this.deepClone(category);
-        return Observable.fromPromise(this._databaseService.categories.update(copy.id, { state: ModelState.Deleted }).then(()=> {
-            return true;
-        }, ()=> {
-            return false
-        }));
+        const copy = this.deepClone(category);
+        return Observable.fromPromise(this._databaseService.categories.update(copy.id, {state: ModelState.Deleted})
+            .then(() => {
+                return true;
+            }, () => {
+                return false;
+            }));
     }
 
 }

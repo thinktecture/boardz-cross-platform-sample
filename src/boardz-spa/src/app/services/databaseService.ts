@@ -8,7 +8,7 @@ import {AgeRating} from '../models/ageRating';
 export class DatabaseService extends Dexie {
 
     constructor() {
-        super("boardzdb");
+        super('boardzdb');
         this.version(1).stores({
             games: '&id, name, description, userName, state, ageRatingId, rowVersion',
             categories: '&id, name, state, numberOfGames, rowVersion',

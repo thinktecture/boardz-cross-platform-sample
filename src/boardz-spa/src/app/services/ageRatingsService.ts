@@ -22,7 +22,7 @@ export class AgeRatingsService extends BaseApiService<AgeRating> {
             Observable.fromPromise(this._databaseService.ageRatings.toArray()), true);
     }
 
-    public getOfflineAgeRatings(): Observable<Array<AgeRating>>{
+    public getOfflineAgeRatings(): Observable<Array<AgeRating>> {
         return Observable.fromPromise(this._databaseService.ageRatings.toArray());
     }
 }

@@ -1,29 +1,27 @@
 import {Injectable} from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
-import {ApiConfig} from '../apiConfig';
 import {TokenService} from './tokenService';
-
+import {environment} from '../../environments/environment';
 @Injectable()
 export class AuthenticatedHttp {
     constructor(private _http: Http,
-                private _config: ApiConfig,
                 private _tokenService: TokenService) {
     }
 
     private buildUrl(appendix: string): string {
-        return `${this._config.rootUrl}${appendix}`;
+        return `${environment.apiRootUrl}${appendix}`;
     }
 
     private getRequestOptions(): RequestOptions {
-        let requestOptions = new RequestOptions();
+        const requestOptions = new RequestOptions();
         requestOptions.headers = new Headers();
 
         requestOptions.headers.append('Accept', 'application/json');
         requestOptions.headers.append('Accept', 'text/plain');
         requestOptions.headers.append('Accept', '*/*');
         requestOptions.headers.append('Content-Type', 'application/json;charset=UTF-8');
-        let token = this._tokenService.token;
+        const token = this._tokenService.token;
         if (token) {
             requestOptions.headers.append('Authorization', 'Bearer ' + token);
         }

@@ -27,19 +27,19 @@ export class HeaderComponent implements OnInit {
     }
 
     public getConnectionStateIndicator(): string {
-        let classes = "fa ";
+        let classes = 'fa ';
         switch (this._offlineDetectionService.currentConnectionState) {
             case ConnectionState.Initializing:
-                classes += "fa-spinner fa-pulse fa-fw";
+                classes += 'fa-spinner fa-pulse fa-fw';
                 break;
             case ConnectionState.Offline:
-                classes += "fa-plane";
+                classes += 'fa-plane';
                 break;
             case ConnectionState.ToSlow:
-                classes += "fa-plane";
+                classes += 'fa-plane';
                 break;
             default:
-                classes += "fa-wifi";
+                classes += 'fa-wifi';
                 break;
         }
         return classes;

@@ -2,13 +2,14 @@ import {Directive} from '@angular/core';
 import {OfflineDetectionService} from '../services/offlineDetectionService';
 import {ConnectionState} from '../models/connectionState';
 
+//noinspection TsLint
 @Directive({
-    selector: 'boardz-header'
+    selector: 'offlineIndicatorDirective'
 })
 export class OfflineIndicatorDirective {
 
     constructor(private _offlineDetectionService: OfflineDetectionService) {
-        this._offlineDetectionService.connectionChanged.asObservable().subscribe((connectionState)=> {
+        this._offlineDetectionService.connectionChanged.asObservable().subscribe((connectionState) => {
             switch (connectionState) {
                 case ConnectionState.Offline:
                     document.body.classList.remove('skin-blue', 'skin-red', 'skin-yellow');

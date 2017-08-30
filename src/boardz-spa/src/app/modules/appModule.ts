@@ -5,8 +5,6 @@ import {HttpModule} from '@angular/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
-import {ApiConfig} from '../apiConfig';
-import {OfflineConfig} from '../offlineConfig';
 import {OfflineDetectionService} from '../services/offlineDetectionService';
 import {AuthenticatedHttp} from '../services/authenticatedHttp';
 import {TokenService} from '../services/tokenService';
@@ -36,6 +34,7 @@ import {DatabaseService} from '../services/databaseService';
 import {AgeRatingsService} from '../services/ageRatingsService';
 import {CategoriesService} from '../services/categoriesService';
 import {DashboardService} from '../services/dashboardService';
+import {OfflineIndicatorDirective} from '../directives/offlineIndicatorDirective';
 
 const ROOT_ROUTES = [
 
@@ -66,11 +65,10 @@ const ROOT_ROUTES = [
         SidebarComponent,
         WidgetComponent,
         BackButtonDirective,
-        CloseSidebarOnClickDirective
+        CloseSidebarOnClickDirective,
+        OfflineIndicatorDirective
     ],
     providers: [
-        ApiConfig,
-        OfflineConfig,
         OfflineDetectionService,
         NativeIntegrationService,
         AuthenticatedHttp,

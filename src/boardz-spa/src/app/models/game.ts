@@ -30,8 +30,8 @@ export class Game implements ISupportsOfflineStorage<Game> {
         //noinspection TypeScriptUnresolvedFunction
         this.ageRating = (new AgeRating()).fromRawJson(rawJson.ageRating);
         this.ageRatingId = this.ageRating.id || rawJson.ageRatingId;
-        if(rawJson.categories){
-            this.categories = rawJson.categories.map(rawCategory=> (new Category).fromRawJson(rawCategory));
+        if (rawJson.categories) {
+            this.categories = rawJson.categories.map(rawCategory => (new Category).fromRawJson(rawCategory));
         }
         this.description = rawJson.description || null;
         this.userName = rawJson.userName || null;

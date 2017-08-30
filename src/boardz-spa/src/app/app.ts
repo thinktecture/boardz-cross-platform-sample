@@ -13,6 +13,7 @@ import {SyncService} from './services/syncService';
 
 declare const window: IBoardZAppWindow;
 
+//noinspection TsLint
 @Component({
     selector: 'body',
     templateUrl: 'app.html'
