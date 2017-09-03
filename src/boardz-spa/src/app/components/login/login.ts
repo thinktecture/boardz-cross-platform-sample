@@ -1,10 +1,9 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {LoginService} from '../../services/loginService';
-import {LogService} from '../../services/logService';
-import {NotificationService} from '../../services/notificationService';
-import {SignalRService} from '../../services/signalrService';
-import {AgeRatingsService} from '../../services/ageRatingsService';
+import {LoginService} from '../../services/authentication.service';
+import {LogService} from '../../services/infrastructure/log.service';
+import {NotificationService} from '../../services/notifications/notification.service';
+import {AgeRatingsService} from '../../services/ageratings.service';
 import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -32,7 +31,6 @@ export class LoginComponent {
                 private _loginService: LoginService,
                 private _logService: LogService,
                 private _notificationService: NotificationService,
-                private _signalRService: SignalRService,
                 private _ageRatingsService: AgeRatingsService) {
     }
 
@@ -43,7 +41,6 @@ export class LoginComponent {
             .subscribe(
                 () => {
                     this._ageRatingsService.getAllAgeRatings().subscribe();
-                    this._signalRService.start();
                     this.setError(false);
                     this._router.navigate(['']);
                 },

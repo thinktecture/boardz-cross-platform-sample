@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
-import {DatabaseService} from './databaseService';
-import {OfflineDetectionService} from './offlineDetectionService';
-import {AuthenticatedHttp} from './authenticatedHttp';
-import {Category} from '../models/category';
-import {ModelState} from '../models/modelState';
-import {Game} from '../models/game';
-import {NotificationService} from './notificationService';
-import {Notification} from '../models/notification';
-import {NotificationType} from '../models/notificationType';
+import {DatabaseService} from './database.service';
+import {OfflineDetectionService} from './offline.detection.service';
+import {AuthenticatedHttp} from '../http.service';
+import {Category} from '../../models/category';
+import {ModelState} from '../../models/modelState';
+import {Game} from '../../models/game';
+import {NotificationService} from '../notifications/notification.service';
+import {Notification} from '../../models/notification';
+import {NotificationType} from '../../models/notificationType';
 
 @Injectable()
 export class SyncService {
@@ -54,7 +54,7 @@ export class SyncService {
      * @returns {Promise<number>}
      */
     private syncCategories(categories: Array<Category>): Promise<number> {
-        return this._authenticatedHttp.post('api/sync/synccategories', JSON.stringify(categories))
+        return this._authenticatedHttp.post('api/sync/categories', JSON.stringify(categories))
             .map(response => response.status)
             .toPromise();
     }
@@ -65,7 +65,7 @@ export class SyncService {
      * @returns {Promise<R>}
      */
     private syncGames(games: Array<Game>): Promise<number> {
-        return this._authenticatedHttp.post('api/sync/syncgames', JSON.stringify(games))
+        return this._authenticatedHttp.post('api/sync/games', JSON.stringify(games))
             .map(response => response.status)
             .toPromise();
 

@@ -3,13 +3,13 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {LocateItComponent} from '../components/locateIt/locateIt';
 import {PictureItComponent} from '../components/pictureIt/pictureIt';
-import {GeolocationService} from '../services/geolocationService';
-import {PlatformInformationService} from '../services/platformInformationService';
-import {DesktopCameraService} from '../services/desktopCameraService';
-import {MobileCameraService} from '../services/mobileCameraService';
-import {CameraService} from '../services/cameraService';
+import {GeolocationService} from '../services/geolocation.service';
+import {RuntimeService} from '../services/infrastructure/runtime.service';
+import {DesktopCameraService} from '../services/camera/dekstop.camera.service';
+import {MobileCameraService} from '../services/camera/mobile.camera.service';
+import {CameraService} from '../services/camera/camera.service';
 
-export function cameraServiceFactory(platformInformationService: PlatformInformationService): CameraService {
+export function cameraServiceFactory(platformInformationService: RuntimeService): CameraService {
     return platformInformationService.isMobile ? new MobileCameraService() : new DesktopCameraService();
 }
 
@@ -28,7 +28,7 @@ export function cameraServiceFactory(platformInformationService: PlatformInforma
     ],
     providers: [
         {
-            provide: CameraService, useFactory: cameraServiceFactory, deps: [PlatformInformationService]
+            provide: CameraService, useFactory: cameraServiceFactory, deps: [RuntimeService]
         },
         GeolocationService
     ]

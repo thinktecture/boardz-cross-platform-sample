@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {GeoLocation} from '../../models/geoLocation';
-import {GeolocationService} from '../../services/geolocationService';
+import {GeolocationService} from '../../services/geolocation.service';
 import {LatLng, map, marker, tileLayer} from 'leaflet';
 
 @Component({

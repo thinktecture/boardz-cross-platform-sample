@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
-import {TokenService} from './tokenService';
+import {TokenService} from './token.service';
 import {environment} from '../../environments/environment';
 @Injectable()
 export class AuthenticatedHttp {

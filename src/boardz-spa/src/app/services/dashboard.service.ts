@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {AuthenticatedHttp} from './authenticatedHttp';
-import {DatabaseService} from './databaseService';
-import {OfflineDetectionService} from './offlineDetectionService';
+import {AuthenticatedHttp} from './http.service';
+import {DatabaseService} from './offline/database.service';
+import {OfflineDetectionService} from './offline/offline.detection.service';
 import {ModelState} from '../models/modelState';
 
 @Injectable()

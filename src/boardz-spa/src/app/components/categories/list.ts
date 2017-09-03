@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 
-import {NotificationService} from '../../services/notificationService';
-import {CategoriesService} from '../../services/categoriesService';
+import {NotificationService} from '../../services/notifications/notification.service';
+import {CategoriesService} from '../../services/categories.service';
 import {Category} from '../../models/category';
 @Component({
     templateUrl: 'list.html'

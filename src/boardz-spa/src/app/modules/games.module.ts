@@ -1,20 +1,20 @@
 import {NgModule} from '@angular/core';
-import {SharedModule} from './sharedModule';
+import {SharedModule} from './shared.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {GameDetailsComponent} from '../components/games/details';
 import {GamesRootComponent} from '../components/games/gamesRoot';
 import {GameListComponent} from '../components/games/list';
-import {GameDetailsResolver} from '../resolvers/gameDetailsResolver';
-import {AuthGuard} from '../guards/authGuard';
+import {GameResolver} from '../resolvers/game.resolver';
+import {AuthenticatedGuard} from '../guards/authenticated.guard';
 
 const GAME_ROUTES = [
 
     {
         path: 'games',
         component: GamesRootComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthenticatedGuard],
         children: [
             {path: 'all', component: GameListComponent, data: {displayName: 'Game overview'}},
             {
@@ -25,7 +25,7 @@ const GAME_ROUTES = [
             {
                 path: 'details/:id',
                 component: GameDetailsComponent,
-                resolve: {game: GameDetailsResolver},
+                resolve: {game: GameResolver},
                 data: {displayName: 'Game details'}
             }
         ]
@@ -47,7 +47,7 @@ const GAME_ROUTES = [
         GameListComponent
     ],
     providers: [
-        GameDetailsResolver
+        GameResolver
     ]
 })
 export class GamesModule {

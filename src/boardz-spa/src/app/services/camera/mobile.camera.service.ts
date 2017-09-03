@@ -1,5 +1,5 @@
 import {Observable, Observer} from 'rxjs/Rx';
-import {ICameraService} from './cameraService';
+import {ICameraService} from './camera.service';
 
 declare let window;
 

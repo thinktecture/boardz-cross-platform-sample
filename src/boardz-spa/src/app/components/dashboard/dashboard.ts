@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {DashboardService} from '../../services/dashboardService';
-import {OfflineDetectionService} from '../../services/offlineDetectionService';
-import {TokenService} from '../../services/tokenService';
+import {DashboardService} from '../../services/dashboard.service';
+import {OfflineDetectionService} from '../../services/offline/offline.detection.service';
+import {TokenService} from '../../services/token.service';
 
 @Component({
     selector: 'app-dashboard',

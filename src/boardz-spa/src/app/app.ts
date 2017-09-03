@@ -1,15 +1,10 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
-import {LogService} from './services/logService';
+import {LogService} from './services/infrastructure/log.service';
 import {LogLevel} from './models/logLevel';
-import {SignalRService} from './services/signalrService';
-import {LoginService} from './services/loginService';
-import {NotificationService} from './services/notificationService';
-import {UiNotificationService} from './services/uiNotificationService';
-import {NativeIntegrationService} from './services/nativeIntegrationService';
+import {UiNotificationService} from './services/notifications/ui.notification.service';
+import {DesktopService} from './services/infrastructure/desktop.service';
 import {IBoardZAppWindow} from './interfaces/boardzAppWindow';
-import {OfflineDetectionService} from './services/offlineDetectionService';
-import {ConnectionState} from './models/connectionState';
-import {SyncService} from './services/syncService';
+import {OfflineDetectionService} from './services/offline/offline.detection.service';
 
 declare const window: IBoardZAppWindow;
 
@@ -20,12 +15,9 @@ declare const window: IBoardZAppWindow;
 })
 
 export class BoardzAppComponent implements OnInit, AfterViewInit, OnDestroy {
-    constructor(private _signalRService: SignalRService,
-                private _loginService: LoginService,
-                private _notificationService: NotificationService,
+    constructor(
                 private _offlineDetectionService: OfflineDetectionService,
-                private _syncService: SyncService,
-                private _nativeIntegrationService: NativeIntegrationService,
+                private _nativeIntegrationService: DesktopService,
                 private _uiNotificationService: UiNotificationService,
                 private _logService: LogService) {
         _logService.maximumLogLevel = LogLevel.Verbose;
@@ -41,15 +33,6 @@ export class BoardzAppComponent implements OnInit, AfterViewInit, OnDestroy {
         if (window.initAdminLTE) {
             window.initAdminLTE();
         }
-
-        if (this._loginService.isAuthenticated) {
-            this._signalRService.start();
-        }
-
-        this._signalRService.someoneJoinedAGame.subscribe(message => {
-            this._notificationService.notifyInformation(message);
-        });
-
         this._nativeIntegrationService.registerNavigationHook();
     }
 

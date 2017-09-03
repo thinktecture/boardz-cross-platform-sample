@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Game} from '../../models/game';
-import {GamesService} from '../../services/gamesService';
-import {NotificationService} from '../../services/notificationService';
+import {GamesService} from '../../services/games.service';
+import {NotificationService} from '../../services/notifications/notification.service';
 
 @Component({
     selector: 'app-games-list',

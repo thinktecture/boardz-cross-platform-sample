@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve} from '@angular/router';
 import {Category} from '../models/category';
-import {CategoriesService} from '../services/categoriesService';
+import {CategoriesService} from '../services/categories.service';
 
 @Injectable()
-export class CategoryDetailsResolver implements Resolve<Category> {
+export class CategoryResolver implements Resolve<Category> {
     constructor(private _categoriesService: CategoriesService) {
     }
 

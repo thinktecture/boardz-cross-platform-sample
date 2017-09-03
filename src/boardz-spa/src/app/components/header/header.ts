@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Notification} from '../../models/notification';
-import {LoginService} from '../../services/loginService';
-import {TokenService} from '../../services/tokenService';
-import {NotificationService} from '../../services/notificationService';
-import {OfflineDetectionService} from '../../services/offlineDetectionService';
+import {LoginService} from '../../services/authentication.service';
+import {TokenService} from '../../services/token.service';
+import {NotificationService} from '../../services/notifications/notification.service';
+import {OfflineDetectionService} from '../../services/offline/offline.detection.service';
 import {ConnectionState} from '../../models/connectionState';
 
 @Component({

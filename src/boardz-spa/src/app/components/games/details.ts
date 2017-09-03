@@ -1,22 +1,21 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Game} from '../../models/game';
-import {GamesService} from '../../services/gamesService';
-import {NotificationService} from '../../services/notificationService';
-import {SignalRService} from '../../services/signalrService';
-import {PlayersService} from '../../services/playersService';
+import {GamesService} from '../../services/games.service';
+import {NotificationService} from '../../services/notifications/notification.service';
+import {PlayersService} from '../../services/players.service';
 import {Player} from '../../models/player';
 import {GeoLocation} from '../../models/geoLocation';
-import {LoginService} from '../../services/loginService';
+import {LoginService} from '../../services/authentication.service';
 import {Notification} from '../../models/notification';
 import {NotificationType} from '../../models/notificationType';
 import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import {AgeRating} from '../../models/ageRating';
-import {AgeRatingsService} from '../../services/ageRatingsService';
+import {AgeRatingsService} from '../../services/ageratings.service';
 import {Category} from '../../models/category';
-import {CategoriesService} from '../../services/categoriesService';
-import {OfflineDetectionService} from '../../services/offlineDetectionService';
-import {LogService} from '../../services/logService';
+import {CategoriesService} from '../../services/categories.service';
+import {OfflineDetectionService} from '../../services/offline/offline.detection.service';
+import {LogService} from '../../services/infrastructure/log.service';
 
 @Component({
     selector: 'app-games-details',
@@ -29,7 +28,6 @@ export class GameDetailsComponent implements OnInit {
     public isSending: boolean;
     public ageRatings: Array<AgeRating>;
     public categories: Array<Category>;
-    public active = true;
 
     public details = this._formBuilder.group({
         id: [null],
@@ -48,11 +46,11 @@ export class GameDetailsComponent implements OnInit {
         return this.details.get('name');
     }
 
-    public selectedCategories: Array<String> = [];
-
     public get description(): AbstractControl {
         return this.details.get('description');
     }
+
+    private _original: Game;
 
     constructor(private _router: Router,
                 private route: ActivatedRoute,
@@ -61,7 +59,6 @@ export class GameDetailsComponent implements OnInit {
                 private _categoriesService: CategoriesService,
                 private _ageRatingsService: AgeRatingsService,
                 private _playersService: PlayersService,
-                private _signalRService: SignalRService,
                 private _offlineDetectionService: OfflineDetectionService,
                 private _loginService: LoginService,
                 private _logService: LogService,
@@ -76,13 +73,14 @@ export class GameDetailsComponent implements OnInit {
 
         this.route.data.forEach((data: { game: Game }) => {
             if (data.game) {
+                this._original = data.game;
                 this.details.setValue({
                     id: data.game.id,
                     name: data.game.name,
                     description: data.game.description,
                     ageRatingId: data.game.ageRatingId,
                     ageRating: data.game.ageRating,
-                    categories: data.game.categories
+                    categories: data.game.categories.map(c => c.id)
                 });
             }
         });
@@ -109,6 +107,7 @@ export class GameDetailsComponent implements OnInit {
     }
 
     public reset() {
+        // todo: apply values from this.original;
         this.details.reset();
     }
 
@@ -118,20 +117,10 @@ export class GameDetailsComponent implements OnInit {
 
 
     public saveChanges(): void {
-
-        this.details.value.categories = this.categories.filter(cat => this.selectedCategories.indexOf(cat.id) > -1);
-
-        if (this.details.value.ageRatingId) {
-            const found = this.ageRatings.filter(ar => ar.id === this.details.value.ageRatingId);
-            if (found && found.length > 0) {
-                this.details.setValue({
-                    ageRating: found[0]
-                });
-            }
-
-        }
-        if (this.details.value.id === null) {
-            this._gameService.addGame(this.details.value)
+        const game = JSON.parse(JSON.stringify(this.details.value));
+        game.categories = this.categories.filter(c => this.details.value.categories.indexOf(c.id) > -1);
+        if (!game.id) {
+            this._gameService.addGame(game)
                 .subscribe(
                     (newId) => {
                         this._notificationService.notifySuccess('New game was added.');
@@ -140,7 +129,7 @@ export class GameDetailsComponent implements OnInit {
                     () => this._notificationService.notifyError('Could not save new game.')
                 );
         } else {
-            this._gameService.updateGame(this.details.value)
+            this._gameService.updateGame(game)
                 .subscribe(() => {
                         this._notificationService.notifySuccess('Game data was updated.');
                     },
@@ -186,8 +175,6 @@ export class GameDetailsComponent implements OnInit {
         }
 
         this.isSending = true;
-        this._signalRService.sendIAmGaming(this.details.value.name);
-
         const player = new Player();
         player.name = this._loginService.username;
         player.gameId = this.details.value.id;

@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
-import {SharedModule} from './sharedModule';
+import {SharedModule} from './shared.module';
 import {CommonModule} from '@angular/common';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
-import {CategoryDetailsResolver} from '../resolvers/categoryDetailsResolver';
+import {CategoryResolver} from '../resolvers/category.resolver';
 import {CategoryDetailsComponent} from '../components/categories/details';
 import {CategoryListComponent} from '../components/categories/list';
-import {AuthGuard} from '../guards/authGuard';
+import {AuthenticatedGuard} from '../guards/authenticated.guard';
 import {CategoryRootComponent} from '../components/categories/categoryRoot';
 
 const CATEGORY_ROUTES = [
@@ -14,7 +14,7 @@ const CATEGORY_ROUTES = [
     {
         path: 'categories',
         component: CategoryRootComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthenticatedGuard],
         children: [
             { path: 'all', component: CategoryListComponent, data: { displayName: 'Category overview' } },
             {
@@ -25,7 +25,7 @@ const CATEGORY_ROUTES = [
             {
                 path: 'details/:id',
                 component: CategoryDetailsComponent,
-                resolve: { category: CategoryDetailsResolver },
+                resolve: { category: CategoryResolver },
                 data: { displayName: 'Category details' }
             }
         ]
@@ -37,7 +37,7 @@ const CATEGORY_ROUTES = [
 @NgModule({
     imports: [
         CommonModule,
-        FormsModule,
+        ReactiveFormsModule,
         SharedModule,
         RouterModule.forChild(CATEGORY_ROUTES)
     ],
@@ -47,7 +47,9 @@ const CATEGORY_ROUTES = [
         CategoryListComponent,
         CategoryDetailsComponent
     ],
-    providers: []
+    providers: [
+        CategoryResolver
+    ]
 })
 export class CategoriesModule {
 

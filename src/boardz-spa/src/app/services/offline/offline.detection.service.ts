@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
-import {ConnectionState} from '../models/connectionState';
+import {ConnectionState} from '../../models/connectionState';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/timeout';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {Subject} from 'rxjs/Rx';
-import {environment} from '../../environments/environment';
+import {environment} from '../../../environments/environment';
 
 @Injectable()
 export class OfflineDetectionService {

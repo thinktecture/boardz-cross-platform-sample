@@ -1,17 +1,17 @@
 import {Directive, HostBinding, HostListener} from '@angular/core';
 import {Location} from '@angular/common';
 
-import {PlatformInformationService} from '../services/platformInformationService';
+import {RuntimeService} from '../services/infrastructure/runtime.service';
 
 @Directive({
     selector: '[appBackButton]',
 })
-export class BackButtonDirective {
+export class BackDirective {
 
     @HostBinding('attr.hidden')
     public isHidden = true;
 
-    constructor(private _platformInformationService: PlatformInformationService,
+    constructor(private _platformInformationService: RuntimeService,
                 private _location: Location) {
         this.setHidden();
     }

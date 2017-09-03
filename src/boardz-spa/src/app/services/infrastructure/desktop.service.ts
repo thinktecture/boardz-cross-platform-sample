@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-import {PlatformInformationService} from './platformInformationService';
-import {IBoardZAppWindow} from '../interfaces/boardzAppWindow';
+import {RuntimeService} from './runtime.service';
+import {IBoardZAppWindow} from '../../interfaces/boardzAppWindow';
 
 declare const window: IBoardZAppWindow;
 
 @Injectable()
-export class NativeIntegrationService {
+export class DesktopService {
     constructor(private _router: Router,
-                private _platformInformationService: PlatformInformationService) {
+                private _platformInformationService: RuntimeService) {
     }
 
     public registerNavigationHook() {

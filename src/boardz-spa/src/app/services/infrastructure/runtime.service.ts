@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 declare let window;
 
 @Injectable()
-export class PlatformInformationService {
+export class RuntimeService {
     private _isMobile: boolean;
     private _isDesktop: boolean;
     private _isWeb: boolean;

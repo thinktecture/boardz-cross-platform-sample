@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve} from '@angular/router';
 import {Game} from '../models/game';
-import {GamesService} from '../services/gamesService';
+import {GamesService} from '../services/games.service';
 
 @Injectable()
-export class GameDetailsResolver implements Resolve<Game> {
+export class GameResolver implements Resolve<Game> {
     constructor(private _gamesService: GamesService) {
     }
 

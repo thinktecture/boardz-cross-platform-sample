@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {GeoLocation} from '../../models/geoLocation';
-import {GeolocationService} from '../../services/geolocationService';
-import {PlayersService} from '../../services/playersService';
+import {GeolocationService} from '../../services/geolocation.service';
+import {PlayersService} from '../../services/players.service';
 import {NearByPlayer} from '../../models/nearbyPlayer';
-import {AbstractControl, FormBuilder} from '@angular/forms';
+import {FormBuilder} from '@angular/forms';
 
 @Component({
     selector: 'app-radius-search',
@@ -29,7 +29,7 @@ export class RadiusSearchComponent implements OnInit {
     }
 
     public doSearch() {
-        this._playersService.findNearby(this.search.value.radis, this.location)
+        this._playersService.findNearby(this.search.value.radius, this.location)
             .subscribe(results => this.players = results);
     }
 }

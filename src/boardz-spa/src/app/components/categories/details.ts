@@ -1,23 +1,31 @@
 import {Component, OnInit} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
-import {LogService} from '../../services/logService';
-import {NotificationService} from '../../services/notificationService';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NotificationService} from '../../services/notifications/notification.service';
 import {Category} from '../../models/category';
-import {CategoriesService} from '../../services/categoriesService';
+import {CategoriesService} from '../../services/categories.service';
+import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
 
 @Component({
     templateUrl: 'details.html'
 })
 export class CategoryDetailsComponent implements OnInit {
 
-    private _needsReset: boolean;
-    private _sending: boolean;
+    public details = this._formBuilder.group({
+        id: [null],
+        name: ['', Validators.required]
+    });
 
-    public active = true;
-    public model: Category = new Category();
-    public originalModel: Category = new Category();
+    public get name(): AbstractControl {
+        return this.details.get('name');
+    }
 
-    constructor(private _logService: LogService,
+    public get id(): AbstractControl {
+        return this.details.get('id');
+    }
+
+    private _original: Category;
+
+    constructor(private _formBuilder: FormBuilder,
                 private _categoriesService: CategoriesService,
                 private _router: Router,
                 private route: ActivatedRoute,
@@ -26,9 +34,12 @@ export class CategoryDetailsComponent implements OnInit {
 
     public ngOnInit(): any {
         this.route.data.forEach((data: { category: Category }) => {
-            this.originalModel = this._categoriesService.deepClone(this.model = data.category || new Category());
-            if (this._needsReset) {
-                this.reset();
+            if (data.category) {
+                this._original = data.category;
+                this.details.setValue({
+                    name: data.category.name,
+                    id: data.category.id
+                });
             }
         });
     }
@@ -38,19 +49,17 @@ export class CategoryDetailsComponent implements OnInit {
     }
 
     public reset(): void {
-        this._needsReset = false;
-
-        // Based on: https://angular.io/docs/ts/latest/guide/forms.html
-        this.model = this._categoriesService.deepClone(this.originalModel);
-
-        // workaround to re-initialize the actual form controls states
-        this.active = false;
-        setTimeout(() => this.active = true, 0);
+        this.details.reset({
+            id: this._original.id,
+            name: this._original.name
+        });
     }
 
     public saveChanges(): void {
-        if (this.model.id === null) {
-            this._categoriesService.addCategory(this.model)
+        const category = JSON.parse(JSON.stringify(this.details.value));
+        if (!category.id) {
+            delete category.id;
+            this._categoriesService.addCategory(category)
                 .subscribe(
                     (newId) => {
                         this._notificationService.notifySuccess('New category was added.');
@@ -59,7 +68,7 @@ export class CategoryDetailsComponent implements OnInit {
                     () => this._notificationService.notifyError('Could not save new category.')
                 );
         } else {
-            this._categoriesService.updateCategory(this.model)
+            this._categoriesService.updateCategory(category)
                 .subscribe((oldId) => {
                         this._notificationService.notifySuccess('Category data was updated.');
                         this._router.navigate(['/categories/all']);
@@ -72,8 +81,8 @@ export class CategoryDetailsComponent implements OnInit {
     }
 
     public deleteCategory(): void {
-        if (window.confirm('Really delete the category "' + this.originalModel.name + '" ?')) {
-            this._categoriesService.deleteCategory(this.originalModel)
+        if (window.confirm('Really delete the category "' + this.details.value.name + '" ?')) {
+            this._categoriesService.deleteCategory(this.details.value)
                 .subscribe(
                     () => {
                         this._notificationService.notifySuccess('Category data was deleted.');

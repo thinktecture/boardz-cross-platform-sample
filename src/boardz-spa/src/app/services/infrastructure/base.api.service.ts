@@ -1,8 +1,8 @@
 import {Injectable, Type} from '@angular/core';
-import {AuthenticatedHttp} from './authenticatedHttp';
+import {AuthenticatedHttp} from '../http.service';
 import {Observable} from 'rxjs/Rx';
-import {OfflineDetectionService} from './offlineDetectionService';
-import {ISupportsOfflineStorage} from '../interfaces/supportsOfflineStorage';
+import {OfflineDetectionService} from '../offline/offline.detection.service';
+import {ISupportsOfflineStorage} from '../../interfaces/supportsOfflineStorage';
 import {Dexie} from 'dexie';
 
 @Injectable()

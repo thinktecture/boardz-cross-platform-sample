@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import Dexie from 'dexie';
-import {Category} from '../models/category';
-import {Game} from '../models/game';
-import {AgeRating} from '../models/ageRating';
+import {Category} from '../../models/category';
+import {Game} from '../../models/game';
+import {AgeRating} from '../../models/ageRating';
 
 @Injectable()
 export class DatabaseService extends Dexie {

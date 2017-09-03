@@ -5,13 +5,20 @@
 
 export const environment = {
     production: false,
-    apiRootUrl: 'https://boardzapi.azurewebsites.net/',
+    authN: {
+        url: 'http://13.80.18.87/',
+        grant: 'password',
+        clientId: 'ro',
+        clientSecret: 'secret',
+        scope: 'api'
+    },
+    apiRootUrl: 'http://10.211.55.4:8000/',
     offlineConfig: {
-        checkInterval: 10000,
+        checkInterval: 5000,
         maxDurationForGood: 50,
         maxDurationForNormal: 190,
-        maxDurationForToSlow: 240,
-        absoluteTimeoutAt: 320
+        maxDurationForToSlow: 300,
+        absoluteTimeoutAt: 375
     }
 
 };

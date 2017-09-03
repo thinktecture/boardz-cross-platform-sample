@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 
-import {CameraService} from '../../services/cameraService';
+import {CameraService} from '../../services/camera/camera.service';
 
 @Component({
     selector: 'app-picture-it',

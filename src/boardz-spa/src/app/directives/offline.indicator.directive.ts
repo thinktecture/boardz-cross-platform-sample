@@ -1,5 +1,5 @@
 import {Directive} from '@angular/core';
-import {OfflineDetectionService} from '../services/offlineDetectionService';
+import {OfflineDetectionService} from '../services/offline/offline.detection.service';
 import {ConnectionState} from '../models/connectionState';
 
 //noinspection TsLint

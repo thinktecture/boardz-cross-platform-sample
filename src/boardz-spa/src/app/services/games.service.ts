@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {AuthenticatedHttp} from './authenticatedHttp';
+import {AuthenticatedHttp} from './http.service';
 import {Game} from '../models/game';
-import {BaseApiService} from './baseApiService';
-import {OfflineDetectionService} from './offlineDetectionService';
-import {DatabaseService} from './databaseService';
+import {BaseApiService} from './infrastructure/base.api.service';
+import {OfflineDetectionService} from './offline/offline.detection.service';
+import {DatabaseService} from './offline/database.service';
 import {ModelState} from '../models/modelState';
 
 @Injectable()
@@ -18,7 +18,7 @@ export class GamesService extends BaseApiService<Game> {
     }
 
     public getAllGames(): Observable<Game[]> {
-        return this.getAll('api/games/list',
+        return this.getAll('api/games',
             this._databaseService.games,
             Observable.fromPromise(this._databaseService.games.filter(g => g.state !== ModelState.Deleted).toArray()));
     }
@@ -28,20 +28,20 @@ export class GamesService extends BaseApiService<Game> {
     }
 
     public getGameById(id: string): Observable<Game> {
-        return this.getSingle(id, `api/games/single?id=${id}`,
+        return this.getSingle(id, `api/games/${id}`,
             Observable.fromPromise(this._databaseService.games.get(id)));
     }
 
     public addGame(game: Game): Observable<string> {
-        return this.add(game, `api/games/add`, this.getAddOfflineFallback(game));
+        return this.add(game, `api/games`, this.getAddOfflineFallback(game));
     }
 
     public updateGame(game: Game): Observable<boolean> {
-        return this.update(game, `api/games/update`, this.getUpdateOfflineFallback(game));
+        return this.update(game, `api/games/${game.id}`, this.getUpdateOfflineFallback(game));
     }
 
     public deleteGame(game: Game): Observable<boolean> {
-        return this.deleteItem(game, `api/games/remove?id=${game.id}`, this.getDeleteOfflineFallback(game));
+        return this.deleteItem(game, `api/games/${game.id}`, this.getDeleteOfflineFallback(game));
     }
 
     private getUpdateOfflineFallback(game: Game): Observable<boolean> {

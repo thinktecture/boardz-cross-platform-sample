@@ -2,11 +2,11 @@ import {Injectable} from '@angular/core';
 import {Headers, Http, RequestOptions} from '@angular/http';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
-import {TokenService} from './tokenService';
-import {LogService} from './logService';
+import {TokenService} from './token.service';
+import {LogService} from './infrastructure/log.service';
 import {TokenData} from '../models/tokenData';
-import {SignalRService} from './signalrService';
 import {environment} from '../../environments/environment';
+
 @Injectable()
 export class LoginService {
     private _lastLoginUnsuccessful: boolean;
@@ -22,8 +22,7 @@ export class LoginService {
     constructor(private _logService: LogService,
                 private _http: Http,
                 private _router: Router,
-                private _tokenService: TokenService,
-                private _signalRService: SignalRService) {
+                private _tokenService: TokenService) {
         this._tokenService.isAuthenticated()
             .subscribe((value) => {
                 if (!value) {
@@ -37,8 +36,6 @@ export class LoginService {
      */
     public logout(routeToLogin: boolean = true): void {
         this._logService.logDebug('LoginService.logout called');
-
-        this._signalRService.stop();
         this._lastLoginUnsuccessful = false;
         this._tokenService.token = null;
 
@@ -56,11 +53,16 @@ export class LoginService {
     public login(username: string, password: string): Observable<TokenData> {
         this.logout(false);
 
-        const body = 'grant_type=password&username=' + username + '&password=' + password,
-            options = new RequestOptions({headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'})});
+        const body = `grant_type=${environment.authN.grant}` +
+            `&client_id=${environment.authN.clientId}` +
+            `&client_secret=${environment.authN.clientSecret}` +
+            `&username=${username}` +
+            `&password=${password}` +
+            `&scope=${environment.authN.scope}`;
+        const options = new RequestOptions({headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'})});
 
         return Observable.create((observer) => {
-            this._http.post(environment.apiRootUrl + 'token', body, options)
+            this._http.post(`${environment.authN.url}connect/token`, body, options)
                 .map(response => <TokenData>response.json())
                 .subscribe(
                     (tokenData) => {
