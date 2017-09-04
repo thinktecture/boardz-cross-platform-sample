@@ -1,74 +1,75 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "project": {
-    "name": "boardz-app"
-  },
-  "apps": [
-    {
-      "root": "src",
-      "outDir": "dist",
-      "assets": [
-        "assets",
-        "favicon.ico"
-      ],
-      "index": "index.html",
-      "main": "main.ts",
-      "polyfills": "polyfills.ts",
-      "test": "test.ts",
-      "tsconfig": "tsconfig.app.json",
-      "testTsconfig": "tsconfig.spec.json",
-      "prefix": "app",
-      "styles": [
-        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-        "../node_modules/font-awesome/css/font-awesome.min.css",
-        "../node_modules/admin-lte/dist/css/AdminLTE.min.css",
-        "../node_modules/admin-lte/dist/css/skins/_all-skins.min.css",
-        "styles.css"
-      ],
-      "scripts": [
-        "../node_modules/jquery/dist/jquery.min.js",
-          "../node_modules/jquery-slimscroll/jquery.slimscroll.min.js",
-        "../node_modules/bootstrap/dist/js/bootstrap.min.js",
-        "../node_modules/hammerjs/hammer.min.js",
-        "../node_modules/fastclick/lib/fastclick.js",
-        "../node_modules/leaflet/dist/leaflet.js",
-        "../node_modules/signalr/jquery.signalR.min.js",
-        "../node_modules/pnotify/dist/pnotify.js",
-        "../node_modules/admin-lte/dist/js/app.min.js"
-      ],
-      "environmentSource": "environments/environment.ts",
-      "environments": {
-        "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
-      }
-    }
-  ],
-  "e2e": {
-    "protractor": {
-      "config": "./protractor.conf.js"
-    }
-  },
-  "lint": [
-    {
-      "project": "src/tsconfig.app.json",
-      "exclude": "**/node_modules/**"
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "project": {
+        "name": "boardz-app"
     },
-    {
-      "project": "src/tsconfig.spec.json",
-      "exclude": "**/node_modules/**"
+    "apps": [
+        {
+            "root": "src",
+            "outDir": "dist",
+            "assets": [
+                "assets",
+                "favicon.ico"
+            ],
+            "index": "index.html",
+            "main": "main.ts",
+            "polyfills": "polyfills.ts",
+            "test": "test.ts",
+            "tsconfig": "tsconfig.app.json",
+            "testTsconfig": "tsconfig.spec.json",
+            "prefix": "app",
+            "styles": [
+                "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+                "../node_modules/font-awesome/css/font-awesome.min.css",
+                "../node_modules/admin-lte/dist/css/AdminLTE.min.css",
+                "../node_modules/admin-lte/dist/css/skins/_all-skins.min.css",
+                "../node_modules/leaflet/dist/leaflet.css",
+                "styles.css"
+            ],
+            "scripts": [
+                "../node_modules/jquery/dist/jquery.min.js",
+                "../node_modules/jquery-slimscroll/jquery.slimscroll.min.js",
+                "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+                "../node_modules/hammerjs/hammer.min.js",
+                "../node_modules/fastclick/lib/fastclick.js",
+                "../node_modules/leaflet/dist/leaflet.js",
+                "../node_modules/signalr/jquery.signalR.min.js",
+                "../node_modules/pnotify/dist/pnotify.js",
+                "../node_modules/admin-lte/dist/js/app.min.js"
+            ],
+            "environmentSource": "environments/environment.ts",
+            "environments": {
+                "dev": "environments/environment.ts",
+                "prod": "environments/environment.prod.ts"
+            }
+        }
+    ],
+    "e2e": {
+        "protractor": {
+            "config": "./protractor.conf.js"
+        }
     },
-    {
-      "project": "e2e/tsconfig.e2e.json",
-      "exclude": "**/node_modules/**"
+    "lint": [
+        {
+            "project": "src/tsconfig.app.json",
+            "exclude": "**/node_modules/**"
+        },
+        {
+            "project": "src/tsconfig.spec.json",
+            "exclude": "**/node_modules/**"
+        },
+        {
+            "project": "e2e/tsconfig.e2e.json",
+            "exclude": "**/node_modules/**"
+        }
+    ],
+    "test": {
+        "karma": {
+            "config": "./karma.conf.js"
+        }
+    },
+    "defaults": {
+        "styleExt": "css",
+        "component": {}
     }
-  ],
-  "test": {
-    "karma": {
-      "config": "./karma.conf.js"
-    }
-  },
-  "defaults": {
-    "styleExt": "css",
-    "component": {}
-  }
 }
